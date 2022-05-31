@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "232568310130",
+    "project_id": "wiaterr-3fff2",
+    "storage_bucket": "wiaterr-3fff2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232568310130:android:371aa6ea643747761bf5eb",
+        "android_client_info": {
+          "package_name": "com.ArghyaBandyopadhyay.waiterr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232568310130-9meki9rhbhvkndub395jcleljn70ogbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHLl79ygWHZjji-QmT5D5_CAftoI5g5AQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232568310130-9meki9rhbhvkndub395jcleljn70ogbr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
