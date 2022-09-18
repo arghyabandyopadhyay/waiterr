@@ -7,7 +7,6 @@ import 'package:waiterr/Pages/Login/splash_page.dart';
 import '../Pages/Login/sign_up_page.dart';
 import 'global_class.dart';
 import '../stores/login_store.dart';
-import 'sample_feature/sample_item_details_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -25,8 +24,8 @@ class MyApp extends StatelessWidget {
     precacheImage(const AssetImage('assets/img/background.jpg'), context);
     precacheImage(const AssetImage('assets/img/all_filter_icon.png'), context);
     precacheImage(const AssetImage('assets/img/profile.png'), context);
-    precacheImage(
-        const AssetImage('assets/img/ays_splashscreen_portrait.png'), context);
+    // precacheImage(
+    //     const AssetImage('assets/img/ays_splashscreen_portrait.png'), context);
   }
 
   @override
@@ -100,8 +99,6 @@ class MyApp extends StatelessWidget {
                                 case SettingsView.routeName:
                                   return SettingsView(
                                       controller: settingsController);
-                                case SampleItemDetailsView.routeName:
-                                  return const SampleItemDetailsView();
                                 case SplashPage.routeName:
                                   return const SplashPage();
                                 default:
