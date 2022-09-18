@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:waiterr/Model/user_details_model.dart';
-import 'Model/user_client_allocation_model.dart';
+import 'Model/user_restraunt_allocation_model.dart';
 import 'Model/filter_item_model.dart';
 import 'Model/menu_item_model.dart';
 import 'Model/api_header_model.dart';
@@ -7,7 +9,8 @@ import 'Model/user_login_model.dart';
 
 class UserDetail {
   static UserLoginModel loginDetail = UserLoginModel(token: '', tokenType: '');
-  static UserDetailsModel userDetails = UserDetailsModel();
+  static UserDetailsModel userDetails =
+      UserDetailsModel(id: '', isActive: false, mobileNumber: '', roleID: 1);
   static String? theme;
   static MenuItemModel? item;
   static String? currentUrl;
@@ -64,12 +67,43 @@ class Config {
   static String password = "helloWorldIsTheCurrentPassword";
 }
 
-// class PreviousCartManagerVendor{
-//   static String BillingName;
-//   static String ShippingName;
-//   static String BillingGSTIN;
-//   static String ShippingGSTIN;
-//   static List<MenuItemModel> runningCart;
-// }
+class AppBarVariables {
+  static final List<Widget> aboutBoxChildren = <Widget>[
+    const SizedBox(height: 24),
+    const Text('Waiterr is an easy to go restaurant management application.'
+        ' It is capable of placing orders and know offers by different restaurants'
+        ' and also maintaing kitchens. '),
+  ];
 
-
+  static Widget appBarLeading(appBarLeading) => Row(
+        children: [
+          GestureDetector(
+              onTap: () {
+                showAboutDialog(
+                  context: appBarLeading,
+                  applicationIcon: Image.asset(
+                    "assets/img/waiter_icon.png",
+                    width: 40,
+                    height: 40,
+                  ),
+                  applicationName: 'Waiterr',
+                  applicationVersion: 'Version 2022.1',
+                  applicationLegalese: '\u{a9} 2022 Business Genie.',
+                  children: AppBarVariables.aboutBoxChildren,
+                );
+              },
+              child: Image.asset(
+                "assets/img/waiter_icon.png",
+                height: 25,
+                width: 25,
+              )),
+          const Text(
+            "Waiterr",
+            textScaleFactor: 1,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+          ),
+        ],
+      );
+}
