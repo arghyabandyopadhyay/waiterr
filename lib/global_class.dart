@@ -1,0 +1,75 @@
+import 'package:waiterr/Model/user_details_model.dart';
+import 'Model/user_client_allocation_model.dart';
+import 'Model/filter_item_model.dart';
+import 'Model/menu_item_model.dart';
+import 'Model/api_header_model.dart';
+import 'Model/user_login_model.dart';
+
+class UserDetail {
+  static UserLoginModel loginDetail = UserLoginModel(token: '', tokenType: '');
+  static UserDetailsModel userDetails = UserDetailsModel();
+  static String? theme;
+  static MenuItemModel? item;
+  static String? currentUrl;
+  //static RegExp commaRegex = new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+  static RegExp commaRegex = RegExp(r'(\d{1,2})(?=((\d{2})+\d{1})(?!\d))');
+  static Function matchFunc = (Match match) => '${match[1]},';
+
+  static Map<String, String> getHeader() {
+    ApiHeaderModel headerModel = ApiHeaderModel(
+        authorization:
+            "${UserDetail.loginDetail.tokenType} ${UserDetail.loginDetail.token}",
+        contentType: 'application/json; charset=UTF-8');
+    return headerModel.toJson();
+  }
+}
+
+class UserClientAllocationData {
+  static String? clientName;
+  static String? logoURL;
+  static String? dataExchangeVia;
+  static String? dataExchangeURL;
+  static String? clientType;
+  static String? guid;
+  static String? companyGUID;
+  static List<OutletConfigurationModel>? outletConfiguration;
+  static List<MenuItemModel>? productList;
+  static List<FilterItemModel>? distinctStockGroup;
+  static List<List<MenuItemModel>>? productListStockDiff;
+  static void setValues(
+      UserRestrauntAllocationModel userClientAllocationModel) {
+    clientName = userClientAllocationModel.clientName;
+    logoURL = userClientAllocationModel.logoURL;
+    dataExchangeVia = userClientAllocationModel.dataExchangeVia;
+    dataExchangeURL = userClientAllocationModel.dataExchangeURL;
+    clientType = userClientAllocationModel.clientType;
+    guid = userClientAllocationModel.guid;
+    companyGUID = userClientAllocationModel.companyGUID;
+    outletConfiguration = userClientAllocationModel.outletConfiguration;
+  }
+}
+
+class PreviousCartManager {
+  static String? previousSalePointType;
+  static String? previousSalePointName;
+  static String? previousOutletName;
+  static String? billingName;
+  static String? shippingName;
+  static String? billingGSTIN;
+  static String? shippingGSTIN;
+  static late List<MenuItemModel> runningCart;
+}
+
+class Config {
+  static String password = "helloWorldIsTheCurrentPassword";
+}
+
+// class PreviousCartManagerVendor{
+//   static String BillingName;
+//   static String ShippingName;
+//   static String BillingGSTIN;
+//   static String ShippingGSTIN;
+//   static List<MenuItemModel> runningCart;
+// }
+
+
