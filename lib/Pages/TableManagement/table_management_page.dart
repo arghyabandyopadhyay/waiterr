@@ -236,7 +236,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                       Navigator.pop(context);
                       Navigator.of(context).push(CupertinoPageRoute<void>(
                         title: "Profile Page",
-                        builder: (context) => ProfilePage(),
+                        builder: (context) => const ProfilePage(),
                       ));
                     },
                   ),
@@ -254,7 +254,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                       Navigator.pop(context);
                       Navigator.of(context).push(CupertinoPageRoute<void>(
                         title: "About Page",
-                        builder: (context) => AboutPage(),
+                        builder: (context) => const AboutPage(),
                       ));
                     },
                   ),
