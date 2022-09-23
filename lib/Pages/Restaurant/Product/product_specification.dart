@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ProductSpecification extends StatelessWidget {
+  const ProductSpecification({super.key});
+
   @override
   Widget build(BuildContext context) {
     MenuItemModel? item = UserDetail.item;
