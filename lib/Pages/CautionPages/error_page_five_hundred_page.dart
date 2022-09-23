@@ -16,7 +16,7 @@ import 'package:waiterr/Model/drawer_action_model.dart';
 class ErrorPageFiveHundredPage extends StatefulWidget {
   const ErrorPageFiveHundredPage({Key? key}) : super(key: key);
   @override
-  _ErrorPageFiveHundredPageState createState() =>
+  State<ErrorPageFiveHundredPage> createState() =>
       _ErrorPageFiveHundredPageState();
 }
 
