@@ -1,15 +1,13 @@
-class Parameter
-{
+class Parameter {
   String? pKey;
-  var pValue;
+  dynamic pValue;
 
   Parameter({
     this.pKey,
     this.pValue,
   });
 
-  Map toJson()
-  {
+  Map toJson() {
     return {
       'P_Key': pKey,
       'P_Value': pValue,
