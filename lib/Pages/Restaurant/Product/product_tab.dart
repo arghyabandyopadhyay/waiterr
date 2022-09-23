@@ -17,7 +17,7 @@ class ProductTab extends StatelessWidget {
   ProductTab({Key? key, this.item}) : super(key: key);
   final List<TabData> _tabs = [
     TabData("Abouts", const ProductAbout()),
-    TabData("Specs", ProductSpecification()),
+    TabData("Specs", const ProductSpecification()),
     TabData("Reviews", const ProductReviews()),
   ];
 
