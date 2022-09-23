@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:waiterr/screens/profile_page.dart';
-import '../Pages/Login/sign_up_page.dart';
-import 'package:waiterr/screens/todo_card_page.dart';
-import 'package:waiterr/screens/view_data.dart';
 import 'package:waiterr/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.black87,
         title: Row(
-          children: [
+          children: const [
             Text("Today's Schedule"),
           ],
         ),
@@ -39,7 +36,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (builder) => const ProfilePage()));
             },
-            child: CircleAvatar(
+            child: const CircleAvatar(
               backgroundImage: AssetImage('assets/img/mavioguz.jpg'),
             ),
           ),
@@ -52,11 +49,11 @@ class _HomePageState extends State<HomePage> {
         stream: _stream,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
-          return SizedBox();
+          return const SizedBox();
           // return ListView.builder(
           //     itemCount: snapshot.data.docs.length,
           //     itemBuilder: (context, index) {
@@ -156,7 +153,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(19),
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       colors: [
                         Color.fromARGB(255, 250, 238, 10),
                         Color.fromARGB(255, 170, 3, 164),
