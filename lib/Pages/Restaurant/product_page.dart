@@ -37,8 +37,7 @@ class _ProductPageState extends State<ProductPage>
   //Member Functions
   Future<Image?> fetchMenuImage() async {
     Image? menuImage;
-    await postForMenuItemDetails(UserClientAllocationData.guid,
-            UserClientAllocationData.companyGUID, widget.item!.itemID)
+    await postForMenuItemDetails(widget.item!.itemID)
         .then((ProductDetailModel i) => {
               menuImage = i.image,
             });
