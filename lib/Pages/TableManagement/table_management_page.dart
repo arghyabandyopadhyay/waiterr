@@ -86,7 +86,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
     if (_isSearching!) {
       searchResult = items!
           .where((RunningOrderModel element) =>
-              (element.MasterFilter!.toLowerCase()).contains(
+              (element.masterFilter!.toLowerCase()).contains(
                   searchText.toLowerCase().replaceAll(RegExp(r"\s+"), "")))
           .toList();
       setState(() {});
@@ -106,12 +106,12 @@ class _MyTableHomePage extends State<TableManagementPage> {
     await postForRunningOrders(false, "", "", "")
         .then((List<RunningOrderModel> rList) => {
               runningOrderList.addAll(rList.where(
-                  (element) => element.Name == UserDetail.userDetails.name)),
+                  (element) => element.name == UserDetail.userDetails.name)),
               runningOrderList.addAll(rList.where(
-                  (element) => element.Name != UserDetail.userDetails.name)),
+                  (element) => element.name != UserDetail.userDetails.name)),
               totalOrders = runningOrderList.length,
               total = 0,
-              for (var element in rList) total = total + element.Amount!
+              for (var element in rList) total = total + element.amount!
             });
     setState(() {
       _isLoading = false;
@@ -128,7 +128,6 @@ class _MyTableHomePage extends State<TableManagementPage> {
     _isDataLoaded = false;
     _futureitems = fetchList();
     _isLoading = false;
-    //this.items=_futureitems as List<RunningOrderModel>;
   }
 
   @override
