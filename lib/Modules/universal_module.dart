@@ -1,7 +1,4 @@
 import 'package:waiterr/Model/user_details_model.dart';
-import 'package:waiterr/Model/user_login_model.dart';
-import 'package:waiterr/global_class.dart';
-import 'package:waiterr/theme.dart';
 import 'package:flutter/material.dart';
 
 void globalShowInSnackBar(
