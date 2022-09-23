@@ -175,7 +175,9 @@ class _AddOrderState extends State<AddOrder> {
                 null,
                 null);
           } else {
-            print(E);
+            if (kDebugMode) {
+              print(E);
+            }
             globalShowInSnackBar("Some Error Has Occurred.", null,
                 scaffoldMessengerKey, null, null);
           }
@@ -499,10 +501,6 @@ class _AddOrderState extends State<AddOrder> {
                                                                     true;
                                                               }),
                                                               await postForTakeAway(
-                                                                      UserClientAllocationData
-                                                                          .guid,
-                                                                      UserClientAllocationData
-                                                                          .companyGUID,
                                                                       _selectedOutlet)
                                                                   .then((String
                                                                           a) =>
