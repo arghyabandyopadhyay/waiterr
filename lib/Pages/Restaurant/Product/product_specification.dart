@@ -11,12 +11,12 @@ class ProductSpecification extends StatelessWidget {
     MenuItemModel? item = UserDetail.item;
     return ListView(
       shrinkWrap: true,
-      physics: BouncingScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: const [
             Text(
               "Specifications",
               textScaleFactor: 1,
