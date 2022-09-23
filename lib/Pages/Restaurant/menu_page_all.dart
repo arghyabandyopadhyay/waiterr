@@ -191,14 +191,14 @@ class _MenuPageAllState extends State<MenuPageAll> {
     List<MenuItemModel> temp;
     MenuItemModel temp2;
     if (UserDetail.userDetails.roleID == 1) {
-      await postForMenuItem(widget.addOrderData!.WaiterMobileNumber ?? "")
+      await postForMenuItem(widget.addOrderData!.waiterMobileNumber ?? "")
           .then((value) async => {
                 if (PreviousCartManager.previousSalePointName ==
-                        widget.addOrderData!.SalePointName &&
+                        widget.addOrderData!.salePointName &&
                     PreviousCartManager.previousOutletName ==
-                        widget.addOrderData!.OutletName &&
+                        widget.addOrderData!.outletName &&
                     PreviousCartManager.previousSalePointType ==
-                        widget.addOrderData!.SalePointType &&
+                        widget.addOrderData!.salePointType &&
                     PreviousCartManager.runningCart.isNotEmpty)
                   {
                     setState(() {
@@ -257,11 +257,11 @@ class _MenuPageAllState extends State<MenuPageAll> {
           await postForMenuGroupItem();
       UserClientAllocationData.productList ??= await postForMenuItem(null);
       if (PreviousCartManager.previousSalePointName ==
-              widget.addOrderData!.SalePointName &&
+              widget.addOrderData!.salePointName &&
           PreviousCartManager.previousOutletName ==
-              widget.addOrderData!.OutletName &&
+              widget.addOrderData!.outletName &&
           PreviousCartManager.previousSalePointType ==
-              widget.addOrderData!.SalePointType &&
+              widget.addOrderData!.salePointType &&
           PreviousCartManager.runningCart.isNotEmpty) {
         previousTotalValue = PreviousCartManager.runningCart.removeLast();
         totalItems = previousTotalValue.quantity;
@@ -277,12 +277,9 @@ class _MenuPageAllState extends State<MenuPageAll> {
         }
       }
       try {
-        if (widget.addOrderData!.MobileNo!.isNotEmpty) {
+        if (widget.addOrderData!.mobileNo!.isNotEmpty) {
           List<FavouritesJsonModel> favouritesItemIds =
-              await postForFavouritesItem(
-                  UserClientAllocationData.guid,
-                  UserClientAllocationData.companyGUID,
-                  widget.addOrderData!.MobileNo);
+              await postForFavouritesItem(widget.addOrderData!.mobileNo);
           for (FavouritesJsonModel a in favouritesItemIds) {
             temp2 = UserClientAllocationData.productList!
                 .where((element) => element.itemID == a.itemId)
@@ -479,11 +476,11 @@ class _MenuPageAllState extends State<MenuPageAll> {
     List<MenuItemModel> orderList = getOrderList();
     if (orderList.isNotEmpty) PreviousCartManager.runningCart = orderList;
     PreviousCartManager.previousSalePointName =
-        widget.addOrderData!.SalePointName ?? "";
+        widget.addOrderData!.salePointName ?? "";
     PreviousCartManager.previousSalePointType =
-        widget.addOrderData!.SalePointType ?? "";
+        widget.addOrderData!.salePointType ?? "";
     PreviousCartManager.previousOutletName =
-        widget.addOrderData!.OutletName ?? "";
+        widget.addOrderData!.outletName ?? "";
   }
 
   List<ListTile> _buildItems(BuildContext context, List<MenuItemModel> items) {
