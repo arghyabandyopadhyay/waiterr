@@ -16,7 +16,7 @@ import 'package:waiterr/Model/drawer_action_model.dart';
 class NoInternetPage extends StatefulWidget {
   const NoInternetPage({Key? key}) : super(key: key);
   @override
-  _NoInternetPageState createState() => _NoInternetPageState();
+  State<NoInternetPage> createState() => _NoInternetPageState();
 }
 
 class _NoInternetPageState extends State<NoInternetPage> {
@@ -43,7 +43,7 @@ class _NoInternetPageState extends State<NoInternetPage> {
                 elevation: 0,
                 actions: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.refresh),
+                    icon: const Icon(Icons.refresh),
                     onPressed: () async {
                       Connectivity connectivity = Connectivity();
                       await connectivity.checkConnectivity().then((value) => {
@@ -76,7 +76,7 @@ class _NoInternetPageState extends State<NoInternetPage> {
                       Navigator.pop(context);
                       Navigator.of(context).push(CupertinoPageRoute<void>(
                         title: "Profile Page",
-                        builder: (context) => ProfilePage(),
+                        builder: (context) => const ProfilePage(),
                       ));
                     },
                   ),
@@ -87,7 +87,7 @@ class _NoInternetPageState extends State<NoInternetPage> {
                       Navigator.pop(context);
                       Navigator.of(context).push(CupertinoPageRoute<void>(
                         title: "About Page",
-                        builder: (context) => AboutPage(),
+                        builder: (context) => const AboutPage(),
                       ));
                     },
                   ),
@@ -102,12 +102,12 @@ class _NoInternetPageState extends State<NoInternetPage> {
                   ),
                 ],
               )),
-              body: Container(
-                  child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                    Padding(
+              body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         "Waiterr",
                         textScaleFactor: 1,
@@ -116,16 +116,15 @@ class _NoInternetPageState extends State<NoInternetPage> {
                         style: TextStyle(
                             fontSize: 30.0, fontWeight: FontWeight.bold),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 15),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    new Flexible(
+                    Flexible(
                       child: Container(
                           height: MediaQuery.of(context).size.height,
-                          padding: EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.only(top: 10),
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(30),
@@ -143,9 +142,9 @@ class _NoInternetPageState extends State<NoInternetPage> {
                               )
                             ],
                           ),
-                          child: ErrorPageNoInternet()),
+                          child: const ErrorPageNoInternet()),
                     )
-                  ])),
+                  ]),
             )
           ]));
     });
