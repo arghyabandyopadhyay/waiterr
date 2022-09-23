@@ -38,7 +38,7 @@ class RunningOrderCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          item!.SalePointType!,
+                          item!.salePointType!,
                           textAlign: TextAlign.center,
                           textScaleFactor: 1,
                           style: const TextStyle(
@@ -47,14 +47,14 @@ class RunningOrderCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          item!.SalePointName!,
+                          item!.salePointName!,
                           textAlign: TextAlign.center,
                           textScaleFactor: 1,
                           style: TextStyle(
                               color: GlobalTheme.secondaryText,
-                              fontSize: item!.SalePointName!.length > 2
-                                  ? (item!.SalePointName!.length > 3
-                                      ? (item!.SalePointName!.length > 4
+                              fontSize: item!.salePointName!.length > 2
+                                  ? (item!.salePointName!.length > 3
+                                      ? (item!.salePointName!.length > 4
                                           ? 12
                                           : 20)
                                       : 28)
@@ -63,7 +63,7 @@ class RunningOrderCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          item!.OutletName!,
+                          item!.outletName!,
                           textAlign: TextAlign.center,
                           textScaleFactor: 1,
                           style: const TextStyle(
@@ -91,7 +91,7 @@ class RunningOrderCard extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width / 1.5,
                               child: Text(
-                                (item!.Name != null) ? item!.Name! : "",
+                                (item!.name != null) ? item!.name! : "",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 textScaleFactor: 1,
@@ -101,7 +101,7 @@ class RunningOrderCard extends StatelessWidget {
                             Container(
                                 width: MediaQuery.of(context).size.width / 15,
                                 alignment: Alignment.topRight,
-                                child: item!.BillPrinted!
+                                child: item!.billPrinted!
                                     ? const Icon(Icons.print,
                                         color: GlobalTheme.primaryColor)
                                     : null),
@@ -110,7 +110,7 @@ class RunningOrderCard extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 1.75,
                           child: Text(
-                            (item!.MobileNo != null) ? item!.MobileNo! : "",
+                            (item!.mobileNo != null) ? item!.mobileNo! : "",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             textScaleFactor: 1,
@@ -121,7 +121,7 @@ class RunningOrderCard extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 1.75,
                           child: Text(
-                            "Waiter: ${item!.WaiterName!}",
+                            "Waiter: ${item!.waiterName!}",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             textScaleFactor: 1,
@@ -137,7 +137,7 @@ class RunningOrderCard extends StatelessWidget {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width / 2,
                                   child: Text(
-                                    "PAX: ${item!.PAX}",
+                                    "PAX: ${item!.pax}",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     textScaleFactor: 1,
@@ -149,7 +149,7 @@ class RunningOrderCard extends StatelessWidget {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width / 2,
                                   child: Text(
-                                    "Active Since: ${item!.ActiveSince!}",
+                                    "Active Since: ${item!.activeSince!}",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     textScaleFactor: 1,
@@ -163,7 +163,7 @@ class RunningOrderCard extends StatelessWidget {
                             Container(
                               width: MediaQuery.of(context).size.width / 4,
                               alignment: Alignment.bottomRight,
-                              child: Text("₹${item!.Amount}",
+                              child: Text("₹${item!.amount}",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   textScaleFactor: 1,
