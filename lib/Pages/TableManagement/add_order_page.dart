@@ -137,15 +137,15 @@ class _AddOrderState extends State<AddOrder> {
                         Navigator.of(context).push(CupertinoPageRoute<void>(
                             builder: (context) => MenuPageAll(
                                 addOrderData: RunningOrderModel(
-                                    OutletName: _selectedOutlet,
-                                    SalePointName: salesPointNo.text,
-                                    Name: name.text,
-                                    MobileNo:
+                                    outletName: _selectedOutlet,
+                                    salePointName: salesPointNo.text,
+                                    name: name.text,
+                                    mobileNo:
                                         phoneNumber.text.replaceAll(" ", ""),
-                                    PAX: int.parse(noOfPerson.text),
-                                    SalePointType: _selectedSalesPoint,
-                                    MasterFilter: name.text.replaceAll(" ", ""),
-                                    WaiterName: ""))))
+                                    pax: int.parse(noOfPerson.text),
+                                    salePointType: _selectedSalesPoint,
+                                    masterFilter: name.text.replaceAll(" ", ""),
+                                    waiterName: ""))))
                       }
                     else
                       {
