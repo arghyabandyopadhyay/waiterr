@@ -32,7 +32,7 @@ class VendorCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 35,
-                  //Image(height:50,fit: BoxFit.fitHeight,image: Image.asset('assets/img/AllFilterIcon.png').image,),
+                  //Image(height:50,fit: BoxFit.fitHeight,image: Image.asset('assets/img/all_filter_icon.png').image,),
                   backgroundColor: Colors.transparent,
                   //child: Image(height:50,filterQuality:FilterQuality.high,fit: BoxFit.fitHeight,image: item.image.image,),
                   child: item!.logoURL != null && item!.logoURL != ""
