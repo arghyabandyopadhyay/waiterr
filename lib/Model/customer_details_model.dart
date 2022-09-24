@@ -1,16 +1,23 @@
 //CustomerDetailsModel
 class CustomerDetailsModel {
-  final String? customerID;
+  final String? customerId;
   final String? name;
   final String? mobileNumber;
 
-  CustomerDetailsModel({this.customerID, this.name, this.mobileNumber});
+  CustomerDetailsModel({this.customerId, this.name, this.mobileNumber});
 
   factory CustomerDetailsModel.fromJson(Map<String, dynamic> json) {
     return CustomerDetailsModel(
-      customerID: json['customerID'],
-      name: json['name'],
-      mobileNumber: json['mobileNumber'],
+      customerId: json['id'],
+      name: json['Name'],
+      mobileNumber: json['MobileNumber'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "Name": name,
+      "MobileNumber": mobileNumber,
+    };
   }
 }
