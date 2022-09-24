@@ -6,16 +6,15 @@ class MenuItemModel {
   String? itemDescription;
   String? commentForKOT;
   String? stockGroup;
-  double? quantity;
+  double quantity;
   double? rateBeforeDiscount;
   double? discount;
   double? rate;
-  double? saudaRate;
   String? taxClassID;
   double? taxRate;
   bool? isDiscountable;
   String? masterFilter;
-  List<CustomizablePageModel>? customizable;
+  List<CustomizablePageModel> customizable;
   bool? isVeg;
   String itemID;
   String? tags;
@@ -27,16 +26,15 @@ class MenuItemModel {
       this.itemDescription,
       this.commentForKOT,
       this.stockGroup,
-      this.quantity,
+      required this.quantity,
       this.rateBeforeDiscount,
       this.discount,
       this.rate,
-      this.saudaRate,
       this.taxClassID,
       this.taxRate,
       this.isDiscountable,
       this.masterFilter,
-      this.customizable,
+      required this.customizable,
       required this.itemID,
       this.isVeg,
       this.tags,
@@ -49,24 +47,24 @@ class MenuItemModel {
         itemDescription: json['ItemDescription'],
         commentForKOT: json['CommentForKOT'],
         stockGroup: json['StockGroup'],
-        quantity: json['Quantity'],
-        rateBeforeDiscount: json['RateBeforeDiscount'],
-        discount: json['Discount'],
-        rate: json['Rate'],
-        saudaRate: json['SaudaRate'],
+        quantity: json['Quantity'] ?? 0,
+        rateBeforeDiscount: double.parse(json['RateBeforeDiscount'].toString()),
+        discount: double.parse(json['Discount'].toString()),
+        rate: double.parse(json['Rate'].toString()),
         taxClassID: json['TaxClassID'],
-        taxRate: json['TaxRate'],
-        isDiscountable: json['IsDiscountable'],
+        taxRate: double.parse(json['TaxRate'].toString()),
+        isDiscountable: json['IsDiscountable'] == 1,
         masterFilter: json['MasterFilter'],
-        customizable: (json['Customizable'] == "")
-            ? []
-            : (json['Customizable'] as List)
-                .map((data) => CustomizablePageModel.fromJson(data))
-                .toList(),
-        isVeg: json['IsVeg'],
-        itemID: json['ItemID'],
+        customizable:
+            (json['Customizable'] == "" || json['Customizable'] == null)
+                ? []
+                : (json['Customizable'] as List)
+                    .map((data) => CustomizablePageModel.fromJson(data))
+                    .toList(),
+        isVeg: json['IsVeg'] == 1,
+        itemID: json['id'],
         tags: json['Tags'],
-        favourite: json['Favourite']);
+        favourite: json['Favourite'] == 1);
   }
 
   Map<String, dynamic> toMap() {
@@ -80,14 +78,13 @@ class MenuItemModel {
       'RateBeforeDiscount': rateBeforeDiscount,
       'Discount': discount,
       'Rate': rate,
-      'SaudaRate': saudaRate,
       'TaxClassID': taxClassID,
       'TaxRate': taxRate,
       'IsDiscountable': isDiscountable,
       'MasterFilter': masterFilter,
-      'Customizable': (customizable == null)
+      'Customizable': (customizable == [])
           ? []
-          : (customizable as List)
+          : customizable
               .map((data) => CustomizablePageModel.fromJson(data))
               .toList(),
       'IsVeg': isVeg,
