@@ -631,7 +631,7 @@ class _HomePageState extends State<HomePage> {
 //                   ),
 //                   errorWidget: (context, url, error) => Icon(Icons.error),
 //                 ):Image(height:50,fit: BoxFit.fitHeight,image: Image.asset('assets/img/waiter_icon.png').image,),
-//                 //Image(height:50,fit: BoxFit.fitHeight,image: Image.asset('assets/img/AllFilterIcon.png').image,),
+//                 //Image(height:50,fit: BoxFit.fitHeight,image: Image.asset('assets/img/all_filter_icon.png').image,),
 //                 backgroundColor: Colors.transparent,
 //               ),
 //               Text(item.clientName,textScaleFactor: 1,textAlign:TextAlign.center,maxLines: 4, overflow:TextOverflow.ellipsis,style: GoogleFonts.openSans(fontSize:11),),
