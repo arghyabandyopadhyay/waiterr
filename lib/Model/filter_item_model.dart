@@ -1,4 +1,4 @@
-class FilterItemModel{
+class FilterItemModel {
   final String? image;
   final String? stockGroup;
   final String? masterFilter;
@@ -6,7 +6,7 @@ class FilterItemModel{
 
   factory FilterItemModel.fromJson(Map<String, dynamic> json) {
     return FilterItemModel(
-      //image: json['Image']!=null&&json['Image']!=""?Image.memory(base64Decode(json['Image'])):Image.asset('assets/img/AllFilterIcon.png'),
+      //image: json['Image']!=null&&json['Image']!=""?Image.memory(base64Decode(json['Image'])):Image.asset('assets/img/all_filter_icon.png'),
       image: json['Image'],
       stockGroup: json['StockGroup'],
       masterFilter: json['MasterFilter'],
