@@ -111,7 +111,7 @@ class ProductAbout extends StatelessWidget {
                           height: 16,
                         ),
                         Container(
-                          height: (item!.customizable!.isNotEmpty) ? null : 0,
+                          height: (item!.customizable.isNotEmpty) ? null : 0,
                           padding: const EdgeInsets.symmetric(horizontal: 1),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -119,7 +119,7 @@ class ProductAbout extends StatelessWidget {
                                   color: Colors.orange,
                                   width: 1.0,
                                   style: BorderStyle.solid)),
-                          child: (item!.customizable!.isNotEmpty)
+                          child: (item!.customizable.isNotEmpty)
                               ? const Text(
                                   " Customizable ",
                                   textScaleFactor: 1,
