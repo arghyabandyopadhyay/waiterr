@@ -47,7 +47,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
   late List<MenuItemModel> filterList;
   List<MenuItemModel> favourites = [];
   String dropdownValue = '0';
-  double? totalItems = 0;
+  double totalItems = 0;
   double? totalCartAmount = 0;
   bool? _isSearching, _dataIsLoaded, _isFilterOn;
   List<MenuItemModel> searchResult = [];
@@ -87,12 +87,11 @@ class _MenuPageAllState extends State<MenuPageAll> {
 
   void _showModalBottomSheet(BuildContext context, MenuItemModel element) {
     int i = 0;
-    List<CustomizablePageModel> custList = element.customizable!;
+    List<CustomizablePageModel> custList = element.customizable;
     for (CustomizablePageModel custModel in custList) {
-      if (custModel.qty != "0") {
-        totalItems = totalItems! - double.parse(custModel.qty!);
-        totalCartAmount = totalCartAmount! -
-            double.parse(custModel.price!) * double.parse(custModel.qty!);
+      if (custModel.qty != 0) {
+        totalItems = totalItems - custModel.qty;
+        totalCartAmount = totalCartAmount! - custModel.price * custModel.qty;
       }
     }
     showModalBottomSheet<CustValTemp>(
@@ -113,25 +112,24 @@ class _MenuPageAllState extends State<MenuPageAll> {
           if (value != null)
             {
               setState(() {
-                for (CustomizablePageModel a in element.customizable!) {
+                for (CustomizablePageModel a in element.customizable) {
                   a.qty = value.orderList[i++].qty;
                 }
                 i = 0;
                 totalCartAmount = totalCartAmount! + value.totalCartAmount!;
-                totalItems = totalItems! + value.totalItem!;
+                totalItems = totalItems + value.totalItem;
                 element.quantity = value.totalItem;
               })
             }
           else
             {
               setState(() {
-                List<CustomizablePageModel> custList1 = element.customizable!;
+                List<CustomizablePageModel> custList1 = element.customizable;
                 for (CustomizablePageModel custModel in custList1) {
-                  if (custModel.qty != "0") {
-                    totalItems = totalItems! + int.parse(custModel.qty!);
-                    totalCartAmount = totalCartAmount! +
-                        double.parse(custModel.price!) *
-                            int.parse(custModel.qty!);
+                  if (custModel.qty != 0) {
+                    totalItems = totalItems + custModel.qty;
+                    totalCartAmount =
+                        totalCartAmount! + custModel.price * custModel.qty;
                   }
                 }
               }),
@@ -142,14 +140,14 @@ class _MenuPageAllState extends State<MenuPageAll> {
   Future<void> _showProductPage(
       BuildContext context, MenuItemModel element) async {
     if (element.quantity != 0) {
-      totalItems = totalItems! - element.quantity!;
-      totalCartAmount = totalCartAmount! - element.rate! * element.quantity!;
+      totalItems = totalItems - element.quantity;
+      totalCartAmount = totalCartAmount! - element.rate! * element.quantity;
     }
     await Navigator.push(context,
         CupertinoPageRoute(builder: (context1) => ProductPage(item: element)));
     setState(() {
-      totalCartAmount = totalCartAmount! + element.rate! * element.quantity!;
-      totalItems = totalItems! + element.quantity!;
+      totalCartAmount = totalCartAmount! + element.rate! * element.quantity;
+      totalItems = totalItems + element.quantity;
     });
   }
 
@@ -191,7 +189,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
     List<MenuItemModel> temp;
     MenuItemModel temp2;
     if (UserDetail.userDetails.roleID == 1) {
-      await postForMenuItem(widget.addOrderData!.waiterMobileNumber ?? "")
+      await postForMenuItem(widget.addOrderData!.mobileNo ?? "")
           .then((value) async => {
                 if (PreviousCartManager.previousSalePointName ==
                         widget.addOrderData!.salePointName &&
@@ -346,10 +344,10 @@ class _MenuPageAllState extends State<MenuPageAll> {
 
   void onTapAdd(MenuItemModel itemModel) {
     setState(() {
-      if (itemModel.customizable!.isEmpty) {
-        totalItems = totalItems! + 1;
+      if (itemModel.customizable.isEmpty) {
+        totalItems = totalItems + 1;
         totalCartAmount = totalCartAmount! + itemModel.rate!;
-        itemModel.quantity = itemModel.quantity! + 1;
+        itemModel.quantity = itemModel.quantity + 1;
       } else {
         _showModalBottomSheet(context, itemModel);
       }
@@ -358,21 +356,21 @@ class _MenuPageAllState extends State<MenuPageAll> {
 
   void onTapRemove(MenuItemModel itemModel) {
     setState(() {
-      if (itemModel.customizable!.isEmpty) {
-        if (itemModel.quantity! - 1 >= 0) {
-          totalItems = itemModel.quantity == 0.0 ? totalItems : totalItems! - 1;
+      if (itemModel.customizable.isEmpty) {
+        if (itemModel.quantity - 1 >= 0) {
+          totalItems = itemModel.quantity == 0.0 ? totalItems : totalItems - 1;
           totalCartAmount = itemModel.quantity == 0.0
               ? totalCartAmount
               : totalCartAmount! - itemModel.rate!;
           itemModel.quantity =
-              itemModel.quantity == 0.0 ? 0.0 : itemModel.quantity! - 1;
+              itemModel.quantity == 0.0 ? 0.0 : itemModel.quantity - 1;
         } else {
           totalItems = itemModel.quantity == 0.0
               ? totalItems
-              : totalItems! - itemModel.quantity!;
+              : totalItems - itemModel.quantity;
           totalCartAmount = itemModel.quantity == 0.0
               ? totalCartAmount
-              : totalCartAmount! - itemModel.rate! * itemModel.quantity!;
+              : totalCartAmount! - itemModel.rate! * itemModel.quantity;
           itemModel.quantity = 0.0;
         }
       } else {
@@ -409,13 +407,13 @@ class _MenuPageAllState extends State<MenuPageAll> {
 
   void onLongPressedRemove(MenuItemModel itemModel) {
     setState(() {
-      if (itemModel.customizable!.isEmpty) {
+      if (itemModel.customizable.isEmpty) {
         totalItems = itemModel.quantity == 0.0
             ? totalItems
-            : totalItems! - itemModel.quantity!;
+            : totalItems - itemModel.quantity;
         totalCartAmount = itemModel.quantity == 0.0
             ? totalCartAmount
-            : totalCartAmount! - itemModel.rate! * itemModel.quantity!;
+            : totalCartAmount! - itemModel.rate! * itemModel.quantity;
         itemModel.quantity = 0.0;
       } else {
         _showModalBottomSheet(context, itemModel);
@@ -424,7 +422,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
   }
 
   void onLongPressedAdd(MenuItemModel itemModel) {
-    itemModel.customizable!.isEmpty
+    itemModel.customizable.isEmpty
         ? showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -436,10 +434,10 @@ class _MenuPageAllState extends State<MenuPageAll> {
                 previousValue: itemModel.quantity,
                 onTapAdd: () {
                   setState(() {
-                    totalItems = totalItems! + quantity - itemModel.quantity!;
+                    totalItems = totalItems + quantity - itemModel.quantity;
                     double info = itemModel.rate!;
                     totalCartAmount = totalCartAmount! +
-                        info * (quantity - itemModel.quantity!);
+                        info * (quantity - itemModel.quantity);
                     itemModel.quantity = quantity;
                   });
                   Navigator.pop(context);
@@ -453,18 +451,20 @@ class _MenuPageAllState extends State<MenuPageAll> {
     List<MenuItemModel> orderList = [];
     try {
       orderList = productListSearch!
-          .where((element) => element.quantity! > 0.0)
+          .where((element) => element.quantity > 0.0)
           .toList();
       orderList.add(MenuItemModel(
           item: "Total",
           itemDescription: null,
           itemID: "",
+          customizable: [],
           rate: totalCartAmount,
           quantity: totalItems));
     } catch (E) {
       orderList.add(MenuItemModel(
           item: "Total",
           itemID: "",
+          customizable: [],
           itemDescription: null,
           rate: totalCartAmount,
           quantity: totalItems));
@@ -499,7 +499,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                     key: ObjectKey(items[index].itemID),
                     item: items[index],
                     onMiddleTap: () {
-                      //_showProductPage(context,items[index]);
+                      _showProductPage(context, items[index]);
                     },
                     onTapAdd: () {
                       onTapAdd(items[index]);
