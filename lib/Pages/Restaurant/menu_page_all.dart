@@ -57,7 +57,6 @@ class _MenuPageAllState extends State<MenuPageAll> {
   );
   String menuText = "Menu";
   double globalBillingRate = 0;
-  double globalSaudaRate = 0;
   Icon appbarIcon = const Icon(
     Icons.arrow_back_ios,
     color: Colors.black,
