@@ -202,7 +202,7 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                 height: 2,
                               ),
                               Container(
-                                height: (widget.item!.customizable!.isNotEmpty)
+                                height: (widget.item!.customizable.isNotEmpty)
                                     ? null
                                     : 0,
                                 padding:
@@ -213,7 +213,7 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                         color: Colors.orange,
                                         width: 1.0,
                                         style: BorderStyle.solid)),
-                                child: (widget.item!.customizable!.isNotEmpty)
+                                child: (widget.item!.customizable.isNotEmpty)
                                     ? const Text(
                                         " Customizable ",
                                         textScaleFactor: 1,
@@ -223,16 +223,20 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                     : null,
                               ),
                               Container(
-                                height: (widget.item!.commentForKOT!.isNotEmpty)
-                                    ? null
+                                height: widget.item!.commentForKOT != null
+                                    ? (widget.item!.commentForKOT!.isNotEmpty)
+                                        ? null
+                                        : 0
                                     : 0,
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 1),
-                                child: (widget.item!.commentForKOT!.isNotEmpty)
-                                    ? const Icon(
-                                        Icons.comment,
-                                        color: GlobalTheme.primaryColor,
-                                      )
+                                child: widget.item!.commentForKOT != null
+                                    ? (widget.item!.commentForKOT!.isNotEmpty)
+                                        ? const Icon(
+                                            Icons.comment,
+                                            color: GlobalTheme.primaryColor,
+                                          )
+                                        : null
                                     : null,
                               ),
                             ],
