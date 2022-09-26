@@ -9,14 +9,14 @@ class TotalCalculationWidget extends StatelessWidget {
   const TotalCalculationWidget({Key? key, this.item}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if (item!.customizable!.isEmpty) {
+    if (item!.customizable.isEmpty) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           SizedBox(
               width: MediaQuery.of(context).size.width / 1.75,
               child: Text(
-                "${item!.item} x ${item!.quantity!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
+                "${item!.item} x ${item!.quantity.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
                 textScaleFactor: 1,
                 style: const TextStyle(fontSize: 17),
                 maxLines: 2,
@@ -26,7 +26,7 @@ class TotalCalculationWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 6,
               alignment: Alignment.topRight,
               child: Text(
-                "₹${(item!.quantity! * item!.rate!).toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
+                "₹${(item!.quantity * item!.rate!).toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
                 textScaleFactor: 1,
                 textAlign: TextAlign.right,
                 style: const TextStyle(fontSize: 17),
@@ -39,16 +39,16 @@ class TotalCalculationWidget extends StatelessWidget {
       return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: item!.customizable!.length,
+        itemCount: item!.customizable.length,
         itemBuilder: (context, id) {
-          if (double.parse(item!.customizable![id].qty!) != 0) {
+          if (item!.customizable[id].qty != 0) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 SizedBox(
                     width: MediaQuery.of(context).size.width / 1.5,
                     child: Text(
-                      "${item!.item}(${item!.customizable![id].name!}) x ${item!.customizable![id].qty!}",
+                      "${item!.item}(${item!.customizable[id].name}) x ${item!.customizable[id].qty}",
                       textScaleFactor: 1,
                       style: const TextStyle(fontSize: 17),
                       maxLines: 2,
@@ -58,7 +58,7 @@ class TotalCalculationWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width / 6,
                     alignment: Alignment.topRight,
                     child: Text(
-                      "₹${double.parse(item!.customizable![id].qty!) * double.parse(item!.customizable![id].price!)}",
+                      "₹${item!.customizable[id].qty * item!.customizable[id].price}",
                       textScaleFactor: 1,
                       style: const TextStyle(fontSize: 17),
                       overflow: TextOverflow.ellipsis,
