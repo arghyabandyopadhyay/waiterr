@@ -46,9 +46,9 @@ class _ProductPageState extends State<ProductPage>
 
   void _showModalBottomSheet(BuildContext context, MenuItemModel element) {
     int i = 0;
-    List<CustomizablePageModel> custList = element.customizable!;
+    List<CustomizablePageModel> custList = element.customizable;
     for (CustomizablePageModel custModel in custList) {
-      if (custModel.qty != "0") {}
+      if (custModel.qty != 0) {}
     }
     showModalBottomSheet<CustValTemp>(
       shape: RoundedRectangleBorder(
@@ -67,7 +67,7 @@ class _ProductPageState extends State<ProductPage>
           if (value != null)
             {
               setState(() {
-                for (CustomizablePageModel a in element.customizable!) {
+                for (CustomizablePageModel a in element.customizable) {
                   a.qty = value.orderList[i++].qty;
                 }
                 i = 0;
@@ -77,9 +77,9 @@ class _ProductPageState extends State<ProductPage>
           else
             {
               setState(() {
-                List<CustomizablePageModel> custList1 = element.customizable!;
+                List<CustomizablePageModel> custList1 = element.customizable;
                 for (CustomizablePageModel custModel in custList1) {
-                  if (custModel.qty != "0") {}
+                  if (custModel.qty != 0) {}
                 }
               }),
             },
@@ -102,8 +102,8 @@ class _ProductPageState extends State<ProductPage>
   }
 
   void onTapAdd() {
-    if (widget.item!.customizable!.isEmpty) {
-      widget.item!.quantity = widget.item!.quantity! + 1;
+    if (widget.item!.customizable.isEmpty) {
+      widget.item!.quantity = widget.item!.quantity + 1;
     } else {
       _showModalBottomSheet(context, widget.item!);
     }
@@ -111,7 +111,7 @@ class _ProductPageState extends State<ProductPage>
   }
 
   void onLongPressedAdd() {
-    (widget.item!.customizable!.isEmpty)
+    (widget.item!.customizable.isEmpty)
         ? showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -191,7 +191,7 @@ class _ProductPageState extends State<ProductPage>
                             child: SizedBox(
                               height: 200,
                               child:
-                                  Image.asset("assets/img/AllFilterIcon.png"),
+                                  Image.asset("assets/img/all_filter_icon.png"),
                             ),
                           );
                         }
@@ -241,7 +241,7 @@ class _ProductPageState extends State<ProductPage>
                             item: widget.item,
                             onLongPressedAdd: onLongPressedAdd,
                             onLongPressedRemove: () {
-                              if (widget.item!.customizable!.isEmpty) {
+                              if (widget.item!.customizable.isEmpty) {
                                 widget.item!.quantity = 0.0;
                               } else {
                                 _showModalBottomSheet(context, widget.item!);
@@ -249,12 +249,12 @@ class _ProductPageState extends State<ProductPage>
                               setState(() {});
                             },
                             onTapRemove: () {
-                              if (widget.item!.customizable!.isEmpty) {
-                                if (widget.item!.quantity! - 1 >= 0) {
+                              if (widget.item!.customizable.isEmpty) {
+                                if (widget.item!.quantity - 1 >= 0) {
                                   widget.item!.quantity =
                                       widget.item!.quantity == 0.0
                                           ? 0.0
-                                          : widget.item!.quantity! - 1;
+                                          : widget.item!.quantity - 1;
                                 } else {
                                   widget.item!.quantity = 0.0;
                                 }
@@ -281,7 +281,7 @@ class _ProductPageState extends State<ProductPage>
                                   style: BorderStyle.solid)),
                           width: MediaQuery.of(context).size.width * 0.60,
                           child: Text(
-                              'Add ₹ ${(widget.item!.rate! * widget.item!.quantity!).toStringAsFixed(2)}',
+                              'Add ₹ ${(widget.item!.rate! * widget.item!.quantity).toStringAsFixed(2)}',
                               textScaleFactor: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
