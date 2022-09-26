@@ -88,45 +88,48 @@ class _AddOrderState extends State<AddOrder> {
           await postForRunningOrders(
                   true, _selectedSalesPoint, salesPointNo.text, _selectedOutlet)
               .then((List<RunningOrderModel> rList) async => {
-                    // if (phoneNumber.text.isNotEmpty)
-                    //   {
-                    //     if (_mobileStatus == "New")
-                    //       await postCustomerDetails(name.text,
-                    //               phoneNumber.text.replaceAll(" ", ""))
-                    //           .catchError((e) {
-                    //         if (kDebugMode) {
-                    //           print(
-                    //               "Server Error Occurred. Please Contact Us If The problem Persists.");
-                    //         }
-                    //       })
-                    //     else
-                    //       {
-                    //         await getCustomerDetails(
-                    //                 phoneNumber.text.replaceAll(" ", ""))
-                    //             .then((CustomerDetailsModel value) => {
-                    //                   if (value.name != "New")
-                    //                     customerId = value.customerID,
-                    //                 })
-                    //             .catchError((e) {
-                    //           globalShowInSnackBar(
-                    //               "Server Error Occurred. Please Contact Us If The problem Persists.",
-                    //               null,
-                    //               scaffoldMessengerKey,
-                    //               null,
-                    //               null);
-                    //         }),
-                    //         await putCustomerDetails(customerId, name.text,
-                    //                 phoneNumber.text.replaceAll(" ", ""))
-                    //             .catchError((e) {
-                    //           globalShowInSnackBar(
-                    //               "Server Error Occurred. Please Contact Us If The problem Persists.",
-                    //               null,
-                    //               scaffoldMessengerKey,
-                    //               null,
-                    //               null);
-                    //         })
-                    //       },
-                    //   },
+                    if (phoneNumber.text.isNotEmpty)
+                      {
+                        if (_mobileStatus == "New")
+                          await postCustomerDetails(name.text,
+                                  phoneNumber.text.replaceAll(" ", ""))
+                              .catchError((e) {
+                            if (kDebugMode) {
+                              print(
+                                  "Server Error Occurred. Please Contact Us If The problem Persists.");
+                            }
+                          })
+                        else
+                          {
+                            await getCustomerDetails(
+                                    phoneNumber.text.replaceAll(" ", ""))
+                                .then((CustomerDetailsModel value) => {
+                                      if (value.name != "New")
+                                        customerId = value.customerId,
+                                    })
+                                .catchError((e) {
+                              globalShowInSnackBar(
+                                  "Server Error Occurred. Please Contact Us If The problem Persists.",
+                                  null,
+                                  scaffoldMessengerKey,
+                                  null,
+                                  null);
+                            }),
+                            await putCustomerDetails(CustomerDetailsModel(
+                                    customerId: customerId,
+                                    name: name.text,
+                                    mobileNumber:
+                                        phoneNumber.text.replaceAll(" ", "")))
+                                .catchError((e) {
+                              globalShowInSnackBar(
+                                  "Server Error Occurred. Please Contact Us If The problem Persists.",
+                                  null,
+                                  scaffoldMessengerKey,
+                                  null,
+                                  null);
+                            })
+                          },
+                      },
                     setState(() {
                       _isLoadingAvailability = false;
                     }),
@@ -145,7 +148,9 @@ class _AddOrderState extends State<AddOrder> {
                                     pax: int.parse(noOfPerson.text),
                                     salePointType: _selectedSalesPoint,
                                     masterFilter: name.text.replaceAll(" ", ""),
-                                    waiterName: ""))))
+                                    waiterMobileNumber:
+                                        UserDetail.userDetails.mobileNumber,
+                                    waiterName: UserDetail.userDetails.name))))
                       }
                     else
                       {
@@ -637,7 +642,7 @@ class _AddOrderState extends State<AddOrder> {
                                                                     else
                                                                       {
                                                                         customerId =
-                                                                            value.customerID,
+                                                                            value.customerId,
                                                                         if (name
                                                                             .text
                                                                             .isEmpty)
