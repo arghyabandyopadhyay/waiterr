@@ -68,14 +68,14 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
         ),
         Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
               height: 2,
               width: MediaQuery.of(context).size.width / 12.25,
-              margin: EdgeInsets.all(0),
-              padding: EdgeInsets.all(0),
+              margin: const EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               color: current_step >= 0
                   ? GlobalTheme.primaryColor
                   : GlobalTheme.primaryText,
@@ -110,14 +110,14 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
         ),
         Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
               height: 2,
               width: MediaQuery.of(context).size.width / 12.25,
-              margin: EdgeInsets.all(0),
-              padding: EdgeInsets.all(0),
+              margin: const EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               color: current_step >= 1
                   ? GlobalTheme.primaryColor
                   : GlobalTheme.primaryText,
@@ -152,14 +152,14 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
         ),
         Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
               height: 2,
               width: MediaQuery.of(context).size.width / 12.25,
-              margin: EdgeInsets.all(0),
-              padding: EdgeInsets.all(0),
+              margin: const EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               color: current_step >= 2
                   ? GlobalTheme.primaryColor
                   : GlobalTheme.primaryText,
