@@ -3,13 +3,12 @@ import '../place_order_menu_list.dart';
 class PlaceOrderJson {
   String? salePointType;
   String? salePointName;
-  String? waiterName;
+  String? waiterId;
   String? customerName;
   String? mobileNumber;
   int? pAX;
   String? outletName;
   String? narration;
-  String? createdBy;
   String? createdOn;
   List<PlaceOrderMenuList>? menuList;
   String? userRole;
@@ -17,13 +16,12 @@ class PlaceOrderJson {
   PlaceOrderJson(
       {this.salePointType,
       this.salePointName,
-      this.waiterName,
+      this.waiterId,
       this.customerName,
       this.mobileNumber,
       this.pAX,
       this.outletName,
       this.narration,
-      this.createdBy,
       this.createdOn,
       this.menuList,
       this.userRole});
@@ -35,13 +33,12 @@ class PlaceOrderJson {
     return {
       'SalePointType': salePointType,
       'SalePointName': salePointName,
-      'WaiterName': waiterName,
+      'WaiterId': waiterId,
       'CustomerName': customerName,
       'MobileNumber': mobileNumber,
       'PAX': pAX,
       'OutletName': outletName,
       'Narration': narration,
-      'CreatedBy': createdBy,
       'CreatedOn': createdOn,
       'menuList': menuList,
       'AYSUserRole': userRole,
