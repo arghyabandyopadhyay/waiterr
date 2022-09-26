@@ -31,7 +31,7 @@ class SelectionCardResponsive extends StatelessWidget {
               //       child:item.image)),
               CircleAvatar(
                 radius: active! ? 35 : 30,
-                //Image(height:50,fit: BoxFit.fitHeight,image: Image.asset('assets/img/AllFilterIcon.png').image,),
+                //Image(height:50,fit: BoxFit.fitHeight,image: Image.asset('assets/img/all_filter_icon.png').image,),
                 backgroundColor: Colors.transparent,
                 //child: Image(height:50,filterQuality:FilterQuality.high,fit: BoxFit.fitHeight,image: item.image.image,),
                 child: item!.image != null && item!.image != ""
@@ -69,7 +69,7 @@ class SelectionCardResponsive extends StatelessWidget {
                         height: 50,
                         fit: BoxFit.fitHeight,
                         image:
-                            Image.asset('assets/img/AllFilterIcon.png').image,
+                            Image.asset('assets/img/all_filter_icon.png').image,
                       ),
               ),
               Text(
