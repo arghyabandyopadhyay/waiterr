@@ -5,11 +5,12 @@ class MenuItemModel {
   String item;
   String? itemDescription;
   String? commentForKOT;
+  String? commentForKOTId;
   String? stockGroup;
   double quantity;
   double? rateBeforeDiscount;
   double? discount;
-  double? rate;
+  double rate;
   String? taxClassID;
   double? taxRate;
   bool? isDiscountable;
@@ -18,18 +19,19 @@ class MenuItemModel {
   bool? isVeg;
   String itemID;
   String? tags;
-  bool? favourite;
+  bool favourite;
 
   MenuItemModel(
       {this.itemImage,
       required this.item,
       this.itemDescription,
       this.commentForKOT,
+      this.commentForKOTId,
       this.stockGroup,
       required this.quantity,
       this.rateBeforeDiscount,
       this.discount,
-      this.rate,
+      required this.rate,
       this.taxClassID,
       this.taxRate,
       this.isDiscountable,
@@ -38,7 +40,7 @@ class MenuItemModel {
       required this.itemID,
       this.isVeg,
       this.tags,
-      this.favourite});
+      required this.favourite});
 
   factory MenuItemModel.fromJson(Map<String, dynamic> json) {
     return MenuItemModel(
@@ -73,6 +75,7 @@ class MenuItemModel {
       'Item': item,
       'ItemDescription': itemDescription,
       'CommentForKOT': commentForKOT,
+      'CommentForKOTId': commentForKOTId,
       'StockGroup': stockGroup,
       'Quantity': quantity,
       'RateBeforeDiscount': rateBeforeDiscount,
