@@ -26,7 +26,7 @@ class TotalCalculationWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 6,
               alignment: Alignment.topRight,
               child: Text(
-                "₹${(item!.quantity * item!.rate!).toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
+                "₹${(item!.quantity * item!.rate).toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
                 textScaleFactor: 1,
                 textAlign: TextAlign.right,
                 style: const TextStyle(fontSize: 17),
