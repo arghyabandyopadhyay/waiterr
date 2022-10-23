@@ -1,12 +1,14 @@
-class CommentForKotSuggestionsModel{
+class CommentForKotSuggestionsModel {
+  final String? id;
   final String? commentForKOT;
-  final String? itemID;
-  CommentForKotSuggestionsModel({this.commentForKOT, this.itemID});
+  final String? menuItemId;
+  CommentForKotSuggestionsModel({this.id, this.commentForKOT, this.menuItemId});
 
   factory CommentForKotSuggestionsModel.fromJson(Map<String, dynamic> json) {
     return CommentForKotSuggestionsModel(
+      id: json['id'],
       commentForKOT: json['CommentForKOT'],
-      itemID: json['ItemID'],
+      menuItemId: json['MenuItemId'],
     );
   }
 }
