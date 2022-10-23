@@ -15,6 +15,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   badges: ^2.0.2
+  intl: ^0.17.0
   cached_network_image: ^3.2.1
   connectivity_plus: ^2.3.5
   expandable_group: ^0.0.8
