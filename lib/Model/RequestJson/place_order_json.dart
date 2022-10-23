@@ -7,6 +7,7 @@ class PlaceOrderJson {
   String? customerName;
   String? mobileNumber;
   int? pAX;
+  String? outletId;
   String? outletName;
   String? narration;
   String? createdOn;
@@ -20,6 +21,7 @@ class PlaceOrderJson {
       this.customerName,
       this.mobileNumber,
       this.pAX,
+      this.outletId,
       this.outletName,
       this.narration,
       this.createdOn,
@@ -37,6 +39,7 @@ class PlaceOrderJson {
       'CustomerName': customerName,
       'MobileNumber': mobileNumber,
       'PAX': pAX,
+      'OutletId': outletId,
       'OutletName': outletName,
       'Narration': narration,
       'CreatedOn': createdOn,
