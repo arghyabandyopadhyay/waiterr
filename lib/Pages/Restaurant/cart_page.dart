@@ -14,13 +14,14 @@ import 'package:waiterr/widgets/loading_indicator.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../Model/comment_for_kot_suggestion_model.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 
 class FoodOrderPage extends StatefulWidget {
   final List<MenuItemModel> cartList;
-  final RunningOrderModel? addOrderData;
+  final RunningOrderModel addOrderData;
   const FoodOrderPage(this.cartList, this.addOrderData, {super.key});
   @override
   State<FoodOrderPage> createState() => _FoodOrderPageState();
@@ -109,8 +110,8 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
     if (itemModel.customizable.isEmpty) {
       setState(() {
         totalItems = totalItems! + 1;
-        totalCartAmount = totalCartAmount! + itemModel.rate!;
-        totalTax = totalTax + itemModel.rate! * itemModel.taxRate! * 0.01;
+        totalCartAmount = totalCartAmount! + itemModel.rate;
+        totalTax = totalTax + itemModel.rate * itemModel.taxRate! * 0.01;
         itemModel.quantity = itemModel.quantity + 1;
       });
     } else {
@@ -125,10 +126,10 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
           totalItems = itemModel.quantity == 0.0 ? totalItems : totalItems! - 1;
           totalCartAmount = itemModel.quantity == 0.0
               ? totalCartAmount
-              : totalCartAmount! - itemModel.rate!;
+              : totalCartAmount! - itemModel.rate;
           totalTax = itemModel.quantity == 0.0
               ? totalTax
-              : totalTax - itemModel.rate! * itemModel.taxRate! * 0.01;
+              : totalTax - itemModel.rate * itemModel.taxRate! * 0.01;
           itemModel.quantity =
               itemModel.quantity == 0.0 ? 0.0 : itemModel.quantity - 1;
         } else {
@@ -137,11 +138,11 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
               : totalItems! - itemModel.quantity;
           totalCartAmount = itemModel.quantity == 0.0
               ? totalCartAmount
-              : totalCartAmount! - (itemModel.rate! * itemModel.quantity);
+              : totalCartAmount! - (itemModel.rate * itemModel.quantity);
           totalTax = itemModel.quantity == 0.0
               ? totalTax
               : totalTax -
-                  itemModel.rate! *
+                  itemModel.rate *
                       itemModel.quantity *
                       itemModel.taxRate! *
                       0.01;
@@ -160,34 +161,28 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            String? commentForKOT;
+            CommentForKotSuggestionsModel commentForKOT =
+                CommentForKotSuggestionsModel();
             return AddCommentForKOTDialog(
               itemId: itemModel.itemID,
-              previousValue: itemModel.commentForKOT,
+              previousValue: CommentForKotSuggestionsModel(
+                  commentForKOT: itemModel.commentForKOT,
+                  menuItemId: itemModel.itemID),
               setCommentForKOT: (value) {
                 commentForKOT = value;
               },
               onTapAdd: () {
                 setState(() {
-                  itemModel.commentForKOT = commentForKOT;
+                  itemModel.commentForKOT = commentForKOT.commentForKOT;
+                  itemModel.commentForKOTId = commentForKOT.id;
                   Navigator.pop(context);
                 });
               },
             );
           });
     } else {
-      globalShowInSnackBar(
-          "Can't Add Remarks in the Items not added to cart.",
-          SnackBarAction(
-            label: "Undo",
-            onPressed: () {
-              Navigator.of(_scaffoldKey.currentState!.context)
-                  .popUntil((route) => route.isFirst);
-            },
-          ),
-          scaffoldMessengerKey,
-          null,
-          null);
+      globalShowInSnackBar("Can't Add Remarks in the Items not added to cart.",
+          null, scaffoldMessengerKey, null, null);
     }
   }
 
@@ -199,14 +194,11 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
             : totalItems! - itemModel.quantity;
         totalCartAmount = itemModel.quantity == 0.0
             ? totalCartAmount
-            : totalCartAmount! - (itemModel.rate! * itemModel.quantity);
+            : totalCartAmount! - (itemModel.rate * itemModel.quantity);
         totalTax = itemModel.quantity == 0.0
             ? totalTax
             : totalTax -
-                itemModel.rate! *
-                    itemModel.quantity *
-                    itemModel.taxRate! *
-                    0.01;
+                itemModel.rate * itemModel.quantity * itemModel.taxRate! * 0.01;
         itemModel.quantity = 0.0;
       });
     } else {
@@ -228,11 +220,11 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                 onTapAdd: () {
                   setState(() {
                     totalItems = totalItems! + quantity - itemModel.quantity;
-                    double info = itemModel.rate!;
+                    double info = itemModel.rate;
                     totalCartAmount = totalCartAmount! +
                         info * (quantity - itemModel.quantity);
                     totalTax = totalTax +
-                        itemModel.rate! *
+                        itemModel.rate *
                             (quantity - itemModel.quantity) *
                             itemModel.taxRate! *
                             0.01;
@@ -252,7 +244,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
     totalCartAmount = widget.cartList.last.rate;
     for (int a = 0; a < widget.cartList.length - 1; a++) {
       totalTax = totalTax +
-          widget.cartList[a].rate! *
+          widget.cartList[a].rate *
               widget.cartList[a].quantity *
               widget.cartList[a].taxRate! *
               0.01;
@@ -569,6 +561,8 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                         if (widget.cartList[a].customizable
                                                 .isEmpty &&
                                             widget.cartList[a].quantity > 0.0) {
+                                          print(widget
+                                              .cartList[a].commentForKOTId);
                                           order.add(PlaceOrderMenuList(
                                               itemID: widget.cartList[a].itemID,
                                               quantity:
@@ -576,6 +570,8 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                               rate: widget.cartList[a].rate,
                                               commentForKOT: widget
                                                   .cartList[a].commentForKOT,
+                                              commentForKOTId: widget
+                                                  .cartList[a].commentForKOTId,
                                               taxClassID:
                                                   widget.cartList[a].taxClassID,
                                               taxRate:
@@ -587,18 +583,20 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                       PlaceOrderJson placeOrderJson =
                                           PlaceOrderJson(
                                               salePointName: widget
-                                                  .addOrderData!.salePointName,
+                                                  .addOrderData.salePointName,
                                               salePointType: widget
-                                                  .addOrderData!.salePointType,
+                                                  .addOrderData.salePointType,
                                               waiterId:
                                                   UserDetail.userDetails.id,
-                                              customerName:
-                                                  widget.addOrderData!.name,
-                                              mobileNumber:
-                                                  widget.addOrderData!.mobileNo,
-                                              pAX: widget.addOrderData!.pax,
                                               outletName: widget
-                                                  .addOrderData!.outletName,
+                                                  .addOrderData.outletName,
+                                              customerName:
+                                                  widget.addOrderData.name,
+                                              mobileNumber:
+                                                  widget.addOrderData.mobileNo,
+                                              pAX: widget.addOrderData.pax,
+                                              outletId:
+                                                  widget.addOrderData.outletId,
                                               narration:
                                                   (remarks.text.isNotEmpty)
                                                       ? remarks.text
