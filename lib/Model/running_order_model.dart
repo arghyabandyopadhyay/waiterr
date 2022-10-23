@@ -10,6 +10,7 @@ class RunningOrderModel {
   final String? activeSince;
   final bool? billPrinted;
   final String? outletName;
+  String? outletId;
   final String? masterFilter;
 
   RunningOrderModel(
@@ -24,6 +25,7 @@ class RunningOrderModel {
       this.activeSince,
       this.billPrinted,
       this.outletName,
+      this.outletId,
       this.masterFilter});
 
   factory RunningOrderModel.fromJson(Map<String, dynamic> json) {
