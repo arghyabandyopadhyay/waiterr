@@ -3,6 +3,7 @@ class PlaceOrderMenuList {
   double? quantity;
   double? rate;
   String? commentForKOT;
+  String? commentForKOTId;
   String? taxClassID;
   double? taxRate;
   bool? discountable;
@@ -11,6 +12,7 @@ class PlaceOrderMenuList {
       this.quantity,
       this.rate,
       this.commentForKOT,
+      this.commentForKOTId,
       this.taxClassID,
       this.taxRate,
       this.discountable});
@@ -20,6 +22,7 @@ class PlaceOrderMenuList {
         "Quantity": quantity,
         "Rate": rate,
         "CommentForKOT": commentForKOT,
+        "CommentForKOTId": commentForKOTId,
         "TaxClassID": taxClassID,
         "TaxRate": taxRate,
         "Discountable": discountable
