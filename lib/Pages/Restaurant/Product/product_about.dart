@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import '../../../theme.dart';
 
 class ProductAbout extends StatelessWidget {
-  final MenuItemModel? item;
-  const ProductAbout({Key? key, this.item}) : super(key: key);
+  final MenuItemModel item;
+  const ProductAbout({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<String> tagList = (item!.tags != null) ? item!.tags!.split("|") : [];
-    if (item!.discount != null && item!.discount != 0) {
-      tagList.insert(0, "${item!.discount}% Off");
+    List<String> tagList = (item.tags != null) ? item.tags!.split("|") : [];
+    if (item.discount != null && item.discount != 0) {
+      tagList.insert(0, "${item.discount}% Off");
     }
     double screenWidth = MediaQuery.of(context).size.width;
     return ListView(
@@ -22,11 +22,11 @@ class ProductAbout extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            item!.isVeg != null
+            item.isVeg != null
                 ? Container(
                     alignment: Alignment.centerLeft,
                     margin: const EdgeInsets.only(top: 8),
-                    child: item!.isVeg!
+                    child: item.isVeg!
                         ? Image.asset(
                             'assets/img/veg.png',
                             height: 15,
@@ -40,7 +40,7 @@ class ProductAbout extends StatelessWidget {
                   )
                 : Container(),
             Text(
-              item!.item,
+              item.item,
               textScaleFactor: 1,
               style: const TextStyle(
                   fontSize: 17,
@@ -50,9 +50,9 @@ class ProductAbout extends StatelessWidget {
           ],
         ),
         Container(
-          child: (item!.itemDescription != null)
+          child: (item.itemDescription != null)
               ? Text(
-                  item!.itemDescription!,
+                  item.itemDescription ?? "",
                   textScaleFactor: 1,
                   style: const TextStyle(
                     color: GlobalTheme.primaryText,
@@ -80,7 +80,7 @@ class ProductAbout extends StatelessWidget {
                           child: Row(
                             children: <Widget>[
                               Text(
-                                "₹${item!.rate!.toStringAsFixed((((item!.rate! * 100) % 100) != 0) ? 2 : 0)}",
+                                "₹${item.rate.toStringAsFixed((((item.rate * 100) % 100) != 0) ? 2 : 0)}",
                                 textAlign: TextAlign.start,
                                 textScaleFactor: 1,
                                 style: const TextStyle(fontSize: 30),
@@ -89,8 +89,8 @@ class ProductAbout extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                (item!.discount != null && item!.discount != 0)
-                                    ? "₹${item!.rateBeforeDiscount}"
+                                (item.discount != null && item.discount != 0)
+                                    ? "₹${item.rateBeforeDiscount}"
                                     : "",
                                 textAlign: TextAlign.end,
                                 textScaleFactor: 1,
@@ -111,7 +111,7 @@ class ProductAbout extends StatelessWidget {
                           height: 16,
                         ),
                         Container(
-                          height: (item!.customizable.isNotEmpty) ? null : 0,
+                          height: (item.customizable.isNotEmpty) ? null : 0,
                           padding: const EdgeInsets.symmetric(horizontal: 1),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -119,7 +119,7 @@ class ProductAbout extends StatelessWidget {
                                   color: Colors.orange,
                                   width: 1.0,
                                   style: BorderStyle.solid)),
-                          child: (item!.customizable.isNotEmpty)
+                          child: (item.customizable.isNotEmpty)
                               ? const Text(
                                   " Customizable ",
                                   textScaleFactor: 1,
@@ -129,9 +129,11 @@ class ProductAbout extends StatelessWidget {
                               : null,
                         ),
                         Container(
-                          height: (item!.commentForKOT!.isNotEmpty) ? null : 0,
+                          height: ((item.commentForKOT ?? "").isNotEmpty)
+                              ? null
+                              : 0,
                           padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: (item!.commentForKOT!.isNotEmpty)
+                          child: ((item.commentForKOT ?? "").isNotEmpty)
                               ? const Icon(
                                   Icons.comment,
                                   color: GlobalTheme.primaryColor,
