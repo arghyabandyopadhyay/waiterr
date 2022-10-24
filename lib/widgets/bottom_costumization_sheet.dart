@@ -57,7 +57,6 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                     children: <Widget>[
                       Text(
                         widget.title,
-                        textScaleFactor: 1,
                         textAlign: TextAlign.left,
                         style: const TextStyle(fontSize: 20),
                       ),
@@ -75,7 +74,6 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                   SizedBox(
                     child: Text(
                       widget.description,
-                      textScaleFactor: 1,
                       style: const TextStyle(
                         color: GlobalTheme.primaryText,
                         fontSize: 13,
@@ -233,7 +231,6 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                             horizontal: 10, vertical: 10),
                         child: Text(
                           '$totalItems Items',
-                          textScaleFactor: 1,
                           style: const TextStyle(
                               color: Colors.white, fontSize: 20),
                           overflow: TextOverflow.ellipsis,
@@ -271,7 +268,6 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                             child: Text('Add ₹$totalCartAmount',
-                                textScaleFactor: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 20)),
