@@ -145,7 +145,6 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                           widget.item!.item,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
-                                          textScaleFactor: 1,
                                           style: const TextStyle(fontSize: 17),
                                         ),
                                       ),
@@ -160,9 +159,8 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                     child: Row(
                                       children: <Widget>[
                                         Text(
-                                          "₹${widget.item!.rate!.toStringAsFixed((((widget.item!.rate! * 100) % 100) != 0) ? 2 : 0).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
+                                          "₹${widget.item!.rate.toStringAsFixed((((widget.item!.rate * 100) % 100) != 0) ? 2 : 0).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
                                           textAlign: TextAlign.end,
-                                          textScaleFactor: 1,
                                           style: const TextStyle(fontSize: 17),
                                         ),
                                         const SizedBox(
@@ -174,7 +172,6 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                               ? "₹${widget.item!.rateBeforeDiscount}"
                                               : "",
                                           textAlign: TextAlign.end,
-                                          textScaleFactor: 1,
                                           style: const TextStyle(
                                               fontSize: 15,
                                               color: GlobalTheme.primaryText,
@@ -216,7 +213,6 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                 child: (widget.item!.customizable.isNotEmpty)
                                     ? const Text(
                                         " Customizable ",
-                                        textScaleFactor: 1,
                                         style: TextStyle(
                                             fontSize: 10, color: Colors.orange),
                                       )
@@ -275,7 +271,6 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                         color: GlobalTheme.primaryColor),
                                     child: Text(
                                       tagList[id],
-                                      textScaleFactor: 1,
                                       style: const TextStyle(
                                           fontSize: 10, color: Colors.white),
                                     ),
@@ -296,7 +291,6 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                         child: (widget.item!.itemDescription != null)
                             ? Text(
                                 widget.item!.itemDescription!,
-                                textScaleFactor: 1,
                                 style: const TextStyle(
                                   color: GlobalTheme.primaryText,
                                   fontSize: 13,
