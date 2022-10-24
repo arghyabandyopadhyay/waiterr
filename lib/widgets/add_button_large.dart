@@ -68,7 +68,6 @@ class _AddButtonLargeState extends State<AddButtonLarge> {
                     ? const Text(
                         "Add",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1,
                         style: TextStyle(
                             fontSize: 15, color: GlobalTheme.secondaryText),
                       )
@@ -93,7 +92,6 @@ class _AddButtonLargeState extends State<AddButtonLarge> {
                   (((widget.item!.quantity * 10) % 10) != 0) ? 1 : 0),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: 1,
               style: const TextStyle(
                 fontSize: 12.0,
                 color: GlobalTheme.secondaryText,
@@ -115,7 +113,6 @@ class _AddButtonLargeState extends State<AddButtonLarge> {
                 child: widget.item!.quantity == 0.0
                     ? const Text(
                         "",
-                        textScaleFactor: 1,
                       )
                     : const Icon(
                         Icons.add,
