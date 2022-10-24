@@ -21,8 +21,10 @@ import 'package:waiterr/Modules/api_fetch_module.dart';
 
 class FoodOrderPage extends StatefulWidget {
   final List<MenuItemModel> cartList;
+  final bool isWaiter;
   final RunningOrderModel addOrderData;
-  const FoodOrderPage(this.cartList, this.addOrderData, {super.key});
+  const FoodOrderPage(this.cartList, this.addOrderData, this.isWaiter,
+      {super.key});
   @override
   State<FoodOrderPage> createState() => _FoodOrderPageState();
 }
@@ -44,7 +46,6 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
       animationType: BadgeAnimationType.slide,
       badgeContent: Text(
         totalItems!.round().toString(),
-        textScaleFactor: 1,
         style: const TextStyle(color: Colors.white),
       ),
       child: Container(
@@ -336,7 +337,6 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               child: Text(
                                 "Cart",
-                                textScaleFactor: 1,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                     fontSize: 30.0,
@@ -477,12 +477,10 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                         .spaceBetween,
                                                 children: [
                                                   const Text("Tax",
-                                                      textScaleFactor: 1,
                                                       style: TextStyle(
                                                           fontSize: 17)),
                                                   Text(
                                                     "₹${totalTax.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
-                                                    textScaleFactor: 1,
                                                     textAlign: TextAlign.end,
                                                     style: const TextStyle(
                                                         fontSize: 20),
@@ -509,12 +507,10 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                         .spaceBetween,
                                                 children: [
                                                   const Text("Total",
-                                                      textScaleFactor: 1,
                                                       style: TextStyle(
                                                           fontSize: 20)),
                                                   Text(
                                                     "₹${(totalCartAmount! + totalTax).toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
-                                                    textScaleFactor: 1,
                                                     textAlign: TextAlign.end,
                                                     style: const TextStyle(
                                                         fontSize: 20),
@@ -532,7 +528,6 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                     floatingActionButton: FloatingActionButton.extended(
                         elevation: 5,
                         label: const Text("Place Order",
-                            textScaleFactor: 1,
                             style: TextStyle(
                               fontSize: 17,
                               color: GlobalTheme.floatingButtonText,
@@ -604,9 +599,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                               createdOn: DateTime.now()
                                                   .toIso8601String(),
                                               menuList: order,
-                                              userRole: UserDetail
-                                                          .userDetails.roleID ==
-                                                      1
+                                              userRole: !widget.isWaiter
                                                   ? "User"
                                                   : "Waiter");
                                       _placeOrder(placeOrderJson)
@@ -748,7 +741,6 @@ class CartIconWithBadge extends StatelessWidget {
                   ),
                   child: Text(
                     '$counter',
-                    textScaleFactor: 1,
                     style: const TextStyle(
                       color: Colors.red,
                       fontSize: 8,
@@ -791,7 +783,6 @@ class AddToCartMenu extends StatelessWidget {
             child: Center(
               child: Text(
                 'Add To $productCounter',
-                textScaleFactor: 1,
                 style: const TextStyle(
                     fontSize: 12.0,
                     color: Colors.white,
