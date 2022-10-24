@@ -41,6 +41,11 @@ class UserClientAllocationData {
   static List<List<MenuItemModel>>? productListStockDiff;
   static void setValues(
       UserRestrauntAllocationModel userClientAllocationModel) {
+    if (userClientAllocationModel.guid != guid) {
+      productList = null;
+      distinctStockGroup = null;
+      productListStockDiff = null;
+    }
     clientName = userClientAllocationModel.clientName;
     logoURL = userClientAllocationModel.logoURL;
     dataExchangeVia = userClientAllocationModel.dataExchangeVia;
@@ -99,7 +104,6 @@ class AppBarVariables {
               )),
           const Text(
             "Waiterr",
-            textScaleFactor: 1,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
