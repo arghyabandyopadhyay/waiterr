@@ -41,7 +41,6 @@ class ProductAbout extends StatelessWidget {
                 : Container(),
             Text(
               item.item,
-              textScaleFactor: 1,
               style: const TextStyle(
                   fontSize: 17,
                   color: Colors.black,
@@ -53,7 +52,6 @@ class ProductAbout extends StatelessWidget {
           child: (item.itemDescription != null)
               ? Text(
                   item.itemDescription ?? "",
-                  textScaleFactor: 1,
                   style: const TextStyle(
                     color: GlobalTheme.primaryText,
                     fontSize: 13,
@@ -82,7 +80,6 @@ class ProductAbout extends StatelessWidget {
                               Text(
                                 "₹${item.rate.toStringAsFixed((((item.rate * 100) % 100) != 0) ? 2 : 0)}",
                                 textAlign: TextAlign.start,
-                                textScaleFactor: 1,
                                 style: const TextStyle(fontSize: 30),
                               ),
                               const SizedBox(
@@ -93,7 +90,6 @@ class ProductAbout extends StatelessWidget {
                                     ? "₹${item.rateBeforeDiscount}"
                                     : "",
                                 textAlign: TextAlign.end,
-                                textScaleFactor: 1,
                                 style: const TextStyle(
                                     fontSize: 15,
                                     color: GlobalTheme.primaryText,
@@ -122,7 +118,6 @@ class ProductAbout extends StatelessWidget {
                           child: (item.customizable.isNotEmpty)
                               ? const Text(
                                   " Customizable ",
-                                  textScaleFactor: 1,
                                   style: TextStyle(
                                       fontSize: 10, color: Colors.orange),
                                 )
@@ -171,7 +166,6 @@ class ProductAbout extends StatelessWidget {
                                   color: GlobalTheme.primaryColor),
                               child: Text(
                                 tagList[id],
-                                textScaleFactor: 1,
                                 style: const TextStyle(
                                     fontSize: 10, color: Colors.white),
                               ),
