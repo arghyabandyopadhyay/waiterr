@@ -30,7 +30,6 @@ class Chips extends StatelessWidget {
               elevation: 2,
               label: Text(
                 item!,
-                textScaleFactor: 1,
                 style:
                     const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
