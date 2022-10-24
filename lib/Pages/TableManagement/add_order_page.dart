@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:waiterr/Model/qr_json_model.dart';
 import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Model/customer_details_model.dart';
 import 'package:waiterr/Model/running_order_model.dart';
@@ -16,7 +17,10 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 import '../../theme.dart';
 
 class AddOrder extends StatefulWidget {
-  const AddOrder({Key? key}) : super(key: key);
+  final QRJSONModel? qrjsonModel;
+  final bool isThroughQr;
+  const AddOrder({Key? key, this.qrjsonModel, required this.isThroughQr})
+      : super(key: key);
   @override
   State<AddOrder> createState() => _AddOrderState();
 }
@@ -30,7 +34,6 @@ class _AddOrderState extends State<AddOrder> {
   PersonData person = PersonData();
   var noOfPerson = TextEditingController();
   var salesPointNo = TextEditingController();
-  late List<String?> _outlet;
   late List<String> _salesPoint;
   List<String> noOfPersonList = [
     '1',
@@ -45,7 +48,7 @@ class _AddOrderState extends State<AddOrder> {
     '10'
   ];
   late List<String> salesPointList;
-  String? _selectedOutlet;
+  late OutletConfigurationModel _selectedOutlet;
   String? _selectedSalesPoint;
   String _mobileStatus = "";
   int? _activeSalesPoint;
@@ -59,7 +62,7 @@ class _AddOrderState extends State<AddOrder> {
       GlobalKey<ScaffoldMessengerState>();
   final _IndNumberTextInputFormatter _phoneNumberFormatter =
       _IndNumberTextInputFormatter();
-  List<OutletConfigurationModel>? outletConfiguration;
+  List<OutletConfigurationModel> outletConfiguration = [];
   //Functions
   Future<void> _handleSubmitted() async {
     if (_isLoadingTakeaway || _isLoading || _isLoadingAvailability) {
@@ -85,8 +88,8 @@ class _AddOrderState extends State<AddOrder> {
           _isLoadingAvailability = true;
         });
         try {
-          await postForRunningOrders(
-                  true, _selectedSalesPoint, salesPointNo.text, _selectedOutlet)
+          await postForRunningOrders(true, true, _selectedSalesPoint,
+                  salesPointNo.text, _selectedOutlet.outletName)
               .then((List<RunningOrderModel> rList) async => {
                     if (phoneNumber.text.isNotEmpty)
                       {
@@ -139,18 +142,25 @@ class _AddOrderState extends State<AddOrder> {
                           {FocusScope.of(context).unfocus()},
                         Navigator.of(context).push(CupertinoPageRoute<void>(
                             builder: (context) => MenuPageAll(
-                                addOrderData: RunningOrderModel(
-                                    outletName: _selectedOutlet,
-                                    salePointName: salesPointNo.text,
-                                    name: name.text,
-                                    mobileNo:
-                                        phoneNumber.text.replaceAll(" ", ""),
-                                    pax: int.parse(noOfPerson.text),
-                                    salePointType: _selectedSalesPoint,
-                                    masterFilter: name.text.replaceAll(" ", ""),
-                                    waiterMobileNumber:
-                                        UserDetail.userDetails.mobileNumber,
-                                    waiterName: UserDetail.userDetails.name))))
+                                  addOrderData: RunningOrderModel(
+                                      id: "",
+                                      amount: 0,
+                                      outletName: _selectedOutlet.outletName,
+                                      outletId: _selectedOutlet.id,
+                                      salePointName: salesPointNo.text,
+                                      name: name.text,
+                                      billPrinted: false,
+                                      mobileNo:
+                                          phoneNumber.text.replaceAll(" ", ""),
+                                      pax: int.parse(noOfPerson.text),
+                                      salePointType: _selectedSalesPoint,
+                                      masterFilter:
+                                          name.text.replaceAll(" ", ""),
+                                      waiterMobileNumber:
+                                          UserDetail.userDetails.mobileNumber,
+                                      waiterName: UserDetail.userDetails.name),
+                                  isWaiter: !widget.isThroughQr,
+                                )))
                       }
                     else
                       {
@@ -235,89 +245,100 @@ class _AddOrderState extends State<AddOrder> {
   @override
   void initState() {
     super.initState();
-    outletConfiguration = UserClientAllocationData.outletConfiguration;
-    List<String?> outletListOfClient = [];
-    for (OutletConfigurationModel outletValues in outletConfiguration!) {
-      outletListOfClient.add(outletValues.outletName);
+    if (widget.isThroughQr) {
+      outletConfiguration = [
+        OutletConfigurationModel(
+            widget.qrjsonModel!.restaurantId,
+            widget.qrjsonModel!.outletName,
+            widget.qrjsonModel!.outletSalespointType)
+      ];
+      salesPointList = [widget.qrjsonModel!.table];
+      _selectedSalesPoint = widget.qrjsonModel!.table;
+      salesPointNo.text = widget.qrjsonModel!.table;
+      phoneNumber.text =
+          "${UserDetail.userDetails.mobileNumber.substring(0, 5)} ${UserDetail.userDetails.mobileNumber.substring(5)}";
+      name.text = UserDetail.userDetails.name ?? "";
+    } else {
+      outletConfiguration = [];
+      if (UserClientAllocationData.outletConfiguration != null) {
+        UserClientAllocationData.outletConfiguration?.forEach((element) {
+          outletConfiguration.add(element);
+        });
+      }
+      salesPointList = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20',
+        '21',
+        '22',
+        '23',
+        '24',
+        '25',
+        '26',
+        '27',
+        '28',
+        '29',
+        '30',
+        '31',
+        '32',
+        '33',
+        '34',
+        '35',
+        '36',
+        '37',
+        '38',
+        '39',
+        '40',
+        '41',
+        '42',
+        '43',
+        '44',
+        '45',
+        '46',
+        '47',
+        '48',
+        '49',
+        '50',
+        '51',
+        '52',
+        '53',
+        '54',
+        '55',
+        '56',
+        '57',
+        '58',
+        '59',
+        '60'
+      ];
+      salesPointNo.text = "";
+      phoneNumber.text = "";
+      name.text = "";
     }
-    salesPointList = [
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      '10',
-      '11',
-      '12',
-      '13',
-      '14',
-      '15',
-      '16',
-      '17',
-      '18',
-      '19',
-      '20',
-      '21',
-      '22',
-      '23',
-      '24',
-      '25',
-      '26',
-      '27',
-      '28',
-      '29',
-      '30',
-      '31',
-      '32',
-      '33',
-      '34',
-      '35',
-      '36',
-      '37',
-      '38',
-      '39',
-      '40',
-      '41',
-      '42',
-      '43',
-      '44',
-      '45',
-      '46',
-      '47',
-      '48',
-      '49',
-      '50',
-      '51',
-      '52',
-      '53',
-      '54',
-      '55',
-      '56',
-      '57',
-      '58',
-      '59',
-      '60'
-    ];
-    salesPointNo.text = "";
-    phoneNumber.text = (UserDetail.userDetails.roleID == 1)
-        ? "${UserDetail.userDetails.mobileNumber.substring(0, 5)} ${UserDetail.userDetails.mobileNumber.substring(5)}"
-        : "";
-    name.text = (UserDetail.userDetails.roleID == 1)
-        ? UserDetail.userDetails.name!
-        : "";
     _indexSelectedOutlet = 0;
     _indexSelectedSalesPoint = 0;
     _activeSalesPoint = -1;
     _selectedSalesPoint =
-        outletConfiguration!.first.outletSalePoint!.split("|")[0];
-    _selectedOutlet = outletListOfClient.first;
-    _outlet = outletListOfClient;
-    _salesPoint = outletConfiguration!
-        .where((element) => element.outletName == _selectedOutlet)
+        outletConfiguration.first.outletSalePoint!.split("|")[0];
+    _selectedOutlet = outletConfiguration.first;
+    _salesPoint = outletConfiguration
+        .where((element) => element == _selectedOutlet)
         .first
         .outletSalePoint!
         .split("|");
@@ -327,7 +348,6 @@ class _AddOrderState extends State<AddOrder> {
   Widget build(BuildContext context) {
     const cursorColor = GlobalTheme.primaryColor;
     const sizedBoxSpace = SizedBox(height: 24);
-    bool userType = UserDetail.userDetails.roleID == 1;
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
       child: Scaffold(
@@ -362,7 +382,6 @@ class _AddOrderState extends State<AddOrder> {
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       "Add Order",
-                      textScaleFactor: 1,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.bold),
@@ -423,27 +442,28 @@ class _AddOrderState extends State<AddOrder> {
                                   ),
                                 ),
                                 const Text("Outlets:",
-                                    textScaleFactor: 1,
                                     style: TextStyle(
                                         color: GlobalTheme.primaryText)),
                                 SizedBox(
                                   height: 50,
                                   child: ListView.builder(
                                     shrinkWrap: true,
-                                    itemCount: _outlet.length,
+                                    itemCount: outletConfiguration.length,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
                                       return Chips(
-                                          item: _outlet[index],
+                                          item: outletConfiguration[index]
+                                              .outletName,
                                           index: index,
                                           indexSelected: _indexSelectedOutlet,
                                           onSelected: (value) {
                                             setState(() {
                                               _indexSelectedOutlet = index;
-                                              _selectedOutlet = _outlet[index];
-                                              _salesPoint = outletConfiguration!
+                                              _selectedOutlet =
+                                                  outletConfiguration[index];
+                                              _salesPoint = outletConfiguration
                                                   .where((element) =>
-                                                      element.outletName ==
+                                                      element ==
                                                       _selectedOutlet)
                                                   .first
                                                   .outletSalePoint!
@@ -461,7 +481,6 @@ class _AddOrderState extends State<AddOrder> {
                                   ),
                                 ),
                                 const Text("Sales Point:",
-                                    textScaleFactor: 1,
                                     style: TextStyle(
                                         color: GlobalTheme.primaryText)),
                                 SizedBox(
@@ -506,7 +525,8 @@ class _AddOrderState extends State<AddOrder> {
                                                                     true;
                                                               }),
                                                               await postForTakeAway(
-                                                                      _selectedOutlet)
+                                                                      _selectedOutlet
+                                                                          .id)
                                                                   .then((String
                                                                           a) =>
                                                                       {
@@ -559,7 +579,7 @@ class _AddOrderState extends State<AddOrder> {
                                 ),
                                 sizedBoxSpace,
                                 TextFormField(
-                                  enabled: !userType,
+                                  enabled: !widget.isThroughQr,
                                   cursorColor: cursorColor,
                                   controller: phoneNumber,
                                   style: const TextStyle(),
@@ -574,7 +594,6 @@ class _AddOrderState extends State<AddOrder> {
                                             ),
                                           )
                                         : Text("$_mobileStatus  ",
-                                            textScaleFactor: 1,
                                             style: const TextStyle()),
                                     suffixIconConstraints: const BoxConstraints(
                                         maxHeight: 40, maxWidth: 40),
@@ -692,7 +711,7 @@ class _AddOrderState extends State<AddOrder> {
                                 ),
                                 sizedBoxSpace,
                                 TextFormField(
-                                  enabled: !userType,
+                                  enabled: !widget.isThroughQr,
                                   textCapitalization: TextCapitalization.words,
                                   controller: name,
                                   cursorColor: cursorColor,
@@ -719,7 +738,6 @@ class _AddOrderState extends State<AddOrder> {
                                 ),
                                 sizedBoxSpace,
                                 const Text("Table No",
-                                    textScaleFactor: 1,
                                     style: TextStyle(
                                         color: GlobalTheme.primaryText)),
                                 //Options for Table No
@@ -732,9 +750,11 @@ class _AddOrderState extends State<AddOrder> {
                                     itemBuilder: (context, index) {
                                       return SelectionCard(
                                           item: salesPointList[index],
-                                          active: index == _activeSalesPoint
+                                          active: widget.isThroughQr
                                               ? true
-                                              : false,
+                                              : (index == _activeSalesPoint
+                                                  ? true
+                                                  : false),
                                           onTap: () {
                                             setState(() {
                                               _activeSalesPoint = index;
@@ -753,6 +773,7 @@ class _AddOrderState extends State<AddOrder> {
                                 ),
                                 TextFormField(
                                   controller: salesPointNo,
+                                  enabled: !widget.isThroughQr,
                                   cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   keyboardType: TextInputType.text,
@@ -785,7 +806,6 @@ class _AddOrderState extends State<AddOrder> {
                                 ),
                                 sizedBoxSpace,
                                 const Text("No of Persons",
-                                    textScaleFactor: 1,
                                     style: TextStyle(
                                         color: GlobalTheme.primaryText)),
                                 const SizedBox(),
@@ -855,7 +875,6 @@ class _AddOrderState extends State<AddOrder> {
                 ),
                 label: const Text(
                   "Menu",
-                  textScaleFactor: 1,
                   style: TextStyle(
                     fontSize: 17,
                     color: GlobalTheme.floatingButtonText,
