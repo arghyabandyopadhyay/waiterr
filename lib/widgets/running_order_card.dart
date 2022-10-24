@@ -97,7 +97,7 @@ class RunningOrderCard extends StatelessWidget {
                             Container(
                                 width: MediaQuery.of(context).size.width / 15,
                                 alignment: Alignment.topRight,
-                                child: item!.billPrinted!
+                                child: item!.billPrinted
                                     ? const Icon(Icons.print,
                                         color: GlobalTheme.primaryColor)
                                     : null),
