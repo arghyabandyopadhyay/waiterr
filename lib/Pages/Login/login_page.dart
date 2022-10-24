@@ -81,7 +81,6 @@ class _LoginPageState extends State<LoginPage> {
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       child: const Text(
                         "Enter Your Phone Number",
-                        textScaleFactor: 1,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
@@ -247,7 +246,6 @@ class _LoginPageState extends State<LoginPage> {
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       child: const Text(
                         "Waiterr will send an SMS message to verify your phone number.",
-                        textScaleFactor: 1,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
