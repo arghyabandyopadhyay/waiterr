@@ -53,7 +53,6 @@ class DrawerContent extends StatelessWidget {
                               UserDetail.userDetails.name != ""
                           ? UserDetail.userDetails.name!.split(" ")[0]
                           : alternativeName!,
-                      textScaleFactor: 1,
                       style: const TextStyle(
                         fontSize: 26,
                         color: GlobalTheme.secondaryText,
@@ -64,7 +63,6 @@ class DrawerContent extends StatelessWidget {
                               UserDetail.userDetails.mobileNumber != ""
                           ? UserDetail.userDetails.mobileNumber
                           : alternativeMno!,
-                      textScaleFactor: 1,
                       style: const TextStyle(
                         fontSize: 16,
                         color: GlobalTheme.secondaryText,
