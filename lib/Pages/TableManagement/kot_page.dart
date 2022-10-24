@@ -15,8 +15,10 @@ import 'package:shimmer/shimmer.dart';
 import '../../theme.dart';
 
 class KOTPage extends StatefulWidget {
-  const KOTPage({Key? key, this.item}) : super(key: key);
-  final RunningOrderModel? item;
+  final bool isWaiter;
+  const KOTPage({Key? key, required this.item, required this.isWaiter})
+      : super(key: key);
+  final RunningOrderModel item;
 
   @override
   State<KOTPage> createState() => _KOTPageState();
@@ -32,8 +34,8 @@ class _KOTPageState extends State<KOTPage> {
   Future<List<List<KOTModel>>> fetchList() async {
     List<List<KOTModel>> results = [];
     List<String?> distinctKotNumbers;
-    await postForSalesPointHistory(widget.item!.outletName,
-            widget.item!.salePointType, widget.item!.salePointName)
+    await postForSalesPointHistory(widget.item.outletId,
+            widget.item.salePointType, widget.item.salePointName, null)
         .then((value) => {
               distinctKotNumbers = getDistinctKotNumber(value),
               for (String? kotNumber in distinctKotNumbers)
@@ -53,7 +55,7 @@ class _KOTPageState extends State<KOTPage> {
   List<String?> getDistinctKotNumber(List<KOTModel> othersList) {
     List<String?> dist = [];
     for (var model in othersList) {
-      if (dist == null) {
+      if (dist.isEmpty) {
         dist.add(model.kotNumber);
       }
       if (!dist.contains(model.kotNumber)) {
@@ -99,6 +101,27 @@ class _KOTPageState extends State<KOTPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 actions: <Widget>[
+                  if (UserDetail.userDetails.roleID == 3 &&
+                      widget.item.billPrinted)
+                    IconButton(
+                      icon: const Icon(
+                        Icons.done,
+                        color: Colors.black,
+                      ),
+                      onPressed: () async {
+                        Connectivity connectivity = Connectivity();
+                        await connectivity.checkConnectivity().then((value) => {
+                              if (value != ConnectivityResult.none)
+                                {
+                                  terminateRunningOrders(widget.item.id)
+                                      .then((value) => {
+                                            if (value == 200)
+                                              {Navigator.pop(context)}
+                                          })
+                                }
+                            });
+                      },
+                    ),
                   IconButton(
                     icon: const Icon(
                       Icons.refresh,
@@ -129,10 +152,9 @@ class _KOTPageState extends State<KOTPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
-                      UserDetail.userDetails.roleID == 1
+                      !widget.isWaiter
                           ? "Running Orders"
-                          : "Table-${widget.item!.salePointName!}",
-                      textScaleFactor: 1,
+                          : "Table-${widget.item.salePointName!}",
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.bold),
@@ -307,31 +329,38 @@ class _KOTPageState extends State<KOTPage> {
                               }))),
                 ],
               ),
-              floatingActionButton: FloatingActionButton.extended(
-                backgroundColor: Colors.black,
-                icon: const Icon(
-                  Icons.restaurant_menu,
-                  color: GlobalTheme.floatingButtonText,
-                ),
-                label: const Text(
-                  "Menu",
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: GlobalTheme.floatingButtonText,
-                  ),
-                ),
-                onPressed: () {
-                  widget.item!.billPrinted!
-                      ? globalShowInSnackBar("The Bill Has Been Printed!!",
-                          null, scaffoldMessengerKey, null, null)
-                      : Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) => MenuPageAll(
-                                    addOrderData: widget.item,
-                                  )));
-                },
-              ),
+              floatingActionButton: widget.isWaiter
+                  ? FloatingActionButton.extended(
+                      backgroundColor: Colors.black,
+                      icon: const Icon(
+                        Icons.restaurant_menu,
+                        color: GlobalTheme.floatingButtonText,
+                      ),
+                      label: const Text(
+                        "Menu",
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: GlobalTheme.floatingButtonText,
+                        ),
+                      ),
+                      onPressed: () {
+                        widget.item.billPrinted
+                            ? globalShowInSnackBar(
+                                "The Bill Has Been Printed!!",
+                                null,
+                                scaffoldMessengerKey,
+                                null,
+                                null)
+                            : Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => MenuPageAll(
+                                          addOrderData: widget.item,
+                                          isWaiter: widget.isWaiter,
+                                        )));
+                      },
+                    )
+                  : null,
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.endFloat,
             )
