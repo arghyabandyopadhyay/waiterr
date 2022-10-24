@@ -3,6 +3,7 @@ import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
+import 'package:waiterr/Pages/TableManagement/approve_order_page.dart';
 import 'package:waiterr/Pages/User/about_page.dart';
 import 'package:waiterr/Pages/User/profile_page.dart';
 import 'package:waiterr/stores/login_store.dart';
@@ -42,7 +43,6 @@ class _MyTableHomePage extends State<TableManagementPage> {
   //Widgets
   Widget appBarTitle = const Text(
     "",
-    textScaleFactor: 1,
     style: TextStyle(fontSize: 24.0, height: 2.5),
   );
 
@@ -54,7 +54,9 @@ class _MyTableHomePage extends State<TableManagementPage> {
     await Navigator.of(context)
         .push(CupertinoPageRoute<void>(
           title: "Add Order",
-          builder: (context) => const AddOrder(),
+          builder: (context) => const AddOrder(
+            isThroughQr: false,
+          ),
         ))
         .then((value) => setState(() {
               _futureitems = fetchList();
@@ -74,7 +76,6 @@ class _MyTableHomePage extends State<TableManagementPage> {
       );
       appBarTitle = const Text(
         "",
-        textScaleFactor: 1,
       );
       _isSearching = false;
       _searchController.clear();
@@ -103,7 +104,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
 
   Future<List<RunningOrderModel>> fetchList() async {
     List<RunningOrderModel> runningOrderList = [];
-    await postForRunningOrders(false, "", "", "")
+    await postForRunningOrders(false, true, "", "", "")
         .then((List<RunningOrderModel> rList) => {
               runningOrderList.addAll(rList.where(
                   (element) => element.name == UserDetail.userDetails.name)),
@@ -111,7 +112,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                   (element) => element.name != UserDetail.userDetails.name)),
               totalOrders = runningOrderList.length,
               total = 0,
-              for (var element in rList) total = total + element.amount!
+              for (var element in rList) total = total + element.amount
             });
     setState(() {
       _isLoading = false;
@@ -149,14 +150,12 @@ class _MyTableHomePage extends State<TableManagementPage> {
                 centerTitle: true,
                 title: appBarTitle,
                 elevation: 0,
-                leading: UserDetail.userDetails.roleID == 1
-                    ? IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      )
-                    : null,
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
                 actions: <Widget>[
                   IconButton(
                       icon: icon,
@@ -187,6 +186,32 @@ class _MyTableHomePage extends State<TableManagementPage> {
                       }),
                   IconButton(
                     icon: const Icon(
+                      Icons.check_circle_outline,
+                    ),
+                    onPressed: () async {
+                      Connectivity connectivity = Connectivity();
+                      await connectivity.checkConnectivity().then((value) => {
+                            if (value != ConnectivityResult.none)
+                              {
+                                Navigator.of(context).push(PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const ApproveOrdersPage()))
+                              }
+                            else
+                              {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    PageRouteBuilder(
+                                        pageBuilder:
+                                            (context, animation1, animation2) =>
+                                                const NoInternetPage()),
+                                    (route) => false)
+                              }
+                          });
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(
                       Icons.refresh,
                     ),
                     onPressed: () async {
@@ -194,21 +219,21 @@ class _MyTableHomePage extends State<TableManagementPage> {
                       await connectivity.checkConnectivity().then((value) => {
                             if (value != ConnectivityResult.none)
                               {
-                                if (UserDetail.userDetails.roleID == 1)
-                                  {
-                                    setState(() {
-                                      _isLoading = true;
-                                      _isDataLoaded = false;
-                                    }),
-                                    _futureitems = fetchList()
-                                  }
-                                else
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      PageRouteBuilder(
-                                          pageBuilder: (context, animation1,
-                                                  animation2) =>
-                                              const TableManagementPage()),
-                                      (route) => false)
+                                // if (UserDetail.userDetails.roleID == 1)
+                                //   {
+                                setState(() {
+                                  _isLoading = true;
+                                  _isDataLoaded = false;
+                                }),
+                                _futureitems = fetchList()
+                                //   }
+                                // else
+                                //   Navigator.of(context).pushAndRemoveUntil(
+                                //       PageRouteBuilder(
+                                //           pageBuilder: (context, animation1,
+                                //                   animation2) =>
+                                //               const TableManagementPage()),
+                                //       (route) => false)
                               }
                             else
                               {
@@ -238,13 +263,6 @@ class _MyTableHomePage extends State<TableManagementPage> {
                         title: "Profile Page",
                         builder: (context) => const ProfilePage(),
                       ));
-                    },
-                  ),
-                  DrawerActionModel(
-                    title: "Previous Orders",
-                    iconData: Icons.schedule,
-                    onTap: () {
-                      Navigator.pop(context);
                     },
                   ),
                   DrawerActionModel(
@@ -278,7 +296,6 @@ class _MyTableHomePage extends State<TableManagementPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         UserClientAllocationData.clientName!,
-                        textScaleFactor: 1,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -358,10 +375,11 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                                       void>(
                                                                 title:
                                                                     "Kot Page",
-                                                                builder: (context) =>
-                                                                    KOTPage(
-                                                                        item: searchResult[
-                                                                            index]),
+                                                                builder: (context) => KOTPage(
+                                                                    isWaiter:
+                                                                        true,
+                                                                    item: searchResult[
+                                                                        index]),
                                                               ))
                                                               .then((value) =>
                                                                   setState(() {
@@ -394,6 +412,8 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                             title: "Kot Page",
                                                             builder: (context) =>
                                                                 KOTPage(
+                                                                    isWaiter:
+                                                                        true,
                                                                     item: items![
                                                                         index]),
                                                           ))
@@ -562,7 +582,6 @@ class _MyTableHomePage extends State<TableManagementPage> {
                           children: [
                             Text(
                               ("Running Orders: ${totalOrders.toString().replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}"),
-                              textScaleFactor: 1,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -572,7 +591,6 @@ class _MyTableHomePage extends State<TableManagementPage> {
                             ),
                             Text(
                               ("₹ ${total.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}"),
-                              textScaleFactor: 1,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -627,9 +645,9 @@ class _MyTableHomePage extends State<TableManagementPage> {
 //                       child: Column(
 //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                         children: <Widget>[
-//                           Text(this.item.SalePointType,textAlign:TextAlign.center,textScaleFactor: 1, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: 12),maxLines: 1,overflow: TextOverflow.ellipsis,),
-//                           Text(this.item.SalePointName,textAlign:TextAlign.center,textScaleFactor: 1, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: this.item.SalePointName.length>2?(this.item.SalePointName.length>3?(this.item.SalePointName.length>4?12:20):28):36),maxLines: 1,overflow: TextOverflow.ellipsis,),
-//                           Text(this.item.OutletName,textAlign:TextAlign.center,textScaleFactor: 1, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: 12),maxLines: 1,overflow: TextOverflow.ellipsis,)
+//                           Text(this.item.SalePointType,textAlign:TextAlign.center, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: 12),maxLines: 1,overflow: TextOverflow.ellipsis,),
+//                           Text(this.item.SalePointName,textAlign:TextAlign.center, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: this.item.SalePointName.length>2?(this.item.SalePointName.length>3?(this.item.SalePointName.length>4?12:20):28):36),maxLines: 1,overflow: TextOverflow.ellipsis,),
+//                           Text(this.item.OutletName,textAlign:TextAlign.center, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: 12),maxLines: 1,overflow: TextOverflow.ellipsis,)
 //                         ],
 //                       ),
 //                     ),
@@ -646,22 +664,22 @@ class _MyTableHomePage extends State<TableManagementPage> {
 //                             mainAxisAlignment:MainAxisAlignment.spaceBetween,
 //                             mainAxisSize: MainAxisSize.max,
 //                             children: <Widget>[
-//                               Container(width:MediaQuery.of(context).size.width/1.5,child: Text((this.item.Name!=null)?this.item.Name:"",maxLines: 2,overflow: TextOverflow.ellipsis, textScaleFactor: 1,style: TextStyle(fontSize: 22,height:1),),),
+//                               Container(width:MediaQuery.of(context).size.width/1.5,child: Text((this.item.Name!=null)?this.item.Name:"",maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 22,height:1),),),
 //                               Container(width:MediaQuery.of(context).size.width/15,alignment:Alignment.topRight, child:this.item.BillPrinted?Icon(Icons.print,color: GlobalTheme.primaryColor):null),
 //                             ],
 //                           ),
-//                           Container(width:MediaQuery.of(context).size.width/1.75, child: Text((this.item.MobileNo!=null)?this.item.MobileNo:"",maxLines: 2,overflow: TextOverflow.ellipsis, textScaleFactor: 1,style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
-//                           Container(width:MediaQuery.of(context).size.width/1.75, child: Text("Waiter: "+this.item.WaiterName,maxLines: 2,overflow: TextOverflow.ellipsis, textScaleFactor: 1,style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
+//                           Container(width:MediaQuery.of(context).size.width/1.75, child: Text((this.item.MobileNo!=null)?this.item.MobileNo:"",maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
+//                           Container(width:MediaQuery.of(context).size.width/1.75, child: Text("Waiter: "+this.item.WaiterName,maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
 //                           Row(
 //                             crossAxisAlignment: CrossAxisAlignment.end,
 //                             children: <Widget>[
 //                               Column(
 //                                 children: <Widget>[
-//                                   Container(width:MediaQuery.of(context).size.width/2, child: Text("PAX: "+this.item.PAX.toString(),maxLines: 2,overflow: TextOverflow.ellipsis,textScaleFactor: 1, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
-//                                   Container(width:MediaQuery.of(context).size.width/2, child: Text("Active Since: "+this.item.ActiveSince,maxLines: 2,overflow: TextOverflow.ellipsis,textScaleFactor: 1, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),)
+//                                   Container(width:MediaQuery.of(context).size.width/2, child: Text("PAX: "+this.item.PAX.toString(),maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
+//                                   Container(width:MediaQuery.of(context).size.width/2, child: Text("Active Since: "+this.item.ActiveSince,maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),)
 //                                 ],
 //                               ),
-//                               Container(width:MediaQuery.of(context).size.width/4,alignment:Alignment.bottomRight,child:Text("₹"+this.item.Amount.toString(),maxLines: 2,overflow: TextOverflow.ellipsis, textScaleFactor: 1,style: TextStyle(fontSize: 20,height:1)),)
+//                               Container(width:MediaQuery.of(context).size.width/4,alignment:Alignment.bottomRight,child:Text("₹"+this.item.Amount.toString(),maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 20,height:1)),)
 //                             ],
 //                           ),
 //                         ],
