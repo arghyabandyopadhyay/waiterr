@@ -38,7 +38,6 @@ class SelectionCard extends StatelessWidget {
                 child: Center(
                   child: Text(
                     item!,
-                    textScaleFactor: 1,
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                   ),
                 ),
