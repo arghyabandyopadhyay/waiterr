@@ -21,7 +21,6 @@ class ErrorPageFiveHundred extends StatelessWidget {
           const Text(
             "Technical Error!!, We are working on it.",
             textAlign: TextAlign.center,
-            textScaleFactor: 1,
             style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
           )
         ],
@@ -47,7 +46,6 @@ class ErrorPageFourHundredOne extends StatelessWidget {
           const Text(
             "Unauthorised Access!!",
             textAlign: TextAlign.center,
-            textScaleFactor: 1,
             style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
           )
         ],
@@ -73,7 +71,6 @@ class ErrorPageNoInternet extends StatelessWidget {
           const Text(
             "No Internet Connection!!",
             textAlign: TextAlign.center,
-            textScaleFactor: 1,
             style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
           )
         ],
@@ -100,7 +97,6 @@ class NoRunningOrders extends StatelessWidget {
               const Text(
                 "No Running Orders",
                 textAlign: TextAlign.center,
-                textScaleFactor: 1,
                 style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
               )
             ],
@@ -128,7 +124,6 @@ class NoDataError extends StatelessWidget {
               const Text(
                 "No Data Found!!",
                 textAlign: TextAlign.center,
-                textScaleFactor: 1,
                 style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
               )
             ],
@@ -156,7 +151,6 @@ class ErrorHasOccurred extends StatelessWidget {
               const Text(
                 "An Error Has Occurred!!",
                 textAlign: TextAlign.center,
-                textScaleFactor: 1,
                 style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
               )
             ],
