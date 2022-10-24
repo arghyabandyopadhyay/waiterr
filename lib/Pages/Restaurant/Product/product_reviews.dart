@@ -35,7 +35,6 @@ class ProductReviews extends StatelessWidget {
                         style: BorderStyle.solid),
                   ),
                   child: const Text("Rate Product",
-                      textScaleFactor: 1,
                       style: TextStyle(
                           fontSize: 15,
                           color: GlobalTheme.primaryColor,
