@@ -5,7 +5,7 @@ import '../global_class.dart';
 import 'add_button.dart';
 
 class CartListCard extends StatefulWidget {
-  final MenuItemModel? item;
+  final MenuItemModel item;
   final Function() onTapAdd;
   final Function() onTapRemove;
   final Function() onLongPressedAdd;
@@ -13,7 +13,7 @@ class CartListCard extends StatefulWidget {
   final Function() onDoubleTap;
   const CartListCard(
       {Key? key,
-      this.item,
+      required this.item,
       required this.onTapAdd,
       required this.onLongPressedAdd,
       required this.onLongPressedRemove,
@@ -28,9 +28,9 @@ class _CartListCardState extends State<CartListCard> {
   @override
   Widget build(BuildContext context) {
     List<String> tagList =
-        (widget.item!.tags != null) ? widget.item!.tags!.split("|") : [];
-    if (widget.item!.discount != null && widget.item!.discount != 0) {
-      tagList.insert(0, "${widget.item!.discount}% Off");
+        (widget.item.tags != null) ? widget.item.tags!.split("|") : [];
+    if (widget.item.discount != null && widget.item.discount != 0) {
+      tagList.insert(0, "${widget.item.discount}% Off");
     }
     return Card(
       elevation: 0,
@@ -62,11 +62,11 @@ class _CartListCardState extends State<CartListCard> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  widget.item!.isVeg != null
+                                  widget.item.isVeg != null
                                       ? Container(
                                           alignment: Alignment.centerLeft,
                                           margin: const EdgeInsets.only(top: 8),
-                                          child: widget.item!.isVeg!
+                                          child: widget.item.isVeg!
                                               ? Image.asset(
                                                   'assets/img/veg.png',
                                                   height: 15,
@@ -85,12 +85,11 @@ class _CartListCardState extends State<CartListCard> {
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width /
                                             1.5 +
-                                        ((widget.item!.isVeg != null) ? 0 : 15),
+                                        ((widget.item.isVeg != null) ? 0 : 15),
                                     child: Text(
-                                      widget.item!.item,
+                                      widget.item.item,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
-                                      textScaleFactor: 1,
                                       style: const TextStyle(fontSize: 17),
                                     ),
                                   ),
@@ -101,21 +100,19 @@ class _CartListCardState extends State<CartListCard> {
                                 child: Row(
                                   children: <Widget>[
                                     Text(
-                                      "₹${widget.item!.rate!.toStringAsFixed(((((widget.item!.rate! * 100) % 100) != 0) ? 2 : 0)).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
+                                      "₹${widget.item.rate.toStringAsFixed(((((widget.item.rate * 100) % 100) != 0) ? 2 : 0)).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
                                       textAlign: TextAlign.end,
-                                      textScaleFactor: 1,
                                       style: const TextStyle(fontSize: 17),
                                     ),
                                     const SizedBox(
                                       width: 5,
                                     ),
                                     Text(
-                                      (widget.item!.discount != null &&
-                                              widget.item!.discount != 0)
-                                          ? "₹${widget.item!.rateBeforeDiscount}"
+                                      (widget.item.discount != null &&
+                                              widget.item.discount != 0)
+                                          ? "₹${widget.item.rateBeforeDiscount}"
                                           : "",
                                       textAlign: TextAlign.end,
-                                      textScaleFactor: 1,
                                       style: const TextStyle(
                                           fontSize: 15,
                                           color: GlobalTheme.primaryText,
@@ -143,7 +140,7 @@ class _CartListCardState extends State<CartListCard> {
                             height: 2,
                           ),
                           Container(
-                            height: (widget.item!.customizable.isNotEmpty)
+                            height: (widget.item.customizable.isNotEmpty)
                                 ? null
                                 : 0,
                             padding: const EdgeInsets.only(left: 1, right: 1),
@@ -153,24 +150,23 @@ class _CartListCardState extends State<CartListCard> {
                                     color: Colors.orange,
                                     width: 1.0,
                                     style: BorderStyle.solid)),
-                            child: (widget.item!.customizable.isNotEmpty)
+                            child: (widget.item.customizable.isNotEmpty)
                                 ? const Text(
                                     " Customizable ",
-                                    textScaleFactor: 1,
                                     style: TextStyle(
                                         fontSize: 10, color: Colors.orange),
                                   )
                                 : null,
                           ),
                           Container(
-                            height: widget.item!.commentForKOT != null
-                                ? (widget.item!.commentForKOT!.isNotEmpty)
+                            height: widget.item.commentForKOT != null
+                                ? (widget.item.commentForKOT!.isNotEmpty)
                                     ? null
                                     : 0
                                 : 0,
                             padding: const EdgeInsets.only(left: 1, right: 1),
-                            child: widget.item!.commentForKOT != null
-                                ? (widget.item!.commentForKOT!.isNotEmpty)
+                            child: widget.item.commentForKOT != null
+                                ? (widget.item.commentForKOT!.isNotEmpty)
                                     ? const Icon(
                                         Icons.comment,
                                         color: GlobalTheme.primaryColor,
@@ -210,7 +206,6 @@ class _CartListCardState extends State<CartListCard> {
                                     color: GlobalTheme.primaryColor),
                                 child: Text(
                                   tagList[id],
-                                  textScaleFactor: 1,
                                   style: const TextStyle(
                                       fontSize: 10, color: Colors.white),
                                 ),
@@ -224,10 +219,9 @@ class _CartListCardState extends State<CartListCard> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 1.1,
-                    child: (widget.item!.itemDescription != null)
+                    child: (widget.item.itemDescription != null)
                         ? Text(
-                            widget.item!.itemDescription!,
-                            textScaleFactor: 1,
+                            widget.item.itemDescription!,
                             style: const TextStyle(
                               color: GlobalTheme.primaryText,
                               fontSize: 13,
