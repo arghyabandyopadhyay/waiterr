@@ -22,7 +22,7 @@ class UserRestrauntAllocationModel {
   factory UserRestrauntAllocationModel.fromJson(Map<String, dynamic> json) {
     return UserRestrauntAllocationModel(
       clientName: json['ClientName'],
-      logoURL: json['LogoURL'],
+      logoURL: json['LogoUrl'],
       dataExchangeVia: json['DataExchangeVia'],
       dataExchangeURL: json['DataExchangeUrl'],
       clientType: json['ClientType'],
