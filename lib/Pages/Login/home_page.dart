@@ -8,10 +8,8 @@ import 'package:waiterr/Model/drawer_action_model.dart';
 import 'package:waiterr/Model/qr_json_model.dart';
 import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
-import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
 import 'package:waiterr/Pages/TableManagement/table_management_page.dart';
-import 'package:waiterr/Pages/User/about_page.dart';
 import 'package:waiterr/Pages/User/profile_page.dart';
 import 'package:waiterr/widgets/drawer.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -21,8 +19,9 @@ import 'package:waiterr/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import '../../Model/vendor_card.dart';
+import 'package:waiterr/widgets/vendor_card_mini.dart';
 import '../TableManagement/add_order_page.dart';
+import '../User/orders_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "homePage";
@@ -43,6 +42,8 @@ class _HomePageState extends State<HomePage> {
     try {
       qrResult = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
+      // qrResult =
+      //     '{"RestaurantId":"5a9010a2-3845-11ed-9bd3-83007858518f","Table":"5","Outlet":"Pizza Den","SalespointType":"Dine In"}';
       // If the widget was removed from the tree while the asynchronous platform
       // message was in flight, we want to discard the reply rather than calling
       // setState to update our non-existent appearance.
@@ -52,14 +53,15 @@ class _HomePageState extends State<HomePage> {
         //decoding of the encrypted qrcode to be done
         result = qrResult;
         QRJSONModel qrval = getJson(qrResult);
-        if (qrval.loginId.isNotEmpty &&
-            qrval.userPassword.isNotEmpty &&
-            qrval.restaurantId.isNotEmpty &&
+        if (qrval.restaurantId.isNotEmpty &&
             qrval.table.isNotEmpty &&
-            qrval.outlet.isNotEmpty &&
-            qrval.salespointType.isNotEmpty) {
-          Navigator.of(context).push(
-              CupertinoPageRoute<void>(builder: (context) => const AddOrder()));
+            qrval.outletName.isNotEmpty &&
+            qrval.outletSalespointType.isNotEmpty) {
+          Navigator.of(context).push(CupertinoPageRoute<void>(
+              builder: (context) => AddOrder(
+                    qrjsonModel: qrval,
+                    isThroughQr: true,
+                  )));
         }
         //_save(false,"");
       });
@@ -177,29 +179,14 @@ class _HomePageState extends State<HomePage> {
                         ));
                       },
                     ),
-                    // DrawerActionModel(
-                    //   title: "Running Orders",iconData:Icons.fastfood,
-                    //   onTap:(){
-                    //     Navigator.pop(context);
-                    //     Navigator.of(context).push(CupertinoPageRoute<void>(
-                    //       title: "Table Page",
-                    //       builder:(context)=> KOTPage(item: new RunningOrderModel(Name:UserDetail.name)),
-                    //     )
-                    //     );
-                    //   },
-                    // ),
-                    // DrawerActionModel(title: "Previous Orders",iconData:Icons.schedule,onTap:(){
-                    //     Navigator.pop(context);
-                    //   },
-                    // ),
                     DrawerActionModel(
-                      title: "About us",
-                      iconData: Icons.info,
+                      title: "Running Orders",
+                      iconData: Icons.schedule,
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.of(context).push(CupertinoPageRoute<void>(
-                          title: "About Page",
-                          builder: (context) => const AboutPage(),
+                          title: "Running Orders",
+                          builder: (context) => const OrdersPage(),
                         ));
                       },
                     ),
@@ -257,46 +244,53 @@ class _HomePageState extends State<HomePage> {
                                       builder: (context, snapshot) {
                                         if (snapshot.hasData) {
                                           vendorList = snapshot.data;
-                                          // return  Container(
-                                          //   margin: EdgeInsets.only(left: 10),
-                                          //     height: 132,
-                                          //     child:ListView.builder(
-                                          //       itemCount: vendorList.length,
-                                          //       shrinkWrap: true,
-                                          //       itemBuilder: (context, index) {
-                                          //         return VendorCard(
-                                          //             item: vendorList[index],
-                                          //             onTap: () {
-                                          //               UserClientAllocationData.setValues(vendorList[index]);
-                                          //               Navigator.of(context).push(CupertinoPageRoute<void>(
-                                          //                 title: "Running Orders",
-                                          //                 builder:(context)=> UserClientAllocationData.clientType=="Steel Industry"?VendorOrderManagementPage():TableManagementPage(),
-                                          //               ));
-                                          //             }
-                                          //         );
-                                          //       },
-                                          //     ),
-                                          //   );
-                                          return ListView.builder(
-                                            itemCount: vendorList!.length,
-                                            shrinkWrap: true,
-                                            itemBuilder: (context, index) {
-                                              return VendorCard(
-                                                  item: vendorList![index],
-                                                  onTap: () {
-                                                    UserClientAllocationData
-                                                        .setValues(
-                                                            vendorList![index]);
-                                                    Navigator.of(context).push(
-                                                        CupertinoPageRoute<
-                                                            void>(
-                                                      title: "Running Orders",
-                                                      builder: (context) =>
-                                                          const TableManagementPage(),
-                                                    ));
-                                                  });
-                                            },
+                                          return Container(
+                                            margin:
+                                                const EdgeInsets.only(left: 10),
+                                            height: 120,
+                                            child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: vendorList!.length,
+                                              shrinkWrap: true,
+                                              itemBuilder: (context, index) {
+                                                return VendorCardMini(
+                                                    item: vendorList![index],
+                                                    onTap: () {
+                                                      UserClientAllocationData
+                                                          .setValues(
+                                                              vendorList![
+                                                                  index]);
+                                                      Navigator.of(context).push(
+                                                          CupertinoPageRoute<
+                                                              void>(
+                                                        title: "Running Orders",
+                                                        builder: (context) =>
+                                                            const TableManagementPage(),
+                                                      ));
+                                                    });
+                                              },
+                                            ),
                                           );
+                                          // return ListView.builder(
+                                          //   itemCount: vendorList!.length,
+                                          //   shrinkWrap: true,
+                                          //   itemBuilder: (context, index) {
+                                          //     return VendorCard(
+                                          //         item: vendorList![index],
+                                          //         onTap: () {
+                                          //           UserClientAllocationData
+                                          //               .setValues(
+                                          //                   vendorList![index]);
+                                          //           Navigator.of(context).push(
+                                          //               CupertinoPageRoute<
+                                          //                   void>(
+                                          //             title: "Running Orders",
+                                          //             builder: (context) =>
+                                          //                 const TableManagementPage(),
+                                          //           ));
+                                          //         });
+                                          //   },
+                                          // );
                                         } else if (snapshot.hasError) {
                                           return Container();
                                         }
@@ -567,7 +561,6 @@ class _HomePageState extends State<HomePage> {
                       color: GlobalTheme.floatingButtonText),
                   label: const Text(
                     "Scan Qr",
-                    textScaleFactor: 1,
                     style: TextStyle(
                         fontSize: 17, color: GlobalTheme.floatingButtonText),
                   ),
@@ -634,7 +627,7 @@ class _HomePageState extends State<HomePage> {
 //                 //Image(height:50,fit: BoxFit.fitHeight,image: Image.asset('assets/img/all_filter_icon.png').image,),
 //                 backgroundColor: Colors.transparent,
 //               ),
-//               Text(item.clientName,textScaleFactor: 1,textAlign:TextAlign.center,maxLines: 4, overflow:TextOverflow.ellipsis,style: GoogleFonts.openSans(fontSize:11),),
+//               Text(item.clientName,textAlign:TextAlign.center,maxLines: 4, overflow:TextOverflow.ellipsis,style: GoogleFonts.openSans(fontSize:11),),
 //             ],
 //           )
 //       ),
