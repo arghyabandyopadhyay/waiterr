@@ -40,7 +40,6 @@ class RunningOrderCard extends StatelessWidget {
                         Text(
                           item!.salePointType!,
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1,
                           style: const TextStyle(
                               color: GlobalTheme.secondaryText, fontSize: 12),
                           maxLines: 1,
@@ -49,7 +48,6 @@ class RunningOrderCard extends StatelessWidget {
                         Text(
                           item!.salePointName!,
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1,
                           style: TextStyle(
                               color: GlobalTheme.secondaryText,
                               fontSize: item!.salePointName!.length > 2
@@ -65,7 +63,6 @@ class RunningOrderCard extends StatelessWidget {
                         Text(
                           item!.outletName!,
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1,
                           style: const TextStyle(
                               color: GlobalTheme.secondaryText, fontSize: 12),
                           maxLines: 1,
@@ -94,7 +91,6 @@ class RunningOrderCard extends StatelessWidget {
                                 (item!.name != null) ? item!.name! : "",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                textScaleFactor: 1,
                                 style: const TextStyle(fontSize: 22, height: 1),
                               ),
                             ),
@@ -113,7 +109,6 @@ class RunningOrderCard extends StatelessWidget {
                             (item!.mobileNo != null) ? item!.mobileNo! : "",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            textScaleFactor: 1,
                             style: const TextStyle(
                                 fontSize: 13, color: GlobalTheme.primaryText),
                           ),
@@ -124,7 +119,6 @@ class RunningOrderCard extends StatelessWidget {
                             "Waiter: ${item!.waiterName!}",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            textScaleFactor: 1,
                             style: const TextStyle(
                                 fontSize: 13, color: GlobalTheme.primaryText),
                           ),
@@ -140,7 +134,6 @@ class RunningOrderCard extends StatelessWidget {
                                     "PAX: ${item!.pax}",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    textScaleFactor: 1,
                                     style: const TextStyle(
                                         fontSize: 13,
                                         color: GlobalTheme.primaryText),
@@ -152,7 +145,6 @@ class RunningOrderCard extends StatelessWidget {
                                     "Active Since: ${item!.activeSince!}",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    textScaleFactor: 1,
                                     style: const TextStyle(
                                         fontSize: 13,
                                         color: GlobalTheme.primaryText),
@@ -163,10 +155,9 @@ class RunningOrderCard extends StatelessWidget {
                             Container(
                               width: MediaQuery.of(context).size.width / 4,
                               alignment: Alignment.bottomRight,
-                              child: Text("₹${item!.amount}",
+                              child: Text("₹${item!.amount.toStringAsFixed(2)}",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  textScaleFactor: 1,
                                   style:
                                       const TextStyle(fontSize: 20, height: 1)),
                             )
