@@ -8,14 +8,14 @@ import '../theme.dart';
 
 class AddCommentForKOTDialog extends StatefulWidget {
   final Function() onTapAdd;
-  final Function(String?) setCommentForKOT;
-  final String? previousValue;
+  final Function(CommentForKotSuggestionsModel) setCommentForKOT;
+  final CommentForKotSuggestionsModel previousValue;
   final String itemId;
   const AddCommentForKOTDialog(
       {Key? key,
       required this.onTapAdd,
       required this.setCommentForKOT,
-      this.previousValue,
+      required this.previousValue,
       required this.itemId})
       : super(key: key);
   @override
@@ -30,14 +30,9 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
   late List<CommentForKotSuggestionsModel> items;
   Future<List<CommentForKotSuggestionsModel>> fetchList() async {
     List<CommentForKotSuggestionsModel> runningOrderList = [];
-    await postForCommentOnKot(widget.itemId)
-        .then((List<CommentForKotSuggestionsModel> rList) => {
-              runningOrderList.addAll(
-                  rList.where((element) => element.itemID == widget.itemId)),
-              runningOrderList.addAll(
-                  rList.where((element) => element.itemID != widget.itemId)),
-              items = runningOrderList
-            });
+    await postForCommentOnKot(widget.itemId).then(
+        (List<CommentForKotSuggestionsModel> rList) =>
+            {runningOrderList.addAll(rList), items = runningOrderList});
     setState(() {
       _isLoading = false;
       _dataLoaded = true;
@@ -53,7 +48,7 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
     _isLoading = true;
     _dataLoaded = false;
     _showCross = widget.previousValue.toString().isNotEmpty;
-    remarksController.text = widget.previousValue ?? "";
+    remarksController.text = widget.previousValue.commentForKOT ?? "";
     widget.setCommentForKOT(widget.previousValue);
     //this.items=_futureitems as List<RunningOrderModel>;
   }
@@ -87,7 +82,8 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                               color: GlobalTheme.primaryText),
                           onPressed: () {
                             remarksController.text = "";
-                            widget.setCommentForKOT("");
+                            widget.setCommentForKOT(
+                                CommentForKotSuggestionsModel());
                             setState(() {
                               _showCross = false;
                             });
@@ -96,7 +92,8 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                       : null,
                 ),
                 onChanged: (value) {
-                  widget.setCommentForKOT(value);
+                  widget.setCommentForKOT(
+                      CommentForKotSuggestionsModel(commentForKOT: value));
                   if (value == "" && _showCross!) {
                     setState(() {
                       _showCross = false;
@@ -119,7 +116,6 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                       primary: GlobalTheme.primaryColor),
                   child: const Text(
                     "Ok",
-                    textScaleFactor: 1,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -145,12 +141,10 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                                       return ListTile(
                                         title: Text(
                                           items[index].commentForKOT!,
-                                          textScaleFactor: 1,
                                           style: const TextStyle(fontSize: 17),
                                         ),
                                         onTap: () {
-                                          widget.setCommentForKOT(
-                                              items[index].commentForKOT);
+                                          widget.setCommentForKOT(items[index]);
                                           remarksController.text =
                                               items[index].commentForKOT!;
                                           if (!_showCross!) {
@@ -169,7 +163,6 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                                 return const ListTile(
                                   title: Text(
                                     "No Suggestions available",
-                                    textScaleFactor: 1,
                                     style: TextStyle(fontSize: 17),
                                   ),
                                 );
@@ -178,7 +171,6 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                                 return ListTile(
                                   title: const Text(
                                     "Error occured, Tap to retry.",
-                                    textScaleFactor: 1,
                                     style: TextStyle(fontSize: 17),
                                   ),
                                   onTap: () {
