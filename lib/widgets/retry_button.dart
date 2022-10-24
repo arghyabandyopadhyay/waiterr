@@ -26,7 +26,6 @@ class RetryButton extends StatelessWidget {
           children: const <Widget>[
             Text(
               "Refresh ",
-              textScaleFactor: 1,
               style: TextStyle(
                   color: GlobalTheme.floatingButtonText,
                   fontSize: 20,
