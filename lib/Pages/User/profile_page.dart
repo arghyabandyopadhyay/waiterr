@@ -157,7 +157,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         "My Profile",
-                        textScaleFactor: 1,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -372,7 +371,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     //               shape: RoundedRectangleBorder(
                                     //                   borderRadius:
                                     //                   BorderRadius.circular(20.0)), //
-                                    //               title: Text('Profile photo',textScaleFactor: 1,style: TextStyle(fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                                    //               title: Text('Profile photo',style: TextStyle(fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                                     //               content: Container(
                                     //                 height: 175,
                                     //                 width: 100,
@@ -381,7 +380,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     //                   children: <Widget>[
                                     //                     ListTile(
                                     //                       leading:Icon(Icons.photo_library),
-                                    //                       title: const Text('Gallery',textScaleFactor: 1,),
+                                    //                       title: const Text('Gallery',),
                                     //                       onTap: () {
                                     //                         Navigator.of(context).pop();
                                     //                         _onImageButtonPressed(ImageSource.gallery, context: context);
@@ -389,7 +388,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     //                     ),
                                     //                     ListTile(
                                     //                       leading:Icon(Icons.camera_alt),
-                                    //                       title: const Text('Camera',textScaleFactor: 1,),
+                                    //                       title: const Text('Camera',),
                                     //                       onTap: () {
                                     //                         Navigator.of(context).pop();
                                     //                         _onImageButtonPressed(ImageSource.camera, context: context);
@@ -397,7 +396,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     //                     ),
                                     //                     ListTile(
                                     //                         leading:Icon(Icons.delete),
-                                    //                         title: const Text('Remove Photo',textScaleFactor: 1,),
+                                    //                         title: const Text('Remove Photo',),
                                     //                         onTap: () {
                                     //                           Navigator.of(context).pop();
                                     //                         }),
@@ -491,7 +490,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: GlobalTheme.floatingButtonText),
                 label: const Text(
                   "Save",
-                  textScaleFactor: 1,
                   style: TextStyle(
                       fontSize: 17, color: GlobalTheme.floatingButtonText),
                 ),
