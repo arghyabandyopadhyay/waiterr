@@ -74,7 +74,6 @@ class SelectionCardResponsive extends StatelessWidget {
               ),
               Text(
                 item!.stockGroup!,
-                textScaleFactor: 1,
                 textAlign: TextAlign.center,
                 maxLines: active! ? 1 : 2,
                 overflow: TextOverflow.ellipsis,
