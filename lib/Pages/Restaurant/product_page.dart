@@ -12,10 +12,13 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
+import 'Product/product_about.dart';
+import 'Product/product_reviews.dart';
+import 'Product/product_specification.dart';
 
 class ProductPage extends StatefulWidget {
-  final MenuItemModel? item;
-  const ProductPage({Key? key, this.item}) : super(key: key);
+  final MenuItemModel item;
+  const ProductPage({Key? key, required this.item}) : super(key: key);
   @override
   State<ProductPage> createState() => _ProductPageState();
 }
@@ -28,16 +31,11 @@ class _ProductPageState extends State<ProductPage>
   AnimationController? _cardController;
   //Controller
   final TextEditingController _searchController = TextEditingController();
-  bool? _isFavourite;
-  _ProductPageState() {
-    _isFavourite = widget.item!.favourite;
-    UserDetail.item = widget.item;
-  }
 
   //Member Functions
   Future<Image?> fetchMenuImage() async {
     Image? menuImage;
-    await postForMenuItemDetails(widget.item!.itemID)
+    await postForMenuItemDetails(widget.item.itemID)
         .then((ProductDetailModel i) => {
               menuImage = i.image,
             });
@@ -102,16 +100,16 @@ class _ProductPageState extends State<ProductPage>
   }
 
   void onTapAdd() {
-    if (widget.item!.customizable.isEmpty) {
-      widget.item!.quantity = widget.item!.quantity + 1;
+    if (widget.item.customizable.isEmpty) {
+      widget.item.quantity = widget.item.quantity + 1;
     } else {
-      _showModalBottomSheet(context, widget.item!);
+      _showModalBottomSheet(context, widget.item);
     }
     setState(() {});
   }
 
   void onLongPressedAdd() {
-    (widget.item!.customizable.isEmpty)
+    (widget.item.customizable.isEmpty)
         ? showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -120,16 +118,16 @@ class _ProductPageState extends State<ProductPage>
                 setQuantity: (double value) {
                   quantity = value;
                 },
-                previousValue: widget.item!.quantity,
+                previousValue: widget.item.quantity,
                 onTapAdd: () {
                   setState(() {
-                    widget.item!.quantity = quantity;
+                    widget.item.quantity = quantity;
                   });
                   Navigator.pop(context);
                 },
               );
             })
-        : _showModalBottomSheet(context, widget.item!);
+        : _showModalBottomSheet(context, widget.item);
   }
 
   @override
@@ -159,11 +157,11 @@ class _ProductPageState extends State<ProductPage>
                 IconButton(
                     icon: Icon(
                       Icons.favorite,
-                      color: _isFavourite! ? Colors.red : Colors.black,
+                      color: widget.item.favourite ? Colors.red : Colors.black,
                     ),
                     onPressed: () {
                       setState(() {
-                        _isFavourite = !_isFavourite!;
+                        widget.item.favourite = widget.item.favourite;
                       });
                       //send data to api server
                     }),
@@ -217,7 +215,14 @@ class _ProductPageState extends State<ProductPage>
                         ListenableProvider.value(value: _cardController)
                       ],
                       child: Scaffold(
-                        body: ProductTab(item: widget.item),
+                        body: ProductTab(
+                          item: widget.item,
+                          tabs: [
+                            TabData("Abouts", ProductAbout(item: widget.item)),
+                            TabData("Specs", const ProductSpecification()),
+                            TabData("Reviews", const ProductReviews()),
+                          ],
+                        ),
                       ),
                     ),
                   )
@@ -241,25 +246,25 @@ class _ProductPageState extends State<ProductPage>
                             item: widget.item,
                             onLongPressedAdd: onLongPressedAdd,
                             onLongPressedRemove: () {
-                              if (widget.item!.customizable.isEmpty) {
-                                widget.item!.quantity = 0.0;
+                              if (widget.item.customizable.isEmpty) {
+                                widget.item.quantity = 0.0;
                               } else {
-                                _showModalBottomSheet(context, widget.item!);
+                                _showModalBottomSheet(context, widget.item);
                               }
                               setState(() {});
                             },
                             onTapRemove: () {
-                              if (widget.item!.customizable.isEmpty) {
-                                if (widget.item!.quantity - 1 >= 0) {
-                                  widget.item!.quantity =
-                                      widget.item!.quantity == 0.0
+                              if (widget.item.customizable.isEmpty) {
+                                if (widget.item.quantity - 1 >= 0) {
+                                  widget.item.quantity =
+                                      widget.item.quantity == 0.0
                                           ? 0.0
-                                          : widget.item!.quantity - 1;
+                                          : widget.item.quantity - 1;
                                 } else {
-                                  widget.item!.quantity = 0.0;
+                                  widget.item.quantity = 0.0;
                                 }
                               } else {
-                                _showModalBottomSheet(context, widget.item!);
+                                _showModalBottomSheet(context, widget.item);
                               }
                               setState(() {});
                             },
@@ -281,8 +286,7 @@ class _ProductPageState extends State<ProductPage>
                                   style: BorderStyle.solid)),
                           width: MediaQuery.of(context).size.width * 0.60,
                           child: Text(
-                              'Add ₹ ${(widget.item!.rate! * widget.item!.quantity).toStringAsFixed(2)}',
-                              textScaleFactor: 1,
+                              'Add ₹ ${(widget.item.rate * widget.item.quantity).toStringAsFixed(2)}',
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                   color: Colors.white,
