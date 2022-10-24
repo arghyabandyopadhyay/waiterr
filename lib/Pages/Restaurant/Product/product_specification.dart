@@ -21,7 +21,6 @@ class ProductSpecification extends StatelessWidget {
           children: const [
             Text(
               "Specifications",
-              textScaleFactor: 1,
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             // GestureDetector(
