@@ -5,38 +5,42 @@ import 'package:flutter/widgets.dart';
 
 class ProgressStatusIndicator extends StatefulWidget {
   final KOTModel currentKot;
-  ProgressStatusIndicator(this.currentKot) : super();
+  const ProgressStatusIndicator(this.currentKot, {super.key});
   @override
-  ProgressStatusIndicatorState createState() =>
-      ProgressStatusIndicatorState(currentKot);
+  ProgressStatusIndicatorState createState() => ProgressStatusIndicatorState();
 }
 
 class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
-  final KOTModel currentKot;
-  ProgressStatusIndicatorState(this.currentKot) {
-    getCurrentStep(currentKot);
-  }
-  int current_step = 0;
+  int currentStep = 0;
   void getCurrentStep(KOTModel currentKot) {
-    if (currentKot.orderPlaced!) {
-      if (currentKot.orderApproved!) {
-        if (currentKot.orderPrepared!) {
-          if (currentKot.orderProcessed!)
-            current_step = 3;
-          else
-            current_step = 2;
-        } else
-          current_step = 1;
-      } else
-        current_step = 0;
-    } else
-      current_step = -1;
+    if (currentKot.orderPlaced) {
+      if (currentKot.orderApproved) {
+        if (currentKot.orderPrepared) {
+          if (currentKot.orderProcessed) {
+            currentStep = 3;
+          } else {
+            currentStep = 2;
+          }
+        } else {
+          currentStep = 1;
+        }
+      } else {
+        currentStep = 0;
+      }
+    } else {
+      currentStep = -1;
+    }
+  }
+
+  @override
+  void initState() {
+    getCurrentStep(widget.currentKot);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -45,7 +49,7 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
           children: <Widget>[
             Icon(Icons.fastfood,
                 size: 35,
-                color: current_step >= 0
+                color: currentStep >= 0
                     ? GlobalTheme.primaryColor
                     : GlobalTheme.primaryText),
             Container(
@@ -54,12 +58,11 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
               child: Text(
                 'Order Placed',
                 textAlign: TextAlign.center,
-                textScaleFactor: 1,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
-                    color: current_step >= 0
+                    color: currentStep >= 0
                         ? GlobalTheme.primaryColor
                         : GlobalTheme.primaryText),
               ),
@@ -76,7 +79,7 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
               width: MediaQuery.of(context).size.width / 12.25,
               margin: const EdgeInsets.all(0),
               padding: const EdgeInsets.all(0),
-              color: current_step >= 0
+              color: currentStep >= 0
                   ? GlobalTheme.primaryColor
                   : GlobalTheme.primaryText,
             ),
@@ -87,7 +90,7 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
           children: <Widget>[
             Icon(Icons.assignment,
                 size: 35,
-                color: current_step >= 1
+                color: currentStep >= 1
                     ? GlobalTheme.primaryColor
                     : GlobalTheme.primaryText),
             Container(
@@ -96,12 +99,11 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
               child: Text(
                 'Order Approved',
                 textAlign: TextAlign.center,
-                textScaleFactor: 1,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
-                    color: current_step >= 1
+                    color: currentStep >= 1
                         ? GlobalTheme.primaryColor
                         : GlobalTheme.primaryText),
               ),
@@ -118,7 +120,7 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
               width: MediaQuery.of(context).size.width / 12.25,
               margin: const EdgeInsets.all(0),
               padding: const EdgeInsets.all(0),
-              color: current_step >= 1
+              color: currentStep >= 1
                   ? GlobalTheme.primaryColor
                   : GlobalTheme.primaryText,
             ),
@@ -129,7 +131,7 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
           children: <Widget>[
             Icon(Icons.restaurant,
                 size: 35,
-                color: current_step >= 2
+                color: currentStep >= 2
                     ? GlobalTheme.primaryColor
                     : GlobalTheme.primaryText),
             Container(
@@ -138,12 +140,11 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
               child: Text(
                 'Order Prepared',
                 textAlign: TextAlign.center,
-                textScaleFactor: 1,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
-                    color: current_step >= 2
+                    color: currentStep >= 2
                         ? GlobalTheme.primaryColor
                         : GlobalTheme.primaryText),
               ),
@@ -160,7 +161,7 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
               width: MediaQuery.of(context).size.width / 12.25,
               margin: const EdgeInsets.all(0),
               padding: const EdgeInsets.all(0),
-              color: current_step >= 2
+              color: currentStep >= 2
                   ? GlobalTheme.primaryColor
                   : GlobalTheme.primaryText,
             ),
@@ -171,7 +172,7 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
           children: <Widget>[
             Icon(Icons.done_all,
                 size: 35,
-                color: current_step >= 3
+                color: currentStep >= 3
                     ? GlobalTheme.primaryColor
                     : GlobalTheme.primaryText),
             Container(
@@ -180,12 +181,11 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
               child: Text(
                 'Order Delivered',
                 textAlign: TextAlign.center,
-                textScaleFactor: 1,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
-                    color: current_step >= 3
+                    color: currentStep >= 3
                         ? GlobalTheme.primaryColor
                         : GlobalTheme.primaryText),
               ),
@@ -193,43 +193,6 @@ class ProgressStatusIndicatorState extends State<ProgressStatusIndicator> {
           ],
         )
       ],
-    ));
+    );
   }
 }
-/*
-Stepper(
-              type: StepperType.horizontal,
-              currentStep: current_step,
-              physics: AlwaysScrollableScrollPhysics(),
-              steps:[
-                Step(
-                  title: Icon(Icons.fastfood,color:current_step>=0?GlobalTheme.primaryColor:GlobalTheme.primaryText),
-                    content:Center(child:Text('The Order has been placed.',textScaleFactor: 1,style: TextStyle(fontSize: 17,color: Colors.black45),),),
-                    state: current_step>=0?StepState.complete:StepState.indexed,
-                    isActive: current_step>=0
-                ),
-                Step(
-                    title: Icon(Icons.restaurant_menu,color:current_step>=1?GlobalTheme.primaryColor:GlobalTheme.primaryText),
-                    content: Center(child:Text('The Order has been approved.',textScaleFactor: 1,style: TextStyle(fontSize: 17,color: Colors.black45),),),
-                    state: StepState.disabled,
-                    isActive: current_step>=1
-                ),
-                Step(
-                    title: Icon(Icons.restaurant,color:current_step>=2?GlobalTheme.primaryColor:GlobalTheme.primaryText),
-                    content:  Center(child:Text('The Order would be coming to you in some minutes.',textScaleFactor: 1,style: TextStyle(fontSize: 17,color: Colors.black45))),
-                    state: current_step>=2?StepState.complete:StepState.indexed,
-                    isActive: current_step>=2
-                ),
-                Step(
-                    title: Icon(Icons.done_all,color:current_step>=3?GlobalTheme.primaryColor:GlobalTheme.primaryText),
-                    content:  Center(child:Text('The Order has been Delivered.',textScaleFactor: 1,style: TextStyle(fontSize: 17,color: Colors.black45),)),
-                    state: current_step==3?StepState.complete:StepState.indexed,
-                    isActive: current_step==3
-                ),
-              ],
-              controlsBuilder: (BuildContext context,
-                  {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
-                return Row();
-              },
-            )
- */
