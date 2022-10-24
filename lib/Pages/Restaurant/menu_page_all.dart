@@ -30,8 +30,11 @@ import '../../global_class.dart';
 
 class MenuPageAll extends StatefulWidget {
   final RunningOrderModel addOrderData;
+  final bool isWaiter;
   // This widget is the root of your application.
-  const MenuPageAll({Key? key, required this.addOrderData}) : super(key: key);
+  const MenuPageAll(
+      {Key? key, required this.addOrderData, required this.isWaiter})
+      : super(key: key);
   @override
   State<MenuPageAll> createState() => _MenuPageAllState();
 }
@@ -73,7 +76,6 @@ class _MenuPageAllState extends State<MenuPageAll> {
   final _controller = ScrollController();
   Widget appBarTitle = const Text(
     "Menu",
-    textScaleFactor: 1,
     textAlign: TextAlign.left,
     style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
   );
@@ -163,7 +165,6 @@ class _MenuPageAllState extends State<MenuPageAll> {
       );
       appBarTitle = const Text(
         "Menu",
-        textScaleFactor: 1,
         textAlign: TextAlign.left,
         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
       );
@@ -188,7 +189,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
     List<List<MenuItemModel>>? results = [];
     List<MenuItemModel> temp;
     MenuItemModel temp2;
-    if (UserDetail.userDetails.roleID == 1) {
+    if (!widget.isWaiter) {
+      print("hh");
       await postForMenuItem(widget.addOrderData.mobileNo ?? "",
               widget.addOrderData.outletId ?? "")
           .then((value) async => {
@@ -255,7 +257,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
       UserClientAllocationData.distinctStockGroup ??=
           await postForMenuGroupItem();
       UserClientAllocationData.productList ??=
-          await postForMenuItem(null, null);
+          await postForMenuItem(null, widget.addOrderData.outletId);
       if (PreviousCartManager.previousSalePointName ==
               widget.addOrderData.salePointName &&
           PreviousCartManager.previousOutletName ==
@@ -276,23 +278,23 @@ class _MenuPageAllState extends State<MenuPageAll> {
           element.commentForKOT = "";
         }
       }
-      try {
-        if (widget.addOrderData.mobileNo!.isNotEmpty) {
-          List<FavouritesJsonModel> favouritesItemIds =
-              await postForFavouritesItem(widget.addOrderData.mobileNo);
-          for (FavouritesJsonModel a in favouritesItemIds) {
-            temp2 = UserClientAllocationData.productList!
-                .where((element) => element.itemID == a.itemId)
-                .toList()[0];
-            temp2.favourite = true;
-            favourites.add(temp2);
-          }
-        } else {
-          await Future.delayed(const Duration(milliseconds: 500), () => "1");
-        }
-      } catch (E) {
-        favourites.clear();
-      }
+      // try {
+      //   if (widget.addOrderData.mobileNo!.isNotEmpty) {
+      //     List<FavouritesJsonModel> favouritesItemIds =
+      //         await postForFavouritesItem(widget.addOrderData.mobileNo);
+      //     for (FavouritesJsonModel a in favouritesItemIds) {
+      //       temp2 = UserClientAllocationData.productList!
+      //           .where((element) => element.itemID == a.itemId)
+      //           .toList()[0];
+      //       temp2.favourite = true;
+      //       favourites.add(temp2);
+      //     }
+      //   } else {
+      //     await Future.delayed(const Duration(milliseconds: 500), () => "1");
+      //   }
+      // } catch (E) {
+      //   favourites.clear();
+      // }
       productListSearch = UserClientAllocationData.productList;
       distinctStockGroup = UserClientAllocationData.distinctStockGroup;
       if (UserClientAllocationData.productListStockDiff == null) {
@@ -339,7 +341,6 @@ class _MenuPageAllState extends State<MenuPageAll> {
 
   Widget _header(String? name) => Text(
         "  $name",
-        textScaleFactor: 1,
         style: GoogleFonts.openSans(
             color: Colors.black, fontSize: 17, fontWeight: FontWeight.w600),
       );
@@ -629,6 +630,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                                     MenuPageAll(
                                                       addOrderData:
                                                           widget.addOrderData,
+                                                      isWaiter: widget.isWaiter,
                                                     )))
                                       }
                                   });
@@ -650,7 +652,9 @@ class _MenuPageAllState extends State<MenuPageAll> {
                               context,
                               CupertinoPageRoute(
                                   builder: (context1) => FoodOrderPage(
-                                      orderList, widget.addOrderData)));
+                                      orderList,
+                                      widget.addOrderData,
+                                      widget.isWaiter)));
                           if (value != null) {
                             var tmp = value.split("|");
                             totalItems = double.parse(tmp[0]);
@@ -1243,7 +1247,6 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                     children: <Widget>[
                       Text(
                         '${widget.totalItems!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))} Items',
-                        textScaleFactor: 1,
                         style: const TextStyle(
                             color: GlobalTheme.secondaryText, fontSize: 15),
                       ),
@@ -1255,7 +1258,6 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                                   : null,
                               child: Text(
                                 '₹${widget.totalCartAmount!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))} ',
-                                textScaleFactor: 1,
                                 style: const TextStyle(
                                     color: GlobalTheme.secondaryText,
                                     fontSize: 20),
@@ -1264,7 +1266,6 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                               )),
                           const Text(
                             ' plus Taxes',
-                            textScaleFactor: 1,
                             style: TextStyle(
                                 color: GlobalTheme.secondaryText, fontSize: 10),
                           )
@@ -1277,7 +1278,6 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                       children: const <Widget>[
                         Text(
                           'View Cart',
-                          textScaleFactor: 1,
                           style: TextStyle(
                               color: GlobalTheme.secondaryText, fontSize: 20),
                           textAlign: TextAlign.right,
