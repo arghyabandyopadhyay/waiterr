@@ -22,7 +22,6 @@ void globalShowInSnackBar(
       backgroundColor: barColor,
       content: Text(
         value,
-        textScaleFactor: 1,
         style: const TextStyle(),
       ),
       action: barAction));
