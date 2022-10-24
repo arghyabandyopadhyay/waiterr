@@ -17,7 +17,6 @@ class TotalCalculationWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 1.75,
               child: Text(
                 "${item!.item} x ${item!.quantity.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
-                textScaleFactor: 1,
                 style: const TextStyle(fontSize: 17),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -27,7 +26,6 @@ class TotalCalculationWidget extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Text(
                 "₹${(item!.quantity * item!.rate).toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
-                textScaleFactor: 1,
                 textAlign: TextAlign.right,
                 style: const TextStyle(fontSize: 17),
                 overflow: TextOverflow.ellipsis,
@@ -49,7 +47,6 @@ class TotalCalculationWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width / 1.5,
                     child: Text(
                       "${item!.item}(${item!.customizable[id].name}) x ${item!.customizable[id].qty}",
-                      textScaleFactor: 1,
                       style: const TextStyle(fontSize: 17),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -59,7 +56,6 @@ class TotalCalculationWidget extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: Text(
                       "₹${item!.customizable[id].qty * item!.customizable[id].price}",
-                      textScaleFactor: 1,
                       style: const TextStyle(fontSize: 17),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
