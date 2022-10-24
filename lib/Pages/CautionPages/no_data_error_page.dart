@@ -109,7 +109,6 @@ class _NoDateErrorPageState extends State<NoDateErrorPage> {
                     const Padding(
                       child: Text(
                         "Waiterr",
-                        textScaleFactor: 1,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
