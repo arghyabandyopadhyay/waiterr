@@ -42,7 +42,6 @@ class _AboutPageState extends State<AboutPage> {
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       "About Us",
-                      textScaleFactor: 1,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -136,7 +135,6 @@ class _AboutPageState extends State<AboutPage> {
                   const Icon(Icons.call, color: GlobalTheme.floatingButtonText),
               label: const Text(
                 "Contact Us",
-                textScaleFactor: 1,
                 style: TextStyle(
                     fontSize: 17, color: GlobalTheme.floatingButtonText),
               ),
