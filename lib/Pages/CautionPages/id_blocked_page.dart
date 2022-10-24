@@ -43,7 +43,6 @@ class _IdBlockedPageState extends State<IdBlockedPage> {
                   backgroundColor: Colors.transparent,
                   title: Text(
                     "",
-                    textScaleFactor: 1,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontSize: 30.0,
@@ -123,7 +122,6 @@ class _IdBlockedPageState extends State<IdBlockedPage> {
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
                           "Waiterr",
-                          textScaleFactor: 1,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
