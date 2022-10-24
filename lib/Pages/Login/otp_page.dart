@@ -49,7 +49,6 @@ class _OtpPageState extends State<OtpPage> {
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: const Text(
                             'Code Verification',
-                            textScaleFactor: 1,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
@@ -61,7 +60,6 @@ class _OtpPageState extends State<OtpPage> {
                       Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: const Text('Enter one time password sent on',
-                              textScaleFactor: 1,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: GlobalTheme.primaryText,
@@ -71,7 +69,6 @@ class _OtpPageState extends State<OtpPage> {
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           child:
                               Text('+91${UserDetail.loginDetail.mobileNumber}',
-                                  textScaleFactor: 1,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     color: GlobalTheme.primaryText,
@@ -149,7 +146,6 @@ class _OtpPageState extends State<OtpPage> {
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         child: const Text(
                           "Enter the 6-digit code.",
-                          textScaleFactor: 1,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
