@@ -1,10 +1,7 @@
 import 'package:waiterr/Model/menu_item_model.dart';
-import 'package:waiterr/Pages/Restaurant/Product/product_specification.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../theme.dart';
-import 'product_about.dart';
-import 'product_reviews.dart';
 
 class TabData {
   TabData(this.label, this.child);
@@ -14,12 +11,8 @@ class TabData {
 
 class ProductTab extends StatelessWidget {
   final MenuItemModel? item;
-  ProductTab({Key? key, this.item}) : super(key: key);
-  final List<TabData> _tabs = [
-    TabData("Abouts", const ProductAbout()),
-    TabData("Specs", const ProductSpecification()),
-    TabData("Reviews", const ProductReviews()),
-  ];
+  final List<TabData> tabs;
+  const ProductTab({Key? key, this.item, required this.tabs}) : super(key: key);
 
   Widget _buildTabBar() {
     return TabBar(
@@ -29,10 +22,9 @@ class ProductTab extends StatelessWidget {
       indicatorSize: TabBarIndicatorSize.label,
       indicatorWeight: 2,
       indicatorColor: GlobalTheme.primaryColor,
-      tabs: _tabs
+      tabs: tabs
           .map((tab) => Text(
                 tab.label,
-                textScaleFactor: 1,
               ))
           .toList(),
     );
@@ -41,7 +33,7 @@ class ProductTab extends StatelessWidget {
   Widget _buildTabContent() {
     return Expanded(
       child: TabBarView(
-        children: _tabs.map((tab) => tab.child).toList(),
+        children: tabs.map((tab) => tab.child).toList(),
       ),
     );
   }
