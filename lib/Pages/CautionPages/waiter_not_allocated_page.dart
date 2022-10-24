@@ -112,7 +112,6 @@ class _WaiterNotAllocatedPageState extends State<WaiterNotAllocatedPage> {
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
                           "Waiterr",
-                          textScaleFactor: 1,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
