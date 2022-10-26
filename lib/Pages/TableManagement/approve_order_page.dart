@@ -17,13 +17,14 @@ import '../../widgets/confirmation_dialog.dart';
 import '../../widgets/loading_indicator.dart';
 
 class ApproveOrdersPage extends StatefulWidget {
-  const ApproveOrdersPage({Key? key}) : super(key: key);
+  final String approvalType;
+  const ApproveOrdersPage({Key? key, required this.approvalType})
+      : super(key: key);
   @override
   State<ApproveOrdersPage> createState() => _ApproveOrdersPageState();
 }
 
 class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
-  String approvalType = "";
   List<List<KOTModel>>? kotList;
   Future<List<List<KOTModel>>>? _futureKot;
   bool? _dataIsLoaded;
@@ -35,7 +36,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
   Future<List<List<KOTModel>>> fetchList() async {
     List<List<KOTModel>> results = [];
     List<String?> distinctKotNumbers;
-    await postForSalesPointHistory(null, null, null, approvalType)
+    await postForSalesPointHistory(null, null, null, widget.approvalType)
         .then((value) => {
               distinctKotNumbers = getDistinctKotNumber(value),
               for (String? kotNumber in distinctKotNumbers)
@@ -73,13 +74,6 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
   @override
   void initState() {
     super.initState();
-    if (UserDetail.userDetails.roleID == 1) {
-      approvalType = "OrderApproved";
-    } else if (UserDetail.userDetails.roleID == 2) {
-      approvalType = "OrderPrepared";
-    } else if (UserDetail.userDetails.roleID == 3) {
-      approvalType = "OrderProcessed";
-    }
     _futureKot = fetchList();
     _isLoading = false;
     _dataIsLoaded = false;
@@ -705,7 +699,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
               kotList.first.kotNumber ?? "",
               forAggregate,
               forApproval,
-              approvalType,
+              widget.approvalType,
               allProcessed)
           .then((value) => {status = value});
 
