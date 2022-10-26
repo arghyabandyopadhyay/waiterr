@@ -15,8 +15,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../Model/model_option_model.dart';
+import '../../Modules/universal_module.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
+import '../../widgets/option_modal_bottom_sheet.dart';
 import 'kot_page.dart';
 import 'add_order_page.dart';
 
@@ -184,69 +187,300 @@ class _MyTableHomePage extends State<TableManagementPage> {
                           }
                         });
                       }),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.check_circle_outline,
-                    ),
-                    onPressed: () async {
-                      Connectivity connectivity = Connectivity();
-                      await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
-                              {
-                                Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            const ApproveOrdersPage()))
-                              }
-                            else
-                              {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    PageRouteBuilder(
-                                        pageBuilder:
-                                            (context, animation1, animation2) =>
-                                                const NoInternetPage()),
-                                    (route) => false)
-                              }
-                          });
+                  PopupMenuButton<ModalOptionModel>(
+                    itemBuilder: (BuildContext popupContext) {
+                      return [
+                        ModalOptionModel(
+                            particulars: "Approvals",
+                            icon: Icons.sort,
+                            onTap: () {
+                              Navigator.pop(popupContext);
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext alertDialogContext) {
+                                    return OptionModalBottomSheet(
+                                        appBarText: "Approvals",
+                                        appBarIcon: Icons.sort,
+                                        list: [
+                                          ModalOptionModel(
+                                            icon: Icons.approval,
+                                            particulars: "Approve orders",
+                                            onTap: () async {
+                                              Navigator.pop(alertDialogContext);
+                                              Connectivity connectivity =
+                                                  Connectivity();
+                                              await connectivity
+                                                  .checkConnectivity()
+                                                  .then((value) => {
+                                                        if (value !=
+                                                            ConnectivityResult
+                                                                .none)
+                                                          {
+                                                            Navigator.of(context).push(PageRouteBuilder(
+                                                                pageBuilder: (context,
+                                                                        animation1,
+                                                                        animation2) =>
+                                                                    const ApproveOrdersPage(
+                                                                        approvalType:
+                                                                            "OrderApproved")))
+                                                          }
+                                                        else
+                                                          {
+                                                            Navigator.of(context).pushAndRemoveUntil(
+                                                                PageRouteBuilder(
+                                                                    pageBuilder: (context,
+                                                                            animation1,
+                                                                            animation2) =>
+                                                                        const NoInternetPage()),
+                                                                (route) =>
+                                                                    false)
+                                                          }
+                                                      });
+                                            },
+                                          ),
+                                          if (UserDetail.userDetails.roleID == 2 ||
+                                              UserDetail.userDetails.roleID ==
+                                                  3 ||
+                                              UserDetail.userDetails.roleID ==
+                                                  4)
+                                            ModalOptionModel(
+                                              icon: Icons.fastfood,
+                                              particulars:
+                                                  "Complete Order Preparation",
+                                              onTap: () async {
+                                                Navigator.pop(
+                                                    alertDialogContext);
+                                                Connectivity connectivity =
+                                                    Connectivity();
+                                                await connectivity
+                                                    .checkConnectivity()
+                                                    .then((value) => {
+                                                          if (value !=
+                                                              ConnectivityResult
+                                                                  .none)
+                                                            {
+                                                              Navigator.of(context).push(PageRouteBuilder(
+                                                                  pageBuilder: (context,
+                                                                          animation1,
+                                                                          animation2) =>
+                                                                      const ApproveOrdersPage(
+                                                                          approvalType:
+                                                                              "OrderPrepared")))
+                                                            }
+                                                          else
+                                                            {
+                                                              Navigator.of(context).pushAndRemoveUntil(
+                                                                  PageRouteBuilder(
+                                                                      pageBuilder: (context,
+                                                                              animation1,
+                                                                              animation2) =>
+                                                                          const NoInternetPage()),
+                                                                  (route) =>
+                                                                      false)
+                                                            }
+                                                        });
+                                              },
+                                            ),
+                                          if (UserDetail.userDetails.roleID ==
+                                                  3 ||
+                                              UserDetail.userDetails.roleID ==
+                                                  4)
+                                            ModalOptionModel(
+                                              icon: Icons.done_all,
+                                              particulars: "Order delivered",
+                                              onTap: () async {
+                                                Navigator.pop(
+                                                    alertDialogContext);
+                                                Connectivity connectivity =
+                                                    Connectivity();
+                                                await connectivity
+                                                    .checkConnectivity()
+                                                    .then((value) => {
+                                                          if (value !=
+                                                              ConnectivityResult
+                                                                  .none)
+                                                            {
+                                                              Navigator.of(context).push(
+                                                                  PageRouteBuilder(
+                                                                      pageBuilder: (context,
+                                                                              animation1,
+                                                                              animation2) =>
+                                                                          const ApproveOrdersPage(
+                                                                            approvalType:
+                                                                                "OrderProcessed",
+                                                                          )))
+                                                            }
+                                                          else
+                                                            {
+                                                              Navigator.of(context).pushAndRemoveUntil(
+                                                                  PageRouteBuilder(
+                                                                      pageBuilder: (context,
+                                                                              animation1,
+                                                                              animation2) =>
+                                                                          const NoInternetPage()),
+                                                                  (route) =>
+                                                                      false)
+                                                            }
+                                                        });
+                                              },
+                                            ),
+                                          if (UserDetail.userDetails.roleID ==
+                                                  3 ||
+                                              UserDetail.userDetails.roleID ==
+                                                  4)
+                                            ModalOptionModel(
+                                              icon: Icons.done_all,
+                                              particulars: "Order delivered",
+                                              onTap: () async {
+                                                Navigator.pop(
+                                                    alertDialogContext);
+                                                Connectivity connectivity =
+                                                    Connectivity();
+                                                await connectivity
+                                                    .checkConnectivity()
+                                                    .then((value) => {
+                                                          if (value !=
+                                                              ConnectivityResult
+                                                                  .none)
+                                                            {
+                                                              Navigator.of(context).push(
+                                                                  PageRouteBuilder(
+                                                                      pageBuilder: (context,
+                                                                              animation1,
+                                                                              animation2) =>
+                                                                          const ApproveOrdersPage(
+                                                                            approvalType:
+                                                                                "OrderProcessed",
+                                                                          )))
+                                                            }
+                                                          else
+                                                            {
+                                                              Navigator.of(context).pushAndRemoveUntil(
+                                                                  PageRouteBuilder(
+                                                                      pageBuilder: (context,
+                                                                              animation1,
+                                                                              animation2) =>
+                                                                          const NoInternetPage()),
+                                                                  (route) =>
+                                                                      false)
+                                                            }
+                                                        });
+                                              },
+                                            ),
+                                          //TODO: to be implemented after wards
+                                          // if (UserDetail.userDetails.roleID ==
+                                          //     3||UserDetail.userDetails.roleID == 4)
+                                          //   ModalOptionModel(
+                                          //     icon: Icons.stop,
+                                          //     particulars: "Terminate Order",
+                                          //     onTap: () async {
+                                          //       Navigator.pop(
+                                          //           alertDialogContext);
+                                          //       Connectivity connectivity =
+                                          //           Connectivity();
+                                          //       await connectivity
+                                          //           .checkConnectivity()
+                                          //           .then((value) => {
+                                          //                 if (value !=
+                                          //                     ConnectivityResult
+                                          //                         .none)
+                                          //                   {
+                                          //                     Navigator.of(context).push(
+                                          //                         PageRouteBuilder(
+                                          //                             pageBuilder: (context,
+                                          //                                     animation1,
+                                          //                                     animation2) =>
+                                          //                                 const ApproveOrdersPage(
+                                          //                                   approvalType:
+                                          //                                       "OrderTerminate",
+                                          //                                 )))
+                                          //                   }
+                                          //                 else
+                                          //                   {
+                                          //                     Navigator.of(context).pushAndRemoveUntil(
+                                          //                         PageRouteBuilder(
+                                          //                             pageBuilder: (context,
+                                          //                                     animation1,
+                                          //                                     animation2) =>
+                                          //                                 const NoInternetPage()),
+                                          //                         (route) =>
+                                          //                             false)
+                                          //                   }
+                                          //               });
+                                          //     },
+                                          //   ),
+                                        ]);
+                                  });
+                            }),
+                        if (UserDetail.userDetails.roleID == 3 ||
+                            UserDetail.userDetails.roleID == 4)
+                          ModalOptionModel(
+                              particulars: "Waiter manager",
+                              onTap: () async {
+                                Navigator.pop(context);
+                                //Todo: navigate to waiter manager
+                              },
+                              icon: Icons.person_outline),
+                        if (UserDetail.userDetails.roleID == 3 ||
+                            UserDetail.userDetails.roleID == 4)
+                          ModalOptionModel(
+                              particulars: "Menu manager",
+                              onTap: () async {
+                                Navigator.pop(context);
+                                //Todo: navigate to waiter manager
+                              },
+                              icon: Icons.menu_book_outlined),
+                        //role id 4 is for owner
+                        if (UserDetail.userDetails.roleID == 4)
+                          ModalOptionModel(
+                              particulars: "Admin manager",
+                              onTap: () async {
+                                Navigator.pop(context);
+                                //Todo: navigate to waiter manager
+                              },
+                              icon: Icons.admin_panel_settings_outlined),
+                        ModalOptionModel(
+                            particulars: "Refresh",
+                            onTap: () async {
+                              Navigator.pop(context);
+                              Connectivity connectivity = Connectivity();
+                              await connectivity
+                                  .checkConnectivity()
+                                  .then((value) => {
+                                        if (value != ConnectivityResult.none)
+                                          {
+                                            setState(() {
+                                              _isLoading = true;
+                                              _isDataLoaded = false;
+                                            }),
+                                            _futureitems = fetchList()
+                                          }
+                                        else
+                                          {
+                                            Navigator.of(context)
+                                                .pushAndRemoveUntil(
+                                                    PageRouteBuilder(
+                                                        pageBuilder: (context,
+                                                                animation1,
+                                                                animation2) =>
+                                                            const NoInternetPage()),
+                                                    (route) => false)
+                                          }
+                                      });
+                            },
+                            icon: Icons.refresh)
+                      ].map((ModalOptionModel choice) {
+                        return PopupMenuItem<ModalOptionModel>(
+                          value: choice,
+                          child: ListTile(
+                            title: Text(choice.particulars),
+                            leading: Icon(choice.icon, color: choice.iconColor),
+                            onTap: choice.onTap,
+                          ),
+                        );
+                      }).toList();
                     },
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.refresh,
-                    ),
-                    onPressed: () async {
-                      Connectivity connectivity = Connectivity();
-                      await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
-                              {
-                                // if (UserDetail.userDetails.roleID == 1)
-                                //   {
-                                setState(() {
-                                  _isLoading = true;
-                                  _isDataLoaded = false;
-                                }),
-                                _futureitems = fetchList()
-                                //   }
-                                // else
-                                //   Navigator.of(context).pushAndRemoveUntil(
-                                //       PageRouteBuilder(
-                                //           pageBuilder: (context, animation1,
-                                //                   animation2) =>
-                                //               const TableManagementPage()),
-                                //       (route) => false)
-                              }
-                            else
-                              {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    PageRouteBuilder(
-                                        pageBuilder:
-                                            (context, animation1, animation2) =>
-                                                const NoInternetPage()),
-                                    (route) => false)
-                              }
-                          });
-                    },
-                  )
                 ],
               ),
               drawer: Drawer(
