@@ -3,6 +3,7 @@ import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
+import 'package:waiterr/Pages/Restaurant/waiter_manager_page.dart';
 import 'package:waiterr/Pages/TableManagement/approve_order_page.dart';
 import 'package:waiterr/Pages/User/about_page.dart';
 import 'package:waiterr/Pages/User/profile_page.dart';
@@ -418,7 +419,10 @@ class _MyTableHomePage extends State<TableManagementPage> {
                               particulars: "Waiter manager",
                               onTap: () async {
                                 Navigator.pop(context);
-                                //Todo: navigate to waiter manager
+                                Navigator.of(context).push(PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const WaiterManagerPage()));
                               },
                               icon: Icons.person_outline),
                         if (UserDetail.userDetails.roleID == 3 ||
