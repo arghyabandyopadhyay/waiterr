@@ -17,6 +17,10 @@ class GlobalTheme {
     const Color.fromARGB(255, 249, 95, 195),
     const Color.fromARGB(255, 244, 3, 3)
   ];
+  static var primaryGradientGreen = [
+    const Color.fromARGB(255, 136, 249, 95),
+    const Color.fromARGB(255, 21, 175, 62)
+  ];
   static var primaryGradient2 = [
     const Color.fromARGB(255, 118, 106, 228),
     const Color.fromARGB(255, 72, 65, 141),
