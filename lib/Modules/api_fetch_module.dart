@@ -19,6 +19,7 @@ import 'package:waiterr/Model/user_details_model.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
 import 'package:waiterr/Model/user_login_model.dart';
+import '../Model/waiter_details_model.dart';
 import '../global_class.dart';
 
 //ready
@@ -288,6 +289,18 @@ Future<CustomerDetailsModel> getCustomerDetails(String mobile) async {
   }
 }
 
+Future<UserDetailsModel> getUserDetail(String mobile) async {
+  RequestJson requestJson = RequestJson(
+      requestType: "Waiters",
+      parameterList: ([Parameter(pKey: "MobileNo", pValue: mobile)]));
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  return UserDetailsModel.fromJson(jsonDecode(responseBody));
+}
+
 //ready
 Future<List<UserRestrauntAllocationModel>> getUserClientAllocation(
     String? uid) async {
@@ -410,8 +423,6 @@ Future<int> putCustomerDetails(
   } else if (response.statusCode == 500) {
     throw 500;
   } else {
-    print(response.body);
-
     // If the server did return a 200 OK response,
     // then parse the json.
     //return new UserRestrauntAllocationModel(clientName:"",guid:"",companyGUID: "",dataExchangeVia: "");
@@ -485,6 +496,26 @@ Future<List<RunningOrderModel>> postForRunningOrders(
     throw 500;
   } else {
     throw "ErrorHasOccurred";
+  }
+}
+
+Future<int> postForUserClientAllocation(String userId, String outletId) async {
+  RequestJson requestJson = RequestJson(
+      requestType: "Waiters",
+      parameterList: ([
+        Parameter(pKey: "UserId", pValue: userId),
+        Parameter(pKey: "OutletId", pValue: outletId)
+      ]));
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  responseBody = jsonDecode(responseBody);
+  if (responseBody == "Success") {
+    return 200;
+  } else {
+    return 500;
   }
 }
 
@@ -601,6 +632,19 @@ Future<ProductDetailModel> postForMenuItemDetails(String menuItemId) async {
   return ProductDetailModel.fromJson(jsonDecode(responseBody));
 }
 
+Future<List<WaiterDetailsModel>> postForWaiterDetails() async {
+  RequestJson requestJson =
+      RequestJson(requestType: "Waiters", parameterList: null);
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  return (jsonDecode(responseBody) as List)
+      .map((data) => WaiterDetailsModel.fromJson(data))
+      .toList();
+}
+
 //ready
 Future<List<MenuItemModel>> postForMenuItem(
     String? clientMobile, String? outletId) async {
@@ -710,6 +754,8 @@ Future<String> responseGeneratorPost(String body) async {
     }
   } else if (response.statusCode == 500) {
     throw 500;
+  } else if (response.statusCode == 204) {
+    throw "NoData";
   } else {
     // If the server did return a 200 OK response,
     // then parse the json.
