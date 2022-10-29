@@ -13,7 +13,7 @@ class RunningOrderModel {
   final String? activeSince;
   final bool billPrinted;
   final String? outletName;
-  String? outletId;
+  String outletId;
   final String? masterFilter;
   RunningOrderModel(
       {required this.id,
@@ -28,7 +28,7 @@ class RunningOrderModel {
       this.activeSince,
       required this.billPrinted,
       this.outletName,
-      this.outletId,
+      required this.outletId,
       this.masterFilter});
 
   factory RunningOrderModel.fromJson(Map<String, dynamic> json) {
