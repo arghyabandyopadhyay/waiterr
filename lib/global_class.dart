@@ -34,6 +34,7 @@ class UserClientAllocationData {
   static String? dataExchangeURL;
   static String? clientType;
   static String? guid;
+  static int ucaRoleId = 1;
   static String? companyGUID;
   static List<OutletConfigurationModel>? outletConfiguration;
   static List<MenuItemModel>? productList;
@@ -46,6 +47,7 @@ class UserClientAllocationData {
       distinctStockGroup = null;
       productListStockDiff = null;
     }
+    ucaRoleId = userClientAllocationModel.ucaRoleId;
     clientName = userClientAllocationModel.clientName;
     logoURL = userClientAllocationModel.logoURL;
     dataExchangeVia = userClientAllocationModel.dataExchangeVia;
