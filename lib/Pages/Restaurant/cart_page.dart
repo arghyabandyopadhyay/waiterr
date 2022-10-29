@@ -112,7 +112,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
       setState(() {
         totalItems = totalItems! + 1;
         totalCartAmount = totalCartAmount! + itemModel.rate;
-        totalTax = totalTax + itemModel.rate * itemModel.taxRate! * 0.01;
+        totalTax = totalTax + itemModel.rate * itemModel.taxRate * 0.01;
         itemModel.quantity = itemModel.quantity + 1;
       });
     } else {
@@ -130,7 +130,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
               : totalCartAmount! - itemModel.rate;
           totalTax = itemModel.quantity == 0.0
               ? totalTax
-              : totalTax - itemModel.rate * itemModel.taxRate! * 0.01;
+              : totalTax - itemModel.rate * itemModel.taxRate * 0.01;
           itemModel.quantity =
               itemModel.quantity == 0.0 ? 0.0 : itemModel.quantity - 1;
         } else {
@@ -145,7 +145,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
               : totalTax -
                   itemModel.rate *
                       itemModel.quantity *
-                      itemModel.taxRate! *
+                      itemModel.taxRate *
                       0.01;
           itemModel.quantity = 0.0;
         }
@@ -199,7 +199,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
         totalTax = itemModel.quantity == 0.0
             ? totalTax
             : totalTax -
-                itemModel.rate * itemModel.quantity * itemModel.taxRate! * 0.01;
+                itemModel.rate * itemModel.quantity * itemModel.taxRate * 0.01;
         itemModel.quantity = 0.0;
       });
     } else {
@@ -227,7 +227,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                     totalTax = totalTax +
                         itemModel.rate *
                             (quantity - itemModel.quantity) *
-                            itemModel.taxRate! *
+                            itemModel.taxRate *
                             0.01;
                     itemModel.quantity = quantity;
                   });
@@ -247,7 +247,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
       totalTax = totalTax +
           widget.cartList[a].rate *
               widget.cartList[a].quantity *
-              widget.cartList[a].taxRate! *
+              widget.cartList[a].taxRate *
               0.01;
     }
   }
