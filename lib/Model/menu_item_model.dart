@@ -6,20 +6,24 @@ class MenuItemModel {
   String? itemDescription;
   String? commentForKOT;
   String? commentForKOTId;
-  String? stockGroup;
+  String stockGroup;
+  String stockGroupId;
   double quantity;
-  double? rateBeforeDiscount;
-  double? discount;
+  double rateBeforeDiscount;
+  double discount;
   double rate;
-  String? taxClassID;
-  double? taxRate;
-  bool? isDiscountable;
+  String taxClassID;
+  double taxRate;
+  bool isDiscountable;
   String? masterFilter;
   List<CustomizablePageModel> customizable;
-  bool? isVeg;
+  bool isVeg;
   String itemID;
   String? tags;
+  String? outletId;
+  String? outletName;
   bool favourite;
+  bool isEdited;
 
   MenuItemModel(
       {this.itemImage,
@@ -27,20 +31,24 @@ class MenuItemModel {
       this.itemDescription,
       this.commentForKOT,
       this.commentForKOTId,
-      this.stockGroup,
+      required this.stockGroup,
+      required this.stockGroupId,
       required this.quantity,
-      this.rateBeforeDiscount,
-      this.discount,
+      required this.rateBeforeDiscount,
+      required this.discount,
       required this.rate,
-      this.taxClassID,
-      this.taxRate,
-      this.isDiscountable,
+      required this.taxClassID,
+      required this.taxRate,
+      required this.isDiscountable,
       this.masterFilter,
       required this.customizable,
       required this.itemID,
-      this.isVeg,
+      required this.isVeg,
       this.tags,
-      required this.favourite});
+      required this.favourite,
+      required this.isEdited,
+      this.outletId,
+      this.outletName});
 
   factory MenuItemModel.fromJson(Map<String, dynamic> json) {
     return MenuItemModel(
@@ -49,6 +57,7 @@ class MenuItemModel {
         itemDescription: json['ItemDescription'],
         commentForKOT: json['CommentForKOT'],
         stockGroup: json['StockGroup'],
+        stockGroupId: json['StockGroupId'],
         quantity: json['Quantity'] ?? 0,
         rateBeforeDiscount: double.parse(json['RateBeforeDiscount'].toString()),
         discount: double.parse(json['Discount'].toString()),
@@ -66,10 +75,13 @@ class MenuItemModel {
         isVeg: json['IsVeg'] == 1,
         itemID: json['id'],
         tags: json['Tags'],
-        favourite: json['Favourite'] == 1);
+        outletId: json['OutletId'],
+        outletName: json['OutletName'],
+        favourite: json['Favourite'] == 1,
+        isEdited: false);
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap(bool forManagement) {
     var map = <String, dynamic>{
       'ItemImage': itemImage,
       'Item': item,
@@ -77,6 +89,7 @@ class MenuItemModel {
       'CommentForKOT': commentForKOT,
       'CommentForKOTId': commentForKOTId,
       'StockGroup': stockGroup,
+      'StockGroupId': stockGroupId,
       'Quantity': quantity,
       'RateBeforeDiscount': rateBeforeDiscount,
       'Discount': discount,
@@ -91,9 +104,11 @@ class MenuItemModel {
               .map((data) => CustomizablePageModel.fromJson(data))
               .toList(),
       'IsVeg': isVeg,
+      'OutletId': outletId,
       'ItemID': itemID,
       'Tags': tags,
-      'Favourite': favourite
+      'Favourite': favourite,
+      if (forManagement) 'IsEdited': isEdited
     };
     return map;
   }
