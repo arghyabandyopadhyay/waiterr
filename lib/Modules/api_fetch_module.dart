@@ -19,6 +19,7 @@ import 'package:waiterr/Model/user_details_model.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
 import 'package:waiterr/Model/user_login_model.dart';
+import '../Model/tax_model.dart';
 import '../Model/waiter_details_model.dart';
 import '../global_class.dart';
 
@@ -289,6 +290,7 @@ Future<CustomerDetailsModel> getCustomerDetails(String mobile) async {
   }
 }
 
+//Ready
 Future<UserDetailsModel> getUserDetail(String mobile) async {
   RequestJson requestJson = RequestJson(
       requestType: "Waiters",
@@ -499,6 +501,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
   }
 }
 
+//Ready
 Future<int> postForUserClientAllocation(String userId, String outletId) async {
   RequestJson requestJson = RequestJson(
       requestType: "Waiters",
@@ -519,6 +522,7 @@ Future<int> postForUserClientAllocation(String userId, String outletId) async {
   }
 }
 
+//Ready
 Future<int> terminateRunningOrders(String? runningOrderId) async {
   RequestJson requestJson = RequestJson(
       requestType: "Running Orders",
@@ -539,6 +543,7 @@ Future<int> terminateRunningOrders(String? runningOrderId) async {
   }
 }
 
+//Ready
 Future<List<CommentForKotSuggestionsModel>> postForCommentOnKot(
     String? itemId) async {
   UniversalJson universalJson = UniversalJson(
@@ -568,6 +573,7 @@ Future<String> postForTakeAway(String? outletId) async {
   return responseBody;
 }
 
+//ready
 Future<List<KOTModel>> postForSalesPointHistory(String? outletId,
     String? salePointType, String? salePointName, String? approvalType) async {
   RequestJson requestJson = RequestJson(
@@ -589,6 +595,7 @@ Future<List<KOTModel>> postForSalesPointHistory(String? outletId,
       .toList();
 }
 
+//ready
 Future<int> postForOrderApproval(
     String runningOrderId,
     String kotNumber,
@@ -619,6 +626,7 @@ Future<int> postForOrderApproval(
   }
 }
 
+//ready
 Future<ProductDetailModel> postForMenuItemDetails(String menuItemId) async {
   RequestJson requestJson =
       RequestJson(requestType: "waiterr Menu Item Detail", parameterList: [
@@ -632,6 +640,7 @@ Future<ProductDetailModel> postForMenuItemDetails(String menuItemId) async {
   return ProductDetailModel.fromJson(jsonDecode(responseBody));
 }
 
+//ready
 Future<List<WaiterDetailsModel>> postForWaiterDetails() async {
   RequestJson requestJson =
       RequestJson(requestType: "Waiters", parameterList: null);
@@ -648,12 +657,16 @@ Future<List<WaiterDetailsModel>> postForWaiterDetails() async {
 //ready
 Future<List<MenuItemModel>> postForMenuItem(
     String? clientMobile, String? outletId) async {
-  RequestJson requestJson =
-      RequestJson(requestType: "Waiterr Menu", parameterList: [
-    if (clientMobile != null)
-      Parameter(pKey: "clientMobile", pValue: clientMobile),
-    Parameter(pKey: "restaurantId", pValue: outletId)
-  ]);
+  RequestJson requestJson = RequestJson(
+      requestType: "Waiterr Menu",
+      parameterList: (clientMobile != null || outletId != null)
+          ? [
+              if (clientMobile != null)
+                Parameter(pKey: "clientMobile", pValue: clientMobile),
+              if (outletId != null)
+                Parameter(pKey: "restaurantId", pValue: outletId)
+            ]
+          : null);
   UniversalJson universalJson = UniversalJson(
       gUID: UserClientAllocationData.guid,
       companyGUID: UserClientAllocationData.companyGUID,
@@ -664,10 +677,34 @@ Future<List<MenuItemModel>> postForMenuItem(
       .toList();
 }
 
-//ready
-Future<List<FilterItemModel>> postForMenuGroupItem() async {
+Future<int> postForNewMenuItem(
+    MenuItemModel menuItemModel, bool isForEdit) async {
   RequestJson requestJson =
-      RequestJson(requestType: "Waiterr Menu Group", parameterList: null);
+      RequestJson(requestType: "Waiterr Menu Edit", parameterList: [
+    if (isForEdit) Parameter(pKey: "id", pValue: menuItemModel.itemID),
+    Parameter(
+        pKey: "menuItem", pValue: jsonEncode(menuItemModel.toMap(isForEdit)))
+  ]);
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  responseBody = jsonDecode(responseBody);
+  if (responseBody == "Success") {
+    return 200;
+  } else {
+    return 500;
+  }
+}
+
+//ready
+Future<List<FilterItemModel>> postForMenuGroupItem(String? outletId) async {
+  RequestJson requestJson = RequestJson(
+      requestType: "Waiterr Menu Group",
+      parameterList: (outletId == null)
+          ? null
+          : [Parameter(pKey: "OutletId", pValue: outletId)]);
   UniversalJson universalJson = UniversalJson(
       gUID: UserClientAllocationData.guid,
       companyGUID: UserClientAllocationData.companyGUID,
@@ -676,6 +713,61 @@ Future<List<FilterItemModel>> postForMenuGroupItem() async {
   return (jsonDecode(responseBody) as List)
       .map((data) => FilterItemModel.fromJson(data))
       .toList();
+}
+
+//ready
+Future<int> postForMenuGroupItemAddition(
+    String stockGroup, String outletID) async {
+  RequestJson requestJson =
+      RequestJson(requestType: "Waiterr Menu Group", parameterList: [
+    Parameter(pKey: "StockGroup", pValue: stockGroup),
+    Parameter(pKey: "OutletId", pValue: outletID),
+    Parameter(pKey: "ImageUrl", pValue: null)
+  ]);
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  responseBody = jsonDecode(responseBody);
+  if (responseBody == "Success") {
+    return 200;
+  } else {
+    return 500;
+  }
+}
+
+Future<List<TaxModel>> postForTaxClass() async {
+  RequestJson requestJson =
+      RequestJson(requestType: "Tax Class", parameterList: null);
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  List<TaxModel> result = (jsonDecode(responseBody) as List)
+      .map((data) => TaxModel.fromJson(data))
+      .toList();
+  return result;
+}
+
+Future<int> postForTaxClassAddition(String taxClass, double taxRate) async {
+  RequestJson requestJson =
+      RequestJson(requestType: "Tax Class", parameterList: [
+    Parameter(pKey: "TaxClass", pValue: taxClass),
+    Parameter(pKey: "TaxRate", pValue: taxRate)
+  ]);
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  responseBody = jsonDecode(responseBody);
+  if (responseBody == "Success") {
+    return 200;
+  } else {
+    return 500;
+  }
 }
 
 Future<List<FavouritesJsonModel>> postForFavouritesItem(
