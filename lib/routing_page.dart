@@ -13,8 +13,6 @@ import 'package:waiterr/Pages/CautionPages/error_page_five_hundred_page.dart';
 import 'package:waiterr/Pages/CautionPages/id_blocked_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_data_error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
-import 'package:waiterr/Pages/CautionPages/waiter_not_allocated_page.dart';
-import 'package:waiterr/Pages/TableManagement/table_management_page.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -135,39 +133,7 @@ class _RoutingPageState extends State<RoutingPage> {
                                           // _saveUserDetails(u1),
                                           if (u1.isActive)
                                             {
-                                              if (u1.roleID == 1)
-                                                {
-                                                  // _saveOfflineLogin(100),
-                                                  widget = const HomePage(),
-                                                }
-                                              else
-                                                {
-                                                  await getUserClientAllocation(
-                                                          u1.id)
-                                                      .then((List<UserRestrauntAllocationModel>
-                                                              ucamList) async =>
-                                                          {
-                                                            ucam = ucamList[0],
-                                                            // _saveOfflineLogin(
-                                                            //     100),
-                                                            if (ucam!.guid!
-                                                                .isNotEmpty)
-                                                              {
-                                                                UserClientAllocationData
-                                                                    .setValues(
-                                                                        ucam!),
-                                                                _saveUserClientAllocationData(
-                                                                    ucam!),
-                                                                widget =
-                                                                    const TableManagementPage()
-                                                              }
-                                                            else
-                                                              {
-                                                                widget =
-                                                                    const WaiterNotAllocatedPage()
-                                                              }
-                                                          })
-                                                }
+                                              widget = const HomePage(),
                                             }
                                           else
                                             {
@@ -267,9 +233,6 @@ class _RoutingPageState extends State<RoutingPage> {
           if (snapshot.hasData) {
             return snapshot.data!;
           } else if (snapshot.hasError) {
-            if (kDebugMode) {
-              print(snapshot.error);
-            }
             if (snapshot.error.toString() == "NoInternet") {
               return const NoInternetPage();
             } else if (snapshot.error.toString() == "500") {
@@ -279,9 +242,7 @@ class _RoutingPageState extends State<RoutingPage> {
             } else if (snapshot.error.toString() == "401") {
               return const ErrorPageFourHundredOne();
             } else {
-              return (UserDetail.userDetails.roleID == 2)
-                  ? const WaiterNotAllocatedPage()
-                  : const ErrorHasOccuredPage();
+              return const ErrorHasOccuredPage();
             }
             //else return Container(
             //padding:EdgeInsets.all(10),
@@ -427,226 +388,3 @@ class _RoutingPageState extends State<RoutingPage> {
   }
   // Replace these two methods in the examples that follow
 }
-
-
-
-
-// if(userDetails!=null)
-//   {
-//     await getRegistrationDetails(userDetails.mobileNumber).then((UserDetailsModel u) async => {
-//       UserDetail.isActive=u.isActive,
-//       UserDetail.roleID=u.roleID,
-//       UserDetail.uid=u.uid,
-//       UserDetail.userID=u.userID,
-//       UserDetail.name=u.name,
-//       UserDetail.mobileNumber=u.mobileNumber,
-//       UserDetail.userProfileImageUrl=u.profileUrl,
-//       UserDetail.deviceToken=u.deviceToken,
-//       _saveUserDetails(u),
-//       if(u.isActive)
-//       {
-//         if(u.roleID==1)
-//         {
-//           _saveOfflineLogin(100),
-//           if(UserDetail.deviceToken==null||UserDetail.deviceToken!=firebaseToken){
-//             UserDetail.deviceToken=u.deviceToken=firebaseToken,
-//             _saveUserDetails(u),
-//             await putRegistrationDetails(u)
-//           },
-//           widget=HomePage(),
-//         }
-//         else
-//         {
-//           if(UserDetail.deviceToken==null){
-//             UserDetail.deviceToken=u.deviceToken=firebaseToken,
-//             _saveUserDetails(u),
-//             await putRegistrationDetails(u)
-//           }
-//           else if(UserDetail.deviceToken==firebaseToken)
-//           {
-//             await getUserClientAllocation(u.uid).then((List<UserRestrauntAllocationModel> ucamList) async => {
-//               _saveOfflineLogin(100),
-//               ucam=ucamList[0],
-//               if(ucam.guid.isNotEmpty)
-//                 {
-//                   UserClientAllocationData.setValues(ucam),
-//                   _saveUserClientAllocationData(ucam),
-//                   widget=UserClientAllocationData.clientType=="Steel Industry"?VendorOrderManagementPage():TableManagementPage()
-//                 }
-//               else{
-//                 widget=WaiterNotAllocatedPage()
-//               }
-//             }),
-//           }
-//           else{
-//               //Your Id Is Blocked.
-//               _saveOfflineLogin(0),
-//               widget=IdBlockedPage()
-//             }
-//         }
-//     }
-//     else
-//     {
-//       //Your Id Is Blocked.
-//       _saveOfflineLogin(0),
-//       widget=IdBlockedPage()
-//     }
-//     }).catchError((e) async {
-//       await _readOfflineLogin().then((int value) async => {
-//         if(value>0)
-//           {
-//             value--,
-//             await _readUserDetails().then((UserDetailsModel u) async => {
-//             UserDetail.isActive=u.isActive,
-//             UserDetail.roleID=u.roleID,
-//             UserDetail.uid=u.uid,
-//             UserDetail.userID=u.userID,
-//             UserDetail.name=u.name,
-//             UserDetail.mobileNumber=u.mobileNumber,
-//             if(u.isActive)
-//               {
-//                 if(u.roleID==1)
-//                   {
-//                     widget=ErrorPageFiveHundredPage(),
-//                   }
-//                 else
-//                   {
-//                     await _readUserClientAllocationData().then((UserRestrauntAllocationModel ucamList) async => {
-//                       ucam=ucamList,
-//                       _saveOfflineLogin(value),
-//                       if(ucam.guid.isNotEmpty)
-//                         {
-//                           UserClientAllocationData.setValues(ucam),
-//                           widget=UserClientAllocationData.clientType=="Steel Industry"?VendorOrderManagementPage():TableManagementPage()
-//                         }
-//                       else{
-//                         widget=WaiterNotAllocatedPage()
-//                       }
-//                     }
-//                     ),
-//                   }
-//               }
-//             else
-//               {
-//                 //Your Id Is Blocked.
-//                 widget=IdBlockedPage()
-//               }
-//           })
-//           }
-//         else widget=IdBlockedPage()
-//       });
-//     }),
-//   }
-// else
-//   {
-//       UserDetail.mobileNumber=Provider.of<LoginStore>(context1, listen: false).firebaseUser.phoneNumber.replaceAll("+91", ""),
-//       await getRegistrationDetails(UserDetail.mobileNumber).then((UserDetailsModel u) async => {
-//         if(u.mobileNumber==UserDetail.mobileNumber)
-//           {
-//             UserDetail.isActive=u.isActive,
-//             UserDetail.roleID=u.roleID,
-//             UserDetail.uid=u.uid,
-//             UserDetail.userID=u.userID,
-//             UserDetail.name=u.name,
-//             UserDetail.mobileNumber=u.mobileNumber,
-//             UserDetail.userProfileImageUrl=u.profileUrl,
-//             UserDetail.deviceToken=u.deviceToken,
-//             if(u.isActive)
-//               {
-//                 if(u.roleID==1)
-//                   {
-//                     widget=HomePage(),
-//                     _saveOfflineLogin(100),
-//                     if(UserDetail.deviceToken==null||UserDetail.deviceToken!=firebaseToken){
-//                       UserDetail.deviceToken=u.deviceToken=firebaseToken,
-//                       await putRegistrationDetails(u)
-//                     },
-//                     _saveUserDetails(u),
-//                   }
-//                 else
-//                   {
-//                     //id blocked
-//                     // _saveOfflineLogin(0),
-//                     // widget=IdBlockedPage()
-//
-//                     if(UserDetail.deviceToken==null){
-//                       UserDetail.deviceToken=u.deviceToken=firebaseToken,
-//                       _saveUserDetails(u),
-//                       await putRegistrationDetails(u)
-//                     }
-//                     else if(UserDetail.deviceToken==firebaseToken)
-//                       {
-//                         await getUserClientAllocation(u.uid).then((List<UserRestrauntAllocationModel> ucamList) async => {
-//                           _saveOfflineLogin(100),
-//                           ucam=ucamList[0],
-//                           if(ucam.guid.isNotEmpty)
-//                             {
-//                               UserClientAllocationData.setValues(ucam),
-//                               _saveUserClientAllocationData(ucam),
-//                               widget=UserClientAllocationData.clientType=="Steel Industry"?VendorOrderManagementPage():TableManagementPage()
-//                             }
-//                           else{
-//                             widget=WaiterNotAllocatedPage()
-//                           }
-//                         }
-//                         ),
-//                       }
-//                     else{
-//                         //Your Id Is Blocked.
-//                         _saveOfflineLogin(0),
-//                         widget=IdBlockedPage()
-//                       }
-//
-//                   }
-//               }
-//             else
-//               {
-//                 //Your Id Is Blocked.
-//                 _saveOfflineLogin(0),
-//                 widget=IdBlockedPage()
-//               }
-//           }
-//         else{
-//           await postRegistrationDetails(UserDetail.name, UserDetail.mobileNumber,firebaseToken).then((UserDetailsModel u1) async => {
-//             UserDetail.isActive=u1.isActive,
-//             UserDetail.roleID=u1.roleID,
-//             UserDetail.uid=u1.uid,
-//             UserDetail.userID=u1.userID,
-//             UserDetail.name=u1.name,
-//             UserDetail.mobileNumber=u1.mobileNumber,
-//             //savedetail
-//             _saveUserDetails(u1),
-//             if(u1.isActive)
-//               {
-//                 if(u1.roleID==1)
-//                   {
-//                     _saveOfflineLogin(100),
-//                     widget=HomePage(),
-//                   }
-//                 else
-//                   {
-//                     await getUserClientAllocation(u.uid).then((List<UserRestrauntAllocationModel> ucamList)async => {
-//                       ucam=ucamList[0],
-//                       _saveOfflineLogin(100),
-//                     if(ucam.guid.isNotEmpty)
-//                       {
-//                         UserClientAllocationData.setValues(ucam),
-//                         _saveUserClientAllocationData(ucam),
-//                         widget=UserClientAllocationData.clientType=="Steel Industry"?VendorOrderManagementPage():TableManagementPage()
-//                       }
-//                       else{
-//                         widget=WaiterNotAllocatedPage()
-//                       }
-//                     })
-//                   }
-//               }
-//             else
-//               {
-//                 //Your Id Is Blocked.
-//                 _saveOfflineLogin(0),
-//                 widget=IdBlockedPage()
-//               }
-//           }),
-//         }
-//       })
-//   }
