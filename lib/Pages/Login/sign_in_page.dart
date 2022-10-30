@@ -201,9 +201,6 @@ class _SignInPageState extends State<SignInPage> {
               await firebaseAuth.signInWithEmailAndPassword(
                   email: _emailController.text,
                   password: _passwordController.text);
-          if (kDebugMode) {
-            print(userCredential.user?.email);
-          }
           setState(() {
             circular = false;
           });
