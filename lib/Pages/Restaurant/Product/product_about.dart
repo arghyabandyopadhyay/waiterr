@@ -10,7 +10,7 @@ class ProductAbout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> tagList = (item.tags != null) ? item.tags!.split("|") : [];
-    if (item.discount != null && item.discount != 0) {
+    if (item.discount != 0) {
       tagList.insert(0, "${item.discount}% Off");
     }
     double screenWidth = MediaQuery.of(context).size.width;
@@ -22,23 +22,21 @@ class ProductAbout extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            item.isVeg != null
-                ? Container(
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.only(top: 8),
-                    child: item.isVeg!
-                        ? Image.asset(
-                            'assets/img/veg.png',
-                            height: 15,
-                            width: 15,
-                          )
-                        : Image.asset(
-                            'assets/img/nonveg.png',
-                            height: 15,
-                            width: 15,
-                          ),
-                  )
-                : Container(),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.only(top: 8),
+              child: item.isVeg
+                  ? Image.asset(
+                      'assets/img/veg.png',
+                      height: 15,
+                      width: 15,
+                    )
+                  : Image.asset(
+                      'assets/img/nonveg.png',
+                      height: 15,
+                      width: 15,
+                    ),
+            ),
             Text(
               item.item,
               style: const TextStyle(
@@ -86,7 +84,7 @@ class ProductAbout extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                (item.discount != null && item.discount != 0)
+                                (item.discount != 0)
                                     ? "₹${item.rateBeforeDiscount}"
                                     : "",
                                 textAlign: TextAlign.end,
