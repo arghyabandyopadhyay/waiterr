@@ -4,7 +4,7 @@ import 'package:waiterr/widgets/add_button.dart';
 import 'package:flutter/material.dart';
 
 class FavouritesCard extends StatelessWidget {
-  final MenuItemModel? item;
+  final MenuItemModel item;
   final Function() onTapAdd;
   final Function() onTapRemove;
   final Function() onLongPressedAdd;
@@ -12,7 +12,7 @@ class FavouritesCard extends StatelessWidget {
   final Function() onDoubleTap;
   const FavouritesCard(
       {Key? key,
-      this.item,
+      required this.item,
       required this.onTapAdd,
       required this.onLongPressedAdd,
       required this.onLongPressedRemove,
@@ -197,35 +197,30 @@ class FavouritesCard extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        item!.isVeg != null
-                            ? Container(
-                                alignment: Alignment.centerLeft,
-                                margin: const EdgeInsets.only(bottom: 2),
-                                child: item!.isVeg!
-                                    ? Image.asset(
-                                        'assets/img/veg.png',
-                                        height: 15,
-                                        width: 15,
-                                      )
-                                    : Image.asset(
-                                        'assets/img/nonveg.png',
-                                        height: 15,
-                                        width: 15,
-                                      ),
-                              )
-                            : Container(
-                                height: 15,
-                                width: 15,
-                                color: GlobalTheme.backgroundColor),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          margin: const EdgeInsets.only(bottom: 2),
+                          child: item.isVeg
+                              ? Image.asset(
+                                  'assets/img/veg.png',
+                                  height: 15,
+                                  width: 15,
+                                )
+                              : Image.asset(
+                                  'assets/img/nonveg.png',
+                                  height: 15,
+                                  width: 15,
+                                ),
+                        ),
                         const SizedBox(
                           width: 5,
                         ),
                         SizedBox(
-                          width: (item!.customizable.isNotEmpty)
+                          width: (item.customizable.isNotEmpty)
                               ? MediaQuery.of(context).size.width / 3
                               : null,
                           child: Text(
-                            item!.item,
+                            item.item,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 17),
@@ -234,7 +229,7 @@ class FavouritesCard extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      height: (item!.customizable.isNotEmpty) ? null : 0,
+                      height: (item.customizable.isNotEmpty) ? null : 0,
                       padding: const EdgeInsets.only(left: 1, right: 1),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -242,7 +237,7 @@ class FavouritesCard extends StatelessWidget {
                               color: Colors.orange,
                               width: 1.0,
                               style: BorderStyle.solid)),
-                      child: (item!.customizable.isNotEmpty)
+                      child: (item.customizable.isNotEmpty)
                           ? const Text(
                               " Customizable ",
                               style:
@@ -263,7 +258,7 @@ class FavouritesCard extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            "₹${item!.rate}",
+                            "₹${item.rate}",
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
@@ -273,8 +268,8 @@ class FavouritesCard extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            (item!.discount != null && item!.discount != 0)
-                                ? "₹${item!.rateBeforeDiscount}"
+                            (item.discount != 0)
+                                ? "₹${item.rateBeforeDiscount}"
                                 : "",
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
@@ -298,9 +293,9 @@ class FavouritesCard extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: 22),
-                  child: (item!.itemDescription != null)
+                  child: (item.itemDescription != null)
                       ? Text(
-                          item!.itemDescription!,
+                          item.itemDescription!,
                           style: const TextStyle(
                             color: GlobalTheme.primaryText,
                             fontSize: 13,
