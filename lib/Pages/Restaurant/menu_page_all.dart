@@ -40,8 +40,6 @@ class MenuPageAll extends StatefulWidget {
 }
 
 class _MenuPageAllState extends State<MenuPageAll> {
-  //Constructor
-  _MenuPageAllState();
   //Variables
   List<List<MenuItemModel>>? productList;
   int _active_filter = 0;
@@ -190,9 +188,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
     List<MenuItemModel> temp;
     MenuItemModel temp2;
     if (!widget.isWaiter) {
-      print("hh");
-      await postForMenuItem(widget.addOrderData.mobileNo ?? "",
-              widget.addOrderData.outletId ?? "")
+      await postForMenuItem(
+              widget.addOrderData.mobileNo ?? "", widget.addOrderData.outletId)
           .then((value) async => {
                 if (PreviousCartManager.previousSalePointName ==
                         widget.addOrderData.salePointName &&
@@ -222,7 +219,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
                     PreviousCartManager.previousOutletName = ""
                   },
                 productListSearch = value,
-                distinctStockGroup = await postForMenuGroupItem(),
+                distinctStockGroup =
+                    await postForMenuGroupItem(widget.addOrderData.outletId),
                 for (FilterItemModel stockGroup in distinctStockGroup!)
                   {
                     temp = value
@@ -237,6 +235,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                 distinctStockGroup!.insert(
                     0,
                     FilterItemModel(
+                        id: "",
                         image:
                             "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/all.png",
                         stockGroup: "All",
@@ -245,6 +244,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                   distinctStockGroup!.insert(
                       1,
                       FilterItemModel(
+                          id: "",
                           image:
                               "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/previousorder.png",
                           stockGroup: "Previous Orders",
@@ -255,7 +255,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
               });
     } else {
       UserClientAllocationData.distinctStockGroup ??=
-          await postForMenuGroupItem();
+          await postForMenuGroupItem(widget.addOrderData.outletId);
       UserClientAllocationData.productList ??=
           await postForMenuItem(null, widget.addOrderData.outletId);
       if (PreviousCartManager.previousSalePointName ==
@@ -313,6 +313,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
         distinctStockGroup!.insert(
             0,
             FilterItemModel(
+                id: "",
                 image:
                     "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/all.png",
                 stockGroup: "All",
@@ -323,6 +324,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
         distinctStockGroup!.insert(
             1,
             FilterItemModel(
+                id: "",
                 image:
                     "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/previousorder.png",
                 stockGroup: "Previous Orders",
@@ -461,22 +463,40 @@ class _MenuPageAllState extends State<MenuPageAll> {
           .where((element) => element.quantity > 0.0)
           .toList();
       orderList.add(MenuItemModel(
+          stockGroupId: "",
+          stockGroup: "",
           favourite: false,
           item: "Total",
           itemDescription: null,
           itemID: "",
           customizable: [],
           rate: totalCartAmount,
-          quantity: totalItems));
+          quantity: totalItems,
+          discount: 0,
+          isEdited: false,
+          taxClassID: "",
+          taxRate: 0,
+          isVeg: true,
+          rateBeforeDiscount: 0,
+          isDiscountable: false));
     } catch (E) {
       orderList.add(MenuItemModel(
+          stockGroupId: "",
+          stockGroup: "",
           favourite: false,
           item: "Total",
           itemID: "",
           customizable: [],
           itemDescription: null,
           rate: totalCartAmount,
-          quantity: totalItems));
+          quantity: totalItems,
+          discount: 0,
+          isEdited: false,
+          taxClassID: "",
+          taxRate: 0,
+          isVeg: true,
+          rateBeforeDiscount: 0,
+          isDiscountable: false));
     }
     return orderList;
   }
@@ -541,6 +561,9 @@ class _MenuPageAllState extends State<MenuPageAll> {
     _isSearching = false;
     _dataIsLoaded = false;
     _isFilterOn = false;
+    if (widget.addOrderData.outletId != UserClientAllocationData.lastOutletId) {
+      UserClientAllocationData.clearMenuData();
+    }
     _futureproductList = fetchList();
   }
 
