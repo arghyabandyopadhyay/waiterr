@@ -310,6 +310,8 @@ class _OrdersPageState extends State<OrdersPage> {
                                                             int index) {
                                                       return GestureDetector(
                                                         child: RunningOrderCard(
+                                                            onBillPrintedClick:
+                                                                () {},
                                                             item: searchResult[
                                                                 index]),
                                                         onTap: () async {
@@ -347,6 +349,8 @@ class _OrdersPageState extends State<OrdersPage> {
                                                 itemBuilder: (context, index) {
                                                   return GestureDetector(
                                                     child: RunningOrderCard(
+                                                        onBillPrintedClick:
+                                                            () {},
                                                         item: items![index]),
                                                     onTap: () async {
                                                       setState(() {
