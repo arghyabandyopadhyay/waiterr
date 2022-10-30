@@ -7,7 +7,7 @@ import '../global_class.dart';
 import 'add_button.dart';
 
 class NonFavouritesCard extends StatefulWidget {
-  final MenuItemModel? item;
+  final MenuItemModel item;
   final Function() onTapAdd;
   final Function() onTapRemove;
   final Function() onLongPressedAdd;
@@ -16,7 +16,7 @@ class NonFavouritesCard extends StatefulWidget {
   final Function() onMiddleTap;
   const NonFavouritesCard(
       {Key? key,
-      this.item,
+      required this.item,
       required this.onTapAdd,
       required this.onLongPressedAdd,
       required this.onLongPressedRemove,
@@ -32,9 +32,9 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
   @override
   Widget build(BuildContext context) {
     List<String> tagList =
-        (widget.item!.tags != null) ? widget.item!.tags!.split("|") : [];
-    if (widget.item!.discount != null && widget.item!.discount != 0) {
-      tagList.insert(0, "${widget.item!.discount}% Off");
+        (widget.item.tags != null) ? widget.item.tags!.split("|") : [];
+    if (widget.item.discount != 0) {
+      tagList.insert(0, "${widget.item.discount}% Off");
     }
     double screenWidth = MediaQuery.of(context).size.width;
     return Card(
@@ -47,7 +47,7 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                (widget.item!.itemImage != null && widget.item!.itemImage != "")
+                (widget.item.itemImage != null && widget.item.itemImage != "")
                     ? Container(
                         alignment: Alignment.centerLeft,
                         margin: const EdgeInsets.only(top: 5),
@@ -55,7 +55,7 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                         child: CachedNetworkImage(
                           width: 40,
                           height: 40,
-                          imageUrl: widget.item!.itemImage!,
+                          imageUrl: widget.item.itemImage!,
                           imageBuilder: (context, imageProvider) => Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
@@ -110,39 +110,32 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      widget.item!.isVeg != null
-                                          ? Container(
-                                              alignment: Alignment.centerLeft,
-                                              margin:
-                                                  const EdgeInsets.only(top: 8),
-                                              child: widget.item!.isVeg!
-                                                  ? Image.asset(
-                                                      'assets/img/veg.png',
-                                                      height: 15,
-                                                      width: 15,
-                                                    )
-                                                  : Image.asset(
-                                                      'assets/img/nonveg.png',
-                                                      height: 15,
-                                                      width: 15,
-                                                    ),
-                                            )
-                                          : Container(),
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        margin: const EdgeInsets.only(top: 8),
+                                        child: widget.item.isVeg
+                                            ? Image.asset(
+                                                'assets/img/veg.png',
+                                                height: 15,
+                                                width: 15,
+                                              )
+                                            : Image.asset(
+                                                'assets/img/nonveg.png',
+                                                height: 15,
+                                                width: 15,
+                                              ),
+                                      ),
                                       const SizedBox(
                                         width: 5,
                                       ),
                                       SizedBox(
                                         width: screenWidth / 1.5 -
-                                            ((widget.item!.itemImage != null &&
-                                                    widget.item!.itemImage !=
-                                                        "")
+                                            ((widget.item.itemImage != null &&
+                                                    widget.item.itemImage != "")
                                                 ? screenWidth / 7
-                                                : 0) +
-                                            ((widget.item!.isVeg != null)
-                                                ? 0
-                                                : 15),
+                                                : 0),
                                         child: Text(
-                                          widget.item!.item,
+                                          widget.item.item,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: const TextStyle(fontSize: 17),
@@ -152,14 +145,14 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                   ),
                                   SizedBox(
                                     width: screenWidth / 1.5 -
-                                        ((widget.item!.itemImage != null &&
-                                                widget.item!.itemImage != "")
+                                        ((widget.item.itemImage != null &&
+                                                widget.item.itemImage != "")
                                             ? screenWidth / 7
                                             : 0),
                                     child: Row(
                                       children: <Widget>[
                                         Text(
-                                          "₹${widget.item!.rate.toStringAsFixed((((widget.item!.rate * 100) % 100) != 0) ? 2 : 0).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
+                                          "₹${widget.item.rate.toStringAsFixed((((widget.item.rate * 100) % 100) != 0) ? 2 : 0).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}",
                                           textAlign: TextAlign.end,
                                           style: const TextStyle(fontSize: 17),
                                         ),
@@ -167,9 +160,8 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                           width: 5,
                                         ),
                                         Text(
-                                          (widget.item!.discount != null &&
-                                                  widget.item!.discount != 0)
-                                              ? "₹${widget.item!.rateBeforeDiscount}"
+                                          (widget.item.discount != 0)
+                                              ? "₹${widget.item.rateBeforeDiscount}"
                                               : "",
                                           textAlign: TextAlign.end,
                                           style: const TextStyle(
@@ -199,7 +191,7 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                 height: 2,
                               ),
                               Container(
-                                height: (widget.item!.customizable.isNotEmpty)
+                                height: (widget.item.customizable.isNotEmpty)
                                     ? null
                                     : 0,
                                 padding:
@@ -210,7 +202,7 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                         color: Colors.orange,
                                         width: 1.0,
                                         style: BorderStyle.solid)),
-                                child: (widget.item!.customizable.isNotEmpty)
+                                child: (widget.item.customizable.isNotEmpty)
                                     ? const Text(
                                         " Customizable ",
                                         style: TextStyle(
@@ -219,15 +211,15 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                     : null,
                               ),
                               Container(
-                                height: widget.item!.commentForKOT != null
-                                    ? (widget.item!.commentForKOT!.isNotEmpty)
+                                height: widget.item.commentForKOT != null
+                                    ? (widget.item.commentForKOT!.isNotEmpty)
                                         ? null
                                         : 0
                                     : 0,
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 1),
-                                child: widget.item!.commentForKOT != null
-                                    ? (widget.item!.commentForKOT!.isNotEmpty)
+                                child: widget.item.commentForKOT != null
+                                    ? (widget.item.commentForKOT!.isNotEmpty)
                                         ? const Icon(
                                             Icons.comment,
                                             color: GlobalTheme.primaryColor,
@@ -245,8 +237,8 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                       SizedBox(
                         height: (tagList.isNotEmpty) ? 20 : 0,
                         width: screenWidth / 1.12 -
-                            ((widget.item!.itemImage != null &&
-                                    widget.item!.itemImage != "")
+                            ((widget.item.itemImage != null &&
+                                    widget.item.itemImage != "")
                                 ? screenWidth / 7
                                 : 0),
                         child: (tagList.isNotEmpty)
@@ -284,13 +276,13 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                       ),
                       SizedBox(
                         width: screenWidth / 1.1 -
-                            ((widget.item!.itemImage != null &&
-                                    widget.item!.itemImage != "")
+                            ((widget.item.itemImage != null &&
+                                    widget.item.itemImage != "")
                                 ? screenWidth / 7
                                 : 0),
-                        child: (widget.item!.itemDescription != null)
+                        child: (widget.item.itemDescription != null)
                             ? Text(
-                                widget.item!.itemDescription!,
+                                widget.item.itemDescription!,
                                 style: const TextStyle(
                                   color: GlobalTheme.primaryText,
                                   fontSize: 13,
