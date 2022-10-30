@@ -556,8 +556,6 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                         if (widget.cartList[a].customizable
                                                 .isEmpty &&
                                             widget.cartList[a].quantity > 0.0) {
-                                          print(widget
-                                              .cartList[a].commentForKOTId);
                                           order.add(PlaceOrderMenuList(
                                               itemID: widget.cartList[a].itemID,
                                               quantity:
