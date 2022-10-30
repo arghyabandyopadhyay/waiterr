@@ -7,6 +7,7 @@ class WaiterDetailsModel {
   final String outletId;
   final String lastLogin;
   final String outletName;
+  final int ucaRoleId;
   final String? masterFilter;
 
   WaiterDetailsModel(
@@ -18,6 +19,7 @@ class WaiterDetailsModel {
       required this.outletId,
       required this.lastLogin,
       required this.outletName,
+      required this.ucaRoleId,
       required this.masterFilter});
   factory WaiterDetailsModel.fromJson(Map<String, dynamic> json) {
     return WaiterDetailsModel(
@@ -29,6 +31,7 @@ class WaiterDetailsModel {
         lastLogin: json['last_login'],
         outletId: json['OutletId'],
         outletName: json['OutletName'],
+        ucaRoleId: json['UCARoleId'],
         masterFilter: json['MasterFilter']);
   }
 
@@ -41,6 +44,7 @@ class WaiterDetailsModel {
       "IsActive": isActive ? 1 : 0,
       "last_login": lastLogin,
       "OutletId": outletId,
+      "UCARoleId": ucaRoleId,
       "OutletName": outletName
     };
   }
