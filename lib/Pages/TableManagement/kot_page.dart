@@ -101,7 +101,7 @@ class _KOTPageState extends State<KOTPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 actions: <Widget>[
-                  if (UserDetail.userDetails.roleID == 3 &&
+                  if (UserClientAllocationData.ucaRoleId == 3 &&
                       widget.item.billPrinted)
                     IconButton(
                       icon: const Icon(
