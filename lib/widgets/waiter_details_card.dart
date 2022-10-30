@@ -75,7 +75,7 @@ class WaiterDetailsCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.45,
                       alignment: Alignment.bottomRight,
                       child: Text(
-                          "${waiter.roleId == 3 ? "Manager" : waiter.roleId == 2 ? "Chef" : "Waiter"}@${waiter.outletName}",
+                          "${waiter.ucaRoleId == 3 ? "Manager" : waiter.ucaRoleId == 2 ? "Chef" : "Waiter"}@${waiter.outletName}",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(fontSize: 15, height: 1)),
