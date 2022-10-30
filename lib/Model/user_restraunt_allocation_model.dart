@@ -8,6 +8,7 @@ class UserRestrauntAllocationModel {
   final String? clientType;
   final String? guid;
   final String? companyGUID;
+  final int ucaRoleId;
   final List<OutletConfigurationModel>? outletConfiguration;
 
   UserRestrauntAllocationModel(
@@ -18,6 +19,7 @@ class UserRestrauntAllocationModel {
       this.clientType,
       this.guid,
       this.companyGUID,
+      required this.ucaRoleId,
       this.outletConfiguration});
   factory UserRestrauntAllocationModel.fromJson(Map<String, dynamic> json) {
     return UserRestrauntAllocationModel(
@@ -27,6 +29,7 @@ class UserRestrauntAllocationModel {
       dataExchangeURL: json['DataExchangeUrl'],
       clientType: json['ClientType'],
       guid: json['GUID'],
+      ucaRoleId: json['UCARoleId'],
       companyGUID: json['CompanyGUID'],
       outletConfiguration: (json['outletConfiguration'] as List)
           .map((data) => OutletConfigurationModel.fromJson(data))
@@ -45,6 +48,7 @@ class UserRestrauntAllocationModel {
       'dataExchangeURL': dataExchangeURL,
       'clientType': clientType,
       'guid': guid,
+      'UCARoleId': ucaRoleId,
       'companyGUID': companyGUID,
       'outletConfiguration': outletConfiguration,
     };
