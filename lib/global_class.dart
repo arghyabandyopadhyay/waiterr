@@ -40,12 +40,11 @@ class UserClientAllocationData {
   static List<MenuItemModel>? productList;
   static List<FilterItemModel>? distinctStockGroup;
   static List<List<MenuItemModel>>? productListStockDiff;
+  static String? lastOutletId;
   static void setValues(
       UserRestrauntAllocationModel userClientAllocationModel) {
     if (userClientAllocationModel.guid != guid) {
-      productList = null;
-      distinctStockGroup = null;
-      productListStockDiff = null;
+      clearMenuData();
     }
     ucaRoleId = userClientAllocationModel.ucaRoleId;
     clientName = userClientAllocationModel.clientName;
@@ -56,6 +55,12 @@ class UserClientAllocationData {
     guid = userClientAllocationModel.guid;
     companyGUID = userClientAllocationModel.companyGUID;
     outletConfiguration = userClientAllocationModel.outletConfiguration;
+  }
+
+  static void clearMenuData() {
+    productList = null;
+    distinctStockGroup = null;
+    productListStockDiff = null;
   }
 }
 
