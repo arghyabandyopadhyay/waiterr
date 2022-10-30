@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:waiterr/Model/running_order_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +7,11 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 
 class RunningOrderCard extends StatelessWidget {
-  const RunningOrderCard({Key? key, this.item}) : super(key: key);
+  const RunningOrderCard(
+      {Key? key, this.item, required this.onBillPrintedClick})
+      : super(key: key);
   final RunningOrderModel? item;
+  final Function() onBillPrintedClick;
 
   @override
   Widget build(BuildContext context) {
@@ -94,13 +99,16 @@ class RunningOrderCard extends StatelessWidget {
                                 style: const TextStyle(fontSize: 22, height: 1),
                               ),
                             ),
-                            Container(
-                                width: MediaQuery.of(context).size.width / 15,
-                                alignment: Alignment.topRight,
-                                child: item!.billPrinted
-                                    ? const Icon(Icons.print,
-                                        color: GlobalTheme.primaryColor)
-                                    : null),
+                            GestureDetector(
+                              onTap: onBillPrintedClick,
+                              child: Container(
+                                  width: MediaQuery.of(context).size.width / 15,
+                                  alignment: Alignment.topRight,
+                                  child: item!.billPrinted
+                                      ? const Icon(Icons.print,
+                                          color: GlobalTheme.primaryColor)
+                                      : null),
+                            ),
                           ],
                         ),
                         SizedBox(
