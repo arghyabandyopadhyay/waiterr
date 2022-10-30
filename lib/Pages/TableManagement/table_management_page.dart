@@ -3,7 +3,6 @@ import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
-import 'package:waiterr/Pages/Restaurant/waiter_manager_page.dart';
 import 'package:waiterr/Pages/TableManagement/approve_order_page.dart';
 import 'package:waiterr/Pages/User/about_page.dart';
 import 'package:waiterr/Pages/User/profile_page.dart';
@@ -17,10 +16,13 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../Model/model_option_model.dart';
-import '../../Modules/universal_module.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
 import '../../widgets/option_modal_bottom_sheet.dart';
+import '../Restaurant/Management/menu_manager_page.dart';
+import '../Restaurant/Management/stock_group_manager_page.dart';
+import '../Restaurant/Management/tax_class_manager_page.dart';
+import '../Restaurant/Management/waiter_manager_page.dart';
 import 'kot_page.dart';
 import 'add_order_page.dart';
 
@@ -239,10 +241,12 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                       });
                                             },
                                           ),
-                                          if (UserDetail.userDetails.roleID == 2 ||
-                                              UserDetail.userDetails.roleID ==
+                                          if (UserClientAllocationData.ucaRoleId == 2 ||
+                                              UserClientAllocationData
+                                                      .ucaRoleId ==
                                                   3 ||
-                                              UserDetail.userDetails.roleID ==
+                                              UserClientAllocationData
+                                                      .ucaRoleId ==
                                                   4)
                                             ModalOptionModel(
                                               icon: Icons.fastfood,
@@ -282,9 +286,11 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                         });
                                               },
                                             ),
-                                          if (UserDetail.userDetails.roleID ==
+                                          if (UserClientAllocationData
+                                                      .ucaRoleId ==
                                                   3 ||
-                                              UserDetail.userDetails.roleID ==
+                                              UserClientAllocationData
+                                                      .ucaRoleId ==
                                                   4)
                                             ModalOptionModel(
                                               icon: Icons.done_all,
@@ -325,9 +331,11 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                         });
                                               },
                                             ),
-                                          if (UserDetail.userDetails.roleID ==
+                                          if (UserClientAllocationData
+                                                      .ucaRoleId ==
                                                   3 ||
-                                              UserDetail.userDetails.roleID ==
+                                              UserClientAllocationData
+                                                      .ucaRoleId ==
                                                   4)
                                             ModalOptionModel(
                                               icon: Icons.done_all,
@@ -369,8 +377,8 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                               },
                                             ),
                                           //TODO: to be implemented after wards
-                                          // if (UserDetail.userDetails.roleID ==
-                                          //     3||UserDetail.userDetails.roleID == 4)
+                                          // if (UserClientAllocationData.ucaRoleId ==
+                                          //     3||UserClientAllocationData.ucaRoleId == 4)
                                           //   ModalOptionModel(
                                           //     icon: Icons.stop,
                                           //     particulars: "Terminate Order",
@@ -413,10 +421,10 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                         ]);
                                   });
                             }),
-                        if (UserDetail.userDetails.roleID == 3 ||
-                            UserDetail.userDetails.roleID == 4)
+                        if (UserClientAllocationData.ucaRoleId == 3 ||
+                            UserClientAllocationData.ucaRoleId == 4)
                           ModalOptionModel(
-                              particulars: "Waiter manager",
+                              particulars: "Waiter Manager",
                               onTap: () async {
                                 Navigator.pop(context);
                                 Navigator.of(context).push(PageRouteBuilder(
@@ -424,20 +432,47 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                         (context, animation1, animation2) =>
                                             const WaiterManagerPage()));
                               },
-                              icon: Icons.person_outline),
-                        if (UserDetail.userDetails.roleID == 3 ||
-                            UserDetail.userDetails.roleID == 4)
+                              icon: Icons.group_outlined),
+                        if (UserClientAllocationData.ucaRoleId == 3 ||
+                            UserClientAllocationData.ucaRoleId == 4)
                           ModalOptionModel(
-                              particulars: "Menu manager",
+                              particulars: "Menu Manager",
                               onTap: () async {
                                 Navigator.pop(context);
-                                //Todo: navigate to waiter manager
+                                Navigator.of(context).push(PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const MenuManagerPage()));
                               },
-                              icon: Icons.menu_book_outlined),
-                        //role id 4 is for owner
-                        if (UserDetail.userDetails.roleID == 4)
+                              icon: Icons.food_bank_outlined),
+                        if (UserClientAllocationData.ucaRoleId == 3 ||
+                            UserClientAllocationData.ucaRoleId == 4)
                           ModalOptionModel(
-                              particulars: "Admin manager",
+                              particulars: "Stock Group Manager",
+                              onTap: () async {
+                                Navigator.pop(context);
+                                Navigator.of(context).push(PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const StockGroupManagerPage()));
+                              },
+                              icon: Icons.mediation_rounded),
+                        if (UserClientAllocationData.ucaRoleId == 3 ||
+                            UserClientAllocationData.ucaRoleId == 4)
+                          ModalOptionModel(
+                              particulars: "Tax Class Manager",
+                              onTap: () async {
+                                Navigator.pop(context);
+                                Navigator.of(context).push(PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const TaxClassManagerPage()));
+                              },
+                              icon: Icons.pending_actions_outlined),
+                        //role id 4 is for owner
+                        if (UserClientAllocationData.ucaRoleId == 4)
+                          ModalOptionModel(
+                              particulars: "Admin Manager",
                               onTap: () async {
                                 Navigator.pop(context);
                                 //Todo: navigate to waiter manager
@@ -600,6 +635,28 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                             int index) {
                                                       return GestureDetector(
                                                         child: RunningOrderCard(
+                                                            onBillPrintedClick:
+                                                                () async {
+                                                              Connectivity
+                                                                  connectivity =
+                                                                  Connectivity();
+                                                              await connectivity
+                                                                  .checkConnectivity()
+                                                                  .then(
+                                                                      (value) =>
+                                                                          {
+                                                                            if (value !=
+                                                                                ConnectivityResult.none)
+                                                                              {
+                                                                                terminateRunningOrders(searchResult[index].id).then((value) => {
+                                                                                      if (value == 200)
+                                                                                        {
+                                                                                          Navigator.pop(context)
+                                                                                        }
+                                                                                    })
+                                                                              }
+                                                                          });
+                                                            },
                                                             item: searchResult[
                                                                 index]),
                                                         onTap: () async {
@@ -637,6 +694,34 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                 itemBuilder: (context, index) {
                                                   return GestureDetector(
                                                     child: RunningOrderCard(
+                                                        onBillPrintedClick:
+                                                            () async {
+                                                          Connectivity
+                                                              connectivity =
+                                                              Connectivity();
+                                                          if (UserClientAllocationData
+                                                                      .ucaRoleId ==
+                                                                  3 ||
+                                                              UserClientAllocationData
+                                                                      .ucaRoleId ==
+                                                                  4) {
+                                                            await connectivity
+                                                                .checkConnectivity()
+                                                                .then(
+                                                                    (value) => {
+                                                                          if (value !=
+                                                                              ConnectivityResult.none)
+                                                                            {
+                                                                              terminateRunningOrders(items![index].id).then((value) => {
+                                                                                    if (value == 200)
+                                                                                      {
+                                                                                        Navigator.pop(context)
+                                                                                      }
+                                                                                  })
+                                                                            }
+                                                                        });
+                                                          }
+                                                        },
                                                         item: items![index]),
                                                     onTap: () async {
                                                       setState(() {
@@ -850,83 +935,3 @@ class _MyTableHomePage extends State<TableManagementPage> {
     });
   }
 }
-
-// class RunningOrderCard extends StatelessWidget {
-//   RunningOrderCard({Key key, this.item}) : super(key: key);
-//   final RunningOrderModel item;
-//   Widget build(BuildContext context) {
-//     return Container(
-//         padding: EdgeInsets.all(5),
-//         child: Card(
-//           elevation: 0,
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(5.0),
-//           ),
-//           child: Container(
-//               width: MediaQuery.of(context).size.width/6.04,
-//               decoration: BoxDecoration(
-//                 borderRadius:
-//                 const BorderRadius.all(
-//                     Radius.circular(5)),
-//                 gradient: LinearGradient(colors: GlobalTheme.primaryGradient,
-//                   begin: Alignment.topCenter,
-//                   end: Alignment.bottomCenter,
-//                 ),
-//               ),
-//               padding: EdgeInsets.only(left: 5),
-//               child:Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: <Widget>[
-//                     Container(
-//                       alignment: Alignment.center,
-//                       width:MediaQuery.of(context).size.width/7,
-//                       child: Column(
-//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                         children: <Widget>[
-//                           Text(this.item.SalePointType,textAlign:TextAlign.center, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: 12),maxLines: 1,overflow: TextOverflow.ellipsis,),
-//                           Text(this.item.SalePointName,textAlign:TextAlign.center, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: this.item.SalePointName.length>2?(this.item.SalePointName.length>3?(this.item.SalePointName.length>4?12:20):28):36),maxLines: 1,overflow: TextOverflow.ellipsis,),
-//                           Text(this.item.OutletName,textAlign:TextAlign.center, style: TextStyle(color: GlobalTheme.secondaryText,fontSize: 12),maxLines: 1,overflow: TextOverflow.ellipsis,)
-//                         ],
-//                       ),
-//                     ),
-//                     Container(
-//                       padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-//                       color: Colors.white,
-//                       child: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         mainAxisAlignment:MainAxisAlignment.start,
-//                         children: <Widget>[
-//                           SizedBox(height: 5),
-//                           Row(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             mainAxisAlignment:MainAxisAlignment.spaceBetween,
-//                             mainAxisSize: MainAxisSize.max,
-//                             children: <Widget>[
-//                               Container(width:MediaQuery.of(context).size.width/1.5,child: Text((this.item.Name!=null)?this.item.Name:"",maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 22,height:1),),),
-//                               Container(width:MediaQuery.of(context).size.width/15,alignment:Alignment.topRight, child:this.item.BillPrinted?Icon(Icons.print,color: GlobalTheme.primaryColor):null),
-//                             ],
-//                           ),
-//                           Container(width:MediaQuery.of(context).size.width/1.75, child: Text((this.item.MobileNo!=null)?this.item.MobileNo:"",maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
-//                           Container(width:MediaQuery.of(context).size.width/1.75, child: Text("Waiter: "+this.item.WaiterName,maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
-//                           Row(
-//                             crossAxisAlignment: CrossAxisAlignment.end,
-//                             children: <Widget>[
-//                               Column(
-//                                 children: <Widget>[
-//                                   Container(width:MediaQuery.of(context).size.width/2, child: Text("PAX: "+this.item.PAX.toString(),maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),),
-//                                   Container(width:MediaQuery.of(context).size.width/2, child: Text("Active Since: "+this.item.ActiveSince,maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13,color: GlobalTheme.primaryText),),)
-//                                 ],
-//                               ),
-//                               Container(width:MediaQuery.of(context).size.width/4,alignment:Alignment.bottomRight,child:Text("₹"+this.item.Amount.toString(),maxLines: 2,overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 20,height:1)),)
-//                             ],
-//                           ),
-//                         ],
-//                       ),
-//                     )
-//                   ]
-//               ),
-//           ),
-//         )
-//     );
-//   }
-// }
