@@ -29,7 +29,7 @@ class _CartListCardState extends State<CartListCard> {
   Widget build(BuildContext context) {
     List<String> tagList =
         (widget.item.tags != null) ? widget.item.tags!.split("|") : [];
-    if (widget.item.discount != null && widget.item.discount != 0) {
+    if (widget.item.discount != 0) {
       tagList.insert(0, "${widget.item.discount}% Off");
     }
     return Card(
@@ -62,30 +62,28 @@ class _CartListCardState extends State<CartListCard> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  widget.item.isVeg != null
-                                      ? Container(
-                                          alignment: Alignment.centerLeft,
-                                          margin: const EdgeInsets.only(top: 8),
-                                          child: widget.item.isVeg!
-                                              ? Image.asset(
-                                                  'assets/img/veg.png',
-                                                  height: 15,
-                                                  width: 15,
-                                                )
-                                              : Image.asset(
-                                                  'assets/img/nonveg.png',
-                                                  height: 15,
-                                                  width: 15,
-                                                ),
-                                        )
-                                      : Container(),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    margin: const EdgeInsets.only(top: 8),
+                                    child: widget.item.isVeg
+                                        ? Image.asset(
+                                            'assets/img/veg.png',
+                                            height: 15,
+                                            width: 15,
+                                          )
+                                        : Image.asset(
+                                            'assets/img/nonveg.png',
+                                            height: 15,
+                                            width: 15,
+                                          ),
+                                  ),
                                   const SizedBox(
                                     width: 5,
                                   ),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width /
                                             1.5 +
-                                        ((widget.item.isVeg != null) ? 0 : 15),
+                                        (0),
                                     child: Text(
                                       widget.item.item,
                                       maxLines: 2,
