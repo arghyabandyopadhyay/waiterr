@@ -232,13 +232,22 @@ class _AddMenuPageState extends State<AddMenuPage> {
       discountPercentageController.text =
           widget.menuItemModel!.discount.toString();
       tagsController.text = widget.menuItemModel!.tags ?? "";
+      _indexSelectedDiscountableLists =
+          (widget.menuItemModel?.isDiscountable ?? false) ? 1 : 0;
+      _selectedDiscountableLists =
+          discountableLists[_indexSelectedDiscountableLists];
+      _indexSelectedVegNonVegOptions =
+          (widget.menuItemModel?.isVeg ?? true) ? 0 : 1;
+      _selectedVegNonVegOptions =
+          vegNonVegOptions[_indexSelectedVegNonVegOptions];
+    } else {
+      _indexSelectedDiscountableLists = 0;
+      _selectedDiscountableLists = discountableLists.first;
+      _indexSelectedVegNonVegOptions = 0;
+      _selectedVegNonVegOptions = vegNonVegOptions.first;
     }
     _indexSelectedOutlet = 0;
     _selectedOutlet = outletConfiguration.first;
-    _indexSelectedDiscountableLists = 0;
-    _selectedDiscountableLists = discountableLists.first;
-    _indexSelectedVegNonVegOptions = 0;
-    _selectedVegNonVegOptions = vegNonVegOptions.first;
     _futureStockGroups = fetchStockGroups();
     _futureTaxClasses = fetchTaxClasses();
   }
