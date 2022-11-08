@@ -438,7 +438,8 @@ Future<List<RunningOrderModel>> postForRunningOrders(
     bool isWaiter,
     String? salepointType,
     String salePointName,
-    String? outlet) async {
+    String? outlet,
+    bool? includePastOrder) async {
   RequestJson requestJson = RequestJson(
       requestType: forAddOrder ? "Active Sale Point" : "Running Orders",
       parameterList: (forAddOrder
@@ -450,6 +451,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
           : (isWaiter
               ? null
               : [
+                  Parameter(pKey: "IncludePastOrder", pValue: includePastOrder),
                   Parameter(pKey: "WaiterId", pValue: UserDetail.userDetails.id)
                 ])));
   UniversalJson universalJson = UniversalJson(
@@ -527,8 +529,7 @@ Future<int> terminateRunningOrders(String? runningOrderId) async {
   RequestJson requestJson = RequestJson(
       requestType: "Running Orders",
       parameterList: ([
-        Parameter(pKey: "Terminate", pValue: true),
-        Parameter(pKey: "RunningOrderId", pValue: runningOrderId)
+        Parameter(pKey: "RunningOrderId", pValue: runningOrderId),
       ]));
   UniversalJson universalJson = UniversalJson(
       gUID: UserClientAllocationData.guid,
@@ -679,6 +680,8 @@ Future<List<MenuItemModel>> postForMenuItem(
 
 Future<int> postForNewMenuItem(
     MenuItemModel menuItemModel, bool isForEdit) async {
+  print(menuItemModel.toMap(isForEdit));
+  print(isForEdit);
   RequestJson requestJson =
       RequestJson(requestType: "Waiterr Menu Edit", parameterList: [
     if (isForEdit) Parameter(pKey: "id", pValue: menuItemModel.itemID),
