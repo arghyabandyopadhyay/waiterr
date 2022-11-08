@@ -20,7 +20,8 @@ import '../TableManagement/add_order_page.dart';
 import '../TableManagement/kot_page.dart';
 
 class OrdersPage extends StatefulWidget {
-  const OrdersPage({Key? key}) : super(key: key);
+  final bool showPastOrder;
+  const OrdersPage({Key? key, required this.showPastOrder}) : super(key: key);
   @override
   State<OrdersPage> createState() => _OrdersPageState();
 }
@@ -31,8 +32,6 @@ class _OrdersPageState extends State<OrdersPage> {
   Future<List<RunningOrderModel>>? _futureitems;
   bool? _isSearching, _isLoading, _isDataLoaded;
   String _searchText = "";
-  double total = 0.0;
-  int totalOrders = 0;
   List searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -88,16 +87,9 @@ class _OrdersPageState extends State<OrdersPage> {
 
   Future<List<RunningOrderModel>> fetchList() async {
     List<RunningOrderModel> runningOrderList = [];
-    await postForRunningOrders(false, false, "", "", "")
-        .then((List<RunningOrderModel> rList) => {
-              runningOrderList.addAll(rList.where(
-                  (element) => element.name == UserDetail.userDetails.name)),
-              runningOrderList.addAll(rList.where(
-                  (element) => element.name != UserDetail.userDetails.name)),
-              totalOrders = runningOrderList.length,
-              total = 0,
-              for (var element in rList) total = total + element.amount
-            });
+    await postForRunningOrders(false, false, "", "", "", widget.showPastOrder)
+        .then((List<RunningOrderModel> rList) =>
+            {runningOrderList.addAll(rList)});
     setState(() {
       _isLoading = false;
       _isDataLoaded = true;
@@ -243,7 +235,7 @@ class _OrdersPageState extends State<OrdersPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
-                        "${UserDetail.userDetails.name ?? ""}'s running orders",
+                        "${UserDetail.userDetails.name ?? ""}'s ${widget.showPastOrder ? "order history" : "running orders"}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -513,41 +505,6 @@ class _OrdersPageState extends State<OrdersPage> {
                                       ));
                                 }))),
                   ]),
-              bottomNavigationBar: _isDataLoaded!
-                  ? BottomAppBar(
-                      color: Colors.black,
-                      elevation: 0.5,
-                      notchMargin: 5.0,
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        height: 50,
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              ("Running Orders: ${totalOrders.toString().replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}"),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              ("₹ ${total.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))}"),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  : null,
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.endFloat,
             )
