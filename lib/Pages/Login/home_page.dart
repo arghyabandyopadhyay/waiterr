@@ -181,12 +181,25 @@ class _HomePageState extends State<HomePage> {
                     ),
                     DrawerActionModel(
                       title: "Running Orders",
-                      iconData: Icons.schedule,
+                      iconData: Icons.timelapse_outlined,
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.of(context).push(CupertinoPageRoute<void>(
                           title: "Running Orders",
-                          builder: (context) => const OrdersPage(),
+                          builder: (context) =>
+                              const OrdersPage(showPastOrder: false),
+                        ));
+                      },
+                    ),
+                    DrawerActionModel(
+                      title: "Past Orders",
+                      iconData: Icons.schedule,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(CupertinoPageRoute<void>(
+                          title: "Past Orders",
+                          builder: (context) =>
+                              const OrdersPage(showPastOrder: true),
                         ));
                       },
                     ),
