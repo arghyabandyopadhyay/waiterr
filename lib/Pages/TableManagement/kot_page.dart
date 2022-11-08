@@ -101,27 +101,6 @@ class _KOTPageState extends State<KOTPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 actions: <Widget>[
-                  if (UserClientAllocationData.ucaRoleId == 3 &&
-                      widget.item.billPrinted)
-                    IconButton(
-                      icon: const Icon(
-                        Icons.done,
-                        color: Colors.black,
-                      ),
-                      onPressed: () async {
-                        Connectivity connectivity = Connectivity();
-                        await connectivity.checkConnectivity().then((value) => {
-                              if (value != ConnectivityResult.none)
-                                {
-                                  terminateRunningOrders(widget.item.id)
-                                      .then((value) => {
-                                            if (value == 200)
-                                              {Navigator.pop(context)}
-                                          })
-                                }
-                            });
-                      },
-                    ),
                   IconButton(
                     icon: const Icon(
                       Icons.refresh,
