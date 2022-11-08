@@ -24,7 +24,7 @@ class ProductAbout extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(top: 8),
+              margin: const EdgeInsets.only(top: 3),
               child: item.isVeg
                   ? Image.asset(
                       'assets/img/veg.png',
