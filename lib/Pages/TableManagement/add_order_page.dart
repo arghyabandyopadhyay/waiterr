@@ -89,7 +89,7 @@ class _AddOrderState extends State<AddOrder> {
         });
         try {
           await postForRunningOrders(true, true, _selectedSalesPoint,
-                  salesPointNo.text, _selectedOutlet.outletName)
+                  salesPointNo.text, _selectedOutlet.outletName, null)
               .then((List<RunningOrderModel> rList) async => {
                     if (phoneNumber.text.isNotEmpty)
                       {
@@ -158,6 +158,7 @@ class _AddOrderState extends State<AddOrder> {
                                           name.text.replaceAll(" ", ""),
                                       waiterMobileNumber:
                                           UserDetail.userDetails.mobileNumber,
+                                      isTerminated: false,
                                       waiterName: UserDetail.userDetails.name),
                                   isWaiter: !widget.isThroughQr,
                                 )))
