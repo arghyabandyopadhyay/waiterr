@@ -96,7 +96,7 @@ class _MenuDetailsCardState extends State<MenuDetailsCard> {
                                     children: <Widget>[
                                       Container(
                                         alignment: Alignment.centerLeft,
-                                        margin: const EdgeInsets.only(top: 8),
+                                        margin: const EdgeInsets.only(top: 3),
                                         child: widget.item.isVeg
                                             ? Image.asset(
                                                 'assets/img/veg.png',
