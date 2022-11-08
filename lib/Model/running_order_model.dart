@@ -13,6 +13,7 @@ class RunningOrderModel {
   final String? activeSince;
   final bool billPrinted;
   final String? outletName;
+  final bool isTerminated;
   String outletId;
   final String? masterFilter;
   RunningOrderModel(
@@ -29,6 +30,7 @@ class RunningOrderModel {
       required this.billPrinted,
       this.outletName,
       required this.outletId,
+      required this.isTerminated,
       this.masterFilter});
 
   factory RunningOrderModel.fromJson(Map<String, dynamic> json) {
@@ -47,6 +49,7 @@ class RunningOrderModel {
       billPrinted: json['BillPrinted'] == 1,
       outletName: json['OutletName'],
       outletId: json['OutletId'],
+      isTerminated: json['isTerminated'] == 1,
       masterFilter: json['Name'] +
           json['MobileNo'] +
           json['WaiterName'] +
