@@ -509,8 +509,9 @@ Future<int> postForUserClientAllocation(String userId, String outletId) async {
   RequestJson requestJson = RequestJson(
       requestType: "Waiters",
       parameterList: ([
-        Parameter(pKey: "UserId", pValue: userId),
-        Parameter(pKey: "OutletId", pValue: outletId)
+        Parameter(pKey: "id", pValue: userId),
+        Parameter(pKey: "OutletId", pValue: outletId),
+        Parameter(pKey: "ModificationType", pValue: "Create")
       ]));
   UniversalJson universalJson = UniversalJson(
       gUID: UserClientAllocationData.guid,
@@ -539,6 +540,28 @@ Future<int> terminateRunningOrders(String? runningOrderId) async {
   String responseBody = await responseGeneratorPost(json.encode(universalJson));
   responseBody = jsonDecode(responseBody);
   if (responseBody == "Running order terminated successfully") {
+    return 200;
+  } else {
+    return 500;
+  }
+}
+
+//Ready
+Future<int> deleteUserClientAllocation(String? userClientAllocationId) async {
+  RequestJson requestJson = RequestJson(
+      requestType: "Waiters",
+      parameterList: ([
+        Parameter(pKey: "id", pValue: userClientAllocationId),
+        Parameter(pKey: "OutletId", pValue: null),
+        Parameter(pKey: "ModificationType", pValue: "Delete")
+      ]));
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  responseBody = jsonDecode(responseBody);
+  if (responseBody == "User client allocation deleted successfully") {
     return 200;
   } else {
     return 500;
@@ -679,10 +702,8 @@ Future<List<MenuItemModel>> postForMenuItem(
       .toList();
 }
 
-Future<int> postForNewMenuItem(
+Future<int> postForMenuItemModification(
     MenuItemModel menuItemModel, bool isForEdit) async {
-  print(menuItemModel.toMap(isForEdit));
-  print(isForEdit);
   RequestJson requestJson =
       RequestJson(requestType: "Waiterr Menu Edit", parameterList: [
     if (isForEdit) Parameter(pKey: "id", pValue: menuItemModel.itemID),
