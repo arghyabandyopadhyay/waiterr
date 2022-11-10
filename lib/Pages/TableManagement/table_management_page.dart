@@ -445,7 +445,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                         (context, animation1, animation2) =>
                                             const MenuManagerPage()));
                               },
-                              icon: Icons.food_bank_outlined),
+                              icon: Icons.restaurant_menu_outlined),
                         if (UserClientAllocationData.ucaRoleId == 3 ||
                             UserClientAllocationData.ucaRoleId == 4)
                           ModalOptionModel(
@@ -480,7 +480,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                         (context, animation1, animation2) =>
                                             const OutletManagerPage()));
                               },
-                              icon: Icons.mediation_rounded),
+                              icon: Icons.food_bank_outlined),
                         //role id 4 is for owner
                         if (UserClientAllocationData.ucaRoleId == 4)
                           ModalOptionModel(
