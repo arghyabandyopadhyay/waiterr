@@ -30,7 +30,7 @@ dependencies:
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
   sms_autofill: ^2.2.0
-  url_launcher: ^6.1.4
+  url_launcher: ^6.1.6
   device_info_plus: ^3.2.3
   cloud_firestore: ^3.1.18
   firebase_database: ^9.0.16
