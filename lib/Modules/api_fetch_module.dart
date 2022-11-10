@@ -8,6 +8,7 @@ import 'package:waiterr/Model/favourites_json_model.dart';
 import 'package:waiterr/Model/filter_item_model.dart';
 import 'package:waiterr/Model/kot_model.dart';
 import 'package:waiterr/Model/menu_item_model.dart';
+import 'package:waiterr/Model/outlet_configuration_model.dart';
 import 'package:waiterr/Model/product_detail_model.dart';
 import 'package:waiterr/Model/RequestJson/place_order_json.dart';
 import 'package:waiterr/Model/RequestJson/parameter.dart';
@@ -759,6 +760,42 @@ Future<int> postForTaxClassAddition(String taxClass, double taxRate) async {
       RequestJson(requestType: "Tax Class", parameterList: [
     Parameter(pKey: "TaxClass", pValue: taxClass),
     Parameter(pKey: "TaxRate", pValue: taxRate)
+  ]);
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  responseBody = jsonDecode(responseBody);
+  if (responseBody == "Success") {
+    return 200;
+  } else {
+    return 500;
+  }
+}
+
+Future<List<OutletConfigurationModel>> postForOutlets() async {
+  RequestJson requestJson =
+      RequestJson(requestType: "Outlet Configurations", parameterList: null);
+  UniversalJson universalJson = UniversalJson(
+      gUID: UserClientAllocationData.guid,
+      companyGUID: UserClientAllocationData.companyGUID,
+      requestJSON: requestJson);
+  String responseBody = await responseGeneratorPost(json.encode(universalJson));
+  List<OutletConfigurationModel> result = (jsonDecode(responseBody) as List)
+      .map((data) => OutletConfigurationModel.fromJson(data))
+      .toList();
+  return result;
+}
+
+Future<int> postForOutletModification(String outletName, String outletSalePoint,
+    String id, String modificationType) async {
+  RequestJson requestJson =
+      RequestJson(requestType: "Outlet Configurations", parameterList: [
+    Parameter(pKey: "OutletName", pValue: outletName),
+    Parameter(pKey: "OutletSalePoint", pValue: outletSalePoint),
+    Parameter(pKey: "id", pValue: id),
+    Parameter(pKey: "ModificationType", pValue: modificationType)
   ]);
   UniversalJson universalJson = UniversalJson(
       gUID: UserClientAllocationData.guid,
