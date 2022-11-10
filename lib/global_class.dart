@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:waiterr/Model/user_details_model.dart';
+import 'Model/outlet_configuration_model.dart';
 import 'Model/user_restraunt_allocation_model.dart';
 import 'Model/filter_item_model.dart';
 import 'Model/menu_item_model.dart';
