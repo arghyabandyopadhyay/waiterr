@@ -224,84 +224,73 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                                 )
                               ],
                             ),
-                            child:
-                                FutureBuilder<List<OutletConfigurationModel>>(
-                                    future: _futureoutlets,
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        outlets = snapshot.data;
-                                        return ListView(
-                                          shrinkWrap: true,
-                                          physics:
-                                              const BouncingScrollPhysics(),
-                                          children: [
-                                            Center(
-                                              child: Container(
-                                                height: _isLoading! ? 40 : 0,
-                                                width: _isLoading! ? 40 : 0,
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                child: _isLoading!
-                                                    ? const CircularProgressIndicator(
-                                                        strokeWidth: 3,
-                                                        backgroundColor: GlobalTheme
-                                                            .progressBarBackground)
-                                                    : null,
-                                              ),
-                                            ),
-                                            _searchController.text.isNotEmpty
-                                                ? (searchResult.isNotEmpty
-                                                    ? ListView.builder(
-                                                        shrinkWrap: true,
-                                                        physics:
-                                                            const NeverScrollableScrollPhysics(),
-                                                        itemCount:
-                                                            searchResult.length,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return ListTile(
-                                                            title: Text(
-                                                                searchResult[
-                                                                        index]
-                                                                    .outletName),
-                                                            subtitle: Text(
-                                                                searchResult[
-                                                                            index]
-                                                                        .outletSalePoint ??
-                                                                    ""),
-                                                            onTap: () {
-                                                              Navigator.push(
-                                                                  context,
-                                                                  CupertinoPageRoute(
-                                                                      builder: (context) =>
-                                                                          AddOutletPage(
-                                                                            outletDetail:
-                                                                                searchResult[index],
-                                                                            isEdit:
-                                                                                true,
-                                                                          )));
-                                                            },
-                                                          );
-                                                        },
-                                                      )
-                                                    : const NoDataError())
-                                                : ListView.builder(
+                            child: FutureBuilder<
+                                    List<OutletConfigurationModel>>(
+                                future: _futureoutlets,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    outlets = snapshot.data;
+                                    return ListView(
+                                      shrinkWrap: true,
+                                      physics: const BouncingScrollPhysics(),
+                                      children: [
+                                        Center(
+                                          child: Container(
+                                            height: _isLoading! ? 40 : 0,
+                                            width: _isLoading! ? 40 : 0,
+                                            padding: const EdgeInsets.all(10),
+                                            child: _isLoading!
+                                                ? const CircularProgressIndicator(
+                                                    strokeWidth: 3,
+                                                    backgroundColor: GlobalTheme
+                                                        .progressBarBackground)
+                                                : null,
+                                          ),
+                                        ),
+                                        _searchController.text.isNotEmpty
+                                            ? (searchResult.isNotEmpty
+                                                ? ListView.builder(
+                                                    shrinkWrap: true,
                                                     physics:
                                                         const NeverScrollableScrollPhysics(),
-                                                    shrinkWrap: true,
-                                                    itemCount: outlets!.length,
+                                                    itemCount:
+                                                        searchResult.length,
                                                     itemBuilder:
-                                                        (context, index) {
+                                                        (BuildContext context,
+                                                            int index) {
                                                       return ListTile(
                                                         title: Text(
-                                                            outlets![index]
+                                                            searchResult[index]
                                                                 .outletName),
-                                                        subtitle: Text(outlets![
-                                                                    index]
-                                                                .outletSalePoint ??
-                                                            ""),
+                                                        trailing:
+                                                            ElevatedButton(
+                                                          child: const Icon(Icons
+                                                              .delete_outline),
+                                                          onPressed: () async {
+                                                            Connectivity
+                                                                connectivity =
+                                                                Connectivity();
+                                                            await connectivity
+                                                                .checkConnectivity()
+                                                                .then(
+                                                                    (value) => {
+                                                                          if (value !=
+                                                                              ConnectivityResult.none)
+                                                                            {
+                                                                              postForOutletModification("", "", searchResult[index].id, "Delete").then((value) => {
+                                                                                    if (value == 200)
+                                                                                      {
+                                                                                        Navigator.pop(context)
+                                                                                      }
+                                                                                  })
+                                                                            }
+                                                                        });
+                                                          },
+                                                        ),
+                                                        subtitle: Text(
+                                                            searchResult[index]
+                                                                    .outletSalePoint ??
+                                                                ""),
                                                         onTap: () {
                                                           Navigator.push(
                                                               context,
@@ -310,149 +299,207 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                                                                       (context) =>
                                                                           AddOutletPage(
                                                                             outletDetail:
-                                                                                outlets![index],
+                                                                                searchResult[index],
                                                                             isEdit:
                                                                                 true,
                                                                           )));
                                                         },
                                                       );
                                                     },
-                                                  ),
-                                          ],
-                                        );
-                                      } else if (snapshot.hasError) {
-                                        if (snapshot.error.toString() ==
-                                            "NoInternet") {
-                                          return const ErrorPageNoInternet();
-                                        } else if (snapshot.error.toString() ==
-                                            "500") {
-                                          return const ErrorPageFiveHundred();
-                                        } else if (snapshot.error.toString() ==
-                                            "NoData") {
-                                          return const NoDataError();
-                                        } else if (snapshot.error.toString() ==
-                                            "401") {
-                                          return const ErrorPageFourHundredOne();
-                                        } else {
-                                          return const ErrorHasOccurred();
-                                        }
-                                      }
-                                      // By default, show a loading spinner.
-                                      return Container(
-                                          width: double.infinity,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 16.0, vertical: 16.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: <Widget>[
-                                              Expanded(
-                                                child: Shimmer.fromColors(
-                                                    baseColor:
-                                                        Colors.grey[300]!,
-                                                    highlightColor:
-                                                        Colors.grey[100]!,
-                                                    enabled: true,
-                                                    child: ListView.builder(
-                                                      itemBuilder: (_, __) =>
-                                                          Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      bottom:
-                                                                          8.0),
-                                                              child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Container(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          7,
-                                                                      height:
-                                                                          110.0,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                    const Padding(
-                                                                      padding: EdgeInsets.symmetric(
+                                                  )
+                                                : const NoDataError())
+                                            : ListView.builder(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: outlets!.length,
+                                                itemBuilder: (context, index) {
+                                                  return ListTile(
+                                                    title: Text(outlets![index]
+                                                        .outletName),
+                                                    trailing: ElevatedButton(
+                                                      child: const Icon(
+                                                          Icons.delete_outline),
+                                                      onPressed: () async {
+                                                        Connectivity
+                                                            connectivity =
+                                                            Connectivity();
+                                                        await connectivity
+                                                            .checkConnectivity()
+                                                            .then((value) => {
+                                                                  if (value !=
+                                                                      ConnectivityResult
+                                                                          .none)
+                                                                    {
+                                                                      postForOutletModification(
+                                                                              "",
+                                                                              "",
+                                                                              outlets![index].id,
+                                                                              "Delete")
+                                                                          .then((value) => {
+                                                                                if (value == 200)
+                                                                                  {
+                                                                                    Navigator.pop(context)
+                                                                                  }
+                                                                              })
+                                                                    }
+                                                                });
+                                                      },
+                                                    ),
+                                                    subtitle: Text(outlets![
+                                                                index]
+                                                            .outletSalePoint ??
+                                                        ""),
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          CupertinoPageRoute(
+                                                              builder: (context) =>
+                                                                  AddOutletPage(
+                                                                    outletDetail:
+                                                                        outlets![
+                                                                            index],
+                                                                    isEdit:
+                                                                        true,
+                                                                  )));
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                      ],
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    if (snapshot.error.toString() ==
+                                        "NoInternet") {
+                                      return const ErrorPageNoInternet();
+                                    } else if (snapshot.error.toString() ==
+                                        "500") {
+                                      return const ErrorPageFiveHundred();
+                                    } else if (snapshot.error.toString() ==
+                                        "NoData") {
+                                      return const NoDataError();
+                                    } else if (snapshot.error.toString() ==
+                                        "401") {
+                                      return const ErrorPageFourHundredOne();
+                                    } else {
+                                      return const ErrorHasOccurred();
+                                    }
+                                  }
+                                  // By default, show a loading spinner.
+                                  return Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0, vertical: 16.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Shimmer.fromColors(
+                                                baseColor: Colors.grey[300]!,
+                                                highlightColor:
+                                                    Colors.grey[100]!,
+                                                enabled: true,
+                                                child: ListView.builder(
+                                                  itemBuilder: (_, __) =>
+                                                      Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 8.0),
+                                                          child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Container(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      7,
+                                                                  height: 110.0,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
                                                                           horizontal:
                                                                               8.0),
-                                                                    ),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: <
-                                                                            Widget>[
-                                                                          Container(
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width / 1.5,
-                                                                            height:
-                                                                                10.0,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                          const Padding(
-                                                                            padding:
-                                                                                EdgeInsets.symmetric(vertical: 5.0),
-                                                                          ),
-                                                                          Container(
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width / 1.5,
-                                                                            height:
-                                                                                10.0,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                          const Padding(
-                                                                            padding:
-                                                                                EdgeInsets.symmetric(vertical: 5.0),
-                                                                          ),
-                                                                          Container(
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width / 1.5,
-                                                                            height:
-                                                                                10.0,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                          const Padding(
-                                                                            padding:
-                                                                                EdgeInsets.symmetric(vertical: 5.0),
-                                                                          ),
-                                                                          Container(
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width / 1.5,
-                                                                            height:
-                                                                                10.0,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                          const Padding(
-                                                                            padding:
-                                                                                EdgeInsets.symmetric(vertical: 2.0),
-                                                                          ),
-                                                                          Container(
-                                                                            width:
-                                                                                40.0,
-                                                                            height:
-                                                                                10.0,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                        ],
+                                                                ),
+                                                                Expanded(
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: <
+                                                                        Widget>[
+                                                                      Container(
+                                                                        width: MediaQuery.of(context).size.width /
+                                                                            1.5,
+                                                                        height:
+                                                                            10.0,
+                                                                        color: Colors
+                                                                            .white,
                                                                       ),
-                                                                    )
-                                                                  ])),
-                                                      itemCount: 2,
-                                                    )),
-                                              ),
-                                            ],
-                                          ));
-                                    }))),
+                                                                      const Padding(
+                                                                        padding:
+                                                                            EdgeInsets.symmetric(vertical: 5.0),
+                                                                      ),
+                                                                      Container(
+                                                                        width: MediaQuery.of(context).size.width /
+                                                                            1.5,
+                                                                        height:
+                                                                            10.0,
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                      const Padding(
+                                                                        padding:
+                                                                            EdgeInsets.symmetric(vertical: 5.0),
+                                                                      ),
+                                                                      Container(
+                                                                        width: MediaQuery.of(context).size.width /
+                                                                            1.5,
+                                                                        height:
+                                                                            10.0,
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                      const Padding(
+                                                                        padding:
+                                                                            EdgeInsets.symmetric(vertical: 5.0),
+                                                                      ),
+                                                                      Container(
+                                                                        width: MediaQuery.of(context).size.width /
+                                                                            1.5,
+                                                                        height:
+                                                                            10.0,
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                      const Padding(
+                                                                        padding:
+                                                                            EdgeInsets.symmetric(vertical: 2.0),
+                                                                      ),
+                                                                      Container(
+                                                                        width:
+                                                                            40.0,
+                                                                        height:
+                                                                            10.0,
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ])),
+                                                  itemCount: 2,
+                                                )),
+                                          ),
+                                        ],
+                                      ));
+                                }))),
                   ]),
               floatingActionButton: FloatingActionButton(
                 onPressed: _addOutlet,
