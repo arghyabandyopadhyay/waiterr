@@ -1,12 +1,21 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:waiterr/Model/waiter_details_model.dart';
 
+import '../Modules/api_fetch_module.dart';
 import '../theme.dart';
 
 class WaiterDetailsCard extends StatelessWidget {
-  const WaiterDetailsCard({Key? key, required this.waiter}) : super(key: key);
+  const WaiterDetailsCard(
+      {Key? key,
+      required this.waiter,
+      required this.onDeleteClicked,
+      required this.onCallClicked})
+      : super(key: key);
   final WaiterDetailsModel waiter;
+  final Function() onDeleteClicked;
+  final Function() onCallClicked;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,7 +84,7 @@ class WaiterDetailsCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.45,
                       alignment: Alignment.bottomRight,
                       child: Text(
-                          "${waiter.ucaRoleId == 3 ? "Manager" : waiter.ucaRoleId == 2 ? "Chef" : "Waiter"}@${waiter.outletName}",
+                          "${waiter.ucaRoleId == 4 ? "Admin" : waiter.ucaRoleId == 3 ? "Manager" : waiter.ucaRoleId == 2 ? "Chef" : "Waiter"}@${waiter.outletName}",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(fontSize: 15, height: 1)),
@@ -94,21 +103,14 @@ class WaiterDetailsCard extends StatelessWidget {
                             backgroundColor:
                                 GlobalTheme.floatingButtonBackground,
                             minimumSize: const Size(80, 50)),
-                        onPressed: () {},
+                        onPressed: onCallClicked,
                         child: const Icon(Icons.call)),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 GlobalTheme.floatingButtonBackground,
                             minimumSize: const Size(80, 50)),
-                        onPressed: () {},
-                        child: const Icon(Icons.block)),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                GlobalTheme.floatingButtonBackground,
-                            minimumSize: const Size(80, 50)),
-                        onPressed: () {},
+                        onPressed: onDeleteClicked,
                         child: const Icon(Icons.delete_forever_outlined))
                   ],
                 )
