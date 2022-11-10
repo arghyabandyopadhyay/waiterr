@@ -1,18 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:waiterr/Model/filter_item_model.dart';
 import 'package:waiterr/Model/menu_item_model.dart';
 import 'package:waiterr/Model/tax_model.dart';
 import 'package:waiterr/global_class.dart';
-import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Modules/universal_module.dart';
 import 'package:waiterr/widgets/chips.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
+import '../../../Model/outlet_configuration_model.dart';
 import '../../../theme.dart';
-import '../../CautionPages/error_page.dart';
 
 class AddMenuPage extends StatefulWidget {
   final MenuItemModel? menuItemModel;
