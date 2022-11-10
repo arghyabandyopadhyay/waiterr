@@ -96,7 +96,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
           _isLoadingAvailability = true;
         });
         try {
-          await postForNewMenuItem(
+          await postForMenuItemModification(
                   MenuItemModel(
                       item: nameController.text,
                       quantity: 0,
