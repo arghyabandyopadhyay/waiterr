@@ -3,7 +3,6 @@ import 'package:waiterr/Model/qr_json_model.dart';
 import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Model/customer_details_model.dart';
 import 'package:waiterr/Model/running_order_model.dart';
-import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Modules/universal_module.dart';
 import 'package:waiterr/Pages/Restaurant/menu_page_all.dart';
@@ -14,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
+import '../../Model/outlet_configuration_model.dart';
 import '../../theme.dart';
 
 class AddOrder extends StatefulWidget {
