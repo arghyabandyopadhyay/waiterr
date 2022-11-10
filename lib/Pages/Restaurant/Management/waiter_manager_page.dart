@@ -1,3 +1,4 @@
+import 'package:url_launcher/url_launcher.dart';
 import 'package:waiterr/Model/waiter_details_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
@@ -258,8 +259,44 @@ class _WaiterManagerPageState extends State<WaiterManagerPage> {
                                                         (BuildContext context,
                                                             int index) {
                                                       return WaiterDetailsCard(
-                                                          waiter: searchResult[
-                                                              index]);
+                                                        waiter:
+                                                            searchResult[index],
+                                                        onCallClicked:
+                                                            () async {
+                                                          final Uri launchUri =
+                                                              Uri(
+                                                            scheme: 'tel',
+                                                            path: searchResult[
+                                                                    index]
+                                                                .mobileNumber,
+                                                          );
+                                                          await launchUrl(
+                                                              launchUri);
+                                                        },
+                                                        onDeleteClicked:
+                                                            () async {
+                                                          Connectivity
+                                                              connectivity =
+                                                              Connectivity();
+                                                          await connectivity
+                                                              .checkConnectivity()
+                                                              .then((value) => {
+                                                                    if (value !=
+                                                                        ConnectivityResult
+                                                                            .none)
+                                                                      {
+                                                                        deleteUserClientAllocation(searchResult[index].userClientAllocationId).then(
+                                                                            (value) =>
+                                                                                {
+                                                                                  if (value == 200)
+                                                                                    {
+                                                                                      Navigator.pop(context)
+                                                                                    }
+                                                                                })
+                                                                      }
+                                                                  });
+                                                        },
+                                                      );
                                                     },
                                                   )
                                                 : const NoDataError())
@@ -270,7 +307,40 @@ class _WaiterManagerPageState extends State<WaiterManagerPage> {
                                                 itemCount: waiters!.length,
                                                 itemBuilder: (context, index) {
                                                   return WaiterDetailsCard(
-                                                      waiter: waiters![index]);
+                                                    waiter: waiters![index],
+                                                    onCallClicked: () async {
+                                                      final Uri launchUri = Uri(
+                                                        scheme: 'tel',
+                                                        path: waiters![index]
+                                                            .mobileNumber,
+                                                      );
+                                                      await launchUrl(
+                                                          launchUri);
+                                                    },
+                                                    onDeleteClicked: () async {
+                                                      Connectivity
+                                                          connectivity =
+                                                          Connectivity();
+                                                      await connectivity
+                                                          .checkConnectivity()
+                                                          .then((value) => {
+                                                                if (value !=
+                                                                    ConnectivityResult
+                                                                        .none)
+                                                                  {
+                                                                    deleteUserClientAllocation(waiters![index]
+                                                                            .userClientAllocationId)
+                                                                        .then((value) =>
+                                                                            {
+                                                                              if (value == 200)
+                                                                                {
+                                                                                  Navigator.pop(context)
+                                                                                }
+                                                                            })
+                                                                  }
+                                                              });
+                                                    },
+                                                  );
                                                 },
                                               ),
                                       ],
