@@ -13,7 +13,6 @@ class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalTheme.backgroundColor,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -23,7 +22,7 @@ class _AboutPageState extends State<AboutPage> {
             ),
           ),
           Scaffold(
-            backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+            backgroundColor: GlobalTheme.tint,
             appBar: AppBar(
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
@@ -38,14 +37,13 @@ class _AboutPageState extends State<AboutPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       "About Us",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
                   const SizedBox(
@@ -55,24 +53,7 @@ class _AboutPageState extends State<AboutPage> {
                       child: Container(
                     height: MediaQuery.of(context).size.height,
                     padding: const EdgeInsets.only(top: 10),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: GlobalTheme.primaryText,
-                          blurRadius: 25.0, // soften the shadow
-                          spreadRadius: 5.0, //extend the shadow
-                          offset: Offset(
-                            15.0, // Move to right 10  horizontally
-                            15.0, // Move to bottom 10 Vertically
-                          ),
-                        )
-                      ],
-                    ),
+                    decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                     child: ListView(
                       physics: const BouncingScrollPhysics(),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -102,7 +83,6 @@ class _AboutPageState extends State<AboutPage> {
                             title: Text("App Version"),
                             subtitle: Text(
                               "1.0",
-                              style: TextStyle(color: GlobalTheme.primaryText),
                             ),
                           ),
                         ),
@@ -121,8 +101,6 @@ class _AboutPageState extends State<AboutPage> {
                               title: Text("Powered By"),
                               subtitle: Text(
                                 "Business Genie.",
-                                style:
-                                    TextStyle(color: GlobalTheme.primaryText),
                               )),
                         )
                       ],
@@ -131,12 +109,10 @@ class _AboutPageState extends State<AboutPage> {
                 ]),
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             floatingActionButton: FloatingActionButton.extended(
-              icon:
-                  const Icon(Icons.call, color: GlobalTheme.floatingButtonText),
+              icon: const Icon(Icons.call),
               label: const Text(
                 "Contact Us",
-                style: TextStyle(
-                    fontSize: 17, color: GlobalTheme.floatingButtonText),
+                style: TextStyle(fontSize: 17),
               ),
               onPressed: () async {
                 final Uri url = Uri.parse('tel:<+917224077631>');
