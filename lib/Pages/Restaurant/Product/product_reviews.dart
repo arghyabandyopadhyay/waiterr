@@ -30,14 +30,14 @@ class ProductReviews extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                        color: GlobalTheme.primaryText.withOpacity(0.2),
+                        color: GlobalTheme.waiterrPrimaryText.withOpacity(0.2),
                         width: 1,
                         style: BorderStyle.solid),
                   ),
                   child: const Text("Rate Product",
                       style: TextStyle(
                           fontSize: 15,
-                          color: GlobalTheme.primaryColor,
+                          color: GlobalTheme.waiterrPrimaryColor,
                           fontWeight: FontWeight.bold)),
                 ),
                 onTap: () {
