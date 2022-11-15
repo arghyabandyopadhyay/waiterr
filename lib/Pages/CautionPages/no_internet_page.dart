@@ -30,122 +30,104 @@ class _NoInternetPageState extends State<NoInternetPage> {
   Widget build(BuildContext context) {
     return Consumer<LoginStore>(builder: (_, loginStore, __) {
       return Scaffold(
-          backgroundColor: GlobalTheme.backgroundColor,
           body: Stack(children: [
-            Positioned(
-              child: Image.asset(
-                "assets/img/background.jpg",
+        Positioned(
+          child: Image.asset(
+            "assets/img/background.jpg",
+          ),
+        ),
+        Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.refresh),
+                onPressed: () async {
+                  Connectivity connectivity = Connectivity();
+                  await connectivity.checkConnectivity().then((value) => {
+                        if (value != ConnectivityResult.none)
+                          {
+                            Navigator.pushReplacement(
+                                context,
+                                PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            RoutingPage(
+                                              context: context,
+                                            )))
+                          }
+                      });
+                },
+              )
+            ],
+          ),
+          backgroundColor: GlobalTheme.tint,
+          drawer: Drawer(
+              child: DrawerContent(
+            alternativeMno: "No Internet!!",
+            alternativeName: "waiterr",
+            drawerItems: [
+              DrawerActionModel(
+                title: "Profile",
+                iconData: Icons.account_circle,
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(CupertinoPageRoute<void>(
+                    title: "Profile Page",
+                    builder: (context) => const ProfilePage(),
+                  ));
+                },
               ),
-            ),
-            Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                actions: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: () async {
-                      Connectivity connectivity = Connectivity();
-                      await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
-                              {
-                                Navigator.pushReplacement(
-                                    context,
-                                    PageRouteBuilder(
-                                        pageBuilder:
-                                            (context, animation1, animation2) =>
-                                                RoutingPage(
-                                                  context: context,
-                                                )))
-                              }
-                          });
-                    },
-                  )
-                ],
+              DrawerActionModel(
+                title: "About us",
+                iconData: Icons.info,
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(CupertinoPageRoute<void>(
+                    title: "About Page",
+                    builder: (context) => const AboutPage(),
+                  ));
+                },
               ),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
-              drawer: Drawer(
-                  child: DrawerContent(
-                alternativeMno: "No Internet!!",
-                alternativeName: "waiterr",
-                drawerItems: [
-                  DrawerActionModel(
-                    title: "Profile",
-                    iconData: Icons.account_circle,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.of(context).push(CupertinoPageRoute<void>(
-                        title: "Profile Page",
-                        builder: (context) => const ProfilePage(),
-                      ));
-                    },
+              DrawerActionModel(
+                title: "Log out",
+                iconData: Icons.exit_to_app,
+                onTap: () {
+                  Navigator.pop(context);
+                  _deleteUserDetails();
+                  loginStore.signOut(context);
+                },
+              ),
+            ],
+          )),
+          body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    "Waiterr",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style:
+                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                   ),
-                  DrawerActionModel(
-                    title: "About us",
-                    iconData: Icons.info,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.of(context).push(CupertinoPageRoute<void>(
-                        title: "About Page",
-                        builder: (context) => const AboutPage(),
-                      ));
-                    },
-                  ),
-                  DrawerActionModel(
-                    title: "Log out",
-                    iconData: Icons.exit_to_app,
-                    onTap: () {
-                      Navigator.pop(context);
-                      _deleteUserDetails();
-                      loginStore.signOut(context);
-                    },
-                  ),
-                ],
-              )),
-              body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        "Waiterr",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Flexible(
-                      child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          padding: const EdgeInsets.only(top: 10),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: GlobalTheme.primaryText,
-                                blurRadius: 25.0, // soften the shadow
-                                spreadRadius: 5.0, //extend the shadow
-                                offset: Offset(
-                                  15.0, // Move to right 10  horizontally
-                                  15.0, // Move to bottom 10 Vertically
-                                ),
-                              )
-                            ],
-                          ),
-                          child: const ErrorPageNoInternet()),
-                    )
-                  ]),
-            )
-          ]));
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Flexible(
+                  child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      padding: const EdgeInsets.only(top: 10),
+                      decoration: GlobalTheme.waiterrAppBarBoxDecoration,
+                      child: const ErrorPageNoInternet()),
+                )
+              ]),
+        )
+      ]));
     });
   }
 }
