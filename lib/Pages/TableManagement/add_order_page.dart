@@ -347,12 +347,10 @@ class _AddOrderState extends State<AddOrder> {
 
   @override
   Widget build(BuildContext context) {
-    const cursorColor = GlobalTheme.primaryColor;
     const sizedBoxSpace = SizedBox(height: 24);
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
       child: Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -379,37 +377,19 @@ class _AddOrderState extends State<AddOrder> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       "Add Order",
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
                   Flexible(
                       child: Container(
                     height: MediaQuery.of(context).size.height,
                     padding: const EdgeInsets.only(top: 10),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: GlobalTheme.primaryText,
-                          blurRadius: 25.0, // soften the shadow
-                          spreadRadius: 5.0, //extend the shadow
-                          offset: Offset(
-                            15.0, // Move to right 10  horizontally
-                            15.0, // Move to bottom 10 Vertically
-                          ),
-                        )
-                      ],
-                    ),
+                    decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                     child: Form(
                       key: _formKey,
                       child: SingleChildScrollView(
@@ -436,15 +416,11 @@ class _AddOrderState extends State<AddOrder> {
                                     child: _isLoadingAvailability
                                         ? const CircularProgressIndicator(
                                             strokeWidth: 3,
-                                            backgroundColor: GlobalTheme
-                                                .progressBarBackground,
                                           )
                                         : null,
                                   ),
                                 ),
-                                const Text("Outlets:",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("Outlets:"),
                                 SizedBox(
                                   height: 50,
                                   child: ListView.builder(
@@ -481,9 +457,7 @@ class _AddOrderState extends State<AddOrder> {
                                     },
                                   ),
                                 ),
-                                const Text("Sales Point:",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("Sales Point:"),
                                 SizedBox(
                                   height: 50,
                                   child: ListView.builder(
@@ -581,11 +555,10 @@ class _AddOrderState extends State<AddOrder> {
                                 sizedBoxSpace,
                                 TextFormField(
                                   enabled: !widget.isThroughQr,
-                                  cursorColor: cursorColor,
+
                                   controller: phoneNumber,
                                   style: const TextStyle(),
                                   decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
                                     suffixIcon: _isLoading
                                         ? Container(
                                             margin: const EdgeInsets.all(10),
@@ -600,15 +573,6 @@ class _AddOrderState extends State<AddOrder> {
                                         maxHeight: 40, maxWidth: 40),
                                     labelText: "Mobile",
                                     prefixText: '+91 ',
-                                    hintStyle: const TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: const TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
                                     contentPadding: const EdgeInsets.only(
                                         left: 10.0, right: 10.0),
                                   ),
@@ -715,22 +679,9 @@ class _AddOrderState extends State<AddOrder> {
                                   enabled: !widget.isThroughQr,
                                   textCapitalization: TextCapitalization.words,
                                   controller: name,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Name",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   onSaved: (value) {
                                     person.name = value;
@@ -738,9 +689,7 @@ class _AddOrderState extends State<AddOrder> {
                                   validator: _validateName,
                                 ),
                                 sizedBoxSpace,
-                                const Text("Table No",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("Table No"),
                                 //Options for Table No
                                 SizedBox(
                                   height: 50,
@@ -775,14 +724,9 @@ class _AddOrderState extends State<AddOrder> {
                                 TextFormField(
                                   controller: salesPointNo,
                                   enabled: !widget.isThroughQr,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
-                                    hintStyle: const TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: const TextStyle(
-                                        color: GlobalTheme.primaryText),
                                     suffixIcon: _isLoadingTakeaway
                                         ? Container(
                                             margin: const EdgeInsets.all(10),
@@ -794,9 +738,9 @@ class _AddOrderState extends State<AddOrder> {
                                         : null,
                                     suffixIconConstraints: const BoxConstraints(
                                         maxHeight: 40, maxWidth: 40),
-                                    focusedBorder: const UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
+                                    // focusedBorder: const UnderlineInputBorder(
+                                    //     borderSide: BorderSide(
+                                    //         color: GlobalTheme.waiterrPrimaryColor)),
                                     contentPadding: const EdgeInsets.only(
                                         left: 10.0, right: 10.0),
                                   ),
@@ -806,9 +750,7 @@ class _AddOrderState extends State<AddOrder> {
                                   validator: _validateTableNo,
                                 ),
                                 sizedBoxSpace,
-                                const Text("No of Persons",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("No of Persons"),
                                 const SizedBox(),
                                 //Options for No of Persons
                                 SizedBox(
@@ -839,18 +781,13 @@ class _AddOrderState extends State<AddOrder> {
                                   ),
                                 ),
                                 TextFormField(
-                                  cursorColor: cursorColor,
                                   controller: noOfPerson,
                                   style: const TextStyle(),
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
+                                    // focusedBorder: UnderlineInputBorder(
+                                    //     borderSide: BorderSide(
+                                    //         color: GlobalTheme.waiterrPrimaryColor)),
                                     contentPadding: EdgeInsets.only(
                                         left: 10.0, right: 10.0),
                                   ),
@@ -868,17 +805,15 @@ class _AddOrderState extends State<AddOrder> {
                   ))
                 ],
               ),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               floatingActionButton: FloatingActionButton.extended(
                 icon: const Icon(
                   Icons.restaurant_menu,
-                  color: GlobalTheme.floatingButtonText,
                 ),
                 label: const Text(
                   "Menu",
                   style: TextStyle(
                     fontSize: 17,
-                    color: GlobalTheme.floatingButtonText,
                   ),
                 ),
                 onPressed: _handleSubmitted,
