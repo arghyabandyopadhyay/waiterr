@@ -21,7 +21,7 @@ class Chips extends StatelessWidget {
       child: Wrap(
         children: [
           ChoiceChip(
-              selectedColor: GlobalTheme.primaryColor,
+              selectedColor: GlobalTheme.waiterrPrimaryColor,
               backgroundColor: Colors.white,
               padding: const EdgeInsets.all(4),
               shape: const RoundedRectangleBorder(
