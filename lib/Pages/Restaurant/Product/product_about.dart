@@ -51,7 +51,6 @@ class ProductAbout extends StatelessWidget {
               ? Text(
                   item.itemDescription ?? "",
                   style: const TextStyle(
-                    color: GlobalTheme.primaryText,
                     fontSize: 13,
                   ),
                   maxLines: 3,
@@ -90,7 +89,6 @@ class ProductAbout extends StatelessWidget {
                                 textAlign: TextAlign.end,
                                 style: const TextStyle(
                                     fontSize: 15,
-                                    color: GlobalTheme.primaryText,
                                     decoration: TextDecoration.lineThrough),
                               )
                             ],
@@ -129,7 +127,7 @@ class ProductAbout extends StatelessWidget {
                           child: ((item.commentForKOT ?? "").isNotEmpty)
                               ? const Icon(
                                   Icons.comment,
-                                  color: GlobalTheme.primaryColor,
+                                  color: GlobalTheme.commentIconColor,
                                 )
                               : null,
                         ),
@@ -158,10 +156,11 @@ class ProductAbout extends StatelessWidget {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                      color: GlobalTheme.primaryColor,
+                                      color: GlobalTheme.borderColorHighlight,
                                       width: 1.0,
                                       style: BorderStyle.solid),
-                                  color: GlobalTheme.primaryColor),
+                                  color:
+                                      GlobalTheme.boxDecorationColorHighlight),
                               child: Text(
                                 tagList[id],
                                 style: const TextStyle(
