@@ -62,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
             child: ScaffoldMessenger(
               key: loginStore.loginScaffoldMessengerKey,
               child: Scaffold(
-                backgroundColor: GlobalTheme.backgroundColorLoginPage,
                 key: loginStore.loginScaffoldKey,
                 resizeToAvoidBottomInset: false,
                 body: Column(
@@ -100,7 +99,6 @@ class _LoginPageState extends State<LoginPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Card(
-                                color: GlobalTheme.backgroundColor,
                                 elevation: 10,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
@@ -122,7 +120,6 @@ class _LoginPageState extends State<LoginPage> {
                                         child: CupertinoTextField(
                                           textCapitalization:
                                               TextCapitalization.words,
-                                          cursorColor: GlobalTheme.primaryColor,
                                           style: const TextStyle(),
                                           decoration: BoxDecoration(
                                               border: Border.all(
@@ -132,8 +129,6 @@ class _LoginPageState extends State<LoginPage> {
                                           controller: nameController,
                                           placeholder: 'Enter your Name here :',
                                           textInputAction: TextInputAction.next,
-                                          placeholderStyle: const TextStyle(
-                                              color: GlobalTheme.primaryText),
                                         ),
                                       ),
                                       const SizedBox(
@@ -203,7 +198,6 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     child: const Icon(
                                       Icons.arrow_forward,
-                                      color: GlobalTheme.floatingButtonText,
                                     )),
                                 onPressed: () {
                                   FocusScope.of(context).unfocus();
@@ -249,8 +243,7 @@ class _LoginPageState extends State<LoginPage> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0, color: GlobalTheme.primaryText),
+                        style: TextStyle(fontSize: 15.0),
                       ),
                     ),
                   ],
