@@ -27,7 +27,6 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalTheme.backgroundColor,
       body: Stack(
         children: [
           Positioned(
@@ -47,7 +46,7 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
               centerTitle: true,
               elevation: 0,
             ),
-            backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+            backgroundColor: GlobalTheme.tint,
             body: Container(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,24 +143,7 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
                       child: Container(
                           height: MediaQuery.of(context).size.height,
                           padding: const EdgeInsets.only(top: 10),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: GlobalTheme.primaryText,
-                                blurRadius: 25.0, // soften the shadow
-                                spreadRadius: 5.0, //extend the shadow
-                                offset: Offset(
-                                  15.0, // Move to right 10  horizontally
-                                  15.0, // Move to bottom 10 Vertically
-                                ),
-                              )
-                            ],
-                          ),
+                          decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                           child: ListView(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
@@ -196,8 +178,8 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
                                 child: RatingBar(
                                   initialRating: 0,
                                   glowColor: Colors.white,
-                                  unratedColor:
-                                      GlobalTheme.primaryText.withOpacity(0.5),
+                                  unratedColor: GlobalTheme.waiterrPrimaryText
+                                      .withOpacity(0.5),
                                   itemCount: 5,
                                   ratingWidget: RatingWidget(
                                       half: const Icon(
@@ -259,16 +241,6 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
                               const TextField(
                                 minLines: 5,
                                 maxLines: 5,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0)),
-                                      borderSide: BorderSide(
-                                          color: GlobalTheme.primaryColor)),
-                                  contentPadding:
-                                      EdgeInsets.only(left: 10.0, right: 10.0),
-                                ),
                               )
                             ],
                           ))),
@@ -292,7 +264,7 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
                               colors: GlobalTheme.primaryGradient),
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                              color: GlobalTheme.primaryColor,
+                              color: GlobalTheme.borderColorHighlight,
                               width: 1.0,
                               style: BorderStyle.solid)),
                       width: MediaQuery.of(context).size.width * 0.60,
