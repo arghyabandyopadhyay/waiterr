@@ -62,8 +62,7 @@ class WaiterDetailsCard extends StatelessWidget {
                     waiter.mobileNumber,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 13, color: GlobalTheme.primaryText),
+                    style: const TextStyle(fontSize: 13),
                   ),
                 ),
                 Row(
@@ -76,8 +75,7 @@ class WaiterDetailsCard extends StatelessWidget {
                         "Last Login: ${DateFormat('MMMM d, y', 'en_US').format(DateTime.parse(waiter.lastLogin))}",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontSize: 13, color: GlobalTheme.primaryText),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ),
                     Container(
@@ -100,15 +98,11 @@ class WaiterDetailsCard extends StatelessWidget {
                   children: <Widget>[
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                GlobalTheme.floatingButtonBackground,
                             minimumSize: const Size(80, 50)),
                         onPressed: onCallClicked,
                         child: const Icon(Icons.call)),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                GlobalTheme.floatingButtonBackground,
                             minimumSize: const Size(80, 50)),
                         onPressed: onDeleteClicked,
                         child: const Icon(Icons.delete_forever_outlined))
