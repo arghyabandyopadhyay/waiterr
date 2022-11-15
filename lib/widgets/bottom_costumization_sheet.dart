@@ -66,7 +66,6 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                         },
                         child: const Icon(
                           Icons.close,
-                          color: GlobalTheme.primaryText,
                         ),
                       )
                     ],
@@ -75,7 +74,6 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                     child: Text(
                       widget.description,
                       style: const TextStyle(
-                        color: GlobalTheme.primaryText,
                         fontSize: 13,
                       ),
                       maxLines: 3,
@@ -173,7 +171,7 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                                             "Ok",
                                             style: TextStyle(color: Colors.white),
                                           ),
-                                          color: GlobalTheme.primaryColor,
+                                          color: GlobalTheme.waiterrPrimaryColor,
                                         ),
                                       )
                                     ],
@@ -223,7 +221,7 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5)),
                           border: Border.all(
-                              color: GlobalTheme.primaryColor,
+                              color: GlobalTheme.borderColor,
                               width: 0.5,
                               style: BorderStyle.solid),
                         ),
@@ -261,7 +259,7 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(5)),
                               border: Border.all(
-                                  color: GlobalTheme.primaryColor,
+                                  color: GlobalTheme.borderColor,
                                   width: 0.5,
                                   style: BorderStyle.solid),
                             ),
