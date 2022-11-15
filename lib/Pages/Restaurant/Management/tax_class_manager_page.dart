@@ -1,19 +1,15 @@
-import 'package:waiterr/Model/waiter_details_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
 import 'package:waiterr/stores/login_store.dart';
-import 'package:waiterr/widgets/running_order_card.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:waiterr/widgets/waiter_details_card.dart';
 import '../../../Model/tax_model.dart';
 import '../../../theme.dart';
 import 'add_tax_class_manager_page.dart';
-import 'add_waiter_page.dart';
 
 class TaxClassManagerPage extends StatefulWidget {
   const TaxClassManagerPage({Key? key}) : super(key: key);
@@ -108,7 +104,6 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
   Widget build(BuildContext context) {
     return Consumer<LoginStore>(builder: (_, loginStore, __) {
       return Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -143,7 +138,6 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                               decoration: const InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.search,
-                                    color: GlobalTheme.primaryText,
                                   ),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none),
@@ -186,7 +180,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                   )
                 ],
               ),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -208,24 +202,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                         child: Container(
                             height: MediaQuery.of(context).size.height,
                             padding: const EdgeInsets.only(top: 10),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30),
-                                topRight: Radius.circular(30),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: GlobalTheme.primaryText,
-                                  blurRadius: 25.0, // soften the shadow
-                                  spreadRadius: 5.0, //extend the shadow
-                                  offset: Offset(
-                                    15.0, // Move to right 10  horizontally
-                                    15.0, // Move to bottom 10 Vertically
-                                  ),
-                                )
-                              ],
-                            ),
+                            decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                             child: FutureBuilder<List<TaxModel>>(
                                 future: _futuretaxclasses,
                                 builder: (context, snapshot) {
@@ -243,8 +220,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                                             child: _isLoading!
                                                 ? const CircularProgressIndicator(
                                                     strokeWidth: 3,
-                                                    backgroundColor: GlobalTheme
-                                                        .progressBarBackground)
+                                                  )
                                                 : null,
                                           ),
                                         ),
@@ -429,7 +405,6 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                 onPressed: _addTaxGroup,
                 child: const Icon(
                   Icons.add,
-                  color: GlobalTheme.floatingButtonText,
                 ),
               ),
               floatingActionButtonLocation:
