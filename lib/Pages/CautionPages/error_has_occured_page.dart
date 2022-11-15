@@ -16,7 +16,7 @@ import 'package:waiterr/Model/drawer_action_model.dart';
 class ErrorHasOccuredPage extends StatefulWidget {
   const ErrorHasOccuredPage({Key? key}) : super(key: key);
   @override
-  _ErrorHasOccuredPageState createState() => _ErrorHasOccuredPageState();
+  State<ErrorHasOccuredPage> createState() => _ErrorHasOccuredPageState();
 }
 
 class _ErrorHasOccuredPageState extends State<ErrorHasOccuredPage> {
@@ -30,7 +30,6 @@ class _ErrorHasOccuredPageState extends State<ErrorHasOccuredPage> {
   Widget build(BuildContext context) {
     return Consumer<LoginStore>(builder: (_, loginStore, __) {
       return Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         body: Stack(
           children: [
             Positioned(
@@ -101,7 +100,7 @@ class _ErrorHasOccuredPageState extends State<ErrorHasOccuredPage> {
                   ),
                 ],
               )),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -123,24 +122,7 @@ class _ErrorHasOccuredPageState extends State<ErrorHasOccuredPage> {
                       child: Container(
                         height: MediaQuery.of(context).size.height,
                         padding: const EdgeInsets.only(top: 10),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              // color: GlobalTheme.primaryText,
-                              blurRadius: 25.0, // soften the shadow
-                              spreadRadius: 5.0, //extend the shadow
-                              offset: Offset(
-                                15.0, // Move to right 10  horizontally
-                                15.0, // Move to bottom 10 Vertically
-                              ),
-                            )
-                          ],
-                        ),
+                        decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                         child: const ErrorHasOccurred(),
                       ),
                     )
