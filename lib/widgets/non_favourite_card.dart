@@ -166,7 +166,6 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                           textAlign: TextAlign.end,
                                           style: const TextStyle(
                                               fontSize: 15,
-                                              color: GlobalTheme.primaryText,
                                               decoration:
                                                   TextDecoration.lineThrough),
                                         )
@@ -222,7 +221,7 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                     ? (widget.item.commentForKOT!.isNotEmpty)
                                         ? const Icon(
                                             Icons.comment,
-                                            color: GlobalTheme.primaryColor,
+                                            color: GlobalTheme.commentIconColor,
                                           )
                                         : null
                                     : null,
@@ -257,10 +256,12 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
-                                            color: GlobalTheme.primaryColor,
+                                            color: GlobalTheme
+                                                .borderColorHighlight,
                                             width: 1.0,
                                             style: BorderStyle.solid),
-                                        color: GlobalTheme.primaryColor),
+                                        color: GlobalTheme
+                                            .boxDecorationColorHighlight),
                                     child: Text(
                                       tagList[id],
                                       style: const TextStyle(
@@ -284,7 +285,6 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                             ? Text(
                                 widget.item.itemDescription!,
                                 style: const TextStyle(
-                                  color: GlobalTheme.primaryText,
                                   fontSize: 13,
                                 ),
                                 maxLines: 3,
