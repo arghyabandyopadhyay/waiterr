@@ -1,7 +1,5 @@
 import 'package:waiterr/Model/customizable_page_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../theme.dart';
 
@@ -39,11 +37,11 @@ class CustomizableListCard extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     list!.name,
-                    style: TextStyle(
-                        fontSize: 17,
-                        color: list!.qty == 0
-                            ? GlobalTheme.primaryText
-                            : GlobalTheme.primaryColor),
+                    style: list!.qty == 0
+                        ? Theme.of(context).textTheme.headline2
+                        : const TextStyle(
+                            fontSize: 17,
+                            color: GlobalTheme.waiterrPrimaryText),
                   ),
                 ],
               ),
@@ -55,15 +53,13 @@ class CustomizableListCard extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     padding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
-                    child: Text(
-                      "₹${list!.price}",
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                          color: list!.qty == 0
-                              ? GlobalTheme.primaryText
-                              : GlobalTheme.primaryColor,
-                          fontSize: 17),
-                    ),
+                    child: Text("₹${list!.price}",
+                        textAlign: TextAlign.end,
+                        style: list!.qty == 0
+                            ? Theme.of(context).textTheme.headline2
+                            : const TextStyle(
+                                fontSize: 17,
+                                color: GlobalTheme.waiterrPrimaryText)),
                   ),
                   const SizedBox(
                     width: 10,
@@ -82,7 +78,7 @@ class CustomizableListCard extends StatelessWidget {
                           : null,
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
-                          color: GlobalTheme.primaryColor,
+                          color: GlobalTheme.borderColorHighlight,
                           width: 1,
                           style: BorderStyle.solid),
                     ),
@@ -155,7 +151,7 @@ class CustomizableListCard extends StatelessWidget {
                                 : const Icon(
                                     Icons.add,
                                     size: 17,
-                                    color: GlobalTheme.primaryColor,
+                                    color: GlobalTheme.waiterrPrimaryColor,
                                   ),
                             onTap: () {
                               onTapAdd();
