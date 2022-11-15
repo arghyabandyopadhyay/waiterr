@@ -124,7 +124,6 @@ class _SignInPageState extends State<SignInPage> {
         height: 60,
         child: Card(
           elevation: 8,
-          color: GlobalTheme.floatingButtonBackground,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
               side: const BorderSide(
