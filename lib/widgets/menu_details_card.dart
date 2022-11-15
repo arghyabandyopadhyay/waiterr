@@ -151,7 +151,6 @@ class _MenuDetailsCardState extends State<MenuDetailsCard> {
                                           textAlign: TextAlign.end,
                                           style: const TextStyle(
                                               fontSize: 15,
-                                              color: GlobalTheme.primaryText,
                                               decoration:
                                                   TextDecoration.lineThrough),
                                         )
@@ -168,7 +167,7 @@ class _MenuDetailsCardState extends State<MenuDetailsCard> {
                               Icon(
                                 Icons.edit,
                                 color: widget.item.isEdited
-                                    ? GlobalTheme.primaryColor
+                                    ? GlobalTheme.waiterrPrimaryColor
                                     : null,
                               ),
                               const SizedBox(
@@ -224,10 +223,12 @@ class _MenuDetailsCardState extends State<MenuDetailsCard> {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
-                                            color: GlobalTheme.primaryColor,
+                                            color: GlobalTheme
+                                                .borderColorHighlight,
                                             width: 1.0,
                                             style: BorderStyle.solid),
-                                        color: GlobalTheme.primaryColor),
+                                        color: GlobalTheme
+                                            .boxDecorationColorHighlight),
                                     child: Text(
                                       tagList[id],
                                       style: const TextStyle(
@@ -251,7 +252,6 @@ class _MenuDetailsCardState extends State<MenuDetailsCard> {
                             ? Text(
                                 widget.item.itemDescription!,
                                 style: const TextStyle(
-                                  color: GlobalTheme.primaryText,
                                   fontSize: 13,
                                 ),
                                 maxLines: 3,
