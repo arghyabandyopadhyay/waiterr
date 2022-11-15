@@ -30,7 +30,6 @@ class _OtpPageState extends State<OtpPage> {
             child: ScaffoldMessenger(
                 key: loginStore.otpScaffoldMessengerKey,
                 child: Scaffold(
-                  backgroundColor: GlobalTheme.backgroundColorLoginPage,
                   key: loginStore.otpScaffoldKey,
                   resizeToAvoidBottomInset: false,
                   body: Column(
@@ -62,7 +61,6 @@ class _OtpPageState extends State<OtpPage> {
                           child: const Text('Enter one time password sent on',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: GlobalTheme.primaryText,
                                 fontSize: 20,
                               ))),
                       Container(
@@ -71,7 +69,6 @@ class _OtpPageState extends State<OtpPage> {
                               Text('+91${UserDetail.loginDetail.mobileNumber}',
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                    color: GlobalTheme.primaryText,
                                     fontSize: 30,
                                   ))),
                       const SizedBox(
@@ -84,7 +81,6 @@ class _OtpPageState extends State<OtpPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Card(
-                                  color: GlobalTheme.backgroundColor,
                                   elevation: 10,
                                   shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.only(
@@ -131,7 +127,6 @@ class _OtpPageState extends State<OtpPage> {
                                       ),
                                       child: const Icon(
                                         Icons.done,
-                                        color: GlobalTheme.floatingButtonText,
                                       )),
                                   onPressed: () {
                                     loginStore.validateOtpAndLogin(
