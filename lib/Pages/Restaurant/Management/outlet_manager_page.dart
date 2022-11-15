@@ -106,7 +106,6 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
   Widget build(BuildContext context) {
     return Consumer<LoginStore>(builder: (_, loginStore, __) {
       return Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -141,7 +140,6 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                               decoration: const InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.search,
-                                    color: GlobalTheme.primaryText,
                                   ),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none),
@@ -184,7 +182,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                   )
                 ],
               ),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -206,24 +204,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                         child: Container(
                             height: MediaQuery.of(context).size.height,
                             padding: const EdgeInsets.only(top: 10),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30),
-                                topRight: Radius.circular(30),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: GlobalTheme.primaryText,
-                                  blurRadius: 25.0, // soften the shadow
-                                  spreadRadius: 5.0, //extend the shadow
-                                  offset: Offset(
-                                    15.0, // Move to right 10  horizontally
-                                    15.0, // Move to bottom 10 Vertically
-                                  ),
-                                )
-                              ],
-                            ),
+                            decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                             child: FutureBuilder<
                                     List<OutletConfigurationModel>>(
                                 future: _futureoutlets,
@@ -242,8 +223,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                                             child: _isLoading!
                                                 ? const CircularProgressIndicator(
                                                     strokeWidth: 3,
-                                                    backgroundColor: GlobalTheme
-                                                        .progressBarBackground)
+                                                  )
                                                 : null,
                                           ),
                                         ),
@@ -505,7 +485,6 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                 onPressed: _addOutlet,
                 child: const Icon(
                   Icons.add,
-                  color: GlobalTheme.floatingButtonText,
                 ),
               ),
               floatingActionButtonLocation:
