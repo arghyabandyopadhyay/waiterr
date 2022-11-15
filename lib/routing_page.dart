@@ -252,7 +252,6 @@ class _RoutingPageState extends State<RoutingPage> {
           }
           // By default, show a loading spinner.
           return Scaffold(
-            backgroundColor: GlobalTheme.backgroundColor,
             body: Stack(
               children: [
                 Positioned(
@@ -265,7 +264,7 @@ class _RoutingPageState extends State<RoutingPage> {
                     elevation: 0,
                     leading: const Icon(Icons.dehaze),
                   ),
-                  backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+                  backgroundColor: GlobalTheme.tint,
                   body: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -281,24 +280,8 @@ class _RoutingPageState extends State<RoutingPage> {
                           child: Container(
                               height: MediaQuery.of(context).size.height,
                               padding: const EdgeInsets.only(top: 10),
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: GlobalTheme.primaryText,
-                                    blurRadius: 25.0, // soften the shadow
-                                    spreadRadius: 5.0, //extend the shadow
-                                    offset: Offset(
-                                      15.0, // Move to right 10  horizontally
-                                      15.0, // Move to bottom 10 Vertically
-                                    ),
-                                  )
-                                ],
-                              ),
+                              decoration:
+                                  GlobalTheme.waiterrAppBarBoxDecoration,
                               child: Container(
                                 width: double.infinity,
                                 padding: const EdgeInsets.symmetric(
