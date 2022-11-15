@@ -111,7 +111,6 @@ class _OrdersPageState extends State<OrdersPage> {
   Widget build(BuildContext context) {
     return Consumer<LoginStore>(builder: (_, loginStore, __) {
       return Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -146,7 +145,6 @@ class _OrdersPageState extends State<OrdersPage> {
                               decoration: const InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.search,
-                                    color: GlobalTheme.primaryText,
                                   ),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none),
@@ -227,7 +225,7 @@ class _OrdersPageState extends State<OrdersPage> {
                   ),
                 ],
               )),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -238,8 +236,7 @@ class _OrdersPageState extends State<OrdersPage> {
                         "${UserDetail.userDetails.name ?? ""}'s ${widget.showPastOrder ? "order history" : "running orders"}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                     const SizedBox(
@@ -249,24 +246,7 @@ class _OrdersPageState extends State<OrdersPage> {
                         child: Container(
                             height: MediaQuery.of(context).size.height,
                             padding: const EdgeInsets.only(top: 10),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30),
-                                topRight: Radius.circular(30),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: GlobalTheme.primaryText,
-                                  blurRadius: 25.0, // soften the shadow
-                                  spreadRadius: 5.0, //extend the shadow
-                                  offset: Offset(
-                                    15.0, // Move to right 10  horizontally
-                                    15.0, // Move to bottom 10 Vertically
-                                  ),
-                                )
-                              ],
-                            ),
+                            decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                             child: FutureBuilder<List<RunningOrderModel>>(
                                 future: _futureitems,
                                 builder: (context, snapshot) {
@@ -284,8 +264,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                             child: _isLoading!
                                                 ? const CircularProgressIndicator(
                                                     strokeWidth: 3,
-                                                    backgroundColor: GlobalTheme
-                                                        .progressBarBackground)
+                                                  )
                                                 : null,
                                           ),
                                         ),
