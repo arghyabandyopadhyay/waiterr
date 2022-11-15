@@ -6,7 +6,7 @@ import 'package:waiterr/Modules/universal_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/Restaurant/menu_page_all.dart';
 import 'package:waiterr/widgets/kot_details_widget.dart';
-import 'package:waiterr/widgets/progress_status_indicator.dart';
+import 'package:waiterr/widgets/kot_progress_status_indicator.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +78,6 @@ class _KOTPageState extends State<KOTPage> {
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
       child: Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -123,7 +122,7 @@ class _KOTPageState extends State<KOTPage> {
                   )
                 ],
               ),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -135,8 +134,7 @@ class _KOTPageState extends State<KOTPage> {
                           ? "Running Orders"
                           : "Table-${widget.item.salePointName!}",
                       textAlign: TextAlign.left,
-                      style: const TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
                   const SizedBox(
@@ -146,24 +144,7 @@ class _KOTPageState extends State<KOTPage> {
                       child: Container(
                           height: MediaQuery.of(context).size.height,
                           padding: const EdgeInsets.only(top: 5),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: GlobalTheme.primaryText,
-                                blurRadius: 25.0, // soften the shadow
-                                spreadRadius: 5.0, //extend the shadow
-                                offset: Offset(
-                                  15.0, // Move to right 10  horizontally
-                                  15.0, // Move to bottom 10 Vertically
-                                ),
-                              )
-                            ],
-                          ),
+                          decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                           child: FutureBuilder<List<List<KOTModel>>>(
                               future: _futureKot,
                               builder: (context, snapshot) {
@@ -183,8 +164,6 @@ class _KOTPageState extends State<KOTPage> {
                                           child: _isLoading
                                               ? const CircularProgressIndicator(
                                                   strokeWidth: 3,
-                                                  backgroundColor: GlobalTheme
-                                                      .progressBarBackground,
                                                 )
                                               : null,
                                         ),
@@ -313,13 +292,11 @@ class _KOTPageState extends State<KOTPage> {
                       backgroundColor: Colors.black,
                       icon: const Icon(
                         Icons.restaurant_menu,
-                        color: GlobalTheme.floatingButtonText,
                       ),
                       label: const Text(
                         "Menu",
                         style: TextStyle(
                           fontSize: 17,
-                          color: GlobalTheme.floatingButtonText,
                         ),
                       ),
                       onPressed: () {
@@ -362,7 +339,7 @@ class _KOTPageState extends State<KOTPage> {
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(5)),
             border: Border.all(
-                color: GlobalTheme.primaryText,
+                color: GlobalTheme.borderColor,
                 width: 1,
                 style: BorderStyle.solid),
             color: Colors.white,
@@ -380,7 +357,7 @@ class _KOTPageState extends State<KOTPage> {
                   );
                 },
               ),
-              ProgressStatusIndicator(items.first)
+              KOTProgressStatusIndicator(items.first)
             ],
           )),
     ));
