@@ -142,12 +142,10 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
 
   @override
   Widget build(BuildContext context) {
-    const cursorColor = GlobalTheme.primaryColor;
     const sizedBoxSpace = SizedBox(height: 24);
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
       child: Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -174,37 +172,19 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       "Add Waiter",
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
                   Flexible(
                       child: Container(
                     height: MediaQuery.of(context).size.height,
                     padding: const EdgeInsets.only(top: 10),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: GlobalTheme.primaryText,
-                          blurRadius: 25.0, // soften the shadow
-                          spreadRadius: 5.0, //extend the shadow
-                          offset: Offset(
-                            15.0, // Move to right 10  horizontally
-                            15.0, // Move to bottom 10 Vertically
-                          ),
-                        )
-                      ],
-                    ),
+                    decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                     child: Form(
                       key: _formKey,
                       child: SingleChildScrollView(
@@ -231,15 +211,11 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                                     child: _isLoadingAvailability
                                         ? const CircularProgressIndicator(
                                             strokeWidth: 3,
-                                            backgroundColor: GlobalTheme
-                                                .progressBarBackground,
                                           )
                                         : null,
                                   ),
                                 ),
-                                const Text("Outlets:",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("Outlets:"),
                                 SizedBox(
                                   height: 50,
                                   child: ListView.builder(
@@ -269,11 +245,9 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                                 ),
                                 sizedBoxSpace,
                                 TextFormField(
-                                  cursorColor: cursorColor,
                                   controller: phoneNumber,
                                   style: const TextStyle(),
                                   decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
                                     suffixIcon: _isLoading
                                         ? Container(
                                             margin: const EdgeInsets.all(10),
@@ -288,15 +262,6 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                                         maxHeight: 40, maxWidth: 40),
                                     labelText: "Mobile",
                                     prefixText: '+91 ',
-                                    hintStyle: const TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: const TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
                                     contentPadding: const EdgeInsets.only(
                                         left: 10.0, right: 10.0),
                                   ),
@@ -403,22 +368,9 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                                   enabled: false,
                                   textCapitalization: TextCapitalization.words,
                                   controller: name,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Name",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   onSaved: (value) {
                                     person.name = value;
@@ -433,17 +385,15 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                   ))
                 ],
               ),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               floatingActionButton: FloatingActionButton.extended(
                 icon: const Icon(
                   Icons.add,
-                  color: GlobalTheme.floatingButtonText,
                 ),
                 label: const Text(
                   "Add",
                   style: TextStyle(
                     fontSize: 17,
-                    color: GlobalTheme.floatingButtonText,
                   ),
                 ),
                 onPressed: _handleSubmitted,
