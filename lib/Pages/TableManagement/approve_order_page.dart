@@ -6,7 +6,7 @@ import 'package:waiterr/Modules/universal_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/Restaurant/menu_page_all.dart';
 import 'package:waiterr/widgets/kot_details_widget.dart';
-import 'package:waiterr/widgets/progress_status_indicator.dart';
+import 'package:waiterr/widgets/kot_progress_status_indicator.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable_group/expandable_group_widget.dart';
@@ -86,7 +86,6 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
         child: ScaffoldMessenger(
           key: scaffoldMessengerKey,
           child: Scaffold(
-            backgroundColor: GlobalTheme.backgroundColor,
             resizeToAvoidBottomInset: false,
             body: Stack(
               children: [
@@ -133,7 +132,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                       )
                     ],
                   ),
-                  backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+                  backgroundColor: GlobalTheme.tint,
                   body: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -154,24 +153,8 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                           child: Container(
                               height: MediaQuery.of(context).size.height,
                               padding: const EdgeInsets.only(top: 5),
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: GlobalTheme.primaryText,
-                                    blurRadius: 25.0, // soften the shadow
-                                    spreadRadius: 5.0, //extend the shadow
-                                    offset: Offset(
-                                      15.0, // Move to right 10  horizontally
-                                      15.0, // Move to bottom 10 Vertically
-                                    ),
-                                  )
-                                ],
-                              ),
+                              decoration:
+                                  GlobalTheme.waiterrAppBarBoxDecoration,
                               child: FutureBuilder<List<List<KOTModel>>>(
                                   future: _futureKot,
                                   builder: (context, snapshot) {
@@ -195,8 +178,6 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                                                 child: _isLoading
                                                     ? const CircularProgressIndicator(
                                                         strokeWidth: 3,
-                                                        backgroundColor: GlobalTheme
-                                                            .progressBarBackground,
                                                       )
                                                     : null,
                                               ),
@@ -334,13 +315,11 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                     backgroundColor: Colors.black,
                     icon: const Icon(
                       Icons.checklist,
-                      color: GlobalTheme.floatingButtonText,
                     ),
                     label: const Text(
                       "Approve All",
                       style: TextStyle(
                         fontSize: 17,
-                        color: GlobalTheme.floatingButtonText,
                       ),
                     ),
                     onPressed: () {
@@ -466,7 +445,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(5)),
             border: Border.all(
-                color: GlobalTheme.primaryText,
+                color: GlobalTheme.borderColor,
                 width: 1,
                 style: BorderStyle.solid),
             color: Colors.white,
@@ -484,7 +463,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                   );
                 },
               ),
-              ProgressStatusIndicator(items.first),
+              KOTProgressStatusIndicator(items.first),
               const SizedBox(height: 10),
               ApprovalControlKOT(items.first, () {
                 showDialog(
