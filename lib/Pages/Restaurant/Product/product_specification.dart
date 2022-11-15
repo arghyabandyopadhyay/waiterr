@@ -27,7 +27,7 @@ class ProductSpecification extends StatelessWidget {
             //     child: Container(
             //       padding: EdgeInsets.symmetric(horizontal: 10,vertical: 2),
             //       decoration:BoxDecoration(color:Colors.white,border: Border.all(color: GlobalTheme.primaryText.withOpacity(0.2),width: 1,style: BorderStyle.solid),),
-            //       child:Text("Rate Product",style: TextStyle(fontSize:15,color: GlobalTheme.primaryColor,fontWeight: FontWeight.bold)),
+            //       child:Text("Rate Product",style: TextStyle(fontSize:15,color: GlobalTheme.waiterrPrimaryColor,fontWeight: FontWeight.bold)),
             //     ),
             //     onTap:(){
             //       Navigator.push(context, CupertinoPageRoute(builder: (context1) => GetRatingAndReviews(item: item,)));
