@@ -128,7 +128,6 @@ class _ProfilePageState extends State<ProfilePage> {
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
       child: Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -138,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             Scaffold(
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               appBar: AppBar(
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back_ios),
@@ -170,24 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                             height: MediaQuery.of(context).size.height,
                             padding: const EdgeInsets.only(top: 10),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30),
-                                topRight: Radius.circular(30),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: GlobalTheme.primaryText,
-                                  blurRadius: 25.0, // soften the shadow
-                                  spreadRadius: 5.0, //extend the shadow
-                                  offset: Offset(
-                                    15.0, // Move to right 10  horizontally
-                                    15.0, // Move to bottom 10 Vertically
-                                  ),
-                                )
-                              ],
-                            ),
+                            decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                             child: ListView(
                               shrinkWrap: true,
                               padding:
@@ -213,65 +195,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                               textCapitalization:
                                                   TextCapitalization.words,
                                               controller: name,
-                                              cursorColor:
-                                                  GlobalTheme.primaryColor,
                                               validator: _validateName,
                                               autovalidateMode: AutovalidateMode
                                                   .onUserInteraction,
                                               decoration: const InputDecoration(
-                                                border: OutlineInputBorder(),
                                                 labelText: "Name",
-                                                hintStyle: TextStyle(
-                                                    color: GlobalTheme
-                                                        .primaryText),
-                                                labelStyle: TextStyle(
-                                                    color: GlobalTheme
-                                                        .primaryText),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5.0)),
-                                                        borderSide: BorderSide(
-                                                            color: GlobalTheme
-                                                                .primaryColor)),
-                                                contentPadding: EdgeInsets.only(
-                                                    bottom: 10.0,
-                                                    left: 10.0,
-                                                    right: 10.0),
                                               ),
                                             ),
                                             const SizedBox(
                                               height: 24,
                                             ),
                                             TextFormField(
-                                              cursorColor:
-                                                  GlobalTheme.primaryColor,
                                               enabled: false,
                                               controller: phoneNumber,
                                               style: const TextStyle(),
                                               decoration: const InputDecoration(
-                                                border: OutlineInputBorder(),
                                                 labelText: "Mobile",
                                                 prefixText: '+91 ',
-                                                hintStyle: TextStyle(
-                                                    color: GlobalTheme
-                                                        .primaryText),
-                                                labelStyle: TextStyle(
-                                                    color: GlobalTheme
-                                                        .primaryText),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5.0)),
-                                                        borderSide: BorderSide(
-                                                            color: GlobalTheme
-                                                                .primaryColor)),
-                                                contentPadding: EdgeInsets.only(
-                                                    left: 10.0, right: 10.0),
                                               ),
                                               keyboardType: TextInputType.phone,
                                               // TextInputFormatters are applied in sequence.
@@ -486,12 +426,10 @@ class _ProfilePageState extends State<ProfilePage> {
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.endFloat,
               floatingActionButton: FloatingActionButton.extended(
-                icon: const Icon(Icons.save,
-                    color: GlobalTheme.floatingButtonText),
+                icon: const Icon(Icons.save),
                 label: const Text(
                   "Save",
-                  style: TextStyle(
-                      fontSize: 17, color: GlobalTheme.floatingButtonText),
+                  style: TextStyle(fontSize: 17),
                 ),
                 onPressed: () async {
                   if (_validateName(name.text) == null) {
