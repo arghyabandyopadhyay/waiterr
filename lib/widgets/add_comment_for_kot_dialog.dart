@@ -78,8 +78,7 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                   hintText: 'Enter Remarks',
                   suffixIcon: _showCross!
                       ? IconButton(
-                          icon: const Icon(Icons.clear,
-                              color: GlobalTheme.primaryText),
+                          icon: const Icon(Icons.clear),
                           onPressed: () {
                             remarksController.text = "";
                             widget.setCommentForKOT(
@@ -113,7 +112,7 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                     widget.onTapAdd();
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: GlobalTheme.primaryColor),
+                      primary: GlobalTheme.waiterrPrimaryColor),
                   child: const Text(
                     "Ok",
                     style: TextStyle(color: Colors.white),
@@ -181,11 +180,7 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                             }
                             // By default, show a loading spinner.
                             return const SizedBox(
-                                height: 5,
-                                child: LinearProgressIndicator(
-                                  backgroundColor:
-                                      GlobalTheme.progressBarBackground,
-                                ));
+                                height: 5, child: LinearProgressIndicator());
                           }))),
             ],
           ),
