@@ -47,8 +47,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
                   hintText: 'Enter Quantity',
                   suffixIcon: _showCross
                       ? IconButton(
-                          icon: const Icon(Icons.clear,
-                              color: GlobalTheme.primaryText),
+                          icon: const Icon(Icons.clear),
                           onPressed: () {
                             widget.setQuantity(0.0);
                             quantityController.text = "";
@@ -79,7 +78,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
                   onPressed: () {
                     widget.onTapAdd();
                   },
-                  // color: GlobalTheme.primaryColor,
+                  // color: GlobalTheme.waiterrPrimaryColor,
                   child: const Text(
                     "Ok",
                     style: TextStyle(color: Colors.white),
@@ -103,10 +102,10 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                  color: GlobalTheme.primaryColor,
+                                  color: GlobalTheme.borderColorHighlight,
                                   width: 1.0,
                                   style: BorderStyle.solid),
-                              color: GlobalTheme.primaryColor),
+                              color: GlobalTheme.boxDecorationColorHighlight),
                           child: Text(
                             items[id].toStringAsFixed(2),
                             style: const TextStyle(
