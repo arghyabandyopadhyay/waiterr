@@ -113,12 +113,10 @@ class _AddOutletPageState extends State<AddOutletPage> {
 
   @override
   Widget build(BuildContext context) {
-    const cursorColor = GlobalTheme.primaryColor;
     const sizedBoxSpace = SizedBox(height: 24);
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
       child: Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -145,37 +143,19 @@ class _AddOutletPageState extends State<AddOutletPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       "Add Outlet",
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
                   Flexible(
                       child: Container(
                     height: MediaQuery.of(context).size.height,
                     padding: const EdgeInsets.only(top: 10),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: GlobalTheme.primaryText,
-                          blurRadius: 25.0, // soften the shadow
-                          spreadRadius: 5.0, //extend the shadow
-                          offset: Offset(
-                            15.0, // Move to right 10  horizontally
-                            15.0, // Move to bottom 10 Vertically
-                          ),
-                        )
-                      ],
-                    ),
+                    decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                     child: Form(
                       key: _formKey,
                       child: SingleChildScrollView(
@@ -202,8 +182,6 @@ class _AddOutletPageState extends State<AddOutletPage> {
                                     child: _isLoadingAvailability
                                         ? const CircularProgressIndicator(
                                             strokeWidth: 3,
-                                            backgroundColor: GlobalTheme
-                                                .progressBarBackground,
                                           )
                                         : null,
                                   ),
@@ -212,22 +190,9 @@ class _AddOutletPageState extends State<AddOutletPage> {
                                 TextFormField(
                                   textCapitalization: TextCapitalization.words,
                                   controller: name,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Name",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   validator: _validateName,
                                 ),
@@ -235,24 +200,11 @@ class _AddOutletPageState extends State<AddOutletPage> {
                                 TextFormField(
                                   textCapitalization: TextCapitalization.words,
                                   controller: salePointName,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   keyboardType: TextInputType.name,
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Sale points",
                                     hintText: "Separate sale points by '|'.",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                 ),
                                 sizedBoxSpace,
@@ -263,17 +215,15 @@ class _AddOutletPageState extends State<AddOutletPage> {
                   ))
                 ],
               ),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               floatingActionButton: FloatingActionButton.extended(
                 icon: Icon(
                   widget.isEdit ? Icons.edit : Icons.add,
-                  color: GlobalTheme.floatingButtonText,
                 ),
                 label: Text(
                   widget.isEdit ? "Edit" : "Add",
                   style: const TextStyle(
                     fontSize: 17,
-                    color: GlobalTheme.floatingButtonText,
                   ),
                 ),
                 onPressed: _handleSubmitted,
