@@ -86,22 +86,8 @@ class MyApp extends StatelessWidget {
                         // Define a light and dark color theme. Then, read the user's
                         // preferred ThemeMode (light, dark, or system default) from the
                         // SettingsController to display the correct theme.
-                        theme: ThemeData(
-                            scaffoldBackgroundColor:
-                                GlobalTheme.backgroundColor,
-                            primaryColorLight: GlobalTheme.primaryColorLight,
-                            appBarTheme: const AppBarTheme(
-                                elevation: 0,
-                                iconTheme: IconThemeData(
-                                    color: GlobalTheme.appBarIconColor),
-                                backgroundColor: Colors.transparent),
-                            floatingActionButtonTheme:
-                                const FloatingActionButtonThemeData(
-                                    backgroundColor:
-                                        GlobalTheme.floatingButtonBackground,
-                                    foregroundColor:
-                                        GlobalTheme.floatingButtonText)),
-                        darkTheme: ThemeData.dark(),
+                        theme: WaiterrThemeDatas.theme,
+                        darkTheme: WaiterrThemeDatas.darkTheme,
                         themeMode: settingsController.themeMode,
 
                         // Define a function to handle named routes in order to support
