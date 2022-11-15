@@ -46,15 +46,16 @@ class RunningOrderCard extends StatelessWidget {
                           item!.salePointType!,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                              color: GlobalTheme.secondaryText, fontSize: 12),
+                              color: GlobalTheme.salePointTypeColor,
+                              fontSize: 12),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          item!.salePointName!,
+                          item!.salePointName ?? "",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: GlobalTheme.secondaryText,
+                              color: GlobalTheme.salePointNameColor,
                               fontSize: item!.salePointName!.length > 2
                                   ? (item!.salePointName!.length > 3
                                       ? (item!.salePointName!.length > 4
@@ -66,10 +67,10 @@ class RunningOrderCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          item!.outletName!,
+                          item!.outletName ?? "",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                              color: GlobalTheme.secondaryText, fontSize: 12),
+                              color: GlobalTheme.outletNameColor, fontSize: 12),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         )
@@ -93,7 +94,7 @@ class RunningOrderCard extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width / 1.5,
                               child: Text(
-                                (item!.name != null) ? item!.name! : "",
+                                item!.name ?? "",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(fontSize: 22, height: 1),
@@ -106,7 +107,7 @@ class RunningOrderCard extends StatelessWidget {
                                   alignment: Alignment.topRight,
                                   child: item!.billPrinted
                                       ? const Icon(Icons.print,
-                                          color: GlobalTheme.primaryColor)
+                                          color: GlobalTheme.printIconColor)
                                       : null),
                             ),
                           ],
@@ -117,8 +118,7 @@ class RunningOrderCard extends StatelessWidget {
                             (item!.mobileNo != null) ? item!.mobileNo! : "",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                fontSize: 13, color: GlobalTheme.primaryText),
+                            style: const TextStyle(fontSize: 13),
                           ),
                         ),
                         SizedBox(
@@ -127,8 +127,7 @@ class RunningOrderCard extends StatelessWidget {
                             "Waiter: ${item!.waiterName!}",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                fontSize: 13, color: GlobalTheme.primaryText),
+                            style: const TextStyle(fontSize: 13),
                           ),
                         ),
                         Row(
@@ -142,9 +141,7 @@ class RunningOrderCard extends StatelessWidget {
                                     "PAX: ${item!.pax}",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        fontSize: 13,
-                                        color: GlobalTheme.primaryText),
+                                    style: const TextStyle(fontSize: 13),
                                   ),
                                 ),
                                 SizedBox(
@@ -153,9 +150,7 @@ class RunningOrderCard extends StatelessWidget {
                                     "Active Since: ${item!.activeSince!}",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        fontSize: 13,
-                                        color: GlobalTheme.primaryText),
+                                    style: const TextStyle(fontSize: 13),
                                   ),
                                 )
                               ],
