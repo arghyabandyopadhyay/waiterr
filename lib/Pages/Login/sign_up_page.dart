@@ -136,7 +136,6 @@ class _SignUpPageState extends State<SignUpPage> {
         height: 60,
         child: Card(
           elevation: 8,
-          color: GlobalTheme.floatingButtonBackground,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
               side: const BorderSide(
