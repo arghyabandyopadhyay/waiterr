@@ -18,10 +18,10 @@ class ErrorPageFiveHundred extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const Text(
+          Text(
             "Technical Error!!, We are working on it.",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
+            style: Theme.of(context).textTheme.headline2,
           )
         ],
       )),
@@ -43,10 +43,10 @@ class ErrorPageFourHundredOne extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const Text(
+          Text(
             "Unauthorised Access!!",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
+            style: Theme.of(context).textTheme.headline2,
           )
         ],
       )),
@@ -68,10 +68,10 @@ class ErrorPageNoInternet extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const Text(
+          Text(
             "No Internet Connection!!",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
+            style: Theme.of(context).textTheme.headline2,
           )
         ],
       )),
@@ -94,10 +94,10 @@ class NoRunningOrders extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
+              Text(
                 "No Running Orders",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
+                style: Theme.of(context).textTheme.headline2,
               )
             ],
           )),
@@ -121,10 +121,10 @@ class NoDataError extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
+              Text(
                 "No Data Found!!",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
+                style: Theme.of(context).textTheme.headline2,
               )
             ],
           )),
@@ -148,10 +148,10 @@ class ErrorHasOccurred extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
+              Text(
                 "An Error Has Occurred!!",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: GlobalTheme.primaryColor),
+                style: Theme.of(context).textTheme.headline2,
               )
             ],
           )),
