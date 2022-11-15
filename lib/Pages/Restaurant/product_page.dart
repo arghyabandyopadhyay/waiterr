@@ -52,7 +52,6 @@ class _ProductPageState extends State<ProductPage>
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
-      backgroundColor: GlobalTheme.backgroundColor,
       context: context,
       builder: (context) {
         return BottomSheetContent(
@@ -133,7 +132,6 @@ class _ProductPageState extends State<ProductPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalTheme.backgroundColor,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -167,7 +165,7 @@ class _ProductPageState extends State<ProductPage>
                     }),
               ],
             ),
-            backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+            backgroundColor: GlobalTheme.tint,
             body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -281,7 +279,7 @@ class _ProductPageState extends State<ProductPage>
                                   colors: GlobalTheme.primaryGradient),
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                  color: GlobalTheme.primaryColor,
+                                  color: GlobalTheme.borderColorHighlight,
                                   width: 1.0,
                                   style: BorderStyle.solid)),
                           width: MediaQuery.of(context).size.width * 0.60,
