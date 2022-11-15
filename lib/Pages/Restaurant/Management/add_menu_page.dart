@@ -251,12 +251,10 @@ class _AddMenuPageState extends State<AddMenuPage> {
 
   @override
   Widget build(BuildContext context) {
-    const cursorColor = GlobalTheme.primaryColor;
     const sizedBoxSpace = SizedBox(height: 24);
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
       child: Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
@@ -283,37 +281,19 @@ class _AddMenuPageState extends State<AddMenuPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       "Add Menu",
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
                   Flexible(
                       child: Container(
                     height: MediaQuery.of(context).size.height,
                     padding: const EdgeInsets.only(top: 10),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: GlobalTheme.primaryText,
-                          blurRadius: 25.0, // soften the shadow
-                          spreadRadius: 5.0, //extend the shadow
-                          offset: Offset(
-                            15.0, // Move to right 10  horizontally
-                            15.0, // Move to bottom 10 Vertically
-                          ),
-                        )
-                      ],
-                    ),
+                    decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                     child: Form(
                       key: _formKey,
                       child: SingleChildScrollView(
@@ -340,16 +320,11 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                     child: _isLoadingAvailability
                                         ? const CircularProgressIndicator(
                                             strokeWidth: 3,
-                                            backgroundColor: GlobalTheme
-                                                .progressBarBackground,
                                           )
                                         : null,
                                   ),
                                 ),
-                                if (!widget.isEdit)
-                                  const Text("Outlets:",
-                                      style: TextStyle(
-                                          color: GlobalTheme.primaryText)),
+                                if (!widget.isEdit) const Text("Outlets:"),
                                 if (!widget.isEdit)
                                   SizedBox(
                                     height: 50,
@@ -384,22 +359,9 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                 TextFormField(
                                   textCapitalization: TextCapitalization.words,
                                   controller: nameController,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Item Name",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   onSaved: (value) {
                                     person.name = value;
@@ -410,22 +372,9 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                 TextFormField(
                                   textCapitalization: TextCapitalization.words,
                                   controller: descriptionController,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Item Description",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   onSaved: (value) {
                                     person.name = value;
@@ -433,9 +382,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                 ),
                                 sizedBoxSpace,
                                 //isVeg
-                                const Text("Types:",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("Types:"),
                                 SizedBox(
                                   height: 50,
                                   child: ListView.builder(
@@ -464,22 +411,9 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                 TextFormField(
                                   controller: priceController,
                                   keyboardType: TextInputType.number,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Price",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   onChanged: (value) {
                                     discountedPriceController
@@ -499,9 +433,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                 ),
                                 sizedBoxSpace,
                                 //isDiscountable
-                                const Text("Is Discountable:",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("Is Discountable:"),
                                 SizedBox(
                                   height: 50,
                                   child: ListView.builder(
@@ -531,22 +463,9 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                       _selectedDiscountableLists.isDiscountable,
                                   keyboardType: TextInputType.number,
                                   controller: discountPercentageController,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Discount %",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   onChanged: (value) {
                                     discountedPriceController
@@ -567,31 +486,16 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                 TextFormField(
                                   enabled: false,
                                   controller: discountedPriceController,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Discounted Price",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   onSaved: (value) {
                                     person.name = value;
                                   },
                                 ),
                                 sizedBoxSpace,
-                                const Text("Stock Group:",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("Stock Group:"),
                                 FutureBuilder<List<FilterItemModel>>(
                                     future: _futureStockGroups,
                                     builder: ((context, snapshot) {
@@ -631,9 +535,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                           "Stock Group Loading...");
                                     })),
                                 sizedBoxSpace,
-                                const Text("Tax Class:",
-                                    style: TextStyle(
-                                        color: GlobalTheme.primaryText)),
+                                const Text("Tax Class:"),
                                 FutureBuilder<List<TaxModel>>(
                                     future: _futureTaxClasses,
                                     builder: ((context, snapshot) {
@@ -676,22 +578,9 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                 TextFormField(
                                   textCapitalization: TextCapitalization.words,
                                   controller: tagsController,
-                                  cursorColor: cursorColor,
                                   style: const TextStyle(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: "Tags",
-                                    hintStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    labelStyle: TextStyle(
-                                        color: GlobalTheme.primaryText),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        borderSide: BorderSide(
-                                            color: GlobalTheme.primaryColor)),
-                                    contentPadding: EdgeInsets.only(
-                                        bottom: 10.0, left: 10.0, right: 10.0),
                                   ),
                                   validator: _validateRequired,
                                 ),
@@ -703,17 +592,15 @@ class _AddMenuPageState extends State<AddMenuPage> {
                   ))
                 ],
               ),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
               floatingActionButton: FloatingActionButton.extended(
                 icon: Icon(
                   widget.isEdit ? Icons.save : Icons.add,
-                  color: GlobalTheme.floatingButtonText,
                 ),
                 label: Text(
                   widget.isEdit ? "Save" : "Add",
                   style: const TextStyle(
                     fontSize: 17,
-                    color: GlobalTheme.floatingButtonText,
                   ),
                 ),
                 onPressed: _handleSubmitted,
