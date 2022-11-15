@@ -30,7 +30,6 @@ class _NoDateErrorPageState extends State<NoDateErrorPage> {
   Widget build(BuildContext context) {
     return Consumer<LoginStore>(builder: (_, loginStore, __) {
       return Scaffold(
-        backgroundColor: GlobalTheme.backgroundColor,
         body: Stack(
           children: [
             Positioned(
@@ -123,28 +122,11 @@ class _NoDateErrorPageState extends State<NoDateErrorPage> {
                       child: Container(
                           height: MediaQuery.of(context).size.height,
                           padding: const EdgeInsets.only(top: 10),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: GlobalTheme.primaryText,
-                                blurRadius: 25.0, // soften the shadow
-                                spreadRadius: 5.0, //extend the shadow
-                                offset: Offset(
-                                  15.0, // Move to right 10  horizontally
-                                  15.0, // Move to bottom 10 Vertically
-                                ),
-                              )
-                            ],
-                          ),
+                          decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                           child: const NoDataError()),
                     )
                   ])),
-              backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+              backgroundColor: GlobalTheme.tint,
             )
           ],
         ),
