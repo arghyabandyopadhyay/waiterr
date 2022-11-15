@@ -21,7 +21,7 @@ class ProductTab extends StatelessWidget {
       labelPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
       indicatorSize: TabBarIndicatorSize.label,
       indicatorWeight: 2,
-      indicatorColor: GlobalTheme.primaryColor,
+      indicatorColor: GlobalTheme.waiterrPrimaryColor,
       tabs: tabs
           .map((tab) => Text(
                 tab.label,
@@ -48,24 +48,7 @@ class ProductTab extends StatelessWidget {
       child: Container(
         width: screenWidth,
         height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: GlobalTheme.primaryText,
-              blurRadius: 25.0, // soften the shadow
-              spreadRadius: 5.0, //extend the shadow
-              offset: Offset(
-                15.0, // Move to right 10  horizontally
-                15.0, // Move to bottom 10 Vertically
-              ),
-            )
-          ],
-        ),
+        decoration: GlobalTheme.waiterrAppBarBoxDecoration,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
