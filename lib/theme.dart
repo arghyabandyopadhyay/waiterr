@@ -1,18 +1,47 @@
 import 'package:flutter/material.dart';
 
 class GlobalTheme {
-  static const Color primaryColor = Color.fromARGB(255, 3, 63, 244);
-  static const Color primaryColorLight = Color.fromARGB(255, 41, 216, 255);
-  static const Color primaryText = Color(0XFF808080);
-  static const Color secondaryText = Colors.black;
-  static const Color floatingButtonText = Colors.white;
-  static const Color floatingButtonBackground = Color.fromARGB(255, 20, 16, 54);
-  static const Color backgroundColorDim = Color(0xFFf5f5f5);
-  static const Color backgroundColor = Color.fromARGB(255, 180, 172, 240);
-  static const Color backgroundColorLoginPage =
-      Color.fromARGB(255, 255, 255, 255);
-  static const Color progressBarBackground = Color.fromARGB(255, 20, 16, 54);
-  static const Color appBarIconColor = Color.fromARGB(255, 20, 16, 54);
+  //Static datas
+  static Color tint = const Color.fromARGB(255, 180, 172, 240).withOpacity(0.7);
+  static BoxDecoration waiterrAppBarBoxDecoration = const BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(30),
+      topRight: Radius.circular(30),
+    ),
+    boxShadow: [boxShadow],
+  );
+  static const BoxShadow boxShadow = BoxShadow(
+    color: GlobalTheme.borderColor,
+    blurRadius: 25.0, // soften the shadow
+    spreadRadius: 5.0, //extend the shadow
+    offset: Offset(
+      15.0, // Move to right 10  horizontally
+      15.0, // Move to bottom 10 Vertically
+    ),
+  );
+  static const Color borderColor = Color(0XFF808080);
+  static const Color waiterrPrimaryText = Color(0XFF808080);
+  static const Color waiterrSecondaryText = Colors.black;
+  static const Color waiterrPrimaryColor = Color.fromARGB(255, 3, 63, 244);
+
+  static const Color drawerDetailText = Colors.black;
+  static const Color salePointNameColor = Colors.black;
+  static const Color salePointTypeColor = Colors.black;
+  static const Color outletNameColor = Colors.black;
+  static const Color printIconColor = Color.fromARGB(255, 3, 63, 244);
+  static const Color selectionCardBorderColor = Color(0XFF808080);
+  static const Color borderColorHighlight = Color.fromARGB(255, 3, 63, 244);
+  static const Color boxDecorationColorHighlight =
+      Color.fromARGB(255, 3, 63, 244);
+  static const Color selectionCardCheckIconColor =
+      Color.fromARGB(255, 3, 63, 244);
+  static const Color commentIconColor = Color.fromARGB(255, 3, 63, 244);
+  static Color selectionCardSplashColor =
+      const Color.fromARGB(255, 3, 63, 244).withOpacity(0.12);
+  //KOT Progress Status Indicator Global Values
+  static Color kotActiveColor = const Color.fromARGB(255, 3, 63, 244);
+  static Color kotInActiveColor = const Color(0XFF808080);
   static var primaryGradient = [
     const Color.fromARGB(255, 249, 95, 195),
     const Color.fromARGB(255, 244, 3, 3)
@@ -30,4 +59,129 @@ class GlobalTheme {
     const Color.fromARGB(255, 202, 16, 165),
     const Color.fromARGB(255, 231, 35, 35)
   ];
+
+  //Light theme datas
+  Color primaryColor = const Color.fromARGB(255, 3, 63, 244);
+  Color cursor = const Color.fromARGB(255, 3, 63, 244);
+  Color primaryColorLight = const Color.fromARGB(255, 41, 216, 255);
+  Color primaryText = const Color(0XFF808080);
+  Color icon = const Color(0XFF808080);
+  Color secondaryText = Colors.black;
+  Color buttonColor = const Color.fromARGB(255, 20, 16, 54);
+  Color buttonPressedColor = const Color.fromARGB(255, 55, 47, 124);
+  Color floatingButtonText = Colors.white;
+  Color floatingButtonBackground = const Color.fromARGB(255, 20, 16, 54);
+  Color backgroundColorDim = const Color(0xFFf5f5f5);
+  Color backgroundColor = const Color.fromARGB(255, 180, 172, 240);
+  Color backgroundColorLoginPage = const Color.fromARGB(255, 255, 255, 255);
+  Color progressBar = const Color.fromARGB(255, 20, 16, 54);
+  Color appBarIconColor = const Color.fromARGB(255, 20, 16, 54);
+
+  //Dark themes
+  Color primaryColorDark = const Color.fromARGB(255, 3, 63, 244);
+  Color primaryColorLightDark = const Color.fromARGB(255, 41, 216, 255);
+  Color primaryTextDark = const Color(0XFF808080);
+  Color cursorDark = const Color.fromARGB(255, 3, 63, 244);
+  Color iconDark = const Color(0XFF808080);
+  Color secondaryTextDark = Colors.black;
+  Color buttonColorDark = const Color.fromARGB(255, 20, 16, 54);
+  Color buttonPressedColorDark = const Color.fromARGB(255, 55, 47, 124);
+  Color floatingButtonTextDark = Colors.white;
+  Color floatingButtonBackgroundDark = const Color.fromARGB(255, 20, 16, 54);
+  Color backgroundColorDimDark = const Color(0xFFf5f5f5);
+  Color backgroundColorDark = const Color.fromARGB(255, 180, 172, 240);
+  Color backgroundColorLoginPageDark = const Color.fromARGB(255, 255, 255, 255);
+  Color progressBarDark = const Color.fromARGB(255, 20, 16, 54);
+  Color appBarIconColorDark = const Color.fromARGB(255, 20, 16, 54);
+}
+
+class WaiterrThemeDatas {
+  static GlobalTheme globalTheme = GlobalTheme();
+  //Theme data variable [NOT TO BE EDITED]
+  static ThemeData theme = ThemeData(
+      scaffoldBackgroundColor: globalTheme.backgroundColor,
+      primaryColorLight: globalTheme.primaryColorLight,
+      elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.pressed)) {
+          return globalTheme.buttonPressedColor;
+        } else {
+          return globalTheme.buttonColor;
+        }
+      }))),
+      appBarTheme: AppBarTheme(
+          elevation: 0,
+          iconTheme: IconThemeData(color: globalTheme.appBarIconColor),
+          backgroundColor: Colors.transparent),
+      textTheme: TextTheme(
+        headline1: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: globalTheme.secondaryText),
+        headline2: TextStyle(fontSize: 17, color: globalTheme.primaryColor),
+        headline3: TextStyle(color: globalTheme.primaryText),
+        bodyText2: TextStyle(color: globalTheme.primaryText),
+        subtitle1: TextStyle(color: globalTheme.primaryText),
+      ),
+      textSelectionTheme:
+          TextSelectionThemeData(cursorColor: globalTheme.cursor),
+      inputDecorationTheme: InputDecorationTheme(
+        border: const OutlineInputBorder(),
+        hintStyle: TextStyle(color: globalTheme.primaryText),
+        labelStyle: TextStyle(color: globalTheme.primaryText),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+            borderSide: BorderSide(color: globalTheme.primaryColor)),
+        contentPadding:
+            const EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
+      ),
+      iconTheme: IconThemeData(color: globalTheme.icon),
+      progressIndicatorTheme:
+          ProgressIndicatorThemeData(color: globalTheme.progressBar),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: globalTheme.floatingButtonBackground,
+          foregroundColor: globalTheme.floatingButtonText));
+
+  static ThemeData darkTheme = ThemeData(
+      scaffoldBackgroundColor: globalTheme.backgroundColorDark,
+      primaryColorLight: globalTheme.primaryColorLightDark,
+      elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.pressed)) {
+          return globalTheme.buttonPressedColorDark;
+        } else {
+          return globalTheme.buttonColorDark;
+        }
+      }))),
+      appBarTheme: AppBarTheme(
+          elevation: 0,
+          iconTheme: IconThemeData(color: globalTheme.appBarIconColorDark),
+          backgroundColor: Colors.transparent),
+      textTheme: TextTheme(
+        headline1: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: globalTheme.secondaryTextDark),
+        headline2: TextStyle(fontSize: 17, color: globalTheme.primaryColorDark),
+        headline3: TextStyle(color: globalTheme.primaryTextDark),
+        bodyText2: TextStyle(color: globalTheme.primaryTextDark),
+        subtitle1: TextStyle(color: globalTheme.primaryTextDark),
+      ),
+      textSelectionTheme:
+          TextSelectionThemeData(cursorColor: globalTheme.cursorDark),
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: TextStyle(color: globalTheme.primaryTextDark),
+        labelStyle: TextStyle(color: globalTheme.primaryTextDark),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+            borderSide: BorderSide(color: globalTheme.primaryColorDark)),
+        contentPadding:
+            const EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
+      ),
+      iconTheme: IconThemeData(color: globalTheme.iconDark),
+      progressIndicatorTheme:
+          ProgressIndicatorThemeData(color: globalTheme.progressBarDark),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: globalTheme.floatingButtonBackgroundDark,
+          foregroundColor: globalTheme.floatingButtonTextDark));
 }
