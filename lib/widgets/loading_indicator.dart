@@ -10,12 +10,9 @@ class LoadingIndicator extends StatelessWidget {
     height: 100,
     decoration: BoxDecoration(
       borderRadius: const BorderRadius.all(Radius.circular(8)),
-      color: GlobalTheme.primaryColor.withOpacity(0.4),
+      color: GlobalTheme.boxDecorationColorHighlight.withOpacity(0.4),
     ),
-    child: const Center(
-        child: CircularProgressIndicator(
-      backgroundColor: GlobalTheme.progressBarBackground,
-    )),
+    child: const Center(child: CircularProgressIndicator()),
   );
   final bool dismissible;
   final Widget child;
@@ -27,9 +24,7 @@ class LoadingIndicator extends StatelessWidget {
     this.color = Colors.grey,
     this.dismissible = false,
     required this.child,
-  })  : assert(child != null),
-        assert(inAsyncCall != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +34,8 @@ class LoadingIndicator extends StatelessWidget {
       children: [
         child,
         Opacity(
-          child: ModalBarrier(dismissible: dismissible, color: color),
           opacity: opacity,
+          child: ModalBarrier(dismissible: dismissible, color: color),
         ),
         Center(child: progressIndicator),
       ],
