@@ -18,7 +18,7 @@ class SelectionCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
         border: Border.all(
-            color: GlobalTheme.primaryText,
+            color: GlobalTheme.selectionCardBorderColor,
             width: 0.5,
             style: BorderStyle.solid),
       ),
@@ -29,17 +29,16 @@ class SelectionCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
-          splashColor: GlobalTheme.primaryColor.withOpacity(0.12),
+          splashColor: GlobalTheme.selectionCardSplashColor,
           // Generally, material cards do not have a highlight overlay.
           highlightColor: Colors.transparent,
           child: Stack(
             children: [
-              Container(
-                child: Center(
-                  child: Text(
-                    item!,
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                  ),
+              Center(
+                child: Text(
+                  item!,
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.bold),
                 ),
               ),
               Align(
@@ -49,8 +48,9 @@ class SelectionCard extends StatelessWidget {
                   child: Icon(
                     Icons.check_circle,
                     size: 12,
-                    color:
-                        active! ? GlobalTheme.primaryColor : Colors.transparent,
+                    color: active!
+                        ? GlobalTheme.selectionCardCheckIconColor
+                        : Colors.transparent,
                   ),
                 ),
               ),
