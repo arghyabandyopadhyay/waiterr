@@ -25,12 +25,12 @@ class _MenuAllListState extends State<MenuAllList> {
         expandedIcon: const Icon(
           Icons.arrow_drop_down,
           size: 40,
-          color: GlobalTheme.primaryColor,
+          color: GlobalTheme.waiterrPrimaryColor,
         ),
         collapsedIcon: const Icon(
           Icons.arrow_right,
           size: 40,
-          color: GlobalTheme.primaryColor,
+          color: GlobalTheme.waiterrPrimaryColor,
         ),
         isExpanded: true,
         header: widget.header!(widget.productList![index][0].stockGroup),
