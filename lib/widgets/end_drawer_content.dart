@@ -20,6 +20,18 @@ class EndDrawerContent extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: GlobalTheme.primaryGradient2),
+                borderRadius: const BorderRadius.only(
+                  //bottomLeft: Radius.circular(30),
+                  bottomLeft: Radius.circular(30),
+                ),
+                boxShadow: const [
+                  //background color of box
+                  GlobalTheme.boxShadow,
+                ]
+                //color: GlobalTheme.waiterrPrimaryColor,
+                ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,9 +45,9 @@ class EndDrawerContent extends StatelessWidget {
                               UserClientAllocationData.clientName != ""
                           ? UserClientAllocationData.clientName!.split(" ")[0]
                           : alternativeName!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 26,
-                        color: GlobalTheme.secondaryText,
+                        color: GlobalTheme.drawerDetailText,
                       ),
                     ),
                     Text(
@@ -43,9 +55,9 @@ class EndDrawerContent extends StatelessWidget {
                               UserClientAllocationData.dataExchangeVia != ""
                           ? UserClientAllocationData.dataExchangeVia!
                           : alternativeMno!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
-                        color: GlobalTheme.secondaryText,
+                        color: GlobalTheme.drawerDetailText,
                       ),
                     )
                   ],
@@ -61,7 +73,7 @@ class EndDrawerContent extends StatelessWidget {
                               height: 50,
                               width: 50,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
+                                borderRadius: const BorderRadius.all(
                                   Radius.circular(10),
                                 ),
                                 image: DecorationImage(
@@ -87,7 +99,7 @@ class EndDrawerContent extends StatelessWidget {
                                   ),
                                 )),
                             errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                                const Icon(Icons.error),
                           )
                         : Image(
                             height: 50,
@@ -98,30 +110,10 @@ class EndDrawerContent extends StatelessWidget {
                             ).image)),
               ],
             ),
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: GlobalTheme.primaryGradient2),
-                borderRadius: BorderRadius.only(
-                  //bottomLeft: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                ),
-                boxShadow: [
-                  //background color of box
-                  BoxShadow(
-                    color: GlobalTheme.primaryText,
-                    blurRadius: 15.0, // soften the shadow
-                    spreadRadius: 5.0, //extend the shadow
-                    offset: Offset(
-                      5.0, // Move to right 10  horizontally
-                      0.0, // Move to bottom 10 Vertically
-                    ),
-                  ),
-                ]
-                //color: GlobalTheme.primaryColor,
-                ),
           ),
           ListView.builder(
               shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: drawerItems!.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
