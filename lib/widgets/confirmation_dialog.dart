@@ -57,7 +57,7 @@ class ConfirmationDialog extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                            color: GlobalTheme.primaryText,
+                            color: GlobalTheme.borderColor,
                             width: 1.5,
                             style: BorderStyle.solid),
                       ),
@@ -66,8 +66,7 @@ class ConfirmationDialog extends StatelessWidget {
                       width: 80,
                       child: const Text(
                         "No",
-                        style: TextStyle(
-                            fontSize: 20, color: GlobalTheme.primaryText),
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                   ),
@@ -82,7 +81,7 @@ class ConfirmationDialog extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                            color: GlobalTheme.primaryColor,
+                            color: GlobalTheme.borderColorHighlight,
                             width: 1.5,
                             style: BorderStyle.solid),
                       ),
@@ -90,7 +89,7 @@ class ConfirmationDialog extends StatelessWidget {
                         "Yes",
                         style: TextStyle(
                             fontSize: 20,
-                            color: GlobalTheme.primaryColor,
+                            color: GlobalTheme.waiterrPrimaryColor,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
