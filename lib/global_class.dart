@@ -88,12 +88,12 @@ class AppBarVariables {
         ' and also maintaing kitchens. '),
   ];
 
-  static Widget appBarLeading(appBarLeading) => Row(
+  static Widget appBarLeading(context) => Row(
         children: [
           GestureDetector(
               onTap: () {
                 showAboutDialog(
-                  context: appBarLeading,
+                  context: context,
                   applicationIcon: Image.asset(
                     "assets/img/waiter_icon.png",
                     width: 40,
@@ -110,11 +110,11 @@ class AppBarVariables {
                 height: 25,
                 width: 25,
               )),
-          const Text(
+          Text(
             "Waiterr",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headline1,
           ),
         ],
       );
