@@ -32,7 +32,7 @@ class _AddButtonState extends State<AddButton> {
         //gradient: item.quantity==0.0?LinearGradient(begin: Alignment.topCenter,end: Alignment.bottomCenter,colors: GlobalTheme.primaryGradient):null,
         borderRadius: BorderRadius.circular(10.0),
         border: Border.all(
-            color: GlobalTheme.primaryColor,
+            color: GlobalTheme.borderColorHighlight,
             width: 1,
             style: BorderStyle.solid),
       ),
@@ -73,7 +73,8 @@ class _AddButtonState extends State<AddButton> {
                         "Add",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 15, color: GlobalTheme.secondaryText),
+                            fontSize: 15,
+                            color: GlobalTheme.waiterrSecondaryText),
                       )
                     : const Icon(
                         Icons.remove,
@@ -98,7 +99,7 @@ class _AddButtonState extends State<AddButton> {
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 12.0,
-                color: GlobalTheme.secondaryText,
+                color: GlobalTheme.waiterrSecondaryText,
               ),
             ),
           ),
@@ -117,7 +118,7 @@ class _AddButtonState extends State<AddButton> {
                     : const Icon(
                         Icons.add,
                         size: 17,
-                        color: GlobalTheme.primaryColor,
+                        color: GlobalTheme.waiterrPrimaryColor,
                       ),
               )),
         ],
