@@ -69,7 +69,6 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
-      backgroundColor: GlobalTheme.backgroundColor,
       context: context,
       builder: (context) {
         return BottomSheetContent(
@@ -259,7 +258,6 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
         child: ScaffoldMessenger(
             key: scaffoldMessengerKey,
             child: Scaffold(
-              backgroundColor: GlobalTheme.backgroundColor,
               resizeToAvoidBottomInset: false,
               body: Stack(
                 children: [
@@ -347,24 +345,8 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                 child: Container(
                               height: MediaQuery.of(context).size.height,
                               padding: const EdgeInsets.only(top: 5),
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: GlobalTheme.primaryText,
-                                    blurRadius: 25.0, // soften the shadow
-                                    spreadRadius: 5.0, //extend the shadow
-                                    offset: Offset(
-                                      15.0, // Move to right 10  horizontally
-                                      15.0, // Move to bottom 10 Vertically
-                                    ),
-                                  )
-                                ],
-                              ),
+                              decoration:
+                                  GlobalTheme.waiterrAppBarBoxDecoration,
                               child: ListView(
                                   physics: const BouncingScrollPhysics(),
                                   shrinkWrap: true,
@@ -412,22 +394,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                         style: GoogleFonts.robotoCondensed(
                                             fontWeight: FontWeight.bold),
                                         decoration: const InputDecoration(
-                                          border: OutlineInputBorder(),
                                           labelText: "Remarks",
-                                          hintStyle: TextStyle(
-                                              color: GlobalTheme.primaryText),
-                                          labelStyle: TextStyle(
-                                              color: GlobalTheme.primaryText),
-                                          focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.0)),
-                                              borderSide: BorderSide(
-                                                  color: GlobalTheme
-                                                      .primaryColor)),
-                                          contentPadding: EdgeInsets.only(
-                                              bottom: 10.0,
-                                              left: 10.0,
-                                              right: 10.0),
                                         ),
                                       ),
                                     ),
@@ -466,7 +433,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                       Radius.circular(5)),
                                               border: Border.all(
                                                   color:
-                                                      GlobalTheme.primaryText,
+                                                      GlobalTheme.borderColor,
                                                   width: 1,
                                                   style: BorderStyle.solid),
                                               color: Colors.white,
@@ -496,7 +463,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                       Radius.circular(5)),
                                               border: Border.all(
                                                   color:
-                                                      GlobalTheme.primaryText,
+                                                      GlobalTheme.borderColor,
                                                   width: 1,
                                                   style: BorderStyle.solid),
                                               color: Colors.white,
@@ -523,18 +490,15 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                             ))
                           ],
                         )),
-                    backgroundColor:
-                        GlobalTheme.backgroundColor.withOpacity(0.7),
+                    backgroundColor: GlobalTheme.tint,
                     floatingActionButton: FloatingActionButton.extended(
                         elevation: 5,
                         label: const Text("Place Order",
                             style: TextStyle(
                               fontSize: 17,
-                              color: GlobalTheme.floatingButtonText,
                             )),
                         icon: const Icon(
                           Icons.restaurant,
-                          color: GlobalTheme.floatingButtonText,
                         ),
                         onPressed: () {
                           showDialog(
