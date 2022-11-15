@@ -99,7 +99,6 @@ class _MenuPageAllState extends State<MenuPageAll> {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
-      backgroundColor: GlobalTheme.backgroundColor,
       context: context,
       builder: (context) {
         return BottomSheetContent(
@@ -572,7 +571,6 @@ class _MenuPageAllState extends State<MenuPageAll> {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     return Scaffold(
-      backgroundColor: GlobalTheme.backgroundColor,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -662,7 +660,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                     ],
                     elevation: 0,
                   ),
-                  backgroundColor: GlobalTheme.backgroundColor.withOpacity(0.7),
+                  backgroundColor: GlobalTheme.tint,
                   resizeToAvoidBottomInset: true,
                   bottomNavigationBar: BottomAppBar(
                       elevation: 0,
@@ -768,25 +766,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
                               child: Container(
                                   height: screenSize.height,
                                   padding: const EdgeInsets.only(top: 1.75),
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30),
-                                    ),
-                                    boxShadow: [
-                                      //background color of box
-                                      BoxShadow(
-                                        color: GlobalTheme.primaryText,
-                                        blurRadius: 25.0, // soften the shadow
-                                        spreadRadius: 5.0, //extend the shadow
-                                        offset: Offset(
-                                          15.0, // Move to right 10  horizontally
-                                          15.0, // Move to bottom 10 Vertically
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                  decoration:
+                                      GlobalTheme.waiterrAppBarBoxDecoration,
                                   child:
                                       FutureBuilder<List<List<MenuItemModel>>?>(
                                           future: _futureproductList,
@@ -880,7 +861,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                                                     .arrow_drop_down,
                                                                 size: 40,
                                                                 color: GlobalTheme
-                                                                    .primaryColor,
+                                                                    .waiterrPrimaryColor,
                                                               ),
                                                               collapsedIcon:
                                                                   const Icon(
@@ -888,7 +869,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                                                     .arrow_right,
                                                                 size: 40,
                                                                 color: GlobalTheme
-                                                                    .primaryColor,
+                                                                    .waiterrPrimaryColor,
                                                               ),
                                                               isExpanded: true,
                                                               header: _header(
@@ -937,8 +918,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                                               //   children: productList.map((group) {
                                                               //     int index = productList.indexOf(group);
                                                               //     return ExpandableGroup(
-                                                              //       expandedIcon: Icon(Icons.arrow_drop_down,size:40,color: GlobalTheme.primaryColor,),
-                                                              //       collapsedIcon: Icon(Icons.arrow_right,size: 40,color: GlobalTheme.primaryColor,),
+                                                              //       expandedIcon: Icon(Icons.arrow_drop_down,size:40,color: GlobalTheme.waiterrPrimaryColor,),
+                                                              //       collapsedIcon: Icon(Icons.arrow_right,size: 40,color: GlobalTheme.waiterrPrimaryColor,),
                                                               //       isExpanded: true,
                                                               //       header: _header(productList[index][0].stockGroup),
                                                               //       items: _buildItems(context, group),
@@ -1271,7 +1252,8 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                       Text(
                         '${widget.totalItems!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))} Items',
                         style: const TextStyle(
-                            color: GlobalTheme.secondaryText, fontSize: 15),
+                            color: GlobalTheme.waiterrSecondaryText,
+                            fontSize: 15),
                       ),
                       Row(
                         children: <Widget>[
@@ -1282,7 +1264,7 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                               child: Text(
                                 '₹${widget.totalCartAmount!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))} ',
                                 style: const TextStyle(
-                                    color: GlobalTheme.secondaryText,
+                                    color: GlobalTheme.waiterrSecondaryText,
                                     fontSize: 20),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
@@ -1290,7 +1272,8 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                           const Text(
                             ' plus Taxes',
                             style: TextStyle(
-                                color: GlobalTheme.secondaryText, fontSize: 10),
+                                color: GlobalTheme.waiterrSecondaryText,
+                                fontSize: 10),
                           )
                         ],
                       )
@@ -1302,7 +1285,8 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                         Text(
                           'View Cart',
                           style: TextStyle(
-                              color: GlobalTheme.secondaryText, fontSize: 20),
+                              color: GlobalTheme.waiterrSecondaryText,
+                              fontSize: 20),
                           textAlign: TextAlign.right,
                         ),
                         SizedBox(
@@ -1310,7 +1294,7 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                         ),
                         Icon(
                           Icons.shopping_cart,
-                          color: GlobalTheme.secondaryText,
+                          color: GlobalTheme.waiterrSecondaryText,
                           size: 20,
                         )
                       ]),
