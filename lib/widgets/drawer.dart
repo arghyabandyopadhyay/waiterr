@@ -29,7 +29,7 @@ class DrawerContent extends StatelessWidget {
                 boxShadow: const [
                   //background color of box
                   BoxShadow(
-                    color: GlobalTheme.primaryText,
+                    color: GlobalTheme.borderColor,
                     blurRadius: 15.0, // soften the shadow
                     spreadRadius: 5.0, //extend the shadow
                     offset: Offset(
@@ -38,7 +38,7 @@ class DrawerContent extends StatelessWidget {
                     ),
                   ),
                 ]
-                //color: GlobalTheme.primaryColor,
+                //color: GlobalTheme.waiterrPrimaryColor,
                 ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,17 +55,16 @@ class DrawerContent extends StatelessWidget {
                           : alternativeName!,
                       style: const TextStyle(
                         fontSize: 26,
-                        color: GlobalTheme.secondaryText,
+                        color: GlobalTheme.drawerDetailText,
                       ),
                     ),
                     Text(
-                      UserDetail.userDetails.mobileNumber != null &&
-                              UserDetail.userDetails.mobileNumber != ""
+                      UserDetail.userDetails.mobileNumber != ""
                           ? UserDetail.userDetails.mobileNumber
                           : alternativeMno!,
                       style: const TextStyle(
                         fontSize: 16,
-                        color: GlobalTheme.secondaryText,
+                        color: GlobalTheme.drawerDetailText,
                       ),
                     )
                   ],
