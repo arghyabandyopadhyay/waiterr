@@ -2,9 +2,12 @@ class FilterItemModel {
   final String id;
   final String? image;
   final String? stockGroup;
-  final String? masterFilter;
+  final String masterFilter;
   FilterItemModel(
-      {required this.id, this.image, this.stockGroup, this.masterFilter});
+      {required this.id,
+      this.image,
+      this.stockGroup,
+      required this.masterFilter});
 
   factory FilterItemModel.fromJson(Map<String, dynamic> json) {
     return FilterItemModel(
@@ -12,7 +15,7 @@ class FilterItemModel {
       //image: json['Image']!=null&&json['Image']!=""?Image.memory(base64Decode(json['Image'])):Image.asset('assets/img/all_filter_icon.png'),
       image: json['ImageUrl'],
       stockGroup: json['StockGroup'],
-      masterFilter: json['MasterFilter'],
+      masterFilter: json['MasterFilter'] ?? json['StockGroup'],
     );
   }
 }
