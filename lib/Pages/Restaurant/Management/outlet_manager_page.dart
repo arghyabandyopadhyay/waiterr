@@ -187,14 +187,13 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         "Outlets",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                     const SizedBox(
