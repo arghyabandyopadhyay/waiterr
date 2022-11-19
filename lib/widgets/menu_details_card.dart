@@ -164,12 +164,6 @@ class _MenuDetailsCardState extends State<MenuDetailsCard> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
-                              Icon(
-                                Icons.edit,
-                                color: widget.item.isEdited
-                                    ? GlobalTheme.waiterrPrimaryColor
-                                    : null,
-                              ),
                               const SizedBox(
                                 height: 2,
                               ),
