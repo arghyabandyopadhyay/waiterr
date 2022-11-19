@@ -15,7 +15,7 @@ class MenuItemModel {
   String taxClassID;
   double taxRate;
   bool isDiscountable;
-  String? masterFilter;
+  String masterFilter;
   List<CustomizablePageModel> customizable;
   bool isVeg;
   String itemID;
@@ -40,7 +40,7 @@ class MenuItemModel {
       required this.taxClassID,
       required this.taxRate,
       required this.isDiscountable,
-      this.masterFilter,
+      required this.masterFilter,
       required this.customizable,
       required this.itemID,
       required this.isVeg,
@@ -65,7 +65,12 @@ class MenuItemModel {
         taxClassID: json['TaxClassId'],
         taxRate: double.parse(json['TaxRate'].toString()),
         isDiscountable: json['IsDiscountable'] == 1,
-        masterFilter: json['MasterFilter'],
+        masterFilter: json['MasterFilter'] ??
+            (json['Item'] +
+                (json['ItemDescription'] ?? "") +
+                json['StockGroup'] +
+                (json['IsVeg'] == 1 ? "veg" : "nonveg") +
+                json['OutletName']),
         customizable:
             (json['Customizable'] == "" || json['Customizable'] == null)
                 ? []
