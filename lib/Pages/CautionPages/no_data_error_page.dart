@@ -101,24 +101,23 @@ class _NoDateErrorPageState extends State<NoDateErrorPage> {
                 ],
               )),
               body: Container(
-                  child: new Column(
+                  child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                    const Padding(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         "Waiterr",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 15),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    new Flexible(
+                    Flexible(
                       child: Container(
                           height: MediaQuery.of(context).size.height,
                           padding: const EdgeInsets.only(top: 10),
