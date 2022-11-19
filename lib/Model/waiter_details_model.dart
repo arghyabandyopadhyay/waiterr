@@ -9,7 +9,7 @@ class WaiterDetailsModel {
   final String outletName;
   final String userClientAllocationId;
   final int ucaRoleId;
-  final String? masterFilter;
+  final String masterFilter;
 
   WaiterDetailsModel(
       {required this.id,
