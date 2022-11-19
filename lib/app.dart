@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:waiterr/Pages/Login/splash_page.dart';
 import 'package:waiterr/theme.dart';
-import '../Pages/Login/sign_up_page.dart';
 import 'global_class.dart';
 import '../stores/login_store.dart';
 import 'settings/settings_controller.dart';
