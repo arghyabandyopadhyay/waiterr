@@ -152,6 +152,9 @@ class _AddOrderState extends State<AddOrder> {
                                       billPrinted: false,
                                       mobileNo:
                                           phoneNumber.text.replaceAll(" ", ""),
+                                      userId: widget.isThroughQr
+                                          ? UserDetail.userDetails.id
+                                          : "",
                                       pax: int.parse(noOfPerson.text),
                                       salePointType: _selectedSalesPoint,
                                       masterFilter:
