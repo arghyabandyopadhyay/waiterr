@@ -681,13 +681,14 @@ Future<List<WaiterDetailsModel>> postForWaiterDetails() async {
 
 //ready
 Future<List<MenuItemModel>> postForMenuItem(
-    String? clientMobile, String? outletId) async {
+    String? userId, String? outletId) async {
+  print(userId);
+  print(outletId);
   RequestJson requestJson = RequestJson(
       requestType: "Waiterr Menu",
-      parameterList: (clientMobile != null || outletId != null)
+      parameterList: (userId != null || outletId != null)
           ? [
-              if (clientMobile != null)
-                Parameter(pKey: "clientMobile", pValue: clientMobile),
+              if (userId != null) Parameter(pKey: "userId", pValue: userId),
               if (outletId != null)
                 Parameter(pKey: "restaurantId", pValue: outletId)
             ]
