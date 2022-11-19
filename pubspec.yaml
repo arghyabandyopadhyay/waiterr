@@ -33,7 +33,6 @@ dependencies:
   sms_autofill: ^2.2.0
   url_launcher: ^6.1.6
   device_info_plus: ^8.0.0
-  cloud_firestore: ^4.1.0
   firebase_database: ^10.0.6
   google_sign_in: ^5.3.3
   flutter_secure_storage: ^6.0.0
