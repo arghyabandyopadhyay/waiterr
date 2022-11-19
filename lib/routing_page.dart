@@ -43,7 +43,7 @@ class _RoutingPageState extends State<RoutingPage> {
     if (Platform.isAndroid) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      deviceToken = androidInfo.androidId;
+      deviceToken = androidInfo.id;
     } else if (Platform.isIOS) {
       // request permissions if we're on android
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
