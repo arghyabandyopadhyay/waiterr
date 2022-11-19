@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:waiterr/Pages/Login/login_page.dart';
 import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Model/qr_json_model.dart';
 import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
@@ -17,7 +18,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:waiterr/Pages/Login/home_page.dart';
-import 'package:waiterr/Pages/Login/sign_up_page.dart';
 import 'package:waiterr/stores/login_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
@@ -147,7 +147,7 @@ class _RoutingPageState extends State<RoutingPage> {
                 });
       } else {
         // _saveOfflineLogin(100);
-        widget = const SignUpPage();
+        widget = const LoginPage();
       }
     });
     return widget;
