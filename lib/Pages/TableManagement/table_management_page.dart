@@ -94,7 +94,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
     if (_isSearching!) {
       searchResult = items!
           .where((RunningOrderModel element) =>
-              (element.masterFilter!.toLowerCase()).contains(
+              (element.masterFilter.toLowerCase()).contains(
                   searchText.toLowerCase().replaceAll(RegExp(r"\s+"), "")))
           .toList();
       setState(() {});
