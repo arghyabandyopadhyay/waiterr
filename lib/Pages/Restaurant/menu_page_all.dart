@@ -174,7 +174,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
     searchResult.clear();
     if (_isSearching != null) {
       searchResult = productListSearch!
-          .where((element) => (element.masterFilter!.toLowerCase()).contains(
+          .where((element) => (element.masterFilter.toLowerCase()).contains(
               searchText.toLowerCase().replaceAll(RegExp(r"\s+"), "")))
           .toList();
       setState(() {});
@@ -188,7 +188,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
     MenuItemModel temp2;
     if (!widget.isWaiter) {
       await postForMenuItem(
-              widget.addOrderData.mobileNo ?? "", widget.addOrderData.outletId)
+              widget.addOrderData.userId ?? "", widget.addOrderData.outletId)
           .then((value) async => {
                 if (PreviousCartManager.previousSalePointName ==
                         widget.addOrderData.salePointName &&
@@ -475,6 +475,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
           isEdited: false,
           taxClassID: "",
           taxRate: 0,
+          masterFilter: "",
           isVeg: true,
           rateBeforeDiscount: 0,
           isDiscountable: false));
@@ -495,6 +496,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
           taxRate: 0,
           isVeg: true,
           rateBeforeDiscount: 0,
+          masterFilter: "",
           isDiscountable: false));
     }
     return orderList;
