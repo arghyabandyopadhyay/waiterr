@@ -99,6 +99,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
           await postForMenuItemModification(
                   MenuItemModel(
                       item: nameController.text,
+                      itemDescription: descriptionController.text,
                       quantity: 0,
                       rateBeforeDiscount: double.parse(priceController.text),
                       discount: double.parse(
@@ -121,6 +122,13 @@ class _AddMenuPageState extends State<AddMenuPage> {
                           ? widget.menuItemModel?.outletId
                           : _selectedOutlet.id,
                       favourite: false,
+                      masterFilter: (nameController.text +
+                          descriptionController.text +
+                          (_selectedStockGroup.stockGroup ?? "") +
+                          (_selectedVegNonVegOptions.isVeg ? "veg" : "nonveg") +
+                          (widget.isEdit
+                              ? widget.menuItemModel?.outletName ?? ""
+                              : _selectedOutlet.outletName)),
                       isEdited: false),
                   widget.isEdit)
               .then((int resultCode) async => {
