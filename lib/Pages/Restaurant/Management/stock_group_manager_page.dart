@@ -79,7 +79,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
     if (_isSearching!) {
       searchResult = stockGroups!
           .where((FilterItemModel element) =>
-              (element.masterFilter!.toLowerCase()).contains(
+              (element.masterFilter.toLowerCase()).contains(
                   searchText.toLowerCase().replaceAll(RegExp(r"\s+"), "")))
           .toList();
       setState(() {});
@@ -190,14 +190,13 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         "Stock Groups",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                     const SizedBox(
