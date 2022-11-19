@@ -4,6 +4,7 @@ class RunningOrderModel {
   final String id;
   final String? name;
   final String? mobileNo;
+  final String? userId;
   final String? salePointType;
   final String? salePointName;
   final String? waiterName;
@@ -15,11 +16,12 @@ class RunningOrderModel {
   final String? outletName;
   final bool isTerminated;
   String outletId;
-  final String? masterFilter;
+  final String masterFilter;
   RunningOrderModel(
       {required this.id,
       this.name,
       this.mobileNo,
+      this.userId,
       this.salePointType,
       this.salePointName,
       this.waiterName,
@@ -31,7 +33,7 @@ class RunningOrderModel {
       this.outletName,
       required this.outletId,
       required this.isTerminated,
-      this.masterFilter});
+      required this.masterFilter});
 
   factory RunningOrderModel.fromJson(Map<String, dynamic> json) {
     var format = DateFormat('d/M/y, hh:mm');
@@ -50,10 +52,11 @@ class RunningOrderModel {
       outletName: json['OutletName'],
       outletId: json['OutletId'],
       isTerminated: json['isTerminated'] == 1,
-      masterFilter: json['Name'] +
-          json['MobileNo'] +
-          json['WaiterName'] +
-          json['OutletName'],
+      masterFilter: json['MasterFilter'] ??
+          (json['Name'] +
+              json['MobileNo'] +
+              json['WaiterName'] +
+              json['OutletName']),
     );
   }
 }
