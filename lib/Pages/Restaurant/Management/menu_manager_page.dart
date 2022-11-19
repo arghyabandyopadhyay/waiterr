@@ -3,7 +3,6 @@ import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
 import 'package:waiterr/stores/login_store.dart';
-import 'package:waiterr/widgets/running_order_card.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -77,8 +76,8 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
     searchResult.clear();
     if (_isSearching!) {
       searchResult = menus!
-          .where((MenuItemModel element) =>
-              (element.masterFilter!.toLowerCase()).contains(
+          .where((MenuItemModel element) => (element.masterFilter.toLowerCase())
+              .contains(
                   searchText.toLowerCase().replaceAll(RegExp(r"\s+"), "")))
           .toList();
       setState(() {});
@@ -190,14 +189,13 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         "Menus",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                     const SizedBox(
