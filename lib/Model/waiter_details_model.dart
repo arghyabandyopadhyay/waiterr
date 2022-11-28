@@ -35,7 +35,11 @@ class WaiterDetailsModel {
         outletName: json['OutletName'],
         userClientAllocationId: json['UserClientAllocationId'],
         ucaRoleId: json['UCARoleId'],
-        masterFilter: json['MasterFilter']);
+        masterFilter: json['MasterFilter'] ??
+            (json['Name'] +
+                json['MobileNumber'] +
+                json['OutletName'] +
+                json['id']));
   }
 
   Map toJson() {
