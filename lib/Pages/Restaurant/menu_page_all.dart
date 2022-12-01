@@ -255,8 +255,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
     } else {
       UserClientAllocationData.distinctStockGroup ??=
           await postForMenuGroupItem(widget.addOrderData.outletId);
-      UserClientAllocationData.productList ??=
-          await postForMenuItem(null, widget.addOrderData.outletId);
+      UserClientAllocationData.productList ??= await postForMenuItem(
+          widget.addOrderData.userId ?? "", widget.addOrderData.outletId);
       if (PreviousCartManager.previousSalePointName ==
               widget.addOrderData.salePointName &&
           PreviousCartManager.previousOutletName ==
@@ -277,23 +277,12 @@ class _MenuPageAllState extends State<MenuPageAll> {
           element.commentForKOT = "";
         }
       }
-      // try {
-      //   if (widget.addOrderData.mobileNo!.isNotEmpty) {
-      //     List<FavouritesJsonModel> favouritesItemIds =
-      //         await postForFavouritesItem(widget.addOrderData.mobileNo);
-      //     for (FavouritesJsonModel a in favouritesItemIds) {
-      //       temp2 = UserClientAllocationData.productList!
-      //           .where((element) => element.itemID == a.itemId)
-      //           .toList()[0];
-      //       temp2.favourite = true;
-      //       favourites.add(temp2);
-      //     }
-      //   } else {
-      //     await Future.delayed(const Duration(milliseconds: 500), () => "1");
-      //   }
-      // } catch (E) {
-      //   favourites.clear();
-      // }
+      favourites = UserClientAllocationData.productList!
+          .where((element) => element.favourite)
+          .toList();
+      for (MenuItemModel m in UserClientAllocationData.productList!) {
+        print(m.favourite);
+      }
       productListSearch = UserClientAllocationData.productList;
       distinctStockGroup = UserClientAllocationData.distinctStockGroup;
       if (UserClientAllocationData.productListStockDiff == null) {
@@ -307,7 +296,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
       } else {
         results = UserClientAllocationData.productListStockDiff;
       }
-      //favourites=productListSearch.where((element) => element.favourite).toList();
+      // favourites =
+      //     productListSearch!.where((element) => element.favourite).toList();
       if (distinctStockGroup![0].stockGroup != "All") {
         distinctStockGroup!.insert(
             0,
