@@ -86,7 +86,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
 
   Future<List<MenuItemModel>> fetchList() async {
     List<MenuItemModel> menuList = [];
-    await postForMenuItem(null, null).then((List<MenuItemModel> rList) => {
+    await postForMenuItem("", null).then((List<MenuItemModel> rList) => {
           menuList.addAll(rList),
         });
     setState(() {
