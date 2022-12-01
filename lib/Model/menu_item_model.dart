@@ -51,6 +51,7 @@ class MenuItemModel {
       this.outletName});
 
   factory MenuItemModel.fromJson(Map<String, dynamic> json) {
+    print(json);
     return MenuItemModel(
         itemImage: json['ItemImage'],
         item: json['Item'],
@@ -70,7 +71,7 @@ class MenuItemModel {
                 (json['ItemDescription'] ?? "") +
                 json['StockGroup'] +
                 (json['IsVeg'] == 1 ? "veg" : "nonveg") +
-                json['OutletName']),
+                (json['OutletName'] ?? "")),
         customizable:
             (json['Customizable'] == "" || json['Customizable'] == null)
                 ? []
