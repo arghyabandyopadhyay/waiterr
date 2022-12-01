@@ -88,6 +88,7 @@ class _AddOrderState extends State<AddOrder> {
           _isLoadingAvailability = true;
         });
         try {
+          String dataSource = "";
           await postForRunningOrders(true, true, _selectedSalesPoint,
                   salesPointNo.text, _selectedOutlet.outletName, null)
               .then((List<RunningOrderModel> rList) async => {
@@ -107,8 +108,10 @@ class _AddOrderState extends State<AddOrder> {
                             await getCustomerDetails(
                                     phoneNumber.text.replaceAll(" ", ""))
                                 .then((CustomerDetailsModel value) => {
-                                      if (value.name != "New")
+                                      if (value.name != "New" &&
+                                          value.dataSource == "CustomerBank")
                                         customerId = value.customerId,
+                                      dataSource = value.dataSource
                                     })
                                 .catchError((e) {
                               globalShowInSnackBar(
@@ -118,19 +121,14 @@ class _AddOrderState extends State<AddOrder> {
                                   null,
                                   null);
                             }),
-                            await putCustomerDetails(CustomerDetailsModel(
-                                    customerId: customerId,
-                                    name: name.text,
-                                    mobileNumber:
-                                        phoneNumber.text.replaceAll(" ", "")))
-                                .catchError((e) {
-                              globalShowInSnackBar(
-                                  "Server Error Occurred. Please Contact Us If The problem Persists.",
-                                  null,
-                                  scaffoldMessengerKey,
-                                  null,
-                                  null);
-                            })
+                            if (customerId != null &&
+                                dataSource == "CustomerBank")
+                              await putCustomerDetails(CustomerDetailsModel(
+                                  customerId: customerId!,
+                                  name: name.text,
+                                  mobileNumber:
+                                      phoneNumber.text.replaceAll(" ", ""),
+                                  dataSource: "CustomerBank"))
                           },
                       },
                     setState(() {
@@ -138,6 +136,11 @@ class _AddOrderState extends State<AddOrder> {
                     }),
                     if (rList.isEmpty)
                       {
+                        print(widget.isThroughQr
+                            ? UserDetail.userDetails.id
+                            : dataSource == "UserDetails"
+                                ? customerId ?? ""
+                                : ""),
                         if (!FocusScope.of(context).hasPrimaryFocus)
                           {FocusScope.of(context).unfocus()},
                         Navigator.of(context).push(CupertinoPageRoute<void>(
@@ -154,7 +157,9 @@ class _AddOrderState extends State<AddOrder> {
                                           phoneNumber.text.replaceAll(" ", ""),
                                       userId: widget.isThroughQr
                                           ? UserDetail.userDetails.id
-                                          : "",
+                                          : dataSource == "UserDetails"
+                                              ? customerId ?? ""
+                                              : "",
                                       pax: int.parse(noOfPerson.text),
                                       salePointType: _selectedSalesPoint,
                                       masterFilter:
@@ -628,14 +633,16 @@ class _AddOrderState extends State<AddOrder> {
                                                                       }
                                                                     else
                                                                       {
-                                                                        customerId =
-                                                                            value.customerId,
+                                                                        if (value.dataSource ==
+                                                                            "UserDetails")
+                                                                          customerId =
+                                                                              value.customerId,
                                                                         if (name
                                                                             .text
                                                                             .isEmpty)
                                                                           {
                                                                             name.text =
-                                                                                value.name!
+                                                                                value.name
                                                                           }
                                                                       }
                                                                   })
