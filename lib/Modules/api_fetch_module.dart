@@ -285,7 +285,8 @@ Future<CustomerDetailsModel> getCustomerDetails(String mobile) async {
       throw "NoData";
     }
   } else if (response.statusCode == 500) {
-    return CustomerDetailsModel(name: "New", mobileNumber: "");
+    return CustomerDetailsModel(
+        name: "New", mobileNumber: "", customerId: "", dataSource: "");
   } else {
     throw "ErrorHasOccurred";
   }
@@ -681,14 +682,12 @@ Future<List<WaiterDetailsModel>> postForWaiterDetails() async {
 
 //ready
 Future<List<MenuItemModel>> postForMenuItem(
-    String? userId, String? outletId) async {
-  print(userId);
-  print(outletId);
+    String userId, String? outletId) async {
   RequestJson requestJson = RequestJson(
       requestType: "Waiterr Menu",
-      parameterList: (userId != null || outletId != null)
+      parameterList: (userId != "" || outletId != null)
           ? [
-              if (userId != null) Parameter(pKey: "userId", pValue: userId),
+              if (userId != "") Parameter(pKey: "userId", pValue: userId),
               if (outletId != null)
                 Parameter(pKey: "restaurantId", pValue: outletId)
             ]
