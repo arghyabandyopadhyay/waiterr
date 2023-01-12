@@ -292,7 +292,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
-                      "Add Menu",
+                      widget.isEdit ? "Edit Menu" : "Add Menu",
                       textAlign: TextAlign.left,
                       style: Theme.of(context).textTheme.headline1,
                     ),
