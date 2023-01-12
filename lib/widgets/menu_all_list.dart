@@ -35,7 +35,7 @@ class _MenuAllListState extends State<MenuAllList> {
         isExpanded: true,
         header: widget.header!(widget.productList![index][0].stockGroup),
         items: widget.buildItems!(context, group),
-        headerEdgeInsets: EdgeInsets.only(left: 16.0, right: 16.0),
+        headerEdgeInsets: const EdgeInsets.only(left: 16.0, right: 16.0),
       );
     }).toList());
   }
