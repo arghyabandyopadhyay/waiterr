@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:waiterr/Model/waiter_details_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
@@ -13,8 +14,11 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:waiterr/widgets/waiter_details_card.dart';
 import '../../../Model/filter_item_model.dart';
+import '../../../Model/outlet_configuration_model.dart';
+import '../../../global_class.dart';
 import '../../../theme.dart';
-import 'add_waiter_page.dart';
+import '../../../widgets/expandable_group_list.dart';
+import 'add_employee_page.dart';
 
 class StockGroupManagerPage extends StatefulWidget {
   const StockGroupManagerPage({Key? key}) : super(key: key);
@@ -24,8 +28,9 @@ class StockGroupManagerPage extends StatefulWidget {
 
 class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
   //Variables
-  List<FilterItemModel>? stockGroups;
-  Future<List<FilterItemModel>>? _futurestockGroups;
+  List<List<FilterItemModel>>? stockGroups;
+  Future<List<List<FilterItemModel>>?>? _futurestockGroups;
+  List<FilterItemModel>? stockGroupsSearch;
   bool? _isSearching, _isLoading;
   String _searchText = "";
   List<FilterItemModel> searchResult = [];
@@ -48,7 +53,9 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
     await Navigator.of(context)
         .push(CupertinoPageRoute<void>(
           title: "Add Stocks",
-          builder: (context) => const AddStockGroupPage(),
+          builder: (context) => const AddStockGroupPage(
+            isEdit: false,
+          ),
         ))
         .then((value) => setState(() {
               _futurestockGroups = fetchList();
@@ -77,7 +84,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
   void searchOperation(String searchText) {
     searchResult.clear();
     if (_isSearching!) {
-      searchResult = stockGroups!
+      searchResult = stockGroupsSearch!
           .where((FilterItemModel element) =>
               (element.masterFilter.toLowerCase()).contains(
                   searchText.toLowerCase().replaceAll(RegExp(r"\s+"), "")))
@@ -86,14 +93,123 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
     }
   }
 
-  Future<List<FilterItemModel>> fetchList() async {
-    List<FilterItemModel> stockGroups = [];
-    await postForMenuGroupItem(null)
-        .then((List<FilterItemModel> rList) => {stockGroups.addAll(rList)});
-    setState(() {
-      _isLoading = false;
-    });
-    return stockGroups;
+  Widget _header(String? name) => Text(
+        "  $name",
+        style: GoogleFonts.openSans(
+            color: Colors.black, fontSize: 17, fontWeight: FontWeight.w600),
+      );
+  List<ListTile> _buildItems(
+      BuildContext context, List<FilterItemModel> items) {
+    List<ListTile> a = [];
+    a.add(ListTile(
+      title: Container(
+          padding: const EdgeInsets.all(0),
+          child: Column(
+            children: <Widget>[
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: (items[index].image != null &&
+                            items[index].image != "")
+                        ? Container(
+                            alignment: Alignment.centerLeft,
+                            margin: const EdgeInsets.only(top: 5),
+                            width: MediaQuery.of(context).size.width / 7,
+                            child: CachedNetworkImage(
+                              width: 40,
+                              height: 40,
+                              imageUrl: items[index].image!,
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                    //colorFilter:ColorFilter.mode(Colors.red, BlendMode.colorBurn)
+                                  ),
+                                ),
+                              ),
+                              placeholder: (context, url) => SizedBox(
+                                  width: double.infinity,
+                                  child: Center(
+                                    child: Shimmer.fromColors(
+                                      baseColor:
+                                          Colors.grey[300]!.withOpacity(0.3),
+                                      highlightColor: Colors.white,
+                                      enabled: true,
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                7,
+                                        height: 40,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ))
+                        : const SizedBox(
+                            height: 0,
+                            width: 0,
+                          ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => AddStockGroupPage(
+                                    filterItem: items[index],
+                                    isEdit: true,
+                                  )));
+                    },
+                    trailing: ElevatedButton(
+                      child: const Icon(Icons.delete),
+                      onPressed: () async {
+                        Connectivity connectivity = Connectivity();
+                        await connectivity.checkConnectivity().then((value) => {
+                              if (value != ConnectivityResult.none)
+                                {
+                                  postForMenuGroupItemModification(
+                                          "", "", items[index].id, "Delete")
+                                      .then((value) =>
+                                          {items.remove(items[index])})
+                                }
+                            });
+                      },
+                    ),
+                    title: Text(items[index].stockGroup ?? ""),
+                  );
+                },
+              ),
+            ],
+          )),
+    ));
+    return a;
+  }
+
+  Future<List<List<FilterItemModel>>?> fetchList() async {
+    List<List<FilterItemModel>>? results = [];
+    List<FilterItemModel> temp;
+    FilterItemModel temp2;
+    await postForMenuGroupItem(null).then((value) async => {
+          stockGroupsSearch = value,
+          for (OutletConfigurationModel outlet
+              in UserClientAllocationData.outletConfiguration ?? [])
+            {
+              temp = value
+                  .where((element) => element.outletId == outlet.id)
+                  .toList(),
+              if (temp.isNotEmpty) results.add(temp)
+            },
+          setState(() {
+            _isLoading = false;
+          })
+        });
+
+    return results;
   }
 
   //Overrides
@@ -207,7 +323,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                             height: MediaQuery.of(context).size.height,
                             padding: const EdgeInsets.only(top: 10),
                             decoration: GlobalTheme.waiterrAppBarBoxDecoration,
-                            child: FutureBuilder<List<FilterItemModel>>(
+                            child: FutureBuilder<List<List<FilterItemModel>>?>(
                                 future: _futurestockGroups,
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
@@ -314,94 +430,25 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                     },
                                                   )
                                                 : const NoDataError())
-                                            : ListView.builder(
+                                            : ListView(
                                                 physics:
-                                                    const NeverScrollableScrollPhysics(),
+                                                    const BouncingScrollPhysics(),
                                                 shrinkWrap: true,
-                                                itemCount: stockGroups!.length,
-                                                itemBuilder: (context, index) {
-                                                  return ListTile(
-                                                      leading: (stockGroups![index]
-                                                                      .image !=
-                                                                  null &&
-                                                              stockGroups![index]
-                                                                      .image !=
-                                                                  "")
-                                                          ? Container(
-                                                              alignment: Alignment
-                                                                  .centerLeft,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top: 5),
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  7,
-                                                              child:
-                                                                  CachedNetworkImage(
-                                                                width: 40,
-                                                                height: 40,
-                                                                imageUrl:
-                                                                    stockGroups![
-                                                                            index]
-                                                                        .image!,
-                                                                imageBuilder:
-                                                                    (context,
-                                                                            imageProvider) =>
-                                                                        Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    image:
-                                                                        DecorationImage(
-                                                                      image:
-                                                                          imageProvider,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                      //colorFilter:ColorFilter.mode(Colors.red, BlendMode.colorBurn)
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                placeholder: (context,
-                                                                        url) =>
-                                                                    SizedBox(
-                                                                        width: double
-                                                                            .infinity,
-                                                                        child:
-                                                                            Center(
-                                                                          child:
-                                                                              Shimmer.fromColors(
-                                                                            baseColor:
-                                                                                Colors.grey[300]!.withOpacity(0.3),
-                                                                            highlightColor:
-                                                                                Colors.white,
-                                                                            enabled:
-                                                                                true,
-                                                                            child:
-                                                                                Container(
-                                                                              width: MediaQuery.of(context).size.width / 7,
-                                                                              height: 40,
-                                                                              color: Colors.white,
-                                                                            ),
-                                                                          ),
-                                                                        )),
-                                                                errorWidget: (context,
-                                                                        url,
-                                                                        error) =>
-                                                                    const Icon(Icons
-                                                                        .error),
-                                                              ))
-                                                          : const SizedBox(
-                                                              height: 0,
-                                                              width: 0,
-                                                            ),
-                                                      title: Text(
-                                                          stockGroups![index]
-                                                                  .stockGroup ??
-                                                              ""));
-                                                },
-                                              ),
+                                                padding:
+                                                    const EdgeInsets.all(0),
+                                                children: <Widget>[
+                                                    ExpandableGroupList<
+                                                            FilterItemModel>(
+                                                        list: stockGroups,
+                                                        header: (value) {
+                                                          return _header(value);
+                                                        },
+                                                        buildItems:
+                                                            (context1, items) {
+                                                          return _buildItems(
+                                                              context1, items);
+                                                        }),
+                                                  ])
                                       ],
                                     );
                                   } else if (snapshot.hasError) {
