@@ -53,9 +53,6 @@ class _AddTaxClassPageState extends State<AddTaxClassPage> {
                       {Navigator.pop(context)}
                   });
         } catch (E) {
-          if (kDebugMode) {
-            print(E);
-          }
           setState(() {
             _isLoadingAvailability = false;
           });
@@ -70,9 +67,6 @@ class _AddTaxClassPageState extends State<AddTaxClassPage> {
                 null,
                 null);
           } else {
-            if (kDebugMode) {
-              print(E);
-            }
             globalShowInSnackBar("Some Error Has Occurred.", null,
                 scaffoldMessengerKey, null, null);
           }
