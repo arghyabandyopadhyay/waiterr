@@ -506,13 +506,16 @@ Future<List<RunningOrderModel>> postForRunningOrders(
 }
 
 //Ready
-Future<int> postForUserClientAllocation(String userId, String outletId) async {
+Future<int> postForUserClientAllocation(
+    String userId, String outletId, int ucaRoleId, bool isEdit) async {
+  print("ddd");
   RequestJson requestJson = RequestJson(
       requestType: "Waiters",
       parameterList: ([
         Parameter(pKey: "id", pValue: userId),
         Parameter(pKey: "OutletId", pValue: outletId),
-        Parameter(pKey: "ModificationType", pValue: "Create")
+        Parameter(pKey: "UCARoleId", pValue: ucaRoleId),
+        Parameter(pKey: "ModificationType", pValue: isEdit ? "Edit" : "Create")
       ]));
   UniversalJson universalJson = UniversalJson(
       gUID: UserClientAllocationData.guid,
@@ -554,6 +557,7 @@ Future<int> deleteUserClientAllocation(String? userClientAllocationId) async {
       parameterList: ([
         Parameter(pKey: "id", pValue: userClientAllocationId),
         Parameter(pKey: "OutletId", pValue: null),
+        Parameter(pKey: "UCARoleId", pValue: null),
         Parameter(pKey: "ModificationType", pValue: "Delete")
       ]));
   UniversalJson universalJson = UniversalJson(
