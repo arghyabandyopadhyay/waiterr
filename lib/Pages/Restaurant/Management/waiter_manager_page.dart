@@ -46,7 +46,9 @@ class _WaiterManagerPageState extends State<WaiterManagerPage> {
     await Navigator.of(context)
         .push(CupertinoPageRoute<void>(
           title: "Add Waiter",
-          builder: (context) => const AddWaiterPage(),
+          builder: (context) => const AddWaiterPage(
+            isEdit: false,
+          ),
         ))
         .then((value) => setState(() {
               _futurewaiters = fetchList();
@@ -252,6 +254,19 @@ class _WaiterManagerPageState extends State<WaiterManagerPage> {
                                                           await launchUrl(
                                                               launchUri);
                                                         },
+                                                        onMiddleTap: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              CupertinoPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          AddWaiterPage(
+                                                                            waiterDetail:
+                                                                                searchResult[index],
+                                                                            isEdit:
+                                                                                true,
+                                                                          )));
+                                                        },
                                                         onDeleteClicked:
                                                             () async {
                                                           Connectivity
@@ -295,6 +310,19 @@ class _WaiterManagerPageState extends State<WaiterManagerPage> {
                                                       );
                                                       await launchUrl(
                                                           launchUri);
+                                                    },
+                                                    onMiddleTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          CupertinoPageRoute(
+                                                              builder: (context) =>
+                                                                  AddWaiterPage(
+                                                                    waiterDetail:
+                                                                        waiters![
+                                                                            index],
+                                                                    isEdit:
+                                                                        true,
+                                                                  )));
                                                     },
                                                     onDeleteClicked: () async {
                                                       Connectivity
