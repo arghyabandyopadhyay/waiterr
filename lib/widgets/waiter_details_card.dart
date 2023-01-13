@@ -70,7 +70,7 @@ class WaiterDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.45,
+                          width: MediaQuery.of(context).size.width * 0.4,
                           child: Text(
                             "Last Login: ${DateFormat('MMMM d, y', 'en_US').format(DateTime.parse(waiter.lastLogin))}",
                             maxLines: 2,
@@ -79,10 +79,16 @@ class WaiterDetailsCard extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.45,
+                          width: MediaQuery.of(context).size.width * 0.4,
                           alignment: Alignment.bottomRight,
                           child: Text(
-                              "${waiter.ucaRoleId == 4 ? "Admin" : waiter.ucaRoleId == 3 ? "Manager" : waiter.ucaRoleId == 2 ? "Chef" : "Waiter"}@${waiter.outletName}",
+                              waiter.ucaRoleId == 4
+                                  ? "Admin"
+                                  : waiter.ucaRoleId == 3
+                                      ? "Manager"
+                                      : waiter.ucaRoleId == 2
+                                          ? "Chef"
+                                          : "Waiter",
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(fontSize: 15, height: 1)),
