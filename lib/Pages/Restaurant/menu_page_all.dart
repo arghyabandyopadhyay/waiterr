@@ -235,6 +235,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
                     0,
                     FilterItemModel(
                         id: "",
+                        outletId: "",
+                        outletName: "",
                         image:
                             "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/all.png",
                         stockGroup: "All",
@@ -244,6 +246,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
                       1,
                       FilterItemModel(
                           id: "",
+                          outletId: "",
+                          outletName: "",
                           image:
                               "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/previousorder.png",
                           stockGroup: "Previous Orders",
@@ -280,9 +284,6 @@ class _MenuPageAllState extends State<MenuPageAll> {
       favourites = UserClientAllocationData.productList!
           .where((element) => element.favourite)
           .toList();
-      for (MenuItemModel m in UserClientAllocationData.productList!) {
-        print(m.favourite);
-      }
       productListSearch = UserClientAllocationData.productList;
       distinctStockGroup = UserClientAllocationData.distinctStockGroup;
       if (UserClientAllocationData.productListStockDiff == null) {
@@ -303,6 +304,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
             0,
             FilterItemModel(
                 id: "",
+                outletId: "",
+                outletName: "",
                 image:
                     "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/all.png",
                 stockGroup: "All",
@@ -314,6 +317,8 @@ class _MenuPageAllState extends State<MenuPageAll> {
             1,
             FilterItemModel(
                 id: "",
+                outletId: "",
+                outletName: "",
                 image:
                     "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/previousorder.png",
                 stockGroup: "Previous Orders",
