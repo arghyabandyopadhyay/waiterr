@@ -141,9 +141,6 @@ class _AddMenuPageState extends State<AddMenuPage> {
                       {Navigator.pop(context)}
                   });
         } catch (E) {
-          if (kDebugMode) {
-            print(E);
-          }
           setState(() {
             _isLoadingAvailability = false;
           });
@@ -158,9 +155,6 @@ class _AddMenuPageState extends State<AddMenuPage> {
                 null,
                 null);
           } else {
-            if (kDebugMode) {
-              print(E);
-            }
             globalShowInSnackBar("Some Error Has Occurred.", null,
                 scaffoldMessengerKey, null, null);
           }
@@ -176,16 +170,22 @@ class _AddMenuPageState extends State<AddMenuPage> {
 
   Future<List<FilterItemModel>> fetchStockGroups() async {
     List<FilterItemModel> stockGroups = [];
-    await postForMenuGroupItem(_selectedOutlet.id)
+    await postForMenuGroupItem(
+            widget.isEdit ? widget.menuItemModel!.outletId : _selectedOutlet.id)
         .then((List<FilterItemModel> rList) => {stockGroups.addAll(rList)});
     setState(() {
       if (stockGroups.isNotEmpty) {
         if (widget.isEdit) {
-          _selectedStockGroup = stockGroups
-              .where(
-                  (element) => element.id == widget.menuItemModel!.stockGroupId)
-              .first;
-          _indexSelectedStockGroup = stockGroups.indexOf(_selectedStockGroup);
+          try {
+            _selectedStockGroup = stockGroups
+                .where((element) =>
+                    element.id == widget.menuItemModel!.stockGroupId)
+                .first;
+            _indexSelectedStockGroup = stockGroups.indexOf(_selectedStockGroup);
+          } catch (e) {
+            _selectedStockGroup = stockGroups.first;
+            _indexSelectedStockGroup = 0;
+          }
         } else {
           _selectedStockGroup = stockGroups.first;
         }
