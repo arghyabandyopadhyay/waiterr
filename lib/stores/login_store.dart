@@ -56,9 +56,6 @@ abstract class LoginStoreBase with Store {
         verificationCompleted: (AuthCredential auth) async {
           await _auth.signInWithCredential(auth).then((UserCredential value) {
             if (value.user != null) {
-              if (kDebugMode) {
-                print('Authentication successful');
-              }
               onAuthenticationSuccessful(context, value);
             } else {
               globalShowInSnackBar(
