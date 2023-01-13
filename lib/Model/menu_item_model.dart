@@ -51,7 +51,6 @@ class MenuItemModel {
       this.outletName});
 
   factory MenuItemModel.fromJson(Map<String, dynamic> json) {
-    print(json);
     return MenuItemModel(
         itemImage: json['ItemImage'],
         item: json['Item'],
