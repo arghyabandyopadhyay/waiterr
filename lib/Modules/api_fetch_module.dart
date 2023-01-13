@@ -508,7 +508,6 @@ Future<List<RunningOrderModel>> postForRunningOrders(
 //Ready
 Future<int> postForUserClientAllocation(
     String userId, String outletId, int ucaRoleId, bool isEdit) async {
-  print("ddd");
   RequestJson requestJson = RequestJson(
       requestType: "Waiters",
       parameterList: ([
