@@ -31,11 +31,10 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   List<List<MenuItemModel>>? productList;
   Future<List<List<MenuItemModel>>?>? _futureproductList;
   List<MenuItemModel>? productListSearch;
-  List<MenuItemModel> favourites = [];
   String dropdownValue = '0';
   double totalItems = 0;
   double totalCartAmount = 0;
-  bool? _isSearching, _dataIsLoaded, _isLoading;
+  bool? _isSearching, _isLoading;
   List<MenuItemModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -57,7 +56,8 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   Widget appBarTitle = const Text(
     "Menu",
     textAlign: TextAlign.left,
-    style: TextStyle(fontSize: 24.0, height: 2.5, color: Colors.black),
+    style: TextStyle(
+        fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.black),
   );
 
   //Methods
@@ -166,7 +166,6 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   }
 
   Future<List<List<MenuItemModel>>?> fetchList() async {
-    MenuItemModel previousTotalValue;
     List<List<MenuItemModel>>? results = [];
     List<MenuItemModel> temp;
     MenuItemModel temp2;
@@ -181,7 +180,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
               if (temp.isNotEmpty) results.add(temp)
             },
           setState(() {
-            _dataIsLoaded = true;
+            _isLoading = false;
           })
         });
 
@@ -193,53 +192,6 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
         style: GoogleFonts.openSans(
             color: Colors.black, fontSize: 17, fontWeight: FontWeight.w600),
       );
-
-  List<MenuItemModel> getOrderList() {
-    List<MenuItemModel> orderList = [];
-    try {
-      orderList = productListSearch!
-          .where((element) => element.quantity > 0.0)
-          .toList();
-      orderList.add(MenuItemModel(
-          stockGroupId: "",
-          stockGroup: "",
-          favourite: false,
-          item: "Total",
-          itemDescription: null,
-          itemID: "",
-          customizable: [],
-          rate: totalCartAmount,
-          quantity: totalItems,
-          discount: 0,
-          isEdited: false,
-          taxClassID: "",
-          taxRate: 0,
-          masterFilter: "",
-          isVeg: true,
-          rateBeforeDiscount: 0,
-          isDiscountable: false));
-    } catch (E) {
-      orderList.add(MenuItemModel(
-          stockGroupId: "",
-          stockGroup: "",
-          favourite: false,
-          item: "Total",
-          itemID: "",
-          customizable: [],
-          itemDescription: null,
-          rate: totalCartAmount,
-          quantity: totalItems,
-          discount: 0,
-          isEdited: false,
-          taxClassID: "",
-          taxRate: 0,
-          isVeg: true,
-          rateBeforeDiscount: 0,
-          masterFilter: "",
-          isDiscountable: false));
-    }
-    return orderList;
-  }
 
   List<ListTile> _buildItems(BuildContext context, List<MenuItemModel> items) {
     List<ListTile> a = [];
@@ -278,7 +230,6 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   void initState() {
     super.initState();
     _isSearching = false;
-    _dataIsLoaded = false;
     _futureproductList = fetchList();
   }
 
@@ -486,9 +437,6 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                   "401") {
                                                 return const ErrorPageFourHundredOne();
                                               } else {
-                                                if (kDebugMode) {
-                                                  print(snapshot.error);
-                                                }
                                                 return const ErrorHasOccurred();
                                               }
                                             }
