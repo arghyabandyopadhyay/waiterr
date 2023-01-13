@@ -78,9 +78,6 @@ class _AddOutletPageState extends State<AddOutletPage> {
                 null,
                 null);
           } else {
-            if (kDebugMode) {
-              print(E);
-            }
             globalShowInSnackBar("Some Error Has Occurred.", null,
                 scaffoldMessengerKey, null, null);
           }
