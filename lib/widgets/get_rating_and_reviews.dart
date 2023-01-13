@@ -223,11 +223,7 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
                                   //       );
                                   //   }
                                   // },
-                                  onRatingUpdate: (rating) {
-                                    if (kDebugMode) {
-                                      print(rating);
-                                    }
-                                  },
+                                  onRatingUpdate: (rating) {},
                                 ),
                               ),
                               const SizedBox(
