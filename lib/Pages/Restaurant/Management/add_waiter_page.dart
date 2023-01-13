@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:waiterr/Model/user_details_model.dart';
+import 'package:waiterr/Model/waiter_details_model.dart';
 import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Modules/universal_module.dart';
@@ -12,7 +13,10 @@ import '../../../Model/outlet_configuration_model.dart';
 import '../../../theme.dart';
 
 class AddWaiterPage extends StatefulWidget {
-  const AddWaiterPage({Key? key}) : super(key: key);
+  final WaiterDetailsModel? waiterDetail;
+  final bool isEdit;
+  const AddWaiterPage({Key? key, required this.isEdit, this.waiterDetail})
+      : super(key: key);
   @override
   State<AddWaiterPage> createState() => _AddWaiterPageState();
 }
@@ -23,9 +27,9 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
   bool _isLoadingTakeaway = false;
   bool _isLoadingAvailability = false;
   String? customerId;
+  int? ucaRoleId;
   PersonData person = PersonData();
   var noOfPerson = TextEditingController();
-  var salesPointNo = TextEditingController();
   late OutletConfigurationModel _selectedOutlet;
   String _mobileStatus = "";
   int _indexSelectedOutlet = -1;
@@ -44,7 +48,9 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
           "Data loading taking place.", null, scaffoldMessengerKey, null, null);
     } else {
       final form = _formKey.currentState!;
-      if (!form.validate() || _indexSelectedOutlet < 0 || customerId == null) {
+      if ((!widget.isEdit && !form.validate()) ||
+          _indexSelectedOutlet < 0 ||
+          (customerId == null && widget.waiterDetail == null)) {
         // Start validating on every change.
         if (_indexSelectedOutlet < 0) {
           globalShowInSnackBar(
@@ -64,7 +70,12 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
         });
         try {
           await postForUserClientAllocation(
-                  customerId ?? "", _selectedOutlet.id)
+                  widget.isEdit
+                      ? widget.waiterDetail!.userClientAllocationId
+                      : customerId ?? "",
+                  _selectedOutlet.id,
+                  ucaRoleId ?? 1,
+                  widget.isEdit)
               .then((int resultCode) async => {
                     if (resultCode == 500)
                       {
@@ -133,11 +144,19 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
         outletConfiguration.add(element);
       });
     }
-    salesPointNo.text = "";
-    phoneNumber.text = "";
-    name.text = "";
-    _indexSelectedOutlet = 0;
-    _selectedOutlet = outletConfiguration.first;
+    if (widget.isEdit) {
+      phoneNumber.text = widget.waiterDetail!.mobileNumber;
+      name.text = widget.waiterDetail!.name;
+      _selectedOutlet = outletConfiguration
+          .where((element) => widget.waiterDetail!.outletId == element.id)
+          .first;
+      _indexSelectedOutlet = outletConfiguration.indexOf(_selectedOutlet);
+    } else {
+      phoneNumber.text = "";
+      name.text = "";
+      _indexSelectedOutlet = 0;
+      _selectedOutlet = outletConfiguration.first;
+    }
   }
 
   @override
@@ -175,7 +194,7 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
-                      "Add Waiter",
+                      "${widget.isEdit ? "Edit" : "Add"} Waiter",
                       textAlign: TextAlign.left,
                       style: Theme.of(context).textTheme.headline1,
                     ),
@@ -234,7 +253,6 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                                               _selectedOutlet =
                                                   outletConfiguration[index];
                                               if (value) {
-                                                salesPointNo.text = "";
                                                 _isLoadingTakeaway = false;
                                               }
                                               //get list of table
@@ -245,6 +263,7 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
                                 ),
                                 sizedBoxSpace,
                                 TextFormField(
+                                  enabled: !widget.isEdit,
                                   controller: phoneNumber,
                                   style: const TextStyle(),
                                   decoration: InputDecoration(
@@ -387,12 +406,12 @@ class _AddWaiterPageState extends State<AddWaiterPage> {
               ),
               backgroundColor: GlobalTheme.tint,
               floatingActionButton: FloatingActionButton.extended(
-                icon: const Icon(
-                  Icons.add,
+                icon: Icon(
+                  widget.isEdit ? Icons.save : Icons.add,
                 ),
-                label: const Text(
-                  "Add",
-                  style: TextStyle(
+                label: Text(
+                  widget.isEdit ? "Save" : "Add",
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 ),
@@ -412,8 +431,6 @@ class PersonData {
   String? name = '';
   String? phoneNumber = '';
   String outlet = '';
-  String? salesPointNo = '';
-  String? pax = '';
 }
 
 class _IndNumberTextInputFormatter extends TextInputFormatter {
