@@ -511,7 +511,6 @@ class _IndNumberTextInputFormatter extends TextInputFormatter {
         );
       }
     } catch (E) {
-      print(E);
       return const TextEditingValue(text: "");
     }
   }
