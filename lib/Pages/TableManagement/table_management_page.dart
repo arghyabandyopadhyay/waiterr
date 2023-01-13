@@ -22,9 +22,10 @@ import '../../global_class.dart';
 import '../../theme.dart';
 import '../../widgets/option_modal_bottom_sheet.dart';
 import '../Restaurant/Management/menu_manager_page.dart';
+import '../Restaurant/Management/offer_manager_page.dart';
 import '../Restaurant/Management/stock_group_manager_page.dart';
 import '../Restaurant/Management/tax_class_manager_page.dart';
-import '../Restaurant/Management/waiter_manager_page.dart';
+import '../Restaurant/Management/employee_manager_page.dart';
 import 'kot_page.dart';
 import 'add_order_page.dart';
 
@@ -424,13 +425,26 @@ class _MyTableHomePage extends State<TableManagementPage> {
                         if (UserClientAllocationData.ucaRoleId == 3 ||
                             UserClientAllocationData.ucaRoleId == 4)
                           ModalOptionModel(
-                              particulars: "Waiter Manager",
+                              particulars: "Offers Manager",
                               onTap: () async {
                                 Navigator.pop(context);
                                 Navigator.of(context).push(PageRouteBuilder(
                                     pageBuilder:
                                         (context, animation1, animation2) =>
-                                            const WaiterManagerPage()));
+                                            const OfferManagerPage()));
+                              },
+                              icon: Icons.discount_outlined),
+                        if (UserClientAllocationData.ucaRoleId == 3 ||
+                            UserClientAllocationData.ucaRoleId == 4)
+                          ModalOptionModel(
+                              particulars: "Employee Manager",
+                              onTap: () async {
+                                Navigator.pop(context);
+                                Navigator.of(context).push(PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const EmployeeManagerPage(
+                                                isForAdminManagement: false)));
                               },
                               icon: Icons.group_outlined),
                         if (UserClientAllocationData.ucaRoleId == 3 ||
@@ -486,7 +500,11 @@ class _MyTableHomePage extends State<TableManagementPage> {
                               particulars: "Admin Manager",
                               onTap: () async {
                                 Navigator.pop(context);
-                                //Todo: navigate to waiter manager
+                                Navigator.of(context).push(PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const EmployeeManagerPage(
+                                                isForAdminManagement: true)));
                               },
                               icon: Icons.admin_panel_settings_outlined),
                         ModalOptionModel(
