@@ -670,7 +670,8 @@ Future<ProductDetailModel> postForMenuItemDetails(String menuItemId) async {
 }
 
 //ready
-Future<List<WaiterDetailsModel>> postForWaiterDetails() async {
+Future<List<WaiterDetailsModel>> postForEmployeeDetails(
+    bool isForAdminManagement) async {
   RequestJson requestJson =
       RequestJson(requestType: "Waiters", parameterList: null);
   UniversalJson universalJson = UniversalJson(
@@ -680,6 +681,9 @@ Future<List<WaiterDetailsModel>> postForWaiterDetails() async {
   String responseBody = await responseGeneratorPost(json.encode(universalJson));
   return (jsonDecode(responseBody) as List)
       .map((data) => WaiterDetailsModel.fromJson(data))
+      .where((element) => isForAdminManagement
+          ? element.ucaRoleId == 4
+          : element.ucaRoleId != 4)
       .toList();
 }
 
@@ -744,13 +748,15 @@ Future<List<FilterItemModel>> postForMenuGroupItem(String? outletId) async {
 }
 
 //ready
-Future<int> postForMenuGroupItemAddition(
-    String stockGroup, String outletID) async {
+Future<int> postForMenuGroupItemModification(String stockGroup, String outletID,
+    String? id, String modificationType) async {
   RequestJson requestJson =
       RequestJson(requestType: "Waiterr Menu Group", parameterList: [
     Parameter(pKey: "StockGroup", pValue: stockGroup),
     Parameter(pKey: "OutletId", pValue: outletID),
-    Parameter(pKey: "ImageUrl", pValue: null)
+    Parameter(pKey: "id", pValue: id),
+    Parameter(pKey: "ImageUrl", pValue: null),
+    Parameter(pKey: "ModificationType", pValue: modificationType)
   ]);
   UniversalJson universalJson = UniversalJson(
       gUID: UserClientAllocationData.guid,
