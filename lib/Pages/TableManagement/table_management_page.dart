@@ -3,7 +3,7 @@ import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
-import 'package:waiterr/Pages/Restaurant/Management/menu_manager_page_temp.dart';
+import 'package:waiterr/Pages/Restaurant/Management/menu_manager_page.dart';
 import 'package:waiterr/Pages/Restaurant/Management/outlet_manager_page.dart';
 import 'package:waiterr/Pages/TableManagement/approve_order_page.dart';
 import 'package:waiterr/Pages/User/about_page.dart';
@@ -442,7 +442,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                 Navigator.of(context).push(PageRouteBuilder(
                                     pageBuilder:
                                         (context, animation1, animation2) =>
-                                            const MenuManagerPageTemp()));
+                                            const MenuManagerPage()));
                               },
                               icon: Icons.restaurant_menu_outlined),
                         if (UserClientAllocationData.ucaRoleId == 3 ||
