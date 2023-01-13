@@ -5,11 +5,15 @@ import 'package:waiterr/Modules/universal_module.dart';
 import 'package:waiterr/widgets/chips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
+import '../../../Model/filter_item_model.dart';
 import '../../../Model/outlet_configuration_model.dart';
 import '../../../theme.dart';
 
 class AddStockGroupPage extends StatefulWidget {
-  const AddStockGroupPage({Key? key}) : super(key: key);
+  final FilterItemModel? filterItem;
+  final bool isEdit;
+  const AddStockGroupPage({Key? key, required this.isEdit, this.filterItem})
+      : super(key: key);
   @override
   State<AddStockGroupPage> createState() => _AddStockGroupPageState();
 }
@@ -45,7 +49,11 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
           _isLoadingAvailability = true;
         });
         try {
-          await postForMenuGroupItemAddition(name.text, _selectedOutlet.id)
+          await postForMenuGroupItemModification(
+                  name.text,
+                  _selectedOutlet.id,
+                  widget.isEdit ? widget.filterItem!.id : "",
+                  widget.isEdit ? "Edit" : "Create")
               .then((int resultCode) async => {
                     if (resultCode == 500)
                       {
@@ -56,9 +64,6 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
                       {Navigator.pop(context)}
                   });
         } catch (E) {
-          if (kDebugMode) {
-            print(E);
-          }
           setState(() {
             _isLoadingAvailability = false;
           });
@@ -73,9 +78,6 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
                 null,
                 null);
           } else {
-            if (kDebugMode) {
-              print(E);
-            }
             globalShowInSnackBar("Some Error Has Occurred.", null,
                 scaffoldMessengerKey, null, null);
           }
@@ -104,9 +106,17 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
         outletConfiguration.add(element);
       });
     }
-    name.text = "";
-    _indexSelectedOutlet = 0;
-    _selectedOutlet = outletConfiguration.first;
+    if (widget.isEdit) {
+      name.text = widget.filterItem!.stockGroup ?? "";
+      _selectedOutlet = outletConfiguration
+          .where((element) => widget.filterItem!.outletId == element.id)
+          .first;
+      _indexSelectedOutlet = outletConfiguration.indexOf(_selectedOutlet);
+    } else {
+      name.text = "";
+      _indexSelectedOutlet = 0;
+      _selectedOutlet = outletConfiguration.first;
+    }
   }
 
   @override
@@ -144,7 +154,7 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
-                      "Add Waiter",
+                      "${widget.isEdit ? "Edit" : "Add"} Waiter",
                       textAlign: TextAlign.left,
                       style: Theme.of(context).textTheme.headline1,
                     ),
@@ -231,12 +241,12 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
               ),
               backgroundColor: GlobalTheme.tint,
               floatingActionButton: FloatingActionButton.extended(
-                icon: const Icon(
-                  Icons.add,
+                icon: Icon(
+                  widget.isEdit ? Icons.save : Icons.add,
                 ),
-                label: const Text(
-                  "Add",
-                  style: TextStyle(
+                label: Text(
+                  widget.isEdit ? "Save" : "Add",
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 ),
