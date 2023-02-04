@@ -11,7 +11,7 @@ import 'package:waiterr/widgets/bottom_costumization_sheet.dart';
 import 'package:waiterr/widgets/cart_list_card.dart';
 import 'package:waiterr/widgets/confirmation_dialog.dart';
 import 'package:waiterr/widgets/loading_indicator.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../Model/comment_for_kot_suggestion_model.dart';
@@ -40,10 +40,10 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
       GlobalKey<ScaffoldMessengerState>();
   bool isLoading = false;
   Widget _shoppingCartBadge() {
-    return Badge(
-      position: BadgePosition.topEnd(top: 0, end: 3),
+    return badges.Badge(
+      position: badges.BadgePosition.topEnd(top: 0, end: 3),
       animationDuration: const Duration(milliseconds: 300),
-      animationType: BadgeAnimationType.slide,
+      animationType: badges.BadgeAnimationType.slide,
       badgeContent: Text(
         totalItems!.round().toString(),
         style: const TextStyle(color: Colors.white),
