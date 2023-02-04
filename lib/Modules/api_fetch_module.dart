@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:waiterr/Model/comment_for_kot_suggestion_model.dart';
 import 'package:waiterr/Model/customer_details_model.dart';
@@ -15,7 +14,6 @@ import 'package:waiterr/Model/RequestJson/parameter.dart';
 import 'package:waiterr/Model/RequestJson/universal_json.dart';
 import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
-import 'package:waiterr/Model/api_header_model.dart';
 import 'package:waiterr/Model/user_details_model.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
