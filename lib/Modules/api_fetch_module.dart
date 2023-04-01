@@ -464,11 +464,12 @@ Future<List<RunningOrderModel>> postForRunningOrders(
     response = await http.post(
       Uri.parse(isWaiter
           ? UserClientAllocationData.dataExchangeURL!
-          : "http://10.0.2.2:3000/api/master/"),
+          : "http://165.227.145.73:3000/api/master/"),
       headers: UserDetail.getHeader(),
       body: body,
     );
   } catch (E) {
+    print(E);
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
           if (value == ConnectivityResult.none)
@@ -479,6 +480,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
             throw "ErrorHasOccurred"
         });
   }
+  print(response.body);
   if (response.statusCode == 201 || response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the json.
@@ -487,6 +489,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
     } else {
       //for(var value in json.decode(response.body))rList.add(RunningOrderModel.fromJson(value));
       if (response.body.isNotEmpty) {
+        print(response.body);
         return ((json.decode(response.body)) as List)
             .map((data) => RunningOrderModel.fromJson(data))
             .toList();
