@@ -523,7 +523,8 @@ Future<int> postForUserClientAllocation(
       requestJSON: requestJson);
   String responseBody = await responseGeneratorPost(json.encode(universalJson));
   responseBody = jsonDecode(responseBody);
-  if (responseBody == "Success") {
+  if ((!isEdit && responseBody == "user client allocation data inserted") ||
+      (isEdit && responseBody == "user client allocation data updated")) {
     return 200;
   } else {
     return 500;
@@ -566,7 +567,7 @@ Future<int> deleteUserClientAllocation(String? userClientAllocationId) async {
       requestJSON: requestJson);
   String responseBody = await responseGeneratorPost(json.encode(universalJson));
   responseBody = jsonDecode(responseBody);
-  if (responseBody == "User client allocation deleted successfully") {
+  if (responseBody == "User client allocation data deleted successfully") {
     return 200;
   } else {
     return 500;
