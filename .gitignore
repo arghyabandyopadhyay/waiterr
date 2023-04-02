@@ -165,3 +165,12 @@ windows/flutter/generated_plugin_registrant.cc
 windows/flutter/generated_plugin_registrant.h
 windows/flutter/generated_plugins.cmake
 .flutter-plugins-dependencies
+pubspec.lock
+ios/Podfile.lock
+ios/Runner/.DS_Store
+ios/Runner/GoogleService-Info.plist
+macos/Flutter/GeneratedPluginRegistrant.swift
+.metadata
+pubspec.lock
+ios/Runner/GoogleService-Info.plist
+ios/Runner.xcodeproj/project.pbxproj

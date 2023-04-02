@@ -6,6 +6,8 @@
 	<string>232568310130-i35fel3hula0if4bvh3t8nss1t343ppj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.232568310130-i35fel3hula0if4bvh3t8nss1t343ppj</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>232568310130-lbfr83q1ugs08vs111hqrtaj1mio84p4.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCIjwZmJLu1PqEIUrlkKL_A_aX7LhjIIwA</string>
 	<key>GCM_SENDER_ID</key>
@@ -30,5 +32,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:232568310130:ios:b4d7ec391c9d968b1bf5eb</string>
+	<key>DATABASE_URL</key>
+	<string>https://wiaterr-3fff2-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
