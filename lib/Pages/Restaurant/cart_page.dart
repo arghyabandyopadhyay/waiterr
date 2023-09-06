@@ -42,8 +42,9 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
   Widget _shoppingCartBadge() {
     return badges.Badge(
       position: badges.BadgePosition.topEnd(top: 0, end: 3),
-      animationDuration: const Duration(milliseconds: 300),
-      animationType: badges.BadgeAnimationType.slide,
+      badgeAnimation: const badges.BadgeAnimation.slide(
+        animationDuration: Duration(milliseconds:300),
+      ),
       badgeContent: Text(
         totalItems!.round().toString(),
         style: const TextStyle(color: Colors.white),

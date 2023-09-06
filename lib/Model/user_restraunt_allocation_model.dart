@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'outlet_configuration_model.dart';
 
 class UserRestrauntAllocationModel {

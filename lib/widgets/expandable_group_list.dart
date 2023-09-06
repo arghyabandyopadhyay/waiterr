@@ -1,10 +1,11 @@
 import 'package:waiterr/Model/menu_item_model.dart';
-import 'package:expandable_group/expandable_group_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:waiterr/Model/waiter_details_model.dart';
 import 'package:waiterr/theme.dart';
+
+import 'expandable_group_widget.dart';
 
 class ExpandableGroupList<T> extends StatefulWidget {
   final List<List<T>>? list;

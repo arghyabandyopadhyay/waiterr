@@ -20,7 +20,7 @@ import 'package:waiterr/widgets/menu_all_list.dart';
 import 'package:waiterr/widgets/non_favourite_card.dart';
 import 'package:waiterr/widgets/selection_cart_responsive.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:expandable_group/expandable_group_widget.dart';
+import '../../widgets/expandable_group_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:waiterr/Model/running_order_model.dart';
 import 'package:flutter/material.dart';

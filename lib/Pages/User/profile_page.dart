@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
     phoneNumber.text =
         "${UserDetail.userDetails.mobileNumber.substring(0, 5)} ${UserDetail.userDetails.mobileNumber.substring(5)}";
   }
-  PickedFile? _imageFile;
+  XFile? _imageFile;
   dynamic _pickImageError;
   String? _retrieveDataError;
 
@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
   // final TextEditingController maxHeightController = TextEditingController();
   // final TextEditingController qualityController = TextEditingController();
   Future<void> retrieveLostData() async {
-    final LostData response = await _picker.getLostData();
+    final LostDataResponse response = await _picker.retrieveLostData();
     if (response.isEmpty) {
       return;
     }
@@ -83,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void _onImageButtonPressed(ImageSource source,
       {BuildContext? context}) async {
     try {
-      final pickedFile = await _picker.getImage(
+      final pickedFile = await _picker.pickImage(
         source: source,
         maxWidth: 100,
         maxHeight: 100,

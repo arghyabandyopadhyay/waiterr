@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../theme.dart';
-
 class ErrorPageFiveHundred extends StatelessWidget {
   const ErrorPageFiveHundred({Key? key}) : super(key: key);
   @override

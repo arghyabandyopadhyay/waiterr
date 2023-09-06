@@ -9,7 +9,7 @@ import 'package:waiterr/widgets/kot_details_widget.dart';
 import 'package:waiterr/widgets/kot_progress_status_indicator.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:expandable_group/expandable_group_widget.dart';
+import '../../widgets/expandable_group_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../theme.dart';
 import '../../widgets/approval_control_kot.dart';
