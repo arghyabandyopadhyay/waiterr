@@ -22,7 +22,7 @@ class _OfferManagerPageState extends State<OfferManagerPage> {
   List<OutletConfigurationModel>? outlets;
   Future<List<OutletConfigurationModel>>? _futureoutlets;
   bool? _isSearching, _isLoading;
-  String _searchText = "";
+  final String _searchText = "";
   List<OutletConfigurationModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -193,7 +193,7 @@ class _OfferManagerPageState extends State<OfferManagerPage> {
                         "Outlets",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
                     ),
                     const SizedBox(

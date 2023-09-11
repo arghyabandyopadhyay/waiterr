@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "232568310130",
+    "firebase_url": "https://wiaterr-3fff2-default-rtdb.firebaseio.com",
     "project_id": "wiaterr-3fff2",
     "storage_bucket": "wiaterr-3fff2.appspot.com"
   },
@@ -13,6 +14,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "232568310130-hundfigb79r534nq1ijv5m9gkk2hsq86.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ArghyaBandyopadhyay.waiterr",
+            "certificate_hash": "a715921f28da2dcd875b0d776a5c7b6f910dc174"
+          }
+        },
+        {
+          "client_id": "232568310130-lbfr83q1ugs08vs111hqrtaj1mio84p4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ArghyaBandyopadhyay.waiterr",
+            "certificate_hash": "ccb4751d0b9e6dda874791df2390898a1cb39e82"
+          }
+        },
         {
           "client_id": "232568310130-9meki9rhbhvkndub395jcleljn70ogbr.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +46,13 @@
             {
               "client_id": "232568310130-9meki9rhbhvkndub395jcleljn70ogbr.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "232568310130-i35fel3hula0if4bvh3t8nss1t343ppj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ArghyaBandyopadhyay.waiterr"
+              }
             }
           ]
         }

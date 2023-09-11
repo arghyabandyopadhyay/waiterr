@@ -1,9 +1,5 @@
-import 'package:flutter/foundation.dart';
-import 'package:waiterr/global_class.dart';
-import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Modules/universal_module.dart';
-import 'package:waiterr/widgets/chips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import '../../../theme.dart';
@@ -16,8 +12,8 @@ class AddTaxClassPage extends StatefulWidget {
 
 class _AddTaxClassPageState extends State<AddTaxClassPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _isLoading = false;
-  bool _isLoadingTakeaway = false;
+  final bool _isLoading = false;
+  final bool _isLoadingTakeaway = false;
   bool _isLoadingAvailability = false;
   TextEditingController name = TextEditingController();
   TextEditingController rate = TextEditingController();
@@ -129,7 +125,7 @@ class _AddTaxClassPageState extends State<AddTaxClassPage> {
                     child: Text(
                       "Add Tax Class",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
                   Flexible(

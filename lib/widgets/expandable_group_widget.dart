@@ -43,7 +43,7 @@ class ExpandableGroup extends StatefulWidget {
   /// Default value `Theme.of(context).appBarTheme.color`
   final Color? headerBackgroundColor;
 
-  ExpandableGroup({Key? key,
+  const ExpandableGroup({Key? key,
     this.isExpanded = false,
     required this.header,
     required this.items,

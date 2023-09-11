@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:waiterr/Model/bottom_sheet_communication_template.dart';
 import 'package:waiterr/Model/comment_for_kot_suggestion_model.dart';
 import 'package:waiterr/Model/customizable_page_model.dart';
-import 'package:waiterr/Model/favourites_json_model.dart';
 import 'package:waiterr/Model/filter_item_model.dart';
 import 'package:waiterr/Model/menu_item_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
@@ -1276,9 +1275,9 @@ class _ViewCartButtonState extends State<ViewCartButton> {
                       )
                     ],
                   ),
-                  Row(
+                  const Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const <Widget>[
+                      children: <Widget>[
                         Text(
                           'View Cart',
                           style: TextStyle(

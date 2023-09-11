@@ -1,13 +1,12 @@
 import 'package:waiterr/Model/drawer_action_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import '../global_class.dart';
 import '../theme.dart';
 
 class EndDrawerContent extends StatelessWidget {
-  EndDrawerContent(
+  const EndDrawerContent(
       {Key? key, this.drawerItems, this.alternativeName, this.alternativeMno})
       : super(key: key);
   final List<DrawerActionModel>? drawerItems;
@@ -83,7 +82,7 @@ class EndDrawerContent extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            placeholder: (context, url) => Container(
+                            placeholder: (context, url) => SizedBox(
                                 width: double.infinity,
                                 child: Center(
                                   child: Shimmer.fromColors(

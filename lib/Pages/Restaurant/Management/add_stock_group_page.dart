@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Modules/universal_module.dart';
@@ -20,7 +19,7 @@ class AddStockGroupPage extends StatefulWidget {
 
 class _AddStockGroupPageState extends State<AddStockGroupPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _isLoading = false;
+  final bool _isLoading = false;
   bool _isLoadingTakeaway = false;
   bool _isLoadingAvailability = false;
   late OutletConfigurationModel _selectedOutlet;
@@ -156,7 +155,7 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
                     child: Text(
                       "${widget.isEdit ? "Edit" : "Add"} Waiter",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
                   Flexible(

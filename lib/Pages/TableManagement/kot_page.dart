@@ -1,4 +1,3 @@
-import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Model/kot_model.dart';
 import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
@@ -134,7 +133,7 @@ class _KOTPageState extends State<KOTPage> {
                           ? "Running Orders"
                           : "Table-${widget.item.salePointName!}",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
                   const SizedBox(

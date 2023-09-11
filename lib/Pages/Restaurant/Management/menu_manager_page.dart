@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:waiterr/Model/bottom_sheet_communication_template.dart';
 import 'package:waiterr/Model/customizable_page_model.dart';
 import 'package:waiterr/Model/menu_item_model.dart';

@@ -22,7 +22,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
   List<TaxModel>? taxClasses;
   Future<List<TaxModel>>? _futuretaxclasses;
   bool? _isSearching, _isLoading;
-  String _searchText = "";
+  final String _searchText = "";
   List<TaxModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -191,7 +191,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                         "Tax Classes",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
                     ),
                     const SizedBox(

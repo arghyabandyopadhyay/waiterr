@@ -1,24 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:waiterr/Model/waiter_details_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
 import 'package:waiterr/Pages/Restaurant/Management/add_stock_group_page.dart';
 import 'package:waiterr/stores/login_store.dart';
-import 'package:waiterr/widgets/running_order_card.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:waiterr/widgets/waiter_details_card.dart';
 import '../../../Model/filter_item_model.dart';
 import '../../../Model/outlet_configuration_model.dart';
 import '../../../global_class.dart';
 import '../../../theme.dart';
 import '../../../widgets/expandable_group_list.dart';
-import 'add_employee_page.dart';
 
 class StockGroupManagerPage extends StatefulWidget {
   const StockGroupManagerPage({Key? key}) : super(key: key);
@@ -32,7 +28,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
   Future<List<List<FilterItemModel>>?>? _futurestockGroups;
   List<FilterItemModel>? stockGroupsSearch;
   bool? _isSearching, _isLoading;
-  String _searchText = "";
+  final String _searchText = "";
   List<FilterItemModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -312,7 +308,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                         "Stock Groups",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
                     ),
                     const SizedBox(

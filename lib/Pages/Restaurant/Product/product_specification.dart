@@ -15,10 +15,10 @@ class ProductSpecification extends StatelessWidget {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      children: [
+      children: const [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
+          children: [
             Text(
               "Specifications",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),

@@ -5,7 +5,6 @@ import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
 import 'package:waiterr/stores/login_store.dart';
-import 'package:waiterr/widgets/running_order_card.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
   Future<List<List<WaiterDetailsModel>>?>? _futureemployees;
   List<WaiterDetailsModel>? employeeSearch;
   bool? _isSearching, _isLoading;
-  String _searchText = "";
+  final String _searchText = "";
   List<WaiterDetailsModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -275,7 +274,7 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
                         widget.isForAdminManagement ? "Admins" : "Waiters",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
                     ),
                     const SizedBox(

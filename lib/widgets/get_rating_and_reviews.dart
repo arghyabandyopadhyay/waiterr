@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -9,7 +7,7 @@ class GetRatingAndReviews extends StatefulWidget {
   const GetRatingAndReviews({Key? key, this.item}) : super(key: key);
   @override
   _GetRatingAndReviewsState createState() =>
-      _GetRatingAndReviewsState(this.item);
+      _GetRatingAndReviewsState(item);
 }
 
 class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
@@ -17,7 +15,7 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // This widget is the root of your application.
   _GetRatingAndReviewsState(this.item);
-  bool _showCross = false;
+  final bool _showCross = false;
   //Overrides
   @override
   void initState() {

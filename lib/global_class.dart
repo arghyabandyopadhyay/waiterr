@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:waiterr/Model/user_details_model.dart';
 import 'Model/outlet_configuration_model.dart';
 import 'Model/user_restraunt_allocation_model.dart';
@@ -114,7 +113,7 @@ class AppBarVariables {
             "Waiterr",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
         ],
       );

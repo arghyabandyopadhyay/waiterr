@@ -1,9 +1,7 @@
 //AddCommentForKOTDialog
 import 'package:waiterr/Model/comment_for_kot_suggestion_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../global_class.dart';
 import '../theme.dart';
 
 class AddCommentForKOTDialog extends StatefulWidget {
@@ -112,7 +110,7 @@ class _AddCommentForKOTDialogState extends State<AddCommentForKOTDialog> {
                     widget.onTapAdd();
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: GlobalTheme.waiterrPrimaryColor),
+                      backgroundColor: GlobalTheme.waiterrPrimaryColor),
                   child: const Text(
                     "Ok",
                     style: TextStyle(color: Colors.white),

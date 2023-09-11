@@ -18,8 +18,8 @@ class AddOutletPage extends StatefulWidget {
 
 class _AddOutletPageState extends State<AddOutletPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _isLoading = false;
-  bool _isLoadingTakeaway = false;
+  final bool _isLoading = false;
+  final bool _isLoadingTakeaway = false;
   bool _isLoadingAvailability = false;
   TextEditingController name = TextEditingController();
   TextEditingController salePointName = TextEditingController();
@@ -145,7 +145,7 @@ class _AddOutletPageState extends State<AddOutletPage> {
                     child: Text(
                       "Add Outlet",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
                   Flexible(

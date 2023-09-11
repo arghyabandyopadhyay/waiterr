@@ -106,8 +106,7 @@ class _CartListCardState extends State<CartListCard> {
                                       width: 5,
                                     ),
                                     Text(
-                                      (widget.item.discount != null &&
-                                              widget.item.discount != 0)
+                                      (widget.item.discount != 0)
                                           ? "₹${widget.item.rateBeforeDiscount}"
                                           : "",
                                       textAlign: TextAlign.end,

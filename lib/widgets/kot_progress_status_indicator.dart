@@ -1,7 +1,6 @@
 import 'package:waiterr/Model/kot_model.dart';
 import 'package:waiterr/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class KOTProgressStatusIndicator extends StatefulWidget {
   final KOTModel currentKot;

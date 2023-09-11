@@ -1,6 +1,5 @@
 import 'package:waiterr/Model/drawer_action_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import '../global_class.dart';

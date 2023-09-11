@@ -21,7 +21,6 @@ import '../../Model/model_option_model.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
 import '../../widgets/option_modal_bottom_sheet.dart';
-import '../Restaurant/Management/menu_manager_page.dart';
 import '../Restaurant/Management/offer_manager_page.dart';
 import '../Restaurant/Management/stock_group_manager_page.dart';
 import '../Restaurant/Management/tax_class_manager_page.dart';
@@ -40,7 +39,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
   List<RunningOrderModel>? items;
   Future<List<RunningOrderModel>>? _futureitems;
   bool? _isSearching, _isLoading, _isDataLoaded;
-  String _searchText = "";
+  final String _searchText = "";
   double total = 0.0;
   int totalOrders = 0;
   List searchResult = [];
@@ -600,7 +599,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                         UserClientAllocationData.clientName!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
                     ),
                     const SizedBox(

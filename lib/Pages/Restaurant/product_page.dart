@@ -10,7 +10,6 @@ import 'package:waiterr/widgets/bottom_costumization_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../global_class.dart';
 import '../../theme.dart';
 import 'Product/product_about.dart';
 import 'Product/product_reviews.dart';

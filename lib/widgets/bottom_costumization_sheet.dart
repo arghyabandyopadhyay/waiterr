@@ -1,8 +1,6 @@
 import 'package:waiterr/Model/bottom_sheet_communication_template.dart';
 import 'package:waiterr/Model/customizable_page_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:mobx/mobx.dart';
 import '../theme.dart';
 import 'add_quantity_dialog.dart';
 import 'customizable_list_card.dart';

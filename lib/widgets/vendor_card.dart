@@ -1,11 +1,9 @@
 import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../theme.dart';
 
 class VendorCard extends StatelessWidget {
   const VendorCard({Key? key, this.item, required this.onTap})

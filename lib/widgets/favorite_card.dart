@@ -1,5 +1,4 @@
 import 'package:waiterr/Model/menu_item_model.dart';
-import 'package:waiterr/theme.dart';
 import 'package:waiterr/widgets/add_button.dart';
 import 'package:flutter/material.dart';
 

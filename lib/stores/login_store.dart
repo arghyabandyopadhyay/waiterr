@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:waiterr/Modules/universal_module.dart';
 import 'package:waiterr/Pages/Login/splash_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -113,7 +112,7 @@ abstract class LoginStoreBase with Store {
       globalShowInSnackBar('Wrong code ! Please enter the last code received.',
           null, otpScaffoldMessengerKey, SnackBarBehavior.floating, Colors.red);
     }).then((UserCredential authResult) {
-      if (authResult != null && authResult.user != null) {
+      if (authResult.user != null) {
         onAuthenticationSuccessful(context, authResult);
       }
     });

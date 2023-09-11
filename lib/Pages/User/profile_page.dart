@@ -11,7 +11,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
 import 'package:flutter/foundation.dart';
-import 'package:path/path.dart' show join;
 
 class ProfilePage extends StatefulWidget {
   final List<List<dynamic>>? data;
@@ -80,8 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  void _onImageButtonPressed(ImageSource source,
-      {BuildContext? context}) async {
+  void _onImageButtonPressed(ImageSource source) async {
     try {
       final pickedFile = await _picker.pickImage(
         source: source,
@@ -158,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         "My Profile",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
                     ),
                     const SizedBox(
@@ -457,7 +455,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-typedef void OnPickImageCallback(
+typedef OnPickImageCallback = void Function(
     double maxWidth, double maxHeight, int quality);
 
 class _IndNumberTextInputFormatter extends TextInputFormatter {

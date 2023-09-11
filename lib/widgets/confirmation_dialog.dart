@@ -1,6 +1,5 @@
 //ConfirmationDialog
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../theme.dart';
 
@@ -19,7 +18,7 @@ class ConfirmationDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0)), //this right here
-      child: Container(
+      child: SizedBox(
         height: 160,
         child: Padding(
           padding: const EdgeInsets.all(12.0),

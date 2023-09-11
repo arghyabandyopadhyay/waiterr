@@ -1,10 +1,7 @@
-import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Model/kot_model.dart';
-import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Modules/universal_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
-import 'package:waiterr/Pages/Restaurant/menu_page_all.dart';
 import 'package:waiterr/widgets/kot_details_widget.dart';
 import 'package:waiterr/widgets/kot_progress_status_indicator.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';

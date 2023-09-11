@@ -1,9 +1,8 @@
 import 'package:waiterr/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SelectionCard extends StatelessWidget {
-  SelectionCard({Key? key, this.item, this.active, this.onTap})
+  const SelectionCard({Key? key, this.item, this.active, this.onTap})
       : super(key: key);
 
   final String? item;

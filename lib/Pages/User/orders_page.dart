@@ -16,7 +16,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
-import '../TableManagement/add_order_page.dart';
 import '../TableManagement/kot_page.dart';
 
 class OrdersPage extends StatefulWidget {
@@ -31,7 +30,7 @@ class _OrdersPageState extends State<OrdersPage> {
   List<RunningOrderModel>? items;
   Future<List<RunningOrderModel>>? _futureitems;
   bool? _isSearching, _isLoading, _isDataLoaded;
-  String _searchText = "";
+  final String _searchText = "";
   List searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -236,7 +235,7 @@ class _OrdersPageState extends State<OrdersPage> {
                         "${UserDetail.userDetails.name ?? ""}'s ${widget.showPastOrder ? "order history" : "running orders"}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
                     ),
                     const SizedBox(

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ErrorPageFiveHundred extends StatelessWidget {
   const ErrorPageFiveHundred({Key? key}) : super(key: key);
@@ -19,7 +17,7 @@ class ErrorPageFiveHundred extends StatelessWidget {
           Text(
             "Technical Error!!, We are working on it.",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline2,
+            style: Theme.of(context).textTheme.displayMedium,
           )
         ],
       )),
@@ -44,7 +42,7 @@ class ErrorPageFourHundredOne extends StatelessWidget {
           Text(
             "Unauthorised Access!!",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline2,
+            style: Theme.of(context).textTheme.displayMedium,
           )
         ],
       )),
@@ -69,7 +67,7 @@ class ErrorPageNoInternet extends StatelessWidget {
           Text(
             "No Internet Connection!!",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline2,
+            style: Theme.of(context).textTheme.displayMedium,
           )
         ],
       )),
@@ -95,7 +93,7 @@ class NoRunningOrders extends StatelessWidget {
               Text(
                 "No Running Orders",
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               )
             ],
           )),
@@ -122,7 +120,7 @@ class NoDataError extends StatelessWidget {
               Text(
                 "No Data Found!!",
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               )
             ],
           )),
@@ -149,7 +147,7 @@ class ErrorHasOccurred extends StatelessWidget {
               Text(
                 "An Error Has Occurred!!",
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               )
             ],
           )),

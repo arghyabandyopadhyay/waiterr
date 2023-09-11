@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:waiterr/Model/filter_item_model.dart';
 import 'package:waiterr/Model/menu_item_model.dart';
 import 'package:waiterr/Model/tax_model.dart';
@@ -294,7 +293,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
                     child: Text(
                       widget.isEdit ? "Edit Menu" : "Add Menu",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
                   Flexible(

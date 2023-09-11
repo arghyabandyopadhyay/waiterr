@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:waiterr/Pages/Login/login_page.dart';
 import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Model/qr_json_model.dart';

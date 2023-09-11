@@ -114,14 +114,14 @@ class WaiterrThemeDatas {
           iconTheme: IconThemeData(color: globalTheme.appBarIconColor),
           backgroundColor: Colors.transparent),
       textTheme: TextTheme(
-        headline1: TextStyle(
+        displayLarge: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
             color: globalTheme.secondaryText),
-        headline2: TextStyle(fontSize: 17, color: globalTheme.primaryColor),
-        headline3: TextStyle(color: globalTheme.primaryText),
-        bodyText2: TextStyle(color: globalTheme.primaryText),
-        subtitle1: TextStyle(color: globalTheme.primaryText),
+        displayMedium: TextStyle(fontSize: 17, color: globalTheme.primaryColor),
+        displaySmall: TextStyle(color: globalTheme.primaryText),
+        bodyMedium: TextStyle(color: globalTheme.primaryText),
+        titleMedium: TextStyle(color: globalTheme.primaryText),
       ),
       textSelectionTheme:
           TextSelectionThemeData(cursorColor: globalTheme.cursor),
@@ -158,14 +158,14 @@ class WaiterrThemeDatas {
           iconTheme: IconThemeData(color: globalTheme.appBarIconColorDark),
           backgroundColor: Colors.transparent),
       textTheme: TextTheme(
-        headline1: TextStyle(
+        displayLarge: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
             color: globalTheme.secondaryTextDark),
-        headline2: TextStyle(fontSize: 17, color: globalTheme.primaryColorDark),
-        headline3: TextStyle(color: globalTheme.primaryTextDark),
-        bodyText2: TextStyle(color: globalTheme.primaryTextDark),
-        subtitle1: TextStyle(color: globalTheme.primaryTextDark),
+        displayMedium: TextStyle(fontSize: 17, color: globalTheme.primaryColorDark),
+        displaySmall: TextStyle(color: globalTheme.primaryTextDark),
+        bodyMedium: TextStyle(color: globalTheme.primaryTextDark),
+        titleMedium: TextStyle(color: globalTheme.primaryTextDark),
       ),
       textSelectionTheme:
           TextSelectionThemeData(cursorColor: globalTheme.cursorDark),

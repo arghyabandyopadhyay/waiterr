@@ -38,7 +38,7 @@ class CustomizableListCard extends StatelessWidget {
                   Text(
                     list!.name,
                     style: list!.qty == 0
-                        ? Theme.of(context).textTheme.headline2
+                        ? Theme.of(context).textTheme.displayMedium
                         : const TextStyle(
                             fontSize: 17,
                             color: GlobalTheme.waiterrPrimaryText),
@@ -56,7 +56,7 @@ class CustomizableListCard extends StatelessWidget {
                     child: Text("₹${list!.price}",
                         textAlign: TextAlign.end,
                         style: list!.qty == 0
-                            ? Theme.of(context).textTheme.headline2
+                            ? Theme.of(context).textTheme.displayMedium
                             : const TextStyle(
                                 fontSize: 17,
                                 color: GlobalTheme.waiterrPrimaryText)),
