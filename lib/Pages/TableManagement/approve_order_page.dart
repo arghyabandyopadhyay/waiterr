@@ -24,7 +24,7 @@ class ApproveOrdersPage extends StatefulWidget {
 class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
   List<List<KOTModel>>? kotList;
   Future<List<List<KOTModel>>>? _futureKot;
-  bool? _dataIsLoaded;
+  // bool? _dataIsLoaded;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
@@ -49,7 +49,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
     setState(() {
       _isLoading = false;
       isLoading = false;
-      _dataIsLoaded = true;
+      // _dataIsLoaded = true;
     });
     return results;
   }
@@ -73,7 +73,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
     super.initState();
     _futureKot = fetchList();
     _isLoading = false;
-    _dataIsLoaded = false;
+    // _dataIsLoaded = false;
   }
 
   @override

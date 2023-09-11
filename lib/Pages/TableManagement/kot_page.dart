@@ -26,7 +26,7 @@ class KOTPage extends StatefulWidget {
 class _KOTPageState extends State<KOTPage> {
   List<List<KOTModel>>? kotList;
   Future<List<List<KOTModel>>>? _futureKot;
-  bool? _dataIsLoaded;
+  // bool? _dataIsLoaded;
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
   late bool _isLoading;
@@ -46,7 +46,7 @@ class _KOTPageState extends State<KOTPage> {
             });
     setState(() {
       _isLoading = false;
-      _dataIsLoaded = true;
+      // _dataIsLoaded = true;
     });
     return results;
   }
@@ -69,7 +69,7 @@ class _KOTPageState extends State<KOTPage> {
     super.initState();
     _futureKot = fetchList();
     _isLoading = false;
-    _dataIsLoaded = false;
+    // _dataIsLoaded = false;
   }
 
   @override

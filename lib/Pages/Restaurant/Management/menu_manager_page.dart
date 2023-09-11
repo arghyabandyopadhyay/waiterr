@@ -33,7 +33,8 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   String dropdownValue = '0';
   double totalItems = 0;
   double totalCartAmount = 0;
-  bool? _isSearching, _isLoading;
+  bool? _isSearching;
+  // bool? _isLoading;
   List<MenuItemModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -68,7 +69,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
 
   _addMenu() async {
     setState(() {
-      _isLoading = true;
+      // _isLoading = true;
     });
     await Navigator.of(context)
         .push(CupertinoPageRoute<void>(
@@ -179,7 +180,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
               if (temp.isNotEmpty) results.add(temp)
             },
           setState(() {
-            _isLoading = false;
+            // _isLoading = false;
           })
         });
 

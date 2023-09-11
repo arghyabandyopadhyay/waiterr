@@ -29,7 +29,8 @@ class _OrdersPageState extends State<OrdersPage> {
   //Variables
   List<RunningOrderModel>? items;
   Future<List<RunningOrderModel>>? _futureitems;
-  bool? _isSearching, _isLoading, _isDataLoaded;
+  bool? _isSearching, _isLoading;
+  // bool? _isDataLoaded;
   // final String _searchText = "";
   List searchResult = [];
   Icon icon = const Icon(
@@ -91,7 +92,7 @@ class _OrdersPageState extends State<OrdersPage> {
             {runningOrderList.addAll(rList)});
     setState(() {
       _isLoading = false;
-      _isDataLoaded = true;
+      // _isDataLoaded = true;
     });
     return runningOrderList;
   }
@@ -101,7 +102,7 @@ class _OrdersPageState extends State<OrdersPage> {
   void initState() {
     super.initState();
     _isSearching = false;
-    _isDataLoaded = false;
+    // _isDataLoaded = false;
     _futureitems = fetchList();
     _isLoading = false;
   }
@@ -168,7 +169,7 @@ class _OrdersPageState extends State<OrdersPage> {
                               {
                                 setState(() {
                                   _isLoading = true;
-                                  _isDataLoaded = false;
+                                  // _isDataLoaded = false;
                                 }),
                                 _futureitems = fetchList()
                               }
