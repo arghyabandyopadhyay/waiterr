@@ -167,7 +167,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   Future<List<List<MenuItemModel>>?> fetchList() async {
     List<List<MenuItemModel>>? results = [];
     List<MenuItemModel> temp;
-    MenuItemModel temp2;
+    // MenuItemModel temp2;
     await postForMenuItem("", null).then((value) async => {
           productListSearch = value,
           for (OutletConfigurationModel outlet
@@ -359,7 +359,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                               const BouncingScrollPhysics(),
                                                           padding:
                                                               const EdgeInsets
-                                                                      .symmetric(
+                                                                  .symmetric(
                                                                   horizontal:
                                                                       15),
                                                           children: <Widget>[
@@ -465,12 +465,11 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
-                                                                children: <
-                                                                    Widget>[
+                                                                children: <Widget>[
                                                                   Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          10),
                                                                       color: Colors
                                                                           .white,
                                                                       height:
@@ -478,9 +477,9 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                                       width:
                                                                           70),
                                                                   Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          10),
                                                                       color: Colors
                                                                           .white,
                                                                       height:
@@ -497,7 +496,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         bottom:
                                                                             10.0),
                                                                 child: Row(
@@ -528,8 +527,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                                           Column(
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
-                                                                        children: <
-                                                                            Widget>[
+                                                                        children: <Widget>[
                                                                           Container(
                                                                             width:
                                                                                 screenWidth / 2,
@@ -577,12 +575,11 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
-                                                                children: <
-                                                                    Widget>[
+                                                                children: <Widget>[
                                                                   Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          10),
                                                                       color: Colors
                                                                           .white,
                                                                       height:
@@ -590,9 +587,9 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                                       width:
                                                                           70),
                                                                   Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          10),
                                                                       color: Colors
                                                                           .white,
                                                                       height:
@@ -615,7 +612,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                                     (_, __) =>
                                                                         Padding(
                                                                   padding: const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       bottom:
                                                                           10.0),
                                                                   child: Row(
@@ -644,8 +641,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                                             Column(
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
-                                                                          children: <
-                                                                              Widget>[
+                                                                          children: <Widget>[
                                                                             Container(
                                                                               width: screenWidth / 2,
                                                                               height: 10.0,

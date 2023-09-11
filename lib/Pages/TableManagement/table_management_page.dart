@@ -39,7 +39,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
   List<RunningOrderModel>? items;
   Future<List<RunningOrderModel>>? _futureitems;
   bool? _isSearching, _isLoading, _isDataLoaded;
-  final String _searchText = "";
+  // final String _searchText = "";
   double total = 0.0;
   int totalOrders = 0;
   List searchResult = [];
@@ -796,7 +796,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                       Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   bottom: 8.0),
                                                           child: Row(
                                                               crossAxisAlignment:
@@ -824,8 +824,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: <
-                                                                        Widget>[
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             1.5,

@@ -22,7 +22,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
   List<TaxModel>? taxClasses;
   Future<List<TaxModel>>? _futuretaxclasses;
   bool? _isSearching, _isLoading;
-  final String _searchText = "";
+  // final String _searchText = "";
   List<TaxModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -303,7 +303,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                                                       Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   bottom: 8.0),
                                                           child: Row(
                                                               crossAxisAlignment:
@@ -331,8 +331,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: <
-                                                                        Widget>[
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             1.5,

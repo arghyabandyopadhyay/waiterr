@@ -260,8 +260,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
-                                                              children: <
-                                                                  Widget>[
+                                                              children: <Widget>[
                                                                 Container(
                                                                   width: double
                                                                       .infinity,

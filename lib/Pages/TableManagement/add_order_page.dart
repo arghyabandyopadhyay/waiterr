@@ -95,14 +95,14 @@ class _AddOrderState extends State<AddOrder> {
                     if (phoneNumber.text.isNotEmpty)
                       {
                         if (_mobileStatus == "New")
-                          await postCustomerDetails(name.text,
-                                  phoneNumber.text.replaceAll(" ", ""))
-                              .catchError((e) {
-                            if (kDebugMode) {
-                              print(
-                                  "Server Error Occurred. Please Contact Us If The problem Persists.");
-                            }
-                          })
+                          await postCustomerDetails(
+                              name.text, phoneNumber.text.replaceAll(" ", ""))
+                        //     .catchError((e) {
+                        //   if (kDebugMode) {
+                        //     print(
+                        //         "Server Error Occurred. Please Contact Us If The problem Persists.");
+                        //   }
+                        // })
                         else
                           {
                             await getCustomerDetails(
@@ -113,14 +113,15 @@ class _AddOrderState extends State<AddOrder> {
                                         customerId = value.customerId,
                                       dataSource = value.dataSource
                                     })
-                                .catchError((e) {
-                              globalShowInSnackBar(
-                                  "Server Error Occurred. Please Contact Us If The problem Persists.",
-                                  null,
-                                  scaffoldMessengerKey,
-                                  null,
-                                  null);
-                            }),
+                            //     .catchError((e) {
+                            //   globalShowInSnackBar(
+                            //       "Server Error Occurred. Please Contact Us If The problem Persists.",
+                            //       null,
+                            //       scaffoldMessengerKey,
+                            //       null,
+                            //       null);
+                            // })
+                            ,
                             if (customerId != null &&
                                 dataSource == "CustomerBank")
                               await putCustomerDetails(CustomerDetailsModel(
@@ -136,11 +137,12 @@ class _AddOrderState extends State<AddOrder> {
                     }),
                     if (rList.isEmpty)
                       {
-                        print(widget.isThroughQr
-                            ? UserDetail.userDetails.id
-                            : dataSource == "UserDetails"
-                                ? customerId ?? ""
-                                : ""),
+                        if (kDebugMode)
+                          print(widget.isThroughQr
+                              ? UserDetail.userDetails.id
+                              : dataSource == "UserDetails"
+                                  ? customerId ?? ""
+                                  : ""),
                         if (!FocusScope.of(context).hasPrimaryFocus)
                           {FocusScope.of(context).unfocus()},
                         Navigator.of(context).push(CupertinoPageRoute<void>(

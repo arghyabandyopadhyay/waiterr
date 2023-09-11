@@ -29,7 +29,7 @@ class _ProductPageState extends State<ProductPage>
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   AnimationController? _cardController;
   //Controller
-  final TextEditingController _searchController = TextEditingController();
+  // final TextEditingController _searchController = TextEditingController();
 
   //Member Functions
   Future<Image?> fetchMenuImage() async {

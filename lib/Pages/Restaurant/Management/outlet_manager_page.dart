@@ -22,7 +22,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
   List<OutletConfigurationModel>? outlets;
   Future<List<OutletConfigurationModel>>? _futureoutlets;
   bool? _isSearching, _isLoading;
-  final String _searchText = "";
+  // final String _searchText = "";
   List<OutletConfigurationModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -383,7 +383,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                                                       Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   bottom: 8.0),
                                                           child: Row(
                                                               crossAxisAlignment:
@@ -411,8 +411,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: <
-                                                                        Widget>[
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             1.5,

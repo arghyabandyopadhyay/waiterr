@@ -30,7 +30,7 @@ class _OrdersPageState extends State<OrdersPage> {
   List<RunningOrderModel>? items;
   Future<List<RunningOrderModel>>? _futureitems;
   bool? _isSearching, _isLoading, _isDataLoaded;
-  final String _searchText = "";
+  // final String _searchText = "";
   List searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -386,7 +386,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                                       Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   bottom: 8.0),
                                                           child: Row(
                                                               crossAxisAlignment:
@@ -414,8 +414,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: <
-                                                                        Widget>[
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             1.5,

@@ -28,7 +28,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
   Future<List<List<FilterItemModel>>?>? _futurestockGroups;
   List<FilterItemModel>? stockGroupsSearch;
   bool? _isSearching, _isLoading;
-  final String _searchText = "";
+  // final String _searchText = "";
   List<FilterItemModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -189,7 +189,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
   Future<List<List<FilterItemModel>>?> fetchList() async {
     List<List<FilterItemModel>>? results = [];
     List<FilterItemModel> temp;
-    FilterItemModel temp2;
+    // FilterItemModel temp2;
     await postForMenuGroupItem(null).then((value) async => {
           stockGroupsSearch = value,
           for (OutletConfigurationModel outlet
@@ -362,10 +362,13 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                                   alignment:
                                                                       Alignment
                                                                           .centerLeft,
-                                                                  margin: const EdgeInsets
+                                                                  margin:
+                                                                      const EdgeInsets
                                                                           .only(
-                                                                      top: 5),
-                                                                  width: MediaQuery.of(context)
+                                                                          top:
+                                                                              5),
+                                                                  width: MediaQuery.of(
+                                                                              context)
                                                                           .size
                                                                           .width /
                                                                       7,
@@ -483,7 +486,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                       Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   bottom: 8.0),
                                                           child: Row(
                                                               crossAxisAlignment:
@@ -511,8 +514,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: <
-                                                                        Widget>[
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             1.5,

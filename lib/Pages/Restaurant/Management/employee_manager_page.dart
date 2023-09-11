@@ -31,7 +31,7 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
   Future<List<List<WaiterDetailsModel>>?>? _futureemployees;
   List<WaiterDetailsModel>? employeeSearch;
   bool? _isSearching, _isLoading;
-  final String _searchText = "";
+  // final String _searchText = "";
   List<WaiterDetailsModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -95,7 +95,7 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
   Future<List<List<WaiterDetailsModel>>?> fetchList() async {
     List<List<WaiterDetailsModel>>? results = [];
     List<WaiterDetailsModel> temp;
-    WaiterDetailsModel temp2;
+    // WaiterDetailsModel temp2;
     await postForEmployeeDetails(widget.isForAdminManagement)
         .then((value) async => {
               employeeSearch = value,
@@ -430,7 +430,7 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
                                                       Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   bottom: 8.0),
                                                           child: Row(
                                                               crossAxisAlignment:
@@ -458,8 +458,7 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: <
-                                                                        Widget>[
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             1.5,
