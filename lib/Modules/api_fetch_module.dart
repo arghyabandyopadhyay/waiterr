@@ -464,7 +464,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
     response = await http.post(
       Uri.parse(isWaiter
           ? UserClientAllocationData.dataExchangeURL!
-          : "http://165.227.145.73:3000/api/master/"),
+          : "http://127.0.0.1:3000/api/master/"),
       headers: UserDetail.getHeader(),
       body: body,
     );

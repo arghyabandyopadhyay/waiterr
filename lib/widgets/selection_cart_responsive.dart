@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:waiterr/theme.dart';
 
 class SelectionCardResponsive extends StatelessWidget {
   const SelectionCardResponsive({Key? key, this.item, this.active, this.onTap})
@@ -75,7 +76,9 @@ class SelectionCardResponsive extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: active! ? 1 : 2,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.openSans(fontSize: 11),
+                style: const TextStyle(
+                    color: GlobalTheme.waiterrSecondaryText,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           )),

@@ -1,4 +1,3 @@
-
 import 'package:waiterr/Model/running_order_model.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +40,7 @@ class RunningOrderCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          item!.salePointType!,
+                          item!.salePointType ?? "",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               color: GlobalTheme.salePointTypeColor,
@@ -92,7 +91,9 @@ class RunningOrderCard extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width / 1.5,
                               child: Text(
-                                item!.name ?? "",
+                                (item!.name == null || item!.name!.isEmpty)
+                                    ? "Customer"
+                                    : item!.name!,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(fontSize: 22, height: 1),
@@ -113,7 +114,9 @@ class RunningOrderCard extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 1.75,
                           child: Text(
-                            (item!.mobileNo != null) ? item!.mobileNo! : "",
+                            (item!.mobileNo == null || item!.mobileNo!.isEmpty)
+                                ? "XXXXX-XXXXX"
+                                : item!.mobileNo!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 13),
@@ -122,7 +125,7 @@ class RunningOrderCard extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 1.75,
                           child: Text(
-                            "Waiter: ${item!.waiterName!}",
+                            "Waiter: ${(item!.waiterName == null || item!.waiterName!.isEmpty) ? "Waiter" : item!.waiterName}",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 13),
@@ -145,7 +148,7 @@ class RunningOrderCard extends StatelessWidget {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width / 2,
                                   child: Text(
-                                    "Active Since: ${item!.activeSince!}",
+                                    "Active Since: ${(item!.activeSince == null || item!.activeSince!.isEmpty) ? DateTime.now() : item!.activeSince}",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(fontSize: 13),

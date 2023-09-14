@@ -63,6 +63,7 @@ class KOTProgressStatusIndicatorState
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
+                    fontWeight: FontWeight.bold,
                     color: currentStep >= 0
                         ? GlobalTheme.kotActiveColor
                         : GlobalTheme.kotInActiveColor),
@@ -92,7 +93,7 @@ class KOTProgressStatusIndicatorState
             Icon(Icons.assignment,
                 size: 35,
                 color: currentStep >= 1
-                    ? GlobalTheme.kotActiveColor
+                    ? GlobalTheme.orderApprovedColor
                     : GlobalTheme.kotInActiveColor),
             Container(
               width: MediaQuery.of(context).size.width / 6.5,
@@ -104,8 +105,9 @@ class KOTProgressStatusIndicatorState
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
+                    fontWeight: FontWeight.w600,
                     color: currentStep >= 1
-                        ? GlobalTheme.kotActiveColor
+                        ? GlobalTheme.orderApprovedColor
                         : GlobalTheme.kotInActiveColor),
               ),
             ),
@@ -122,7 +124,7 @@ class KOTProgressStatusIndicatorState
               margin: const EdgeInsets.all(0),
               padding: const EdgeInsets.all(0),
               color: currentStep >= 1
-                  ? GlobalTheme.kotActiveColor
+                  ? GlobalTheme.orderApprovedColor
                   : GlobalTheme.kotInActiveColor,
             ),
           ],
@@ -133,7 +135,7 @@ class KOTProgressStatusIndicatorState
             Icon(Icons.restaurant,
                 size: 35,
                 color: currentStep >= 2
-                    ? GlobalTheme.kotActiveColor
+                    ? GlobalTheme.orderProcessedColor
                     : GlobalTheme.kotInActiveColor),
             Container(
               width: MediaQuery.of(context).size.width / 6.5,
@@ -145,8 +147,9 @@ class KOTProgressStatusIndicatorState
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
+                    fontWeight: FontWeight.w600,
                     color: currentStep >= 2
-                        ? GlobalTheme.kotActiveColor
+                        ? GlobalTheme.orderProcessedColor
                         : GlobalTheme.kotInActiveColor),
               ),
             ),
@@ -163,7 +166,7 @@ class KOTProgressStatusIndicatorState
               margin: const EdgeInsets.all(0),
               padding: const EdgeInsets.all(0),
               color: currentStep >= 2
-                  ? GlobalTheme.kotActiveColor
+                  ? GlobalTheme.orderProcessedColor
                   : GlobalTheme.kotInActiveColor,
             ),
           ],
@@ -174,7 +177,7 @@ class KOTProgressStatusIndicatorState
             Icon(Icons.done_all,
                 size: 35,
                 color: currentStep >= 3
-                    ? GlobalTheme.kotActiveColor
+                    ? GlobalTheme.orderDeliveredColor
                     : GlobalTheme.kotInActiveColor),
             Container(
               width: MediaQuery.of(context).size.width / 6.5,
@@ -186,8 +189,9 @@ class KOTProgressStatusIndicatorState
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
+                    fontWeight: FontWeight.w600,
                     color: currentStep >= 3
-                        ? GlobalTheme.kotActiveColor
+                        ? GlobalTheme.orderDeliveredColor
                         : GlobalTheme.kotInActiveColor),
               ),
             ),

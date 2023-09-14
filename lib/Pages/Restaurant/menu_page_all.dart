@@ -74,7 +74,10 @@ class _MenuPageAllState extends State<MenuPageAll> {
   Widget appBarTitle = const Text(
     "Menu",
     textAlign: TextAlign.left,
-    style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+    style: TextStyle(
+        fontSize: 30.0,
+        fontWeight: FontWeight.bold,
+        color: GlobalTheme.waiterrSecondaryText),
   );
 
   //Methods
@@ -764,436 +767,428 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                   padding: const EdgeInsets.only(top: 1.75),
                                   decoration:
                                       GlobalTheme.waiterrAppBarBoxDecoration,
-                                  child:
-                                      FutureBuilder<List<List<MenuItemModel>>?>(
-                                          future: _futureproductList,
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              productList = snapshot.data;
-                                              return _searchController
-                                                      .text.isNotEmpty
-                                                  ? (searchResult.isNotEmpty
-                                                      ? ListView(
+                                  child: FutureBuilder<
+                                          List<List<MenuItemModel>>?>(
+                                      future: _futureproductList,
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          productList = snapshot.data;
+                                          return _searchController
+                                                  .text.isNotEmpty
+                                              ? (searchResult.isNotEmpty
+                                                  ? ListView(
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          const BouncingScrollPhysics(),
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 15),
+                                                      children: <Widget>[
+                                                        ListView.builder(
                                                           shrinkWrap: true,
                                                           physics:
-                                                              const BouncingScrollPhysics(),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      15),
-                                                          children: <Widget>[
-                                                            ListView.builder(
-                                                              shrinkWrap: true,
-                                                              physics:
-                                                                  const NeverScrollableScrollPhysics(),
-                                                              itemCount:
-                                                                  searchResult
-                                                                      .length,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int index) {
-                                                                return NonFavouritesCard(
-                                                                  key: ObjectKey(
-                                                                      searchResult[
-                                                                              index]
-                                                                          .itemID),
-                                                                  item:
-                                                                      searchResult[
-                                                                          index],
-                                                                  onMiddleTap:
-                                                                      () {
-                                                                    _showProductPage(
-                                                                        context,
-                                                                        searchResult[
-                                                                            index]);
-                                                                  },
-                                                                  onTapAdd: () {
-                                                                    onTapAdd(
-                                                                        searchResult[
-                                                                            index]);
-                                                                  },
-                                                                  onTapRemove:
-                                                                      () {
-                                                                    onTapRemove(
-                                                                        searchResult[
-                                                                            index]);
-                                                                  },
-                                                                  onLongPressedRemove:
-                                                                      () {
-                                                                    onLongPressedRemove(
-                                                                        searchResult[
-                                                                            index]);
-                                                                  },
-                                                                  onLongPressedAdd:
-                                                                      () {
-                                                                    onLongPressedAdd(
-                                                                        searchResult[
-                                                                            index]);
-                                                                  },
-                                                                  onDoubleTap:
-                                                                      () {
-                                                                    onDoubleTap(
-                                                                        searchResult[
-                                                                            index]);
-                                                                  },
-                                                                );
+                                                              const NeverScrollableScrollPhysics(),
+                                                          itemCount:
+                                                              searchResult
+                                                                  .length,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  int index) {
+                                                            return NonFavouritesCard(
+                                                              key: ObjectKey(
+                                                                  searchResult[
+                                                                          index]
+                                                                      .itemID),
+                                                              item:
+                                                                  searchResult[
+                                                                      index],
+                                                              onMiddleTap: () {
+                                                                _showProductPage(
+                                                                    context,
+                                                                    searchResult[
+                                                                        index]);
                                                               },
-                                                            )
-                                                          ],
+                                                              onTapAdd: () {
+                                                                onTapAdd(
+                                                                    searchResult[
+                                                                        index]);
+                                                              },
+                                                              onTapRemove: () {
+                                                                onTapRemove(
+                                                                    searchResult[
+                                                                        index]);
+                                                              },
+                                                              onLongPressedRemove:
+                                                                  () {
+                                                                onLongPressedRemove(
+                                                                    searchResult[
+                                                                        index]);
+                                                              },
+                                                              onLongPressedAdd:
+                                                                  () {
+                                                                onLongPressedAdd(
+                                                                    searchResult[
+                                                                        index]);
+                                                              },
+                                                              onDoubleTap: () {
+                                                                onDoubleTap(
+                                                                    searchResult[
+                                                                        index]);
+                                                              },
+                                                            );
+                                                          },
                                                         )
-                                                      : const NoDataError())
-                                                  : (_isFilterOn!
-                                                      ? ListView(
-                                                          physics:
-                                                              const BouncingScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          children: <Widget>[
-                                                            ExpandableGroup(
-                                                              expandedIcon:
-                                                                  const Icon(
-                                                                Icons
-                                                                    .arrow_drop_down,
-                                                                size: 40,
-                                                                color: GlobalTheme
-                                                                    .waiterrPrimaryColor,
-                                                              ),
-                                                              collapsedIcon:
-                                                                  const Icon(
-                                                                Icons
-                                                                    .arrow_right,
-                                                                size: 40,
-                                                                color: GlobalTheme
-                                                                    .waiterrPrimaryColor,
-                                                              ),
-                                                              isExpanded: true,
-                                                              header: _header(
-                                                                  distinctStockGroup![
-                                                                          _active_filter]
-                                                                      .stockGroup),
-                                                              items: _buildItems(
-                                                                  context,
-                                                                  filterList),
-                                                              headerEdgeInsets:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          16.0,
-                                                                      right:
-                                                                          16.0),
-                                                            )
-                                                          ],
-                                                        )
-                                                      : ListView(
-                                                          physics:
-                                                              const BouncingScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          controller:
-                                                              _controller,
-                                                          padding:
+                                                      ],
+                                                    )
+                                                  : const NoDataError())
+                                              : (_isFilterOn!
+                                                  ? ListView(
+                                                      physics:
+                                                          const BouncingScrollPhysics(),
+                                                      shrinkWrap: true,
+                                                      children: <Widget>[
+                                                        ExpandableGroup(
+                                                          expandedIcon:
+                                                              const Icon(
+                                                            Icons
+                                                                .arrow_drop_down,
+                                                            size: 40,
+                                                            color: GlobalTheme
+                                                                .waiterrPrimaryColor,
+                                                          ),
+                                                          collapsedIcon:
+                                                              const Icon(
+                                                            Icons.arrow_right,
+                                                            size: 40,
+                                                            color: GlobalTheme
+                                                                .waiterrPrimaryColor,
+                                                          ),
+                                                          isExpanded: true,
+                                                          header: _header(
+                                                              distinctStockGroup![
+                                                                      _active_filter]
+                                                                  .stockGroup),
+                                                          items: _buildItems(
+                                                              context,
+                                                              filterList),
+                                                          headerEdgeInsets:
                                                               const EdgeInsets
-                                                                  .all(0),
-                                                          children: <Widget>[
-                                                              MenuAllList(
-                                                                  productList:
-                                                                      productList,
-                                                                  header:
-                                                                      (value) {
-                                                                    return _header(
-                                                                        value);
-                                                                  },
-                                                                  buildItems:
-                                                                      (context1,
-                                                                          items) {
-                                                                    return _buildItems(
-                                                                        context1,
-                                                                        items);
-                                                                  }),
-                                                              // Column(
-                                                              //   children: productList.map((group) {
-                                                              //     int index = productList.indexOf(group);
-                                                              //     return ExpandableGroup(
-                                                              //       expandedIcon: Icon(Icons.arrow_drop_down,size:40,color: GlobalTheme.waiterrPrimaryColor,),
-                                                              //       collapsedIcon: Icon(Icons.arrow_right,size: 40,color: GlobalTheme.waiterrPrimaryColor,),
-                                                              //       isExpanded: true,
-                                                              //       header: _header(productList[index][0].stockGroup),
-                                                              //       items: _buildItems(context, group),
-                                                              //       headerEdgeInsets: EdgeInsets.only(left: 16.0, right: 16.0),
-                                                              //     );
-                                                              //   }).toList(),
-                                                              // ),
-                                                            ]));
-                                            } else if (snapshot.hasError) {
-                                              if (snapshot.error.toString() ==
-                                                  "NoInternet") {
-                                                return const ErrorPageNoInternet();
-                                              } else if (snapshot.error
-                                                      .toString() ==
-                                                  "500") {
-                                                return const ErrorPageFiveHundred();
-                                              } else if (snapshot.error
-                                                      .toString() ==
-                                                  "NoData") {
-                                                return const NoDataError();
-                                              } else if (snapshot.error
-                                                      .toString() ==
-                                                  "401") {
-                                                return const ErrorPageFourHundredOne();
-                                              } else {
-                                                if (kDebugMode) {
-                                                  print(snapshot.error);
-                                                }
-                                                return const ErrorHasOccurred();
-                                              }
+                                                                  .only(
+                                                                  left: 16.0,
+                                                                  right: 16.0),
+                                                        )
+                                                      ],
+                                                    )
+                                                  : ListView(
+                                                      physics:
+                                                          const BouncingScrollPhysics(),
+                                                      shrinkWrap: true,
+                                                      controller: _controller,
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              0),
+                                                      children: <Widget>[
+                                                          MenuAllList(
+                                                              productList:
+                                                                  productList,
+                                                              header: (value) {
+                                                                return _header(
+                                                                    value);
+                                                              },
+                                                              buildItems:
+                                                                  (context1,
+                                                                      items) {
+                                                                return _buildItems(
+                                                                    context1,
+                                                                    items);
+                                                              }),
+                                                          // Column(
+                                                          //   children: productList.map((group) {
+                                                          //     int index = productList.indexOf(group);
+                                                          //     return ExpandableGroup(
+                                                          //       expandedIcon: Icon(Icons.arrow_drop_down,size:40,color: GlobalTheme.waiterrPrimaryColor,),
+                                                          //       collapsedIcon: Icon(Icons.arrow_right,size: 40,color: GlobalTheme.waiterrPrimaryColor,),
+                                                          //       isExpanded: true,
+                                                          //       header: _header(productList[index][0].stockGroup),
+                                                          //       items: _buildItems(context, group),
+                                                          //       headerEdgeInsets: EdgeInsets.only(left: 16.0, right: 16.0),
+                                                          //     );
+                                                          //   }).toList(),
+                                                          // ),
+                                                        ]));
+                                        } else if (snapshot.hasError) {
+                                          if (snapshot.error.toString() ==
+                                              "NoInternet") {
+                                            return const ErrorPageNoInternet();
+                                          } else if (snapshot.error
+                                                  .toString() ==
+                                              "500") {
+                                            return const ErrorPageFiveHundred();
+                                          } else if (snapshot.error
+                                                  .toString() ==
+                                              "NoData") {
+                                            return const NoDataError();
+                                          } else if (snapshot.error
+                                                  .toString() ==
+                                              "401") {
+                                            return const ErrorPageFourHundredOne();
+                                          } else {
+                                            if (kDebugMode) {
+                                              print(snapshot.error);
                                             }
-                                            return Container(
-                                                width: double.infinity,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 16.0,
-                                                        vertical: 16.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                      child: Shimmer.fromColors(
-                                                          baseColor:
-                                                              Colors.grey[300]!,
-                                                          highlightColor:
-                                                              Colors.grey[100]!,
-                                                          enabled: true,
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
+                                            return const ErrorHasOccurred();
+                                          }
+                                        }
+                                        return Container(
+                                            width: double.infinity,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16.0,
+                                                vertical: 16.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey[300]!,
+                                                      highlightColor:
+                                                          Colors.grey[100]!,
+                                                      enabled: true,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
                                                             children: <Widget>[
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: <
-                                                                    Widget>[
-                                                                  Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
-                                                                      color: Colors
-                                                                          .white,
-                                                                      height:
-                                                                          20,
-                                                                      width:
-                                                                          70),
-                                                                  Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
-                                                                      color: Colors
-                                                                          .white,
-                                                                      height:
-                                                                          20,
-                                                                      width: 20)
-                                                                ],
-                                                              ),
-                                                              const Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        vertical:
-                                                                            20.0),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        bottom:
-                                                                            10.0),
-                                                                child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    const Padding(
-                                                                      padding: EdgeInsets.symmetric(
+                                                              Container(
+                                                                  padding:
+                                                                      const EdgeInsets.all(
+                                                                          10),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20,
+                                                                  width: 70),
+                                                              Container(
+                                                                  padding:
+                                                                      const EdgeInsets.all(
+                                                                          10),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20,
+                                                                  width: 20)
+                                                            ],
+                                                          ),
+                                                          const Padding(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        20.0),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    bottom:
+                                                                        10.0),
+                                                            child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
                                                                           vertical:
                                                                               8.0),
-                                                                    ),
-                                                                    Container(
-                                                                      width:
-                                                                          15.0,
-                                                                      height:
-                                                                          15.0,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                    const Padding(
-                                                                      padding: EdgeInsets.symmetric(
+                                                                ),
+                                                                Container(
+                                                                  width: 15.0,
+                                                                  height: 15.0,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
                                                                           horizontal:
                                                                               8.0),
-                                                                    ),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: <
-                                                                            Widget>[
-                                                                          Container(
-                                                                            width:
-                                                                                screenWidth / 2,
-                                                                            height:
-                                                                                10.0,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                          const Padding(
-                                                                            padding:
-                                                                                EdgeInsets.symmetric(vertical: 2.0),
-                                                                          ),
-                                                                          Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceBetween,
-                                                                            children: <Widget>[
-                                                                              Container(
-                                                                                width: 100,
-                                                                                height: 10.0,
-                                                                                color: Colors.white,
-                                                                              ),
-                                                                              Container(
-                                                                                width: 70,
-                                                                                height: 35,
-                                                                                decoration: BoxDecoration(
-                                                                                  color: Colors.white,
-                                                                                  borderRadius: BorderRadius.circular(10.0),
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    )
-                                                                  ],
                                                                 ),
-                                                              ),
-                                                              const Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        vertical:
-                                                                            20.0),
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: <
-                                                                    Widget>[
-                                                                  Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
-                                                                      color: Colors
-                                                                          .white,
-                                                                      height:
-                                                                          20,
-                                                                      width:
-                                                                          70),
-                                                                  Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
-                                                                      color: Colors
-                                                                          .white,
-                                                                      height:
-                                                                          20,
-                                                                      width: 20)
-                                                                ],
-                                                              ),
-                                                              const Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        vertical:
-                                                                            20.0),
-                                                              ),
-                                                              ListView.builder(
-                                                                shrinkWrap:
-                                                                    true,
-                                                                physics:
-                                                                    const NeverScrollableScrollPhysics(),
-                                                                itemBuilder:
-                                                                    (_, __) =>
-                                                                        Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      bottom:
-                                                                          10.0),
-                                                                  child: Row(
+                                                                Expanded(
+                                                                  child: Column(
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: [
-                                                                      const Padding(
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(vertical: 8.0),
-                                                                      ),
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width:
-                                                                            15.0,
+                                                                            screenWidth /
+                                                                                2,
                                                                         height:
-                                                                            15.0,
+                                                                            10.0,
                                                                         color: Colors
                                                                             .white,
                                                                       ),
                                                                       const Padding(
                                                                         padding:
-                                                                            EdgeInsets.symmetric(horizontal: 8.0),
+                                                                            EdgeInsets.symmetric(vertical: 2.0),
                                                                       ),
-                                                                      Expanded(
-                                                                        child:
-                                                                            Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: <
-                                                                              Widget>[
-                                                                            Container(
-                                                                              width: screenWidth / 2,
-                                                                              height: 10.0,
+                                                                      Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: <Widget>[
+                                                                          Container(
+                                                                            width:
+                                                                                100,
+                                                                            height:
+                                                                                10.0,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                          Container(
+                                                                            width:
+                                                                                70,
+                                                                            height:
+                                                                                35,
+                                                                            decoration:
+                                                                                BoxDecoration(
                                                                               color: Colors.white,
+                                                                              borderRadius: BorderRadius.circular(10.0),
                                                                             ),
-                                                                            const Padding(
-                                                                              padding: EdgeInsets.symmetric(vertical: 2.0),
-                                                                            ),
-                                                                            Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: <Widget>[
-                                                                                Container(
-                                                                                  width: 100,
-                                                                                  height: 10.0,
-                                                                                  color: Colors.white,
-                                                                                ),
-                                                                                Container(
-                                                                                  width: 70,
-                                                                                  height: 35,
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: Colors.white,
-                                                                                    borderRadius: BorderRadius.circular(10.0),
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            )
-                                                                          ],
-                                                                        ),
+                                                                          ),
+                                                                        ],
                                                                       )
                                                                     ],
                                                                   ),
-                                                                ),
-                                                                itemCount: 2,
-                                                              )
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          const Padding(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        20.0),
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: <Widget>[
+                                                              Container(
+                                                                  padding:
+                                                                      const EdgeInsets.all(
+                                                                          10),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20,
+                                                                  width: 70),
+                                                              Container(
+                                                                  padding:
+                                                                      const EdgeInsets.all(
+                                                                          10),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20,
+                                                                  width: 20)
                                                             ],
-                                                          )),
-                                                    ),
-                                                  ],
-                                                ));
-                                          })),
+                                                          ),
+                                                          const Padding(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        20.0),
+                                                          ),
+                                                          ListView.builder(
+                                                            shrinkWrap: true,
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            itemBuilder:
+                                                                (_, __) =>
+                                                                    Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      bottom:
+                                                                          10.0),
+                                                              child: Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  const Padding(
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        vertical:
+                                                                            8.0),
+                                                                  ),
+                                                                  Container(
+                                                                    width: 15.0,
+                                                                    height:
+                                                                        15.0,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                  const Padding(
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            8.0),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: <Widget>[
+                                                                        Container(
+                                                                          width:
+                                                                              screenWidth / 2,
+                                                                          height:
+                                                                              10.0,
+                                                                          color:
+                                                                              Colors.white,
+                                                                        ),
+                                                                        const Padding(
+                                                                          padding:
+                                                                              EdgeInsets.symmetric(vertical: 2.0),
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: <Widget>[
+                                                                            Container(
+                                                                              width: 100,
+                                                                              height: 10.0,
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                            Container(
+                                                                              width: 70,
+                                                                              height: 35,
+                                                                              decoration: BoxDecoration(
+                                                                                color: Colors.white,
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            itemCount: 2,
+                                                          )
+                                                        ],
+                                                      )),
+                                                ),
+                                              ],
+                                            ));
+                                      })),
                             )
                           ]))))
         ],
@@ -1234,66 +1229,68 @@ class _ViewCartButtonState extends State<ViewCartButton> {
         ),
         padding: const EdgeInsets.all(0),
         margin: const EdgeInsets.all(12),
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                elevation: 0, backgroundColor: Colors.transparent),
-            onPressed: widget.onPressed,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: widget.totalItems! > 0
+            ? ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 0, backgroundColor: Colors.transparent),
+                onPressed: widget.onPressed,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        '${widget.totalItems!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))} Items',
-                        style: const TextStyle(
-                            color: GlobalTheme.waiterrSecondaryText,
-                            fontSize: 15),
-                      ),
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          SizedBox(
-                              width: widget.totalCartAmount! > 10000000000
-                                  ? MediaQuery.of(context).size.width * 0.43
-                                  : null,
-                              child: Text(
-                                '₹${widget.totalCartAmount!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))} ',
-                                style: const TextStyle(
-                                    color: GlobalTheme.waiterrSecondaryText,
-                                    fontSize: 20),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              )),
-                          const Text(
-                            ' plus Taxes',
-                            style: TextStyle(
+                          Text(
+                            '${widget.totalItems!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))} Items',
+                            style: const TextStyle(
                                 color: GlobalTheme.waiterrSecondaryText,
-                                fontSize: 10),
+                                fontSize: 15),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                  width: widget.totalCartAmount! > 10000000000
+                                      ? MediaQuery.of(context).size.width * 0.43
+                                      : null,
+                                  child: Text(
+                                    '₹${widget.totalCartAmount!.toStringAsFixed(2).replaceAllMapped(UserDetail.commaRegex, UserDetail.matchFunc as String Function(Match))} ',
+                                    style: const TextStyle(
+                                        color: GlobalTheme.waiterrSecondaryText,
+                                        fontSize: 20),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  )),
+                              const Text(
+                                ' plus Taxes',
+                                style: TextStyle(
+                                    color: GlobalTheme.waiterrSecondaryText,
+                                    fontSize: 10),
+                              )
+                            ],
                           )
                         ],
-                      )
-                    ],
-                  ),
-                  const Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Text(
-                          'View Cart',
-                          style: TextStyle(
+                      ),
+                      const Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              'View Cart',
+                              style: TextStyle(
+                                  color: GlobalTheme.waiterrSecondaryText,
+                                  fontSize: 20),
+                              textAlign: TextAlign.right,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.shopping_cart,
                               color: GlobalTheme.waiterrSecondaryText,
-                              fontSize: 20),
-                          textAlign: TextAlign.right,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Icon(
-                          Icons.shopping_cart,
-                          color: GlobalTheme.waiterrSecondaryText,
-                          size: 20,
-                        )
-                      ]),
-                ])));
+                              size: 20,
+                            )
+                          ]),
+                    ]))
+            : const SizedBox());
   }
 }

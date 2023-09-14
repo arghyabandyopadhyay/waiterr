@@ -43,7 +43,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
     return badges.Badge(
       position: badges.BadgePosition.topEnd(top: 0, end: 3),
       badgeAnimation: const badges.BadgeAnimation.slide(
-        animationDuration: Duration(milliseconds:300),
+        animationDuration: Duration(milliseconds: 300),
       ),
       badgeContent: Text(
         totalItems!.round().toString(),
@@ -287,9 +287,10 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                             label: "Undo",
                                             onPressed: () {
                                               Navigator.of(_scaffoldKey
-                                                      .currentState!.context)
-                                                  .popUntil(
-                                                      (route) => route.isFirst);
+                                                  .currentState!.context)
+                                                ..pop()
+                                                ..pop()
+                                                ..pop();
                                             },
                                           ),
                                           scaffoldMessengerKey,
@@ -510,6 +511,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                   question: "Are you sure to place the order?",
                                   onTap_Yes: () {
                                     {
+                                      List<Route> arrayRoutes = [];
                                       Navigator.pop(context);
                                       setState(() {
                                         isLoading = true;
@@ -573,10 +575,10 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                       isLoading = false;
                                                     }),
                                                     Navigator.of(_scaffoldKey
-                                                            .currentState!
-                                                            .context)
-                                                        .popUntil((route) =>
-                                                            route.isFirst),
+                                                        .currentState!.context)
+                                                      ..pop()
+                                                      ..pop()
+                                                      ..pop(),
                                                   }
                                                 else if (value == 201)
                                                   {
@@ -588,12 +590,13 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                         SnackBarAction(
                                                           label: "Undo",
                                                           onPressed: () {
-                                                            Navigator.of(_scaffoldKey
+                                                            Navigator.of(
+                                                                _scaffoldKey
                                                                     .currentState!
                                                                     .context)
-                                                                .popUntil((route) =>
-                                                                    route
-                                                                        .isFirst);
+                                                              ..pop()
+                                                              ..pop()
+                                                              ..pop();
                                                           },
                                                         ),
                                                         scaffoldMessengerKey,
@@ -610,12 +613,13 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                         SnackBarAction(
                                                           label: "Undo",
                                                           onPressed: () {
-                                                            Navigator.of(_scaffoldKey
+                                                            Navigator.of(
+                                                                _scaffoldKey
                                                                     .currentState!
                                                                     .context)
-                                                                .popUntil((route) =>
-                                                                    route
-                                                                        .isFirst);
+                                                              ..pop()
+                                                              ..pop()
+                                                              ..pop();
                                                           },
                                                         ),
                                                         scaffoldMessengerKey,
@@ -632,12 +636,13 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                         SnackBarAction(
                                                           label: "Undo",
                                                           onPressed: () {
-                                                            Navigator.of(_scaffoldKey
+                                                            Navigator.of(
+                                                                _scaffoldKey
                                                                     .currentState!
                                                                     .context)
-                                                                .popUntil((route) =>
-                                                                    route
-                                                                        .isFirst);
+                                                              ..pop()
+                                                              ..pop()
+                                                              ..pop();
                                                           },
                                                         ),
                                                         scaffoldMessengerKey,

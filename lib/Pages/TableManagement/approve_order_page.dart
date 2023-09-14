@@ -100,7 +100,6 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                       icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.black,
-                        size: 20,
                       ),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
@@ -134,14 +133,12 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          "Approvals",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 30.0, fontWeight: FontWeight.bold),
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text("Approvals",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.displayLarge),
                       ),
                       const SizedBox(
                         height: 10,

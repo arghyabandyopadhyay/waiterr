@@ -207,6 +207,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                         list: [
                                           ModalOptionModel(
                                             icon: Icons.approval,
+                                            iconColor: Colors.amber.shade800,
                                             particulars: "Approve orders",
                                             onTap: () async {
                                               Navigator.pop(alertDialogContext);
@@ -250,8 +251,8 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                   4)
                                             ModalOptionModel(
                                               icon: Icons.fastfood,
-                                              particulars:
-                                                  "Complete Order Preparation",
+                                              iconColor: Colors.blue.shade800,
+                                              particulars: "Order Prepared",
                                               onTap: () async {
                                                 Navigator.pop(
                                                     alertDialogContext);
@@ -294,6 +295,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                   4)
                                             ModalOptionModel(
                                               icon: Icons.done_all,
+                                              iconColor: Colors.green.shade800,
                                               particulars: "Order delivered",
                                               onTap: () async {
                                                 Navigator.pop(
@@ -331,93 +333,6 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                         });
                                               },
                                             ),
-                                          if (UserClientAllocationData
-                                                      .ucaRoleId ==
-                                                  3 ||
-                                              UserClientAllocationData
-                                                      .ucaRoleId ==
-                                                  4)
-                                            ModalOptionModel(
-                                              icon: Icons.done_all,
-                                              particulars: "Order delivered",
-                                              onTap: () async {
-                                                Navigator.pop(
-                                                    alertDialogContext);
-                                                Connectivity connectivity =
-                                                    Connectivity();
-                                                await connectivity
-                                                    .checkConnectivity()
-                                                    .then((value) => {
-                                                          if (value !=
-                                                              ConnectivityResult
-                                                                  .none)
-                                                            {
-                                                              Navigator.of(context).push(
-                                                                  PageRouteBuilder(
-                                                                      pageBuilder: (context,
-                                                                              animation1,
-                                                                              animation2) =>
-                                                                          const ApproveOrdersPage(
-                                                                            approvalType:
-                                                                                "OrderProcessed",
-                                                                          )))
-                                                            }
-                                                          else
-                                                            {
-                                                              Navigator.of(context).pushAndRemoveUntil(
-                                                                  PageRouteBuilder(
-                                                                      pageBuilder: (context,
-                                                                              animation1,
-                                                                              animation2) =>
-                                                                          const NoInternetPage()),
-                                                                  (route) =>
-                                                                      false)
-                                                            }
-                                                        });
-                                              },
-                                            ),
-                                          //TODO: to be implemented after wards
-                                          // if (UserClientAllocationData.ucaRoleId ==
-                                          //     3||UserClientAllocationData.ucaRoleId == 4)
-                                          //   ModalOptionModel(
-                                          //     icon: Icons.stop,
-                                          //     particulars: "Terminate Order",
-                                          //     onTap: () async {
-                                          //       Navigator.pop(
-                                          //           alertDialogContext);
-                                          //       Connectivity connectivity =
-                                          //           Connectivity();
-                                          //       await connectivity
-                                          //           .checkConnectivity()
-                                          //           .then((value) => {
-                                          //                 if (value !=
-                                          //                     ConnectivityResult
-                                          //                         .none)
-                                          //                   {
-                                          //                     Navigator.of(context).push(
-                                          //                         PageRouteBuilder(
-                                          //                             pageBuilder: (context,
-                                          //                                     animation1,
-                                          //                                     animation2) =>
-                                          //                                 const ApproveOrdersPage(
-                                          //                                   approvalType:
-                                          //                                       "OrderTerminate",
-                                          //                                 )))
-                                          //                   }
-                                          //                 else
-                                          //                   {
-                                          //                     Navigator.of(context).pushAndRemoveUntil(
-                                          //                         PageRouteBuilder(
-                                          //                             pageBuilder: (context,
-                                          //                                     animation1,
-                                          //                                     animation2) =>
-                                          //                                 const NoInternetPage()),
-                                          //                         (route) =>
-                                          //                             false)
-                                          //                   }
-                                          //               });
-                                          //     },
-                                          //   ),
                                         ]);
                                   });
                             }),
@@ -506,36 +421,36 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                 isForAdminManagement: true)));
                               },
                               icon: Icons.admin_panel_settings_outlined),
-                        ModalOptionModel(
-                            particulars: "Refresh",
-                            onTap: () async {
-                              Navigator.pop(context);
-                              Connectivity connectivity = Connectivity();
-                              await connectivity
-                                  .checkConnectivity()
-                                  .then((value) => {
-                                        if (value != ConnectivityResult.none)
-                                          {
-                                            setState(() {
-                                              _isLoading = true;
-                                              _isDataLoaded = false;
-                                            }),
-                                            _futureitems = fetchList()
-                                          }
-                                        else
-                                          {
-                                            Navigator.of(context)
-                                                .pushAndRemoveUntil(
-                                                    PageRouteBuilder(
-                                                        pageBuilder: (context,
-                                                                animation1,
-                                                                animation2) =>
-                                                            const NoInternetPage()),
-                                                    (route) => false)
-                                          }
-                                      });
-                            },
-                            icon: Icons.refresh)
+                        // ModalOptionModel(
+                        //     particulars: "Refresh",
+                        //     onTap: () async {
+                        //       Navigator.pop(context);
+                        //       Connectivity connectivity = Connectivity();
+                        //       await connectivity
+                        //           .checkConnectivity()
+                        //           .then((value) => {
+                        //                 if (value != ConnectivityResult.none)
+                        //                   {
+                        //                     setState(() {
+                        //                       _isLoading = true;
+                        //                       _isDataLoaded = false;
+                        //                     }),
+                        //                     _futureitems = fetchList()
+                        //                   }
+                        //                 else
+                        //                   {
+                        //                     Navigator.of(context)
+                        //                         .pushAndRemoveUntil(
+                        //                             PageRouteBuilder(
+                        //                                 pageBuilder: (context,
+                        //                                         animation1,
+                        //                                         animation2) =>
+                        //                                     const NoInternetPage()),
+                        //                             (route) => false)
+                        //                   }
+                        //               });
+                        //     },
+                        //     icon: Icons.refresh)
                       ].map((ModalOptionModel choice) {
                         return PopupMenuItem<ModalOptionModel>(
                           value: choice,
@@ -606,49 +521,129 @@ class _MyTableHomePage extends State<TableManagementPage> {
                       height: 10,
                     ),
                     Flexible(
-                        child: Container(
-                            height: MediaQuery.of(context).size.height,
-                            padding: const EdgeInsets.only(top: 10),
-                            decoration: GlobalTheme.waiterrAppBarBoxDecoration,
-                            child: FutureBuilder<List<RunningOrderModel>>(
-                                future: _futureitems,
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    items = snapshot.data;
-                                    return ListView(
-                                      shrinkWrap: true,
-                                      physics: const BouncingScrollPhysics(),
-                                      children: [
-                                        Center(
-                                          child: Container(
-                                            height: _isLoading! ? 40 : 0,
-                                            width: _isLoading! ? 40 : 0,
-                                            padding: const EdgeInsets.all(10),
-                                            child: _isLoading!
-                                                ? const CircularProgressIndicator(
-                                                    strokeWidth: 3,
-                                                  )
-                                                : null,
+                      child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          padding: const EdgeInsets.only(top: 10),
+                          decoration: GlobalTheme.waiterrAppBarBoxDecoration,
+                          child: FutureBuilder<List<RunningOrderModel>>(
+                              future: _futureitems,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  items = snapshot.data;
+                                  return RefreshIndicator(
+                                      backgroundColor: Colors.black,
+                                      onRefresh: () {
+                                        setState(() {
+                                          _isLoading = true;
+                                          _isDataLoaded = false;
+                                        });
+                                        _futureitems = fetchList();
+                                        return Future(() => null);
+                                      },
+                                      child: ListView(
+                                        shrinkWrap: true,
+                                        physics: const BouncingScrollPhysics(),
+                                        children: [
+                                          Center(
+                                            child: Container(
+                                              height: _isLoading! ? 40 : 0,
+                                              width: _isLoading! ? 40 : 0,
+                                              padding: const EdgeInsets.all(10),
+                                              child: _isLoading!
+                                                  ? const CircularProgressIndicator(
+                                                      strokeWidth: 3,
+                                                    )
+                                                  : null,
+                                            ),
                                           ),
-                                        ),
-                                        _searchController.text.isNotEmpty
-                                            ? (searchResult.isNotEmpty
-                                                ? ListView.builder(
-                                                    shrinkWrap: true,
-                                                    physics:
-                                                        const NeverScrollableScrollPhysics(),
-                                                    itemCount:
-                                                        searchResult.length,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      return GestureDetector(
-                                                        child: RunningOrderCard(
-                                                            onBillPrintedClick:
-                                                                () async {
-                                                              Connectivity
-                                                                  connectivity =
-                                                                  Connectivity();
+                                          _searchController.text.isNotEmpty
+                                              ? (searchResult.isNotEmpty
+                                                  ? ListView.builder(
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          const NeverScrollableScrollPhysics(),
+                                                      itemCount:
+                                                          searchResult.length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return GestureDetector(
+                                                          child:
+                                                              RunningOrderCard(
+                                                                  onBillPrintedClick:
+                                                                      () async {
+                                                                    Connectivity
+                                                                        connectivity =
+                                                                        Connectivity();
+                                                                    await connectivity
+                                                                        .checkConnectivity()
+                                                                        .then((value) =>
+                                                                            {
+                                                                              if (value != ConnectivityResult.none)
+                                                                                {
+                                                                                  terminateRunningOrders(searchResult[index].id).then((value) => {
+                                                                                        if (value == 200)
+                                                                                          {
+                                                                                            setState(() {
+                                                                                              _isLoading = true;
+                                                                                              _isDataLoaded = false;
+                                                                                            }),
+                                                                                            _futureitems = fetchList()
+                                                                                          }
+                                                                                      })
+                                                                                }
+                                                                            });
+                                                                  },
+                                                                  item: searchResult[
+                                                                      index]),
+                                                          onTap: () async {
+                                                            setState(() {
+                                                              _isLoading = true;
+                                                            });
+                                                            await Navigator.of(
+                                                                    context)
+                                                                .push(
+                                                                    CupertinoPageRoute<
+                                                                        void>(
+                                                                  title:
+                                                                      "Kot Page",
+                                                                  builder: (context) => KOTPage(
+                                                                      isWaiter:
+                                                                          true,
+                                                                      item: searchResult[
+                                                                          index]),
+                                                                ))
+                                                                .then((value) =>
+                                                                    setState(
+                                                                        () {
+                                                                      _futureitems =
+                                                                          fetchList();
+                                                                    }));
+                                                          },
+                                                        );
+                                                      },
+                                                    )
+                                                  : const NoDataError())
+                                              : ListView.builder(
+                                                  physics:
+                                                      const NeverScrollableScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount: items!.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return GestureDetector(
+                                                      child: RunningOrderCard(
+                                                          onBillPrintedClick:
+                                                              () async {
+                                                            Connectivity
+                                                                connectivity =
+                                                                Connectivity();
+                                                            if (UserClientAllocationData
+                                                                        .ucaRoleId ==
+                                                                    3 ||
+                                                                UserClientAllocationData
+                                                                        .ucaRoleId ==
+                                                                    4) {
                                                               await connectivity
                                                                   .checkConnectivity()
                                                                   .then(
@@ -657,240 +652,195 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                                             if (value !=
                                                                                 ConnectivityResult.none)
                                                                               {
-                                                                                terminateRunningOrders(searchResult[index].id).then((value) => {
+                                                                                terminateRunningOrders(items![index].id).then((value) => {
                                                                                       if (value == 200)
                                                                                         {
-                                                                                          Navigator.pop(context)
+                                                                                          setState(() {
+                                                                                            _isLoading = true;
+                                                                                            _isDataLoaded = false;
+                                                                                          }),
+                                                                                          _futureitems = fetchList()
                                                                                         }
                                                                                     })
                                                                               }
                                                                           });
-                                                            },
-                                                            item: searchResult[
-                                                                index]),
-                                                        onTap: () async {
-                                                          setState(() {
-                                                            _isLoading = true;
-                                                          });
-                                                          await Navigator.of(
-                                                                  context)
-                                                              .push(
-                                                                  CupertinoPageRoute<
-                                                                      void>(
-                                                                title:
-                                                                    "Kot Page",
-                                                                builder: (context) => KOTPage(
-                                                                    isWaiter:
-                                                                        true,
-                                                                    item: searchResult[
-                                                                        index]),
-                                                              ))
-                                                              .then((value) =>
-                                                                  setState(() {
-                                                                    _futureitems =
-                                                                        fetchList();
-                                                                  }));
-                                                        },
-                                                      );
-                                                    },
-                                                  )
-                                                : const NoDataError())
-                                            : ListView.builder(
-                                                physics:
-                                                    const NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: items!.length,
-                                                itemBuilder: (context, index) {
-                                                  return GestureDetector(
-                                                    child: RunningOrderCard(
-                                                        onBillPrintedClick:
-                                                            () async {
-                                                          Connectivity
-                                                              connectivity =
-                                                              Connectivity();
-                                                          if (UserClientAllocationData
-                                                                      .ucaRoleId ==
-                                                                  3 ||
-                                                              UserClientAllocationData
-                                                                      .ucaRoleId ==
-                                                                  4) {
-                                                            await connectivity
-                                                                .checkConnectivity()
-                                                                .then(
-                                                                    (value) => {
-                                                                          if (value !=
-                                                                              ConnectivityResult.none)
-                                                                            {
-                                                                              terminateRunningOrders(items![index].id).then((value) => {
-                                                                                    if (value == 200)
-                                                                                      {
-                                                                                        Navigator.pop(context)
-                                                                                      }
-                                                                                  })
-                                                                            }
-                                                                        });
-                                                          }
-                                                        },
-                                                        item: items![index]),
-                                                    onTap: () async {
-                                                      setState(() {
-                                                        _isLoading = true;
-                                                      });
-                                                      await Navigator.of(
-                                                              context)
-                                                          .push(
-                                                              CupertinoPageRoute<
-                                                                  void>(
-                                                            title: "Kot Page",
-                                                            builder: (context) =>
-                                                                KOTPage(
-                                                                    isWaiter:
-                                                                        true,
-                                                                    item: items![
-                                                                        index]),
-                                                          ))
-                                                          .then((value) =>
-                                                              setState(() {
-                                                                _futureitems =
-                                                                    fetchList();
-                                                              }));
-                                                    },
-                                                  );
-                                                },
-                                              ),
-                                      ],
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    if (snapshot.error.toString() ==
-                                        "NoInternet") {
-                                      return const ErrorPageNoInternet();
-                                    } else if (snapshot.error.toString() ==
-                                        "500") {
-                                      return const ErrorPageFiveHundred();
-                                    } else if (snapshot.error.toString() ==
-                                        "NoData") {
-                                      return const NoRunningOrders();
-                                    } else if (snapshot.error.toString() ==
-                                        "401") {
-                                      return const ErrorPageFourHundredOne();
-                                    } else {
-                                      return const ErrorHasOccurred();
-                                    }
+                                                            }
+                                                          },
+                                                          item: items![index]),
+                                                      onTap: () async {
+                                                        setState(() {
+                                                          _isLoading = true;
+                                                        });
+                                                        await Navigator.of(
+                                                                context)
+                                                            .push(
+                                                                CupertinoPageRoute<
+                                                                    void>(
+                                                              title: "Kot Page",
+                                                              builder: (context) =>
+                                                                  KOTPage(
+                                                                      isWaiter:
+                                                                          true,
+                                                                      item: items![
+                                                                          index]),
+                                                            ))
+                                                            .then((value) =>
+                                                                setState(() {
+                                                                  _futureitems =
+                                                                      fetchList();
+                                                                }));
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height)
+                                        ],
+                                      ));
+                                } else if (snapshot.hasError) {
+                                  if (snapshot.error.toString() ==
+                                      "NoInternet") {
+                                    return const ErrorPageNoInternet();
+                                  } else if (snapshot.error.toString() ==
+                                      "500") {
+                                    return const ErrorPageFiveHundred();
+                                  } else if (snapshot.error.toString() ==
+                                      "NoData") {
+                                    return const NoRunningOrders();
+                                  } else if (snapshot.error.toString() ==
+                                      "401") {
+                                    return const ErrorPageFourHundredOne();
+                                  } else {
+                                    return const ErrorHasOccurred();
                                   }
-                                  // By default, show a loading spinner.
-                                  return Container(
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0, vertical: 16.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Shimmer.fromColors(
-                                                baseColor: Colors.grey[300]!,
-                                                highlightColor:
-                                                    Colors.grey[100]!,
-                                                enabled: true,
-                                                child: ListView.builder(
-                                                  itemBuilder: (_, __) =>
-                                                      Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  bottom: 8.0),
-                                                          child: Row(
+                                }
+                                // By default, show a loading spinner.
+                                return Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 16.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Shimmer.fromColors(
+                                              baseColor: Colors.grey[300]!,
+                                              highlightColor: Colors.grey[100]!,
+                                              enabled: true,
+                                              child: ListView.builder(
+                                                itemBuilder: (_, __) => Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 8.0),
+                                                    child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Container(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                7,
+                                                            height: 110.0,
+                                                            color: Colors.white,
+                                                          ),
+                                                          const Padding(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        8.0),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
-                                                              children: [
+                                                              children: <Widget>[
                                                                 Container(
                                                                   width: MediaQuery.of(
                                                                               context)
                                                                           .size
                                                                           .width /
-                                                                      7,
-                                                                  height: 110.0,
+                                                                      1.5,
+                                                                  height: 10.0,
                                                                   color: Colors
                                                                       .white,
                                                                 ),
                                                                 const Padding(
                                                                   padding: EdgeInsets
                                                                       .symmetric(
-                                                                          horizontal:
-                                                                              8.0),
+                                                                          vertical:
+                                                                              5.0),
                                                                 ),
-                                                                Expanded(
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: <Widget>[
-                                                                      Container(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            1.5,
-                                                                        height:
-                                                                            10.0,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                      const Padding(
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(vertical: 5.0),
-                                                                      ),
-                                                                      Container(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            1.5,
-                                                                        height:
-                                                                            10.0,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                      const Padding(
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(vertical: 5.0),
-                                                                      ),
-                                                                      Container(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            1.5,
-                                                                        height:
-                                                                            10.0,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                      const Padding(
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(vertical: 5.0),
-                                                                      ),
-                                                                      Container(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            1.5,
-                                                                        height:
-                                                                            10.0,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                      const Padding(
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(vertical: 2.0),
-                                                                      ),
-                                                                      Container(
-                                                                        width:
-                                                                            40.0,
-                                                                        height:
-                                                                            10.0,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                )
-                                                              ])),
-                                                  itemCount: 2,
-                                                )),
-                                          ),
-                                        ],
-                                      ));
-                                }))),
+                                                                Container(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      1.5,
+                                                                  height: 10.0,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          vertical:
+                                                                              5.0),
+                                                                ),
+                                                                Container(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      1.5,
+                                                                  height: 10.0,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          vertical:
+                                                                              5.0),
+                                                                ),
+                                                                Container(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      1.5,
+                                                                  height: 10.0,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          vertical:
+                                                                              2.0),
+                                                                ),
+                                                                Container(
+                                                                  width: 40.0,
+                                                                  height: 10.0,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          )
+                                                        ])),
+                                                itemCount: 2,
+                                              )),
+                                        ),
+                                      ],
+                                    ));
+                              })),
+                    )
                   ]),
               floatingActionButton: FloatingActionButton(
                 onPressed: _addTable,

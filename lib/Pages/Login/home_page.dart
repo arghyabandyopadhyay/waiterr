@@ -167,37 +167,70 @@ class _HomePageState extends State<HomePage> {
                   alternativeName: "waiterr",
                   drawerItems: [
                     DrawerActionModel(
-                      title: "Profile",
-                      iconData: Icons.account_circle,
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.of(context).push(CupertinoPageRoute<void>(
-                          title: "Profile Page",
-                          builder: (context) => const ProfilePage(),
-                        ));
-                      },
-                    ),
-                    DrawerActionModel(
-                      title: "Running Orders",
+                      title: "My Orders",
                       iconData: Icons.timelapse_outlined,
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.of(context).push(CupertinoPageRoute<void>(
-                          title: "Running Orders",
+                          title: "My Orders",
                           builder: (context) =>
                               const OrdersPage(showPastOrder: false),
                         ));
                       },
                     ),
                     DrawerActionModel(
-                      title: "Past Orders",
+                      title: "Previous Orders",
                       iconData: Icons.schedule,
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.of(context).push(CupertinoPageRoute<void>(
-                          title: "Past Orders",
+                          title: "Previous Orders",
                           builder: (context) =>
                               const OrdersPage(showPastOrder: true),
+                        ));
+                      },
+                    ),
+                    DrawerActionModel(
+                      title: "My Profile",
+                      iconData: Icons.account_circle,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(CupertinoPageRoute<void>(
+                          title: "My Profile",
+                          builder: (context) => const ProfilePage(),
+                        ));
+                      },
+                    ),
+                    DrawerActionModel(
+                      title: "Help Center",
+                      iconData: Icons.help_center_outlined,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(CupertinoPageRoute<void>(
+                          title: "Help Center",
+                          builder: (context) => const ProfilePage(),
+                        ));
+                      },
+                    ),
+                    DrawerActionModel(
+                      title: "Settings",
+                      iconData: Icons.settings,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(CupertinoPageRoute<void>(
+                          title: "Settings",
+                          builder: (context) => const ProfilePage(),
+                        ));
+                      },
+                    ),
+                    DrawerActionModel(
+                      title: "Privacy Policy",
+                      iconData: Icons.privacy_tip_outlined,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(CupertinoPageRoute<void>(
+                          title: "Privacy Policy",
+                          builder: (context) => const ProfilePage(),
                         ));
                       },
                     ),
@@ -258,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                                                       Navigator.of(context).push(
                                                           CupertinoPageRoute<
                                                               void>(
-                                                        title: "Running Orders",
+                                                        title: "My Orders",
                                                         builder: (context) =>
                                                             const TableManagementPage(),
                                                       ));
@@ -279,7 +312,7 @@ class _HomePageState extends State<HomePage> {
                                           //           Navigator.of(context).push(
                                           //               CupertinoPageRoute<
                                           //                   void>(
-                                          //             title: "Running Orders",
+                                          //             title: "My Orders",
                                           //             builder: (context) =>
                                           //                 const TableManagementPage(),
                                           //           ));
@@ -317,8 +350,7 @@ class _HomePageState extends State<HomePage> {
                                                             children: <Widget>[
                                                               Container(
                                                                   padding:
-                                                                      const EdgeInsets
-                                                                              .all(
+                                                                      const EdgeInsets.all(
                                                                           10),
                                                                   color: Colors
                                                                       .white,
@@ -326,8 +358,7 @@ class _HomePageState extends State<HomePage> {
                                                                   width: 70),
                                                               Container(
                                                                   padding:
-                                                                      const EdgeInsets
-                                                                              .all(
+                                                                      const EdgeInsets.all(
                                                                           10),
                                                                   color: Colors
                                                                       .white,
@@ -344,7 +375,7 @@ class _HomePageState extends State<HomePage> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     bottom:
                                                                         10.0),
                                                             child: Row(
@@ -375,8 +406,7 @@ class _HomePageState extends State<HomePage> {
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: <
-                                                                        Widget>[
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width:
                                                                             screenWidth /
@@ -393,8 +423,7 @@ class _HomePageState extends State<HomePage> {
                                                                       Row(
                                                                         mainAxisAlignment:
                                                                             MainAxisAlignment.spaceBetween,
-                                                                        children: <
-                                                                            Widget>[
+                                                                        children: <Widget>[
                                                                           Container(
                                                                             width:
                                                                                 100,
@@ -435,8 +464,7 @@ class _HomePageState extends State<HomePage> {
                                                             children: <Widget>[
                                                               Container(
                                                                   padding:
-                                                                      const EdgeInsets
-                                                                              .all(
+                                                                      const EdgeInsets.all(
                                                                           10),
                                                                   color: Colors
                                                                       .white,
@@ -444,8 +472,7 @@ class _HomePageState extends State<HomePage> {
                                                                   width: 70),
                                                               Container(
                                                                   padding:
-                                                                      const EdgeInsets
-                                                                              .all(
+                                                                      const EdgeInsets.all(
                                                                           10),
                                                                   color: Colors
                                                                       .white,
@@ -468,7 +495,7 @@ class _HomePageState extends State<HomePage> {
                                                                     Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       bottom:
                                                                           10.0),
                                                               child: Row(
@@ -499,8 +526,7 @@ class _HomePageState extends State<HomePage> {
                                                                       crossAxisAlignment:
                                                                           CrossAxisAlignment
                                                                               .start,
-                                                                      children: <
-                                                                          Widget>[
+                                                                      children: <Widget>[
                                                                         Container(
                                                                           width:
                                                                               screenWidth / 2,
@@ -516,8 +542,7 @@ class _HomePageState extends State<HomePage> {
                                                                         Row(
                                                                           mainAxisAlignment:
                                                                               MainAxisAlignment.spaceBetween,
-                                                                          children: <
-                                                                              Widget>[
+                                                                          children: <Widget>[
                                                                             Container(
                                                                               width: 100,
                                                                               height: 10.0,

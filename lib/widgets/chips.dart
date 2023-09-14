@@ -31,7 +31,7 @@ class Chips extends StatelessWidget {
               label: Text(
                 item!,
                 style:
-                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
               ),
               selected: indexSelected == index,
               onSelected: onSelected),

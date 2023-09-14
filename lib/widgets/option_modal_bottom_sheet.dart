@@ -15,9 +15,11 @@ class OptionModalBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        title: Text(appBarText),
+        title: Text(appBarText,
+            maxLines: 1, style: Theme.of(context).textTheme.bodyLarge),
         leading: IconButton(
           icon: Icon(appBarIcon),
           onPressed: () {},
@@ -39,7 +41,10 @@ class OptionModalBottomSheet extends StatelessWidget {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(list[index].particulars),
+                  title: Text(
+                    list[index].particulars,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                   leading: Icon(
                     list[index].icon,
                     color: list[index].iconColor,

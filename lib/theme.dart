@@ -23,7 +23,8 @@ class GlobalTheme {
   static const Color borderColor = Color(0XFF808080);
   static const Color waiterrPrimaryText = Color(0XFF808080);
   static const Color waiterrSecondaryText = Colors.black;
-  static const Color waiterrPrimaryColor = Color.fromARGB(255, 3, 63, 244);
+  // static const Color waiterrPrimaryColor = Color.fromARGB(255, 3, 63, 244);
+  static const Color waiterrPrimaryColor = Color.fromARGB(255, 182, 150, 222);
 
   static const Color drawerDetailText = Colors.black;
   static const Color salePointNameColor = Colors.black;
@@ -35,12 +36,15 @@ class GlobalTheme {
   static const Color boxDecorationColorHighlight =
       Color.fromARGB(255, 3, 63, 244);
   static const Color selectionCardCheckIconColor =
-      Color.fromARGB(255, 3, 63, 244);
+      Color.fromARGB(255, 109, 62, 166);
   static const Color commentIconColor = Color.fromARGB(255, 3, 63, 244);
   static Color selectionCardSplashColor =
       const Color.fromARGB(255, 3, 63, 244).withOpacity(0.12);
   //KOT Progress Status Indicator Global Values
-  static Color kotActiveColor = const Color.fromARGB(255, 3, 63, 244);
+  static Color orderApprovedColor = Colors.amber.shade800;
+  static Color orderProcessedColor = Colors.blue.shade800;
+  static Color orderDeliveredColor = Colors.green.shade800;
+  static Color kotActiveColor = Colors.lime.shade800;
   static Color kotInActiveColor = const Color(0XFF808080);
   static var primaryGradient = [
     const Color.fromARGB(255, 249, 95, 195),
@@ -121,6 +125,10 @@ class WaiterrThemeDatas {
         displayMedium: TextStyle(fontSize: 17, color: globalTheme.primaryColor),
         displaySmall: TextStyle(color: globalTheme.primaryText),
         bodyMedium: TextStyle(color: globalTheme.primaryText),
+        bodyLarge: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: globalTheme.secondaryText),
         titleMedium: TextStyle(color: globalTheme.primaryText),
       ),
       textSelectionTheme:
@@ -162,7 +170,8 @@ class WaiterrThemeDatas {
             fontSize: 30,
             fontWeight: FontWeight.bold,
             color: globalTheme.secondaryTextDark),
-        displayMedium: TextStyle(fontSize: 17, color: globalTheme.primaryColorDark),
+        displayMedium:
+            TextStyle(fontSize: 17, color: globalTheme.primaryColorDark),
         displaySmall: TextStyle(color: globalTheme.primaryTextDark),
         bodyMedium: TextStyle(color: globalTheme.primaryTextDark),
         titleMedium: TextStyle(color: globalTheme.primaryTextDark),
