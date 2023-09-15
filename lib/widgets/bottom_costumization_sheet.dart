@@ -111,11 +111,12 @@ class _BottomSheetContent extends State<BottomSheetContent> {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          late int quantity;
+                          late double quantity;
                           return AddQuantityDialog(
-                            setQuantity: (int value) {
+                            setQuantity: (double value) {
                               quantity = value;
                             },
+                            previousValue: widget.jsonData[id].qty,
                             onTapAdd: () {
                               setState(() {
                                 totalItems = totalItems! + quantity;

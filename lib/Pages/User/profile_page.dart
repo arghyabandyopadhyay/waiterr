@@ -212,8 +212,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               ),
                                               keyboardType: TextInputType.phone,
                                               // TextInputFormatters are applied in sequence.
-                                              inputFormatters: <
-                                                  TextInputFormatter>[
+                                              inputFormatters: <TextInputFormatter>[
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
                                                 // Fit the validating format.

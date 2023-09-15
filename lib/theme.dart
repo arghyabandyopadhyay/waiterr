@@ -44,7 +44,7 @@ class GlobalTheme {
   static Color orderApprovedColor = Colors.amber.shade800;
   static Color orderProcessedColor = Colors.blue.shade800;
   static Color orderDeliveredColor = Colors.green.shade800;
-  static Color kotActiveColor = Colors.lime.shade800;
+  static Color kotActiveColor = const Color.fromARGB(255, 3, 63, 244);
   static Color kotInActiveColor = const Color(0XFF808080);
   static var primaryGradient = [
     const Color.fromARGB(255, 249, 95, 195),

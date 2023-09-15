@@ -20,6 +20,7 @@ import 'package:waiterr/Pages/Login/home_page.dart';
 import 'package:waiterr/stores/login_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
+import 'Pages/CautionPages/build_context_not_mounted_page.dart';
 import 'theme.dart';
 import 'Pages/CautionPages/error_page.dart';
 
@@ -27,18 +28,16 @@ class RoutingPage extends StatefulWidget {
   final BuildContext context;
   const RoutingPage({Key? key, required this.context}) : super(key: key);
   @override
-  State<RoutingPage> createState() => _RoutingPageState(context);
+  State<RoutingPage> createState() => _RoutingPageState();
 }
 
 class _RoutingPageState extends State<RoutingPage> {
-  final context1;
   UserRestrauntAllocationModel? ucam;
   Future<UserDetailsModel>? userDetails;
-  _RoutingPageState(this.context1);
   Future<Widget?>? _widget;
   String? deviceToken;
   Future<Widget?> fetchPage() async {
-    Widget? widget;
+    Widget? widget1;
     if (Platform.isAndroid) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
@@ -49,7 +48,8 @@ class _RoutingPageState extends State<RoutingPage> {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       deviceToken = iosInfo.identifierForVendor;
     }
-    await Provider.of<LoginStore>(context1, listen: false)
+    if (!context.mounted) return const BuildContextNotMountedPage();
+    await Provider.of<LoginStore>(widget.context, listen: false)
         .isAlreadyAuthenticated()
         .then((result) async {
       if (result) {
@@ -62,7 +62,7 @@ class _RoutingPageState extends State<RoutingPage> {
                   else
                     {
                       UserDetail.loginDetail.mobileNumber =
-                          Provider.of<LoginStore>(context1, listen: false)
+                          Provider.of<LoginStore>(widget.context, listen: false)
                               .firebaseUser!
                               .phoneNumber!
                               .replaceAll("+91", ""),
@@ -102,18 +102,18 @@ class _RoutingPageState extends State<RoutingPage> {
                                                   await putRegistrationDetails(
                                                       resultUserDetail)
                                                 },
-                                              widget = const HomePage(),
+                                              widget1 = const HomePage(),
                                             }
                                           else
                                             {
                                               //Your Id Is Blocked.
                                               // _saveOfflineLogin(0),
-                                              widget = const IdBlockedPage()
+                                              widget1 = const IdBlockedPage()
                                             }
                                         })
                                     .catchError((e) async {
                                   if (userDetails != null) {
-                                    widget = const NoDateErrorPage();
+                                    widget1 = const NoDateErrorPage();
                                   } else {
                                     throw e;
                                   }
@@ -132,13 +132,13 @@ class _RoutingPageState extends State<RoutingPage> {
                                           // _saveUserDetails(u1),
                                           if (u1.isActive)
                                             {
-                                              widget = const HomePage(),
+                                              widget1 = const HomePage(),
                                             }
                                           else
                                             {
                                               //Your Id Is Blocked.
                                               // _saveOfflineLogin(0),
-                                              widget = const IdBlockedPage()
+                                              widget1 = const IdBlockedPage()
                                             }
                                         }),
                               }
@@ -146,29 +146,29 @@ class _RoutingPageState extends State<RoutingPage> {
                 });
       } else {
         // _saveOfflineLogin(100);
-        widget = const LoginPage();
+        widget1 = const LoginPage();
       }
     });
-    return widget;
+    return widget1;
   }
 
-  _saveUserClientAllocationData(UserRestrauntAllocationModel u) async {
-    final prefs = await SharedPreferences.getInstance();
-    const key = 'userClientAllocationData';
-    final value = jsonEncode(u.toJson());
-    prefs.setString(key, value);
-  }
+  // _saveUserClientAllocationData(UserRestrauntAllocationModel u) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   const key = 'userClientAllocationData';
+  //   final value = jsonEncode(u.toJson());
+  //   prefs.setString(key, value);
+  // }
 
-  Future<UserRestrauntAllocationModel?> _readUserClientAllocationData() async {
-    final prefs = await SharedPreferences.getInstance();
-    const key = 'userClientAllocationData';
-    final value = prefs.getString(key) ?? "";
-    if (value != "") {
-      return getJsonUserClientAllocationData(value);
-    } else {
-      return null;
-    }
-  }
+  // Future<UserRestrauntAllocationModel?> _readUserClientAllocationData() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   const key = 'userClientAllocationData';
+  //   final value = prefs.getString(key) ?? "";
+  //   if (value != "") {
+  //     return getJsonUserClientAllocationData(value);
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   // _saveOfflineLogin(int n) async {
   //   final prefs = await SharedPreferences.getInstance();
@@ -270,7 +270,7 @@ class _RoutingPageState extends State<RoutingPage> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: AppBarVariables.appBarLeading(context1),
+                          child: AppBarVariables.appBarLeading(widget.context),
                         ),
                         const SizedBox(
                           height: 10,

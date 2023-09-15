@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 
 class ConfirmationDialog extends StatelessWidget {
-  final onTap_Yes;
-  final onTap_No;
-  final question;
-  final headerText;
+  final Function() onTapYes;
+  final Function() onTapNo;
+  final String question;
+  final String headerText;
   // This widget is the root of your application.
   const ConfirmationDialog(
-      {Key? key, this.onTap_Yes, this.onTap_No, this.question, this.headerText})
+      {Key? key,
+      required this.onTapYes,
+      required this.onTapNo,
+      required this.question,
+      required this.headerText})
       : super(key: key);
 
   @override
@@ -49,7 +53,7 @@ class ConfirmationDialog extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      onTap_No();
+                      onTapNo();
                     },
                     child: Container(
                       margin: const EdgeInsets.only(right: 10),
@@ -71,7 +75,7 @@ class ConfirmationDialog extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      onTap_Yes();
+                      onTapYes();
                     },
                     child: Container(
                       alignment: Alignment.center,

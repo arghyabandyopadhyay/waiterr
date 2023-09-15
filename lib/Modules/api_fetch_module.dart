@@ -16,7 +16,7 @@ import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
 import 'package:waiterr/Model/user_details_model.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:waiterr/Model/user_login_model.dart';
 import '../Model/tax_model.dart';
 import '../Model/waiter_details_model.dart';
@@ -24,10 +24,10 @@ import '../global_class.dart';
 
 //ready
 Future<UserLoginModel> loginAppUserDetail(UserLoginModel loginDetails) async {
-  late http.Response response;
+  late Response response;
   try {
     loginDetails.password = Config.password;
-    response = await http.post(Uri.parse('${UserDetail.currentUrl}app/login'),
+    response = await post(Uri.parse('${UserDetail.currentUrl}app/login'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -62,10 +62,9 @@ Future<UserLoginModel> loginAppUserDetail(UserLoginModel loginDetails) async {
 
 //ready
 Future<String> registerAppUserDetail(UserLoginModel userLoginModel) async {
-  late http.Response response;
+  late Response response;
   try {
-    response = await http.post(
-        Uri.parse('${UserDetail.currentUrl}app/register'),
+    response = await post(Uri.parse('${UserDetail.currentUrl}app/register'),
         body: json.encode(userLoginModel.toJson()));
   } catch (E) {
     Connectivity connectivity = Connectivity();
@@ -99,10 +98,10 @@ Future<String> registerAppUserDetail(UserLoginModel userLoginModel) async {
 
 //ready
 Future<UserDetailsModel> userRegistration(String? id) async {
-  late http.Response response;
+  late Response response;
   try {
-    response = await http
-        .get(Uri.parse('${UserDetail.currentUrl}userdetails?id=$id'),
+    response = await get(
+            Uri.parse('${UserDetail.currentUrl}userdetails?id=$id'),
             headers: UserDetail.getHeader())
         .timeout(const Duration(seconds: 2));
   } catch (E) {
@@ -138,10 +137,10 @@ Future<UserDetailsModel> userRegistration(String? id) async {
 
 //ready
 Future<UserDetailsModel> getRegistrationDetails(String? id) async {
-  late http.Response response;
+  late Response response;
   try {
-    response = await http
-        .get(Uri.parse('${UserDetail.currentUrl}userdetails?id=$id'),
+    response = await get(
+            Uri.parse('${UserDetail.currentUrl}userdetails?id=$id'),
             headers: UserDetail.getHeader())
         .timeout(const Duration(seconds: 2));
   } catch (E) {
@@ -174,16 +173,14 @@ Future<UserDetailsModel> getRegistrationDetails(String? id) async {
 
 Future<void> putRegistrationDetails(UserDetailsModel userDetailsModel) async {
   String body = json.encode(userDetailsModel.toJson());
-  late http.Response response;
+  late Response response;
   try {
-    response = await http
-        .put(
-          Uri.parse(
-              '${UserDetail.currentUrl}userdetails?id=${userDetailsModel.id}'),
-          headers: UserDetail.getHeader(),
-          body: body,
-        )
-        .timeout(const Duration(seconds: 4));
+    response = await put(
+      Uri.parse(
+          '${UserDetail.currentUrl}userdetails?id=${userDetailsModel.id}'),
+      headers: UserDetail.getHeader(),
+      body: body,
+    ).timeout(const Duration(seconds: 4));
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
@@ -217,15 +214,13 @@ Future<UserDetailsModel> postRegistrationDetails(
     "DeviceToken": deviceToken
   };
   String body = json.encode(data);
-  late http.Response response;
+  late Response response;
   try {
-    response = await http
-        .post(
-          Uri.parse('${UserDetail.currentUrl}userdetails'),
-          headers: UserDetail.getHeader(),
-          body: body,
-        )
-        .timeout(const Duration(seconds: 2));
+    response = await post(
+      Uri.parse('${UserDetail.currentUrl}userdetails'),
+      headers: UserDetail.getHeader(),
+      body: body,
+    ).timeout(const Duration(seconds: 2));
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
@@ -259,10 +254,10 @@ Future<UserDetailsModel> postRegistrationDetails(
 
 //Ready
 Future<CustomerDetailsModel> getCustomerDetails(String mobile) async {
-  late http.Response response;
+  late Response response;
   try {
-    response = await http
-        .get(Uri.parse('${UserDetail.currentUrl}customerBank?mobile=$mobile'),
+    response = await get(
+            Uri.parse('${UserDetail.currentUrl}customerBank?mobile=$mobile'),
             headers: UserDetail.getHeader())
         .timeout(const Duration(seconds: 2));
   } catch (E) {
@@ -280,11 +275,9 @@ Future<CustomerDetailsModel> getCustomerDetails(String mobile) async {
     if (response.body.isNotEmpty) {
       return CustomerDetailsModel.fromJson(json.decode(response.body));
     } else {
-      throw "NoData";
+      return CustomerDetailsModel(
+          name: "New", mobileNumber: "", customerId: "", dataSource: "");
     }
-  } else if (response.statusCode == 500) {
-    return CustomerDetailsModel(
-        name: "New", mobileNumber: "", customerId: "", dataSource: "");
   } else {
     throw "ErrorHasOccurred";
   }
@@ -306,10 +299,10 @@ Future<UserDetailsModel> getUserDetail(String mobile) async {
 //ready
 Future<List<UserRestrauntAllocationModel>> getUserClientAllocation(
     String? uid) async {
-  late http.Response response;
+  late Response response;
   try {
-    response = await http
-        .get(Uri.parse('${UserDetail.currentUrl}UserClientAllocation?id=$uid'),
+    response = await get(
+            Uri.parse('${UserDetail.currentUrl}UserClientAllocation?id=$uid'),
             headers: UserDetail.getHeader())
         .timeout(const Duration(seconds: 2));
   } catch (E) {
@@ -348,15 +341,13 @@ Future<CustomerDetailsModel> postCustomerDetails(
     "mobileNumber": mobileNumber,
   };
   String body = json.encode(data);
-  late http.Response response;
+  late Response response;
   try {
-    response = await http
-        .post(
-          Uri.parse("${UserDetail.currentUrl}customerBank"),
-          headers: UserDetail.getHeader(),
-          body: body,
-        )
-        .timeout(const Duration(seconds: 2));
+    response = await post(
+      Uri.parse("${UserDetail.currentUrl}customerBank"),
+      headers: UserDetail.getHeader(),
+      body: body,
+    ).timeout(const Duration(seconds: 2));
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
@@ -395,16 +386,14 @@ Future<int> putCustomerDetails(
     CustomerDetailsModel customerDetailsModel) async {
   Map data = customerDetailsModel.toJson();
   String body = json.encode(data);
-  late http.Response response;
+  late Response response;
   try {
-    response = await http
-        .put(
-          Uri.parse(
-              '${UserDetail.currentUrl}customerBank?id=${customerDetailsModel.customerId}'),
-          headers: UserDetail.getHeader(),
-          body: body,
-        )
-        .timeout(const Duration(seconds: 2));
+    response = await put(
+      Uri.parse(
+          '${UserDetail.currentUrl}customerBank?id=${customerDetailsModel.customerId}'),
+      headers: UserDetail.getHeader(),
+      body: body,
+    ).timeout(const Duration(seconds: 2));
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
@@ -459,9 +448,9 @@ Future<List<RunningOrderModel>> postForRunningOrders(
       companyGUID: isWaiter ? UserClientAllocationData.companyGUID : null,
       requestJSON: requestJson);
   String body = json.encode(universalJson);
-  late http.Response response;
+  late Response response;
   try {
-    response = await http.post(
+    response = await post(
       Uri.parse(isWaiter
           ? UserClientAllocationData.dataExchangeURL!
           : "http://127.0.0.1:3000/api/master/"),
@@ -469,7 +458,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
       body: body,
     );
   } catch (E) {
-    print(E);
+    if (kDebugMode) print(E);
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
           if (value == ConnectivityResult.none)
@@ -480,7 +469,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
             throw "ErrorHasOccurred"
         });
   }
-  print(response.body);
+  if (kDebugMode) print(response.body);
   if (response.statusCode == 201 || response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the json.
@@ -489,7 +478,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
     } else {
       //for(var value in json.decode(response.body))rList.add(RunningOrderModel.fromJson(value));
       if (response.body.isNotEmpty) {
-        print(response.body);
+        if (kDebugMode) print(response.body);
         return ((json.decode(response.body)) as List)
             .map((data) => RunningOrderModel.fromJson(data))
             .toList();
@@ -859,8 +848,8 @@ Future<List<FavouritesJsonModel>> postForFavouritesItem(
 }
 
 //ready
-Future<int> postForPlaceOrder(PlaceOrderJson Json) async {
-  String parameterList = jsonEncode(Json.toJson());
+Future<int> postForPlaceOrder(PlaceOrderJson placeOrderJson) async {
+  String parameterList = jsonEncode(placeOrderJson.toJson());
   Map requestJson = {
     "RequestType": "Place Order",
     "ParameterList": null,
@@ -888,9 +877,9 @@ Future<String> responseGeneratorPost(String body) async {
     print(body);
     print(Uri.parse(UserClientAllocationData.dataExchangeURL!));
   }
-  late http.Response response;
+  late Response response;
   try {
-    response = await http.post(
+    response = await post(
       Uri.parse(UserClientAllocationData.dataExchangeURL!),
       headers: UserDetail.getHeader(),
       body: body,

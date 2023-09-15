@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 
 class AddQuantityDialog extends StatefulWidget {
-  final onTapAdd;
-  final setQuantity;
-  final previousValue;
+  final Function() onTapAdd;
+  final Function(double value) setQuantity;
+  final double previousValue;
   const AddQuantityDialog(
-      {Key? key, this.onTapAdd, this.setQuantity, this.previousValue})
+      {Key? key,
+      required this.onTapAdd,
+      required this.setQuantity,
+      required this.previousValue})
       : super(key: key);
   @override
   State<AddQuantityDialog> createState() => _AddQuantityDialogState();

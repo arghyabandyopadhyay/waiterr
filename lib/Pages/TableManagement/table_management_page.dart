@@ -21,7 +21,7 @@ import '../../Model/model_option_model.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
 import '../../widgets/option_modal_bottom_sheet.dart';
-import '../Restaurant/Management/offer_manager_page.dart';
+// import '../Restaurant/Management/offer_manager_page.dart';
 import '../Restaurant/Management/stock_group_manager_page.dart';
 import '../Restaurant/Management/tax_class_manager_page.dart';
 import '../Restaurant/Management/employee_manager_page.dart';
@@ -336,18 +336,19 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                         ]);
                                   });
                             }),
-                        if (UserClientAllocationData.ucaRoleId == 3 ||
-                            UserClientAllocationData.ucaRoleId == 4)
-                          ModalOptionModel(
-                              particulars: "Offers Manager",
-                              onTap: () async {
-                                Navigator.pop(context);
-                                Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            const OfferManagerPage()));
-                              },
-                              icon: Icons.discount_outlined),
+                        //Next update
+                        // if (UserClientAllocationData.ucaRoleId == 3 ||
+                        //     UserClientAllocationData.ucaRoleId == 4)
+                        //   ModalOptionModel(
+                        //       particulars: "Offers Manager",
+                        //       onTap: () async {
+                        //         Navigator.pop(context);
+                        //         Navigator.of(context).push(PageRouteBuilder(
+                        //             pageBuilder:
+                        //                 (context, animation1, animation2) =>
+                        //                     const OfferManagerPage()));
+                        //       },
+                        //       icon: Icons.discount_outlined),
                         if (UserClientAllocationData.ucaRoleId == 3 ||
                             UserClientAllocationData.ucaRoleId == 4)
                           ModalOptionModel(

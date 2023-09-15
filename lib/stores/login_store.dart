@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:waiterr/Pages/Login/login_page.dart';
 import 'package:waiterr/Pages/Login/otp_page.dart';
-import 'package:sms_autofill/sms_autofill.dart';
+// import 'package:sms_autofill/sms_autofill.dart';
 part 'login_store.g.dart';
 
 class LoginStore = LoginStoreBase with _$LoginStore;
 
 abstract class LoginStoreBase with Store {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final SmsAutoFill _autoFill = SmsAutoFill();
+  // final SmsAutoFill _autoFill = SmsAutoFill();
   late String actualCode;
 
   @observable
@@ -133,6 +133,7 @@ abstract class LoginStoreBase with Store {
   @action
   Future<void> signOut(BuildContext context) async {
     await _auth.signOut();
+    if (!context.mounted) return;
     await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const LoginPage()),
         (Route<dynamic> route) => false);

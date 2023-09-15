@@ -10,7 +10,7 @@ import 'package:waiterr/widgets/loading_indicator.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../global_class.dart';
-import 'home_page.dart';
+// import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = "loginPage";
@@ -33,22 +33,22 @@ class _LoginPageState extends State<LoginPage> {
     return true;
   }
 
-  bool _autoValidate = false;
+  // bool _autoValidate = false;
   var nameController = TextEditingController();
   final SmsAutoFill _autoFill = SmsAutoFill();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   int i = 0;
-  void _handleSubmitted() {
-    final form = _formKey.currentState!;
-    if (!form.validate()) {
-      _autoValidate = true; // Start validating on every change.
-    } else {
-      form.save();
-      //Save Data
-      Navigator.of(context).push(
-          CupertinoPageRoute<void>(builder: (context) => const HomePage()));
-    }
-  }
+  // void _handleSubmitted() {
+  //   final form = _formKey.currentState!;
+  //   if (!form.validate()) {
+  //     // _autoValidate = true; // Start validating on every change.
+  //   } else {
+  //     form.save();
+  //     //Save Data
+  //     Navigator.of(context).push(
+  //         CupertinoPageRoute<void>(builder: (context) => const HomePage()));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

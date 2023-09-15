@@ -509,9 +509,8 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                 return ConfirmationDialog(
                                   headerText: "Place Order",
                                   question: "Are you sure to place the order?",
-                                  onTap_Yes: () {
+                                  onTapYes: () {
                                     {
-                                      List<Route> arrayRoutes = [];
                                       Navigator.pop(context);
                                       setState(() {
                                         isLoading = true;
@@ -652,7 +651,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                               });
                                     }
                                   },
-                                  onTap_No: () {
+                                  onTapNo: () {
                                     Navigator.pop(context);
                                   },
                                 );
@@ -739,7 +738,6 @@ class AddToCartMenu extends StatelessWidget {
           iconSize: 18,
         ),
         InkWell(
-          onTap: () => print('hello'),
           child: Container(
             width: 100.0,
             height: 35.0,

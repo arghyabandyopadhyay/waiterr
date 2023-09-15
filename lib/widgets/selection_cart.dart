@@ -2,12 +2,12 @@ import 'package:waiterr/theme.dart';
 import 'package:flutter/material.dart';
 
 class SelectionCard extends StatelessWidget {
-  const SelectionCard({Key? key, this.item, this.active, this.onTap})
+  const SelectionCard({Key? key, this.item, this.active, required this.onTap})
       : super(key: key);
 
   final String? item;
   final bool? active;
-  final onTap;
+  final Function() onTap;
   @override
   Widget build(BuildContext context) {
     return Container(

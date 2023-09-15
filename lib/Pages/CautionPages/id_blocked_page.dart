@@ -112,11 +112,10 @@ class _IdBlockedPageState extends State<IdBlockedPage> {
                     ),
                   ],
                 )),
-                body: Container(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
+                body: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
@@ -158,7 +157,7 @@ class _IdBlockedPageState extends State<IdBlockedPage> {
                           ),
                         ),
                       )
-                    ])),
+                    ]),
                 backgroundColor: GlobalTheme.tint,
               )
             ],

@@ -1,6 +1,6 @@
 //ProductSpecification
-import 'package:waiterr/global_class.dart';
-import 'package:waiterr/Model/menu_item_model.dart';
+// import 'package:waiterr/global_class.dart';
+// import 'package:waiterr/Model/menu_item_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,7 +10,7 @@ class ProductSpecification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MenuItemModel? item = UserDetail.item;
+    // MenuItemModel? item = UserDetail.item;
     return ListView(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),

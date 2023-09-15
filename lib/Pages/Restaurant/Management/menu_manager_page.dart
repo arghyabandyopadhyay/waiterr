@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:waiterr/Model/bottom_sheet_communication_template.dart';
-import 'package:waiterr/Model/customizable_page_model.dart';
+// import 'package:waiterr/Model/bottom_sheet_communication_template.dart';
+// import 'package:waiterr/Model/customizable_page_model.dart';
 import 'package:waiterr/Model/menu_item_model.dart';
 import 'package:waiterr/Model/outlet_configuration_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/theme.dart';
-import 'package:waiterr/widgets/bottom_costumization_sheet.dart';
+// import 'package:waiterr/widgets/bottom_costumization_sheet.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -83,56 +83,56 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
             }));
   }
 
-  void _showModalBottomSheet(BuildContext context, MenuItemModel element) {
-    int i = 0;
-    List<CustomizablePageModel> custList = element.customizable;
-    for (CustomizablePageModel custModel in custList) {
-      if (custModel.qty != 0) {
-        totalItems = totalItems - custModel.qty;
-        totalCartAmount = totalCartAmount - custModel.price * custModel.qty;
-      }
-    }
-    showModalBottomSheet<CustValTemp>(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-      ),
-      context: context,
-      builder: (context) {
-        return BottomSheetContent(
-          jsonData: custList,
-          title: element.item,
-          description: element.itemDescription ?? "",
-        );
-      },
-    ).then((value) => {
-          if (value != null)
-            {
-              setState(() {
-                for (CustomizablePageModel a in element.customizable) {
-                  a.qty = value.orderList[i++].qty;
-                }
-                i = 0;
-                totalCartAmount = totalCartAmount + value.totalCartAmount!;
-                totalItems = totalItems + value.totalItem;
-                element.quantity = value.totalItem;
-              })
-            }
-          else
-            {
-              setState(() {
-                List<CustomizablePageModel> custList1 = element.customizable;
-                for (CustomizablePageModel custModel in custList1) {
-                  if (custModel.qty != 0) {
-                    totalItems = totalItems + custModel.qty;
-                    totalCartAmount =
-                        totalCartAmount + custModel.price * custModel.qty;
-                  }
-                }
-              }),
-            },
-        });
-  }
+  // void _showModalBottomSheet(BuildContext context, MenuItemModel element) {
+  //   int i = 0;
+  //   List<CustomizablePageModel> custList = element.customizable;
+  //   for (CustomizablePageModel custModel in custList) {
+  //     if (custModel.qty != 0) {
+  //       totalItems = totalItems - custModel.qty;
+  //       totalCartAmount = totalCartAmount - custModel.price * custModel.qty;
+  //     }
+  //   }
+  //   showModalBottomSheet<CustValTemp>(
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.only(
+  //           topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+  //     ),
+  //     context: context,
+  //     builder: (context) {
+  //       return BottomSheetContent(
+  //         jsonData: custList,
+  //         title: element.item,
+  //         description: element.itemDescription ?? "",
+  //       );
+  //     },
+  //   ).then((value) => {
+  //         if (value != null)
+  //           {
+  //             setState(() {
+  //               for (CustomizablePageModel a in element.customizable) {
+  //                 a.qty = value.orderList[i++].qty;
+  //               }
+  //               i = 0;
+  //               totalCartAmount = totalCartAmount + value.totalCartAmount!;
+  //               totalItems = totalItems + value.totalItem;
+  //               element.quantity = value.totalItem;
+  //             })
+  //           }
+  //         else
+  //           {
+  //             setState(() {
+  //               List<CustomizablePageModel> custList1 = element.customizable;
+  //               for (CustomizablePageModel custModel in custList1) {
+  //                 if (custModel.qty != 0) {
+  //                   totalItems = totalItems + custModel.qty;
+  //                   totalCartAmount =
+  //                       totalCartAmount + custModel.price * custModel.qty;
+  //                 }
+  //               }
+  //             }),
+  //           },
+  //       });
+  // }
 
   void _handleSearchEnd() {
     setState(() {

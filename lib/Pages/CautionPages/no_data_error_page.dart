@@ -99,11 +99,10 @@ class _NoDateErrorPageState extends State<NoDateErrorPage> {
                   ),
                 ],
               )),
-              body: Container(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
+              body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
@@ -123,7 +122,7 @@ class _NoDateErrorPageState extends State<NoDateErrorPage> {
                           decoration: GlobalTheme.waiterrAppBarBoxDecoration,
                           child: const NoDataError()),
                     )
-                  ])),
+                  ]),
               backgroundColor: GlobalTheme.tint,
             )
           ],

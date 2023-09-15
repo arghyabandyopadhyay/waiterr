@@ -45,7 +45,25 @@ class ProductReviews extends StatelessWidget {
                       context,
                       CupertinoPageRoute(
                           builder: (context1) => GetRatingAndReviews(
-                                item: item,
+                                item: item ??
+                                    MenuItemModel(
+                                      item: '',
+                                      stockGroup: '',
+                                      stockGroupId: '',
+                                      quantity: 0,
+                                      rateBeforeDiscount: 0,
+                                      discount: 0,
+                                      rate: 0,
+                                      taxClassID: '',
+                                      taxRate: 0,
+                                      isDiscountable: false,
+                                      masterFilter: '',
+                                      customizable: [],
+                                      itemID: '',
+                                      isVeg: true,
+                                      favourite: true,
+                                      isEdited: false,
+                                    ),
                               )));
                 })
           ],

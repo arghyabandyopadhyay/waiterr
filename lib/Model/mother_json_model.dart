@@ -2,7 +2,7 @@ class MotherJSONModel {
   String? masterfield;
   String? particulars;
   String? subParticulars;
-  var info;
+  dynamic info;
   String? subInfo;
   String? messageType;
   String? remarks;

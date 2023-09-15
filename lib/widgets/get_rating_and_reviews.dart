@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import '../Model/menu_item_model.dart';
 import '../theme.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class GetRatingAndReviews extends StatefulWidget {
-  final item;
-  const GetRatingAndReviews({Key? key, this.item}) : super(key: key);
+  final MenuItemModel item;
+  const GetRatingAndReviews({Key? key, required this.item}) : super(key: key);
   @override
-  _GetRatingAndReviewsState createState() =>
-      _GetRatingAndReviewsState(item);
+  State<GetRatingAndReviews> createState() => _GetRatingAndReviewsState();
 }
 
 class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
-  final item;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // This widget is the root of your application.
-  _GetRatingAndReviewsState(this.item);
-  final bool _showCross = false;
+  // final bool _showCross = false;
   //Overrides
   @override
   void initState() {
@@ -45,11 +43,10 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
               elevation: 0,
             ),
             backgroundColor: GlobalTheme.tint,
-            body: Container(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
+            body: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
                   // Container(
                   //   padding:EdgeInsets.symmetric(horizontal: 15),
                   //   child: NonFavouritesCard(
@@ -149,7 +146,7 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
                             children: [
                               Center(
                                 child: Text(
-                                  item.item,
+                                  widget.item.item,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -238,7 +235,7 @@ class _GetRatingAndReviewsState extends State<GetRatingAndReviews> {
                               )
                             ],
                           ))),
-                ])),
+                ]),
             bottomNavigationBar: BottomAppBar(
               color: Colors.transparent,
               elevation: 0.5,

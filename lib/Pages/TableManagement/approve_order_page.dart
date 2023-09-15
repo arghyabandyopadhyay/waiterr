@@ -326,7 +326,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                             return ConfirmationDialog(
                               headerText: "Approve Order",
                               question: "Are you sure, to approve the order?",
-                              onTap_Yes: () {
+                              onTapYes: () {
                                 {
                                   Navigator.pop(context);
                                   setState(() {
@@ -341,7 +341,8 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                                                 }),
                                                 setState(() {
                                                   _futureKot = fetchList();
-                                                })
+                                                }),
+                                                Navigator.of(context)..pop()
                                               }
                                             else if (value == 201)
                                               {
@@ -409,7 +410,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                                           });
                                 }
                               },
-                              onTap_No: () {
+                              onTapNo: () {
                                 Navigator.pop(context);
                               },
                             );
@@ -465,7 +466,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                       return ConfirmationDialog(
                         headerText: "Approve Order",
                         question: "Are you sure, to approve the order?",
-                        onTap_Yes: () {
+                        onTapYes: () {
                           {
                             Navigator.pop(context);
                             setState(() {
@@ -554,7 +555,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                                     });
                           }
                         },
-                        onTap_No: () {
+                        onTapNo: () {
                           Navigator.pop(context);
                         },
                       );
@@ -566,7 +567,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                       return ConfirmationDialog(
                         headerText: "Disapprove Order",
                         question: "Are you sure, to disapprove the order?",
-                        onTap_Yes: () {
+                        onTapYes: () {
                           {
                             Navigator.pop(context);
                             setState(() {
@@ -650,7 +651,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                                     });
                           }
                         },
-                        onTap_No: () {
+                        onTapNo: () {
                           Navigator.pop(context);
                         },
                       );

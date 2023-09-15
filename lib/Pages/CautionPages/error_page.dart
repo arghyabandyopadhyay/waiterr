@@ -154,3 +154,30 @@ class ErrorHasOccurred extends StatelessWidget {
     );
   }
 }
+
+class BuildContextNotMounted extends StatelessWidget {
+  const BuildContextNotMounted({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(
+          margin: const EdgeInsets.all(50),
+          padding: const EdgeInsets.symmetric(horizontal: 2),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset("assets/img/error_has_occured.jpg"),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "The Build Context Referred To Is Not Mounted Anymore!!",
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.displayMedium,
+              )
+            ],
+          )),
+    );
+  }
+}

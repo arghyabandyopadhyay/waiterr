@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:waiterr/theme.dart';
 
 class MenuManagerList extends StatefulWidget {
-  List<List<MenuItemModel>>? productList;
-  Function? header;
-  Function? buildItems;
-  MenuManagerList({Key? key, this.productList, this.buildItems, this.header})
+  final List<List<MenuItemModel>>? productList;
+  final Function? header;
+  final Function? buildItems;
+  const MenuManagerList(
+      {Key? key, this.productList, this.buildItems, this.header})
       : super(key: key);
   @override
   State<MenuManagerList> createState() => _MenuManagerListState();

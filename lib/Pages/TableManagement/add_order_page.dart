@@ -135,43 +135,40 @@ class _AddOrderState extends State<AddOrder> {
                     setState(() {
                       _isLoadingAvailability = false;
                     }),
-                    if (rList.isEmpty)
+                    if (_selectedSalesPoint == "TAKE-AWAY" || rList.isEmpty)
                       {
-                        if (kDebugMode)
-                          print(widget.isThroughQr
-                              ? UserDetail.userDetails.id
-                              : dataSource == "UserDetails"
-                                  ? customerId ?? ""
-                                  : ""),
-                        if (!FocusScope.of(context).hasPrimaryFocus)
+                        if (context.mounted &&
+                            !FocusScope.of(context).hasPrimaryFocus)
                           {FocusScope.of(context).unfocus()},
-                        Navigator.of(context).push(CupertinoPageRoute<void>(
-                            builder: (context) => MenuPageAll(
-                                  addOrderData: RunningOrderModel(
-                                      id: "",
-                                      amount: 0,
-                                      outletName: _selectedOutlet.outletName,
-                                      outletId: _selectedOutlet.id,
-                                      salePointName: salesPointNo.text,
-                                      name: name.text,
-                                      billPrinted: false,
-                                      mobileNo:
-                                          phoneNumber.text.replaceAll(" ", ""),
-                                      userId: widget.isThroughQr
-                                          ? UserDetail.userDetails.id
-                                          : dataSource == "UserDetails"
-                                              ? customerId ?? ""
-                                              : "",
-                                      pax: int.parse(noOfPerson.text),
-                                      salePointType: _selectedSalesPoint,
-                                      masterFilter:
-                                          name.text.replaceAll(" ", ""),
-                                      waiterMobileNumber:
-                                          UserDetail.userDetails.mobileNumber,
-                                      isTerminated: false,
-                                      waiterName: UserDetail.userDetails.name),
-                                  isWaiter: !widget.isThroughQr,
-                                )))
+                        if (context.mounted)
+                          Navigator.of(context).push(CupertinoPageRoute<void>(
+                              builder: (context) => MenuPageAll(
+                                    addOrderData: RunningOrderModel(
+                                        id: "",
+                                        amount: 0,
+                                        outletName: _selectedOutlet.outletName,
+                                        outletId: _selectedOutlet.id,
+                                        salePointName: salesPointNo.text,
+                                        name: name.text,
+                                        billPrinted: false,
+                                        mobileNo: phoneNumber.text
+                                            .replaceAll(" ", ""),
+                                        userId: widget.isThroughQr
+                                            ? UserDetail.userDetails.id
+                                            : dataSource == "UserDetails"
+                                                ? customerId ?? ""
+                                                : "",
+                                        pax: int.parse(noOfPerson.text),
+                                        salePointType: _selectedSalesPoint,
+                                        masterFilter:
+                                            name.text.replaceAll(" ", ""),
+                                        waiterMobileNumber:
+                                            UserDetail.userDetails.mobileNumber,
+                                        isTerminated: false,
+                                        waiterName:
+                                            UserDetail.userDetails.name),
+                                    isWaiter: !widget.isThroughQr,
+                                  )))
                       }
                     else
                       {

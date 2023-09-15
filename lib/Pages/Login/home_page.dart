@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   String result = "";
   Future<List<UserRestrauntAllocationModel>>? _futureVendorList;
   List<UserRestrauntAllocationModel>? vendorList;
-  bool? _isLoading, _isDataLoaded;
+  // bool? _isLoading, _isDataLoaded;
 
   Future _scanQR() async {
     String qrResult;
@@ -84,8 +84,8 @@ class _HomePageState extends State<HomePage> {
               vendorList.addAll(vendors),
             });
     setState(() {
-      _isLoading = false;
-      _isDataLoaded = true;
+      // _isLoading = false;
+      // _isDataLoaded = true;
     });
     return vendorList;
   }

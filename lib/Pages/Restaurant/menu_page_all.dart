@@ -41,7 +41,7 @@ class MenuPageAll extends StatefulWidget {
 class _MenuPageAllState extends State<MenuPageAll> {
   //Variables
   List<List<MenuItemModel>>? productList;
-  int _active_filter = 0;
+  int activeFilter = 0;
   Future<List<List<MenuItemModel>>?>? _futureproductList;
   List<FilterItemModel>? distinctStockGroup;
   List<MenuItemModel>? productListSearch;
@@ -708,7 +708,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                             return SelectionCardResponsive(
                                                 item:
                                                     distinctStockGroup![index],
-                                                active: index == _active_filter
+                                                active: index == activeFilter
                                                     ? true
                                                     : false,
                                                 onTap: () {
@@ -719,12 +719,11 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                                       setState(
                                                         () {
                                                           _isFilterOn = false;
-                                                          _active_filter =
-                                                              index;
+                                                          activeFilter = index;
                                                         },
                                                       );
                                                     }
-                                                  } else if (_active_filter ==
+                                                  } else if (activeFilter ==
                                                       index) {
                                                   } else if (distinctStockGroup![
                                                               index]
@@ -734,7 +733,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                                       () {
                                                         _isFilterOn = true;
                                                         filterList = favourites;
-                                                        _active_filter = index;
+                                                        activeFilter = index;
                                                       },
                                                     );
                                                   } else {
@@ -749,7 +748,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                                                         index]
                                                                     .stockGroup)
                                                             .toList();
-                                                        _active_filter = index;
+                                                        activeFilter = index;
                                                       },
                                                     );
                                                   }
@@ -867,7 +866,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                                           isExpanded: true,
                                                           header: _header(
                                                               distinctStockGroup![
-                                                                      _active_filter]
+                                                                      activeFilter]
                                                                   .stockGroup),
                                                           items: _buildItems(
                                                               context,

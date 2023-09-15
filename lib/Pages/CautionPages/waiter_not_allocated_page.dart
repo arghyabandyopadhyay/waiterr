@@ -14,7 +14,7 @@ import 'package:waiterr/Model/drawer_action_model.dart';
 class WaiterNotAllocatedPage extends StatefulWidget {
   const WaiterNotAllocatedPage({Key? key}) : super(key: key);
   @override
-  _WaiterNotAllocatedPageState createState() => _WaiterNotAllocatedPageState();
+  State<WaiterNotAllocatedPage> createState() => _WaiterNotAllocatedPageState();
 }
 
 class _WaiterNotAllocatedPageState extends State<WaiterNotAllocatedPage> {
@@ -101,11 +101,10 @@ class _WaiterNotAllocatedPageState extends State<WaiterNotAllocatedPage> {
                     ),
                   ],
                 )),
-                body: Container(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
+                body: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
@@ -142,7 +141,7 @@ class _WaiterNotAllocatedPageState extends State<WaiterNotAllocatedPage> {
                           ),
                         ),
                       )
-                    ])),
+                    ]),
                 backgroundColor: GlobalTheme.tint,
               )
             ],

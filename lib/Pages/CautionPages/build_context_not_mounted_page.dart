@@ -12,14 +12,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'error_page.dart';
 import 'package:waiterr/Model/drawer_action_model.dart';
 
-class ErrorPageFiveHundredPage extends StatefulWidget {
-  const ErrorPageFiveHundredPage({Key? key}) : super(key: key);
+class BuildContextNotMountedPage extends StatefulWidget {
+  const BuildContextNotMountedPage({Key? key}) : super(key: key);
   @override
-  State<ErrorPageFiveHundredPage> createState() =>
-      _ErrorPageFiveHundredPageState();
+  State<BuildContextNotMountedPage> createState() =>
+      _BuildContextNotMountedPageState();
 }
 
-class _ErrorPageFiveHundredPageState extends State<ErrorPageFiveHundredPage> {
+class _BuildContextNotMountedPageState
+    extends State<BuildContextNotMountedPage> {
   _deleteUserDetails() async {
     final prefs = await SharedPreferences.getInstance();
     const key = 'userData';
@@ -39,7 +40,6 @@ class _ErrorPageFiveHundredPageState extends State<ErrorPageFiveHundredPage> {
             ),
             Scaffold(
               appBar: AppBar(
-                backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: <Widget>[
                   IconButton(
@@ -65,7 +65,7 @@ class _ErrorPageFiveHundredPageState extends State<ErrorPageFiveHundredPage> {
               ),
               drawer: Drawer(
                   child: DrawerContent(
-                alternativeMno: "Error 500!!",
+                alternativeMno: "Oops!! Error 404",
                 alternativeName: "waiterr",
                 drawerItems: [
                   DrawerActionModel(
@@ -101,6 +101,7 @@ class _ErrorPageFiveHundredPageState extends State<ErrorPageFiveHundredPage> {
                   ),
                 ],
               )),
+              backgroundColor: GlobalTheme.tint,
               body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -119,13 +120,13 @@ class _ErrorPageFiveHundredPageState extends State<ErrorPageFiveHundredPage> {
                     ),
                     Flexible(
                       child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          padding: const EdgeInsets.only(top: 10),
-                          decoration: GlobalTheme.waiterrAppBarBoxDecoration,
-                          child: const ErrorPageFiveHundred()),
+                        height: MediaQuery.of(context).size.height,
+                        padding: const EdgeInsets.only(top: 10),
+                        decoration: GlobalTheme.waiterrAppBarBoxDecoration,
+                        child: const BuildContextNotMounted(),
+                      ),
                     )
                   ]),
-              backgroundColor: GlobalTheme.tint,
             )
           ],
         ),
