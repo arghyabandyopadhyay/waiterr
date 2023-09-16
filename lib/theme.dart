@@ -99,6 +99,52 @@ class GlobalTheme {
   Color appBarIconColorDark = const Color.fromARGB(255, 20, 16, 54);
 }
 
+class GlobalTextStyles {
+  static TextStyle unlockYourDinelineTextStyle = TextStyle(
+      fontSize: 25,
+      fontWeight: FontWeight.w600,
+      color: GlobalTheme.primaryGradient2[1]);
+  static TextStyle signInNowTextStyle = TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w600,
+      color: GlobalTheme.primaryGradient2[1]);
+  static TextStyle loginHeaderTextStyle = TextStyle(
+      fontSize: 40,
+      fontWeight: FontWeight.w700,
+      color: GlobalTheme.primaryGradient2[1]);
+  static TextStyle loginHeaderTextStyleMedium = TextStyle(
+      fontSize: 30,
+      fontWeight: FontWeight.w700,
+      color: GlobalTheme.primaryGradient2[1]);
+
+  static TextStyle otpHeaderTextStyle = TextStyle(
+      fontSize: 25,
+      fontWeight: FontWeight.w700,
+      color: GlobalTheme.primaryGradient2[1]);
+  static TextStyle otpHeaderTextStyleMedium = TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+      color: GlobalTheme.primaryGradient2[0]);
+
+  static TextStyle waiterrTextStyleLarge = TextStyle(
+      fontSize: 40.0,
+      fontWeight: FontWeight.w900,
+      fontFamily: 'Dancing',
+      color: GlobalTheme.primaryGradient2[1]);
+
+  static TextStyle waiterrTextStyleAppBar = TextStyle(
+      fontSize: 40.0,
+      fontWeight: FontWeight.w900,
+      fontFamily: 'Dancing',
+      color: GlobalTheme.primaryGradient2[2]);
+
+  static TextStyle waiterrTextStyle = TextStyle(
+      fontSize: 20.0,
+      fontWeight: FontWeight.w900,
+      fontFamily: 'Dancing',
+      color: GlobalTheme.primaryGradient2[1]);
+}
+
 class WaiterrThemeDatas {
   static GlobalTheme globalTheme = GlobalTheme();
   //Theme data variable [NOT TO BE EDITED]

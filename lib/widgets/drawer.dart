@@ -52,10 +52,7 @@ class DrawerContent extends StatelessWidget {
                               UserDetail.userDetails.name != ""
                           ? UserDetail.userDetails.name!.split(" ")[0]
                           : alternativeName!,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        color: GlobalTheme.drawerDetailText,
-                      ),
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                     Text(
                       UserDetail.userDetails.mobileNumber != ""

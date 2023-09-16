@@ -274,7 +274,7 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
                         widget.isForAdminManagement ? "Admins" : "Waiters",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.displayLarge,
+                        style: GlobalTextStyles.waiterrTextStyleAppBar,
                       ),
                     ),
                     const SizedBox(

@@ -515,7 +515,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                         UserClientAllocationData.clientName!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.displayLarge,
+                        style: GlobalTextStyles.waiterrTextStyleAppBar,
                       ),
                     ),
                     const SizedBox(

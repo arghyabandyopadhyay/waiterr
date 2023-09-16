@@ -145,7 +145,7 @@ class _AddOutletPageState extends State<AddOutletPage> {
                     child: Text(
                       "Add Outlet",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                   ),
                   Flexible(

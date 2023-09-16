@@ -43,7 +43,7 @@ class _AboutPageState extends State<AboutPage> {
                       "About Us",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                   ),
                   const SizedBox(

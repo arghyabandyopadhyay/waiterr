@@ -155,7 +155,8 @@ class _AddOrderState extends State<AddOrder> {
                                             .replaceAll(" ", ""),
                                         userId: widget.isThroughQr
                                             ? UserDetail.userDetails.id
-                                            : dataSource == "UserDetails"
+                                            : dataSource == "UserDetails" ||
+                                                    dataSource == "CustomerBank"
                                                 ? customerId ?? ""
                                                 : "",
                                         pax: int.parse(noOfPerson.text),
@@ -389,7 +390,7 @@ class _AddOrderState extends State<AddOrder> {
                     child: Text(
                       "Add Order",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                   ),
                   Flexible(

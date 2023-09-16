@@ -52,6 +52,24 @@ flutter:
   # Enable generation of localized Strings from arb files.
   generate: true
 
+  # Fonts
+  fonts:
+    - family: Lobster
+      fonts:
+        - asset: assets/fonts/Lobster-Regular.ttf
+
+    - family: Dancing
+      fonts:
+        - asset: assets/fonts/DancingScript-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/DancingScript-Medium.ttf
+          weight: 600
+        - asset: assets/fonts/DancingScript-SemiBold.ttf
+          weight: 700
+        - asset: assets/fonts/DancingScript-Bold.ttf
+          weight: 800
+
+
   assets:
     # Add assets from the images directory to the application.
     - assets/images/

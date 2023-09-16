@@ -308,7 +308,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                         "Stock Groups",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.displayLarge,
+                        style: GlobalTextStyles.waiterrTextStyleAppBar,
                       ),
                     ),
                     const SizedBox(

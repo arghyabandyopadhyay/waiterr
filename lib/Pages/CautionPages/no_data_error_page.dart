@@ -109,7 +109,7 @@ class _NoDateErrorPageState extends State<NoDateErrorPage> {
                         "Waiterr",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.displayLarge,
+                        style: GlobalTextStyles.waiterrTextStyleAppBar,
                       ),
                     ),
                     const SizedBox(

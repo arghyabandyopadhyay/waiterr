@@ -33,8 +33,12 @@ class _KOTPageState extends State<KOTPage> {
   Future<List<List<KOTModel>>> fetchList() async {
     List<List<KOTModel>> results = [];
     List<String?> distinctKotNumbers;
-    await postForSalesPointHistory(widget.item.outletId,
-            widget.item.salePointType, widget.item.salePointName, null)
+    await postForSalesPointHistory(
+            widget.item.outletId,
+            widget.item.salePointType,
+            widget.item.salePointName,
+            null,
+            widget.item.billPrinted)
         .then((value) => {
               distinctKotNumbers = getDistinctKotNumber(value),
               for (String? kotNumber in distinctKotNumbers)
@@ -133,7 +137,7 @@ class _KOTPageState extends State<KOTPage> {
                           ? "Running Orders"
                           : "Table-${widget.item.salePointName!}",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                   ),
                   const SizedBox(

@@ -191,7 +191,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                         "Tax Classes",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.displayLarge,
+                        style: GlobalTextStyles.waiterrTextStyleAppBar,
                       ),
                     ),
                     const SizedBox(

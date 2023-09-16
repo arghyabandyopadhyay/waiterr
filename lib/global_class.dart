@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waiterr/Model/user_details_model.dart';
+import 'package:waiterr/theme.dart';
 import 'Model/outlet_configuration_model.dart';
 import 'Model/user_restraunt_allocation_model.dart';
 import 'Model/filter_item_model.dart';
@@ -110,10 +111,10 @@ class AppBarVariables {
                 width: 25,
               )),
           Text(
-            "Waiterr",
+            " Waiterr",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.displayLarge,
+            style: GlobalTextStyles.waiterrTextStyleAppBar,
           ),
         ],
       );

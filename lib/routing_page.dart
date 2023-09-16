@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
-import 'package:waiterr/Pages/Login/login_page.dart';
 import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Model/qr_json_model.dart';
 import 'package:waiterr/Model/user_restraunt_allocation_model.dart';
@@ -21,6 +20,7 @@ import 'package:waiterr/stores/login_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'Pages/CautionPages/build_context_not_mounted_page.dart';
+import 'Pages/Login/landing_page.dart';
 import 'theme.dart';
 import 'Pages/CautionPages/error_page.dart';
 
@@ -146,7 +146,7 @@ class _RoutingPageState extends State<RoutingPage> {
                 });
       } else {
         // _saveOfflineLogin(100);
-        widget1 = const LoginPage();
+        widget1 = const LandingPage();
       }
     });
     return widget1;

@@ -293,7 +293,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
                     child: Text(
                       widget.isEdit ? "Edit Menu" : "Add Menu",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                   ),
                   Flexible(

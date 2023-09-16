@@ -547,6 +547,8 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                   .addOrderData.salePointType,
                                               waiterId:
                                                   UserDetail.userDetails.id,
+                                              customerId:
+                                                  widget.addOrderData.userId,
                                               outletName: widget
                                                   .addOrderData.outletName,
                                               customerName:

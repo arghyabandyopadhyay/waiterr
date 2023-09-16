@@ -453,7 +453,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
     response = await post(
       Uri.parse(isWaiter
           ? UserClientAllocationData.dataExchangeURL!
-          : "http://127.0.0.1:3000/api/master/"),
+          : "${UserDetail.currentUrl}master/"),
       headers: UserDetail.getHeader(),
       body: body,
     );
@@ -594,15 +594,21 @@ Future<String> postForTakeAway(String? outletId) async {
 }
 
 //ready
-Future<List<KOTModel>> postForSalesPointHistory(String? outletId,
-    String? salePointType, String? salePointName, String? approvalType) async {
+Future<List<KOTModel>> postForSalesPointHistory(
+    String? outletId,
+    String? salePointType,
+    String? salePointName,
+    String? approvalType,
+    bool? isTerminated) async {
   RequestJson requestJson = RequestJson(
       requestType: "Sale Point History",
       parameterList: (salePointName != null && salePointType != null)
           ? [
               Parameter(pKey: "SalePointType", pValue: salePointType),
               Parameter(pKey: "SalePointName", pValue: salePointName),
-              Parameter(pKey: "OutletId", pValue: outletId)
+              Parameter(pKey: "OutletId", pValue: outletId),
+              Parameter(
+                  pKey: 'IsTerminated', pValue: (isTerminated ?? false) ? 1 : 0)
             ]
           : [Parameter(pKey: "ApprovalType", pValue: approvalType)]);
   UniversalJson universalJson = UniversalJson(

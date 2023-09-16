@@ -190,7 +190,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                     child: Text(
                       "${widget.isEdit ? "Edit" : "Add"} Waiter",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                   ),
                   Flexible(

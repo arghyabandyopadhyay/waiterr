@@ -17,6 +17,7 @@ class SelectionCardResponsive extends StatelessWidget {
       onTap: onTap,
       child: Container(
           width: 70,
+          height: 70,
           margin: const EdgeInsets.only(top: 2, right: 2),
           alignment: Alignment.center,
           child: Column(

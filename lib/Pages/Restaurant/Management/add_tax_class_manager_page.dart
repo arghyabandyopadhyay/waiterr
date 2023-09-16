@@ -125,7 +125,7 @@ class _AddTaxClassPageState extends State<AddTaxClassPage> {
                     child: Text(
                       "Add Tax Class",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                   ),
                   Flexible(

@@ -153,9 +153,9 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
-                      "${widget.isEdit ? "Edit" : "Add"} Waiter",
+                      "${widget.isEdit ? "Edit" : "Add"} Stock Group",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
                   ),
                   Flexible(

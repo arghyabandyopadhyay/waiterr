@@ -5,6 +5,7 @@ class PlaceOrderJson {
   String? salePointName;
   String? waiterId;
   String? customerName;
+  String? customerId;
   String? mobileNumber;
   int? pAX;
   String? outletId;
@@ -19,6 +20,7 @@ class PlaceOrderJson {
       this.salePointName,
       this.waiterId,
       this.customerName,
+      this.customerId,
       this.mobileNumber,
       this.pAX,
       this.outletId,
@@ -37,6 +39,7 @@ class PlaceOrderJson {
       'SalePointName': salePointName,
       'WaiterId': waiterId,
       'CustomerName': customerName,
+      'CustomerId': customerId,
       'MobileNumber': mobileNumber,
       'PAX': pAX,
       'OutletId': outletId,
@@ -44,7 +47,7 @@ class PlaceOrderJson {
       'Narration': narration,
       'CreatedOn': createdOn,
       'menuList': menuList,
-      'AYSUserRole': userRole,
+      'WaiterrUserRole': userRole,
     };
   }
 }

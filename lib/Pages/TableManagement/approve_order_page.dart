@@ -33,7 +33,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
   Future<List<List<KOTModel>>> fetchList() async {
     List<List<KOTModel>> results = [];
     List<String?> distinctKotNumbers;
-    await postForSalesPointHistory(null, null, null, widget.approvalType)
+    await postForSalesPointHistory(null, null, null, widget.approvalType, null)
         .then((value) => {
               distinctKotNumbers = getDistinctKotNumber(value),
               for (String? kotNumber in distinctKotNumbers)
@@ -135,10 +135,12 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text("Approvals",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.displayLarge),
+                        child: Text(
+                          "Approvals",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GlobalTextStyles.waiterrTextStyleAppBar,
+                        ),
                       ),
                       const SizedBox(
                         height: 10,
