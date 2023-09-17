@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:waiterr/Pages/TableManagement/client_management_page.dart';
 import 'package:waiterr/global_class.dart';
 import 'package:waiterr/Model/drawer_action_model.dart';
 import 'package:waiterr/Model/qr_json_model.dart';
@@ -292,8 +293,14 @@ class _HomePageState extends State<HomePage> {
                                                           CupertinoPageRoute<
                                                               void>(
                                                         title: "My Orders",
-                                                        builder: (context) =>
-                                                            const TableManagementPage(),
+                                                        builder: (context) => (UserClientAllocationData
+                                                                        .ucaRoleId ==
+                                                                    1 ||
+                                                                UserClientAllocationData
+                                                                        .ucaRoleId ==
+                                                                    2)
+                                                            ? const TableManagementPage()
+                                                            : const ClientManagementPage(),
                                                       ));
                                                     });
                                               },

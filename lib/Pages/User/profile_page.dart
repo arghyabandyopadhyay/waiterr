@@ -3,11 +3,10 @@ import 'dart:io';
 
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Modules/universal_module.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:waiterr/widgets/profile_image_widget.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
 import 'package:flutter/foundation.dart';
@@ -226,70 +225,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width *
                                           0.3,
-                                      child: CircleAvatar(
-                                          radius: 50,
-                                          backgroundColor: Colors.transparent,
-                                          child: ClipOval(
-                                            child: UserDetail.userDetails
-                                                            .profileUrl !=
-                                                        null &&
-                                                    UserDetail.userDetails
-                                                            .profileUrl !=
-                                                        ""
-                                                ? CachedNetworkImage(
-                                                    imageUrl: UserDetail
-                                                        .userDetails
-                                                        .profileUrl!,
-                                                    imageBuilder: (context,
-                                                            imageProvider) =>
-                                                        Container(
-                                                      height: 100,
-                                                      width: 100,
-                                                      decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                          image: imageProvider,
-                                                          fit: BoxFit.cover,
-                                                          //colorFilter:ColorFilter.mode(Colors.red, BlendMode.colorBurn)
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    placeholder: (context,
-                                                            url) =>
-                                                        SizedBox(
-                                                            width:
-                                                                double.infinity,
-                                                            child: Center(
-                                                              child: Shimmer
-                                                                  .fromColors(
-                                                                baseColor: Colors
-                                                                    .grey[300]!
-                                                                    .withOpacity(
-                                                                        0.3),
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .white,
-                                                                enabled: true,
-                                                                child:
-                                                                    Container(
-                                                                  width: 100,
-                                                                  height: 100,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                    errorWidget: (context, url,
-                                                            error) =>
-                                                        const Icon(Icons.error),
-                                                  )
-                                                : Image(
-                                                    height: 100,
-                                                    width: 100,
-                                                    fit: BoxFit.fitHeight,
-                                                    image: Image.asset(
-                                                      'assets/img/profile.png',
-                                                    ).image),
-                                          )),
+                                      child: const ProfileImageWidget(
+                                        radius: 50,
+                                        size: Size(100, 100),
+                                      ),
                                     ),
                                     // Badge(
                                     //     position: BadgePosition.bottomEnd(bottom: 2, end: 6),

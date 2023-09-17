@@ -3,8 +3,8 @@ import 'package:waiterr/Model/running_order_model.dart';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Pages/CautionPages/error_page.dart';
 import 'package:waiterr/Pages/CautionPages/no_internet_page.dart';
-import 'package:waiterr/Pages/Restaurant/Management/menu_manager_page.dart';
-import 'package:waiterr/Pages/Restaurant/Management/outlet_manager_page.dart';
+// import 'package:waiterr/Pages/Restaurant/Management/menu_manager_page.dart';
+// import 'package:waiterr/Pages/Restaurant/Management/outlet_manager_page.dart';
 import 'package:waiterr/Pages/TableManagement/approve_order_page.dart';
 import 'package:waiterr/Pages/User/about_page.dart';
 import 'package:waiterr/Pages/User/profile_page.dart';
@@ -22,9 +22,9 @@ import '../../global_class.dart';
 import '../../theme.dart';
 import '../../widgets/option_modal_bottom_sheet.dart';
 // import '../Restaurant/Management/offer_manager_page.dart';
-import '../Restaurant/Management/stock_group_manager_page.dart';
-import '../Restaurant/Management/tax_class_manager_page.dart';
-import '../Restaurant/Management/employee_manager_page.dart';
+// import '../Restaurant/Management/stock_group_manager_page.dart';
+// import '../Restaurant/Management/tax_class_manager_page.dart';
+// import '../Restaurant/Management/employee_manager_page.dart';
 import 'kot_page.dart';
 import 'add_order_page.dart';
 
@@ -190,280 +190,407 @@ class _MyTableHomePage extends State<TableManagementPage> {
                           }
                         });
                       }),
-                  PopupMenuButton<ModalOptionModel>(
-                    itemBuilder: (BuildContext popupContext) {
-                      return [
-                        ModalOptionModel(
-                            particulars: "Approvals",
-                            icon: Icons.sort,
-                            onTap: () {
-                              Navigator.pop(popupContext);
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: (BuildContext alertDialogContext) {
-                                    return OptionModalBottomSheet(
-                                        appBarText: "Approvals",
-                                        appBarIcon: Icons.sort,
-                                        list: [
-                                          ModalOptionModel(
-                                            icon: Icons.approval,
-                                            iconColor: Colors.amber.shade800,
-                                            particulars: "Approve orders",
-                                            onTap: () async {
-                                              Navigator.pop(alertDialogContext);
-                                              Connectivity connectivity =
-                                                  Connectivity();
-                                              await connectivity
-                                                  .checkConnectivity()
-                                                  .then((value) => {
-                                                        if (value !=
-                                                            ConnectivityResult
-                                                                .none)
-                                                          {
-                                                            Navigator.of(context).push(PageRouteBuilder(
+                  IconButton(
+                      icon: const Icon(Icons.checklist_outlined),
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext alertDialogContext) {
+                              return OptionModalBottomSheet(
+                                  appBarText: "Order Manager",
+                                  appBarIcon: Icons.fastfood_outlined,
+                                  list: [
+                                    ModalOptionModel(
+                                      icon: Icons.approval,
+                                      iconColor: Colors.amber.shade800,
+                                      particulars: "Approve orders",
+                                      onTap: () async {
+                                        Navigator.pop(alertDialogContext);
+                                        Connectivity connectivity =
+                                            Connectivity();
+                                        await connectivity
+                                            .checkConnectivity()
+                                            .then((value) => {
+                                                  if (value !=
+                                                      ConnectivityResult.none)
+                                                    {
+                                                      Navigator.of(context).push(PageRouteBuilder(
+                                                          pageBuilder: (context,
+                                                                  animation1,
+                                                                  animation2) =>
+                                                              const ApproveOrdersPage(
+                                                                  approvalType:
+                                                                      "OrderApproved")))
+                                                    }
+                                                  else
+                                                    {
+                                                      Navigator.of(context).pushAndRemoveUntil(
+                                                          PageRouteBuilder(
+                                                              pageBuilder: (context,
+                                                                      animation1,
+                                                                      animation2) =>
+                                                                  const NoInternetPage()),
+                                                          (route) => false)
+                                                    }
+                                                });
+                                      },
+                                    ),
+                                    if (UserClientAllocationData.ucaRoleId == 2 ||
+                                        UserClientAllocationData.ucaRoleId ==
+                                            3 ||
+                                        UserClientAllocationData.ucaRoleId == 4)
+                                      ModalOptionModel(
+                                        icon: Icons.fastfood,
+                                        iconColor: Colors.blue.shade800,
+                                        particulars: "Order Prepared",
+                                        onTap: () async {
+                                          Navigator.pop(alertDialogContext);
+                                          Connectivity connectivity =
+                                              Connectivity();
+                                          await connectivity
+                                              .checkConnectivity()
+                                              .then((value) => {
+                                                    if (value !=
+                                                        ConnectivityResult.none)
+                                                      {
+                                                        Navigator.of(context).push(PageRouteBuilder(
+                                                            pageBuilder: (context,
+                                                                    animation1,
+                                                                    animation2) =>
+                                                                const ApproveOrdersPage(
+                                                                    approvalType:
+                                                                        "OrderPrepared")))
+                                                      }
+                                                    else
+                                                      {
+                                                        Navigator.of(context).pushAndRemoveUntil(
+                                                            PageRouteBuilder(
+                                                                pageBuilder: (context,
+                                                                        animation1,
+                                                                        animation2) =>
+                                                                    const NoInternetPage()),
+                                                            (route) => false)
+                                                      }
+                                                  });
+                                        },
+                                      ),
+                                    if (UserClientAllocationData.ucaRoleId ==
+                                            3 ||
+                                        UserClientAllocationData.ucaRoleId == 4)
+                                      ModalOptionModel(
+                                        icon: Icons.done_all,
+                                        iconColor: Colors.green.shade800,
+                                        particulars: "Order delivered",
+                                        onTap: () async {
+                                          Navigator.pop(alertDialogContext);
+                                          Connectivity connectivity =
+                                              Connectivity();
+                                          await connectivity
+                                              .checkConnectivity()
+                                              .then((value) => {
+                                                    if (value !=
+                                                        ConnectivityResult.none)
+                                                      {
+                                                        Navigator.of(context).push(
+                                                            PageRouteBuilder(
                                                                 pageBuilder: (context,
                                                                         animation1,
                                                                         animation2) =>
                                                                     const ApproveOrdersPage(
-                                                                        approvalType:
-                                                                            "OrderApproved")))
-                                                          }
-                                                        else
-                                                          {
-                                                            Navigator.of(context).pushAndRemoveUntil(
-                                                                PageRouteBuilder(
-                                                                    pageBuilder: (context,
-                                                                            animation1,
-                                                                            animation2) =>
-                                                                        const NoInternetPage()),
-                                                                (route) =>
-                                                                    false)
-                                                          }
-                                                      });
-                                            },
-                                          ),
-                                          if (UserClientAllocationData.ucaRoleId == 2 ||
-                                              UserClientAllocationData
-                                                      .ucaRoleId ==
-                                                  3 ||
-                                              UserClientAllocationData
-                                                      .ucaRoleId ==
-                                                  4)
-                                            ModalOptionModel(
-                                              icon: Icons.fastfood,
-                                              iconColor: Colors.blue.shade800,
-                                              particulars: "Order Prepared",
-                                              onTap: () async {
-                                                Navigator.pop(
-                                                    alertDialogContext);
-                                                Connectivity connectivity =
-                                                    Connectivity();
-                                                await connectivity
-                                                    .checkConnectivity()
-                                                    .then((value) => {
-                                                          if (value !=
-                                                              ConnectivityResult
-                                                                  .none)
-                                                            {
-                                                              Navigator.of(context).push(PageRouteBuilder(
-                                                                  pageBuilder: (context,
-                                                                          animation1,
-                                                                          animation2) =>
-                                                                      const ApproveOrdersPage(
-                                                                          approvalType:
-                                                                              "OrderPrepared")))
-                                                            }
-                                                          else
-                                                            {
-                                                              Navigator.of(context).pushAndRemoveUntil(
-                                                                  PageRouteBuilder(
-                                                                      pageBuilder: (context,
-                                                                              animation1,
-                                                                              animation2) =>
-                                                                          const NoInternetPage()),
-                                                                  (route) =>
-                                                                      false)
-                                                            }
-                                                        });
-                                              },
-                                            ),
-                                          if (UserClientAllocationData
-                                                      .ucaRoleId ==
-                                                  3 ||
-                                              UserClientAllocationData
-                                                      .ucaRoleId ==
-                                                  4)
-                                            ModalOptionModel(
-                                              icon: Icons.done_all,
-                                              iconColor: Colors.green.shade800,
-                                              particulars: "Order delivered",
-                                              onTap: () async {
-                                                Navigator.pop(
-                                                    alertDialogContext);
-                                                Connectivity connectivity =
-                                                    Connectivity();
-                                                await connectivity
-                                                    .checkConnectivity()
-                                                    .then((value) => {
-                                                          if (value !=
-                                                              ConnectivityResult
-                                                                  .none)
-                                                            {
-                                                              Navigator.of(context).push(
-                                                                  PageRouteBuilder(
-                                                                      pageBuilder: (context,
-                                                                              animation1,
-                                                                              animation2) =>
-                                                                          const ApproveOrdersPage(
-                                                                            approvalType:
-                                                                                "OrderProcessed",
-                                                                          )))
-                                                            }
-                                                          else
-                                                            {
-                                                              Navigator.of(context).pushAndRemoveUntil(
-                                                                  PageRouteBuilder(
-                                                                      pageBuilder: (context,
-                                                                              animation1,
-                                                                              animation2) =>
-                                                                          const NoInternetPage()),
-                                                                  (route) =>
-                                                                      false)
-                                                            }
-                                                        });
-                                              },
-                                            ),
-                                        ]);
-                                  });
-                            }),
-                        //Next update
-                        // if (UserClientAllocationData.ucaRoleId == 3 ||
-                        //     UserClientAllocationData.ucaRoleId == 4)
-                        //   ModalOptionModel(
-                        //       particulars: "Offers Manager",
-                        //       onTap: () async {
-                        //         Navigator.pop(context);
-                        //         Navigator.of(context).push(PageRouteBuilder(
-                        //             pageBuilder:
-                        //                 (context, animation1, animation2) =>
-                        //                     const OfferManagerPage()));
-                        //       },
-                        //       icon: Icons.discount_outlined),
-                        if (UserClientAllocationData.ucaRoleId == 3 ||
-                            UserClientAllocationData.ucaRoleId == 4)
-                          ModalOptionModel(
-                              particulars: "Employee Manager",
-                              onTap: () async {
-                                Navigator.pop(context);
-                                Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            const EmployeeManagerPage(
-                                                isForAdminManagement: false)));
-                              },
-                              icon: Icons.group_outlined),
-                        if (UserClientAllocationData.ucaRoleId == 3 ||
-                            UserClientAllocationData.ucaRoleId == 4)
-                          ModalOptionModel(
-                              particulars: "Menu Manager",
-                              onTap: () async {
-                                Navigator.pop(context);
-                                Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            const MenuManagerPage()));
-                              },
-                              icon: Icons.restaurant_menu_outlined),
-                        if (UserClientAllocationData.ucaRoleId == 3 ||
-                            UserClientAllocationData.ucaRoleId == 4)
-                          ModalOptionModel(
-                              particulars: "Stock Group Manager",
-                              onTap: () async {
-                                Navigator.pop(context);
-                                Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            const StockGroupManagerPage()));
-                              },
-                              icon: Icons.mediation_rounded),
-                        if (UserClientAllocationData.ucaRoleId == 3 ||
-                            UserClientAllocationData.ucaRoleId == 4)
-                          ModalOptionModel(
-                              particulars: "Tax Class Manager",
-                              onTap: () async {
-                                Navigator.pop(context);
-                                Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            const TaxClassManagerPage()));
-                              },
-                              icon: Icons.pending_actions_outlined),
-                        if (UserClientAllocationData.ucaRoleId == 4)
-                          ModalOptionModel(
-                              particulars: "Outlet Manager",
-                              onTap: () async {
-                                Navigator.pop(context);
-                                Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            const OutletManagerPage()));
-                              },
-                              icon: Icons.food_bank_outlined),
-                        //role id 4 is for owner
-                        if (UserClientAllocationData.ucaRoleId == 4)
-                          ModalOptionModel(
-                              particulars: "Admin Manager",
-                              onTap: () async {
-                                Navigator.pop(context);
-                                Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            const EmployeeManagerPage(
-                                                isForAdminManagement: true)));
-                              },
-                              icon: Icons.admin_panel_settings_outlined),
-                        // ModalOptionModel(
-                        //     particulars: "Refresh",
-                        //     onTap: () async {
-                        //       Navigator.pop(context);
-                        //       Connectivity connectivity = Connectivity();
-                        //       await connectivity
-                        //           .checkConnectivity()
-                        //           .then((value) => {
-                        //                 if (value != ConnectivityResult.none)
-                        //                   {
-                        //                     setState(() {
-                        //                       _isLoading = true;
-                        //                       _isDataLoaded = false;
-                        //                     }),
-                        //                     _futureitems = fetchList()
-                        //                   }
-                        //                 else
-                        //                   {
-                        //                     Navigator.of(context)
-                        //                         .pushAndRemoveUntil(
-                        //                             PageRouteBuilder(
-                        //                                 pageBuilder: (context,
-                        //                                         animation1,
-                        //                                         animation2) =>
-                        //                                     const NoInternetPage()),
-                        //                             (route) => false)
-                        //                   }
-                        //               });
-                        //     },
-                        //     icon: Icons.refresh)
-                      ].map((ModalOptionModel choice) {
-                        return PopupMenuItem<ModalOptionModel>(
-                          value: choice,
-                          child: ListTile(
-                            title: Text(choice.particulars),
-                            leading: Icon(choice.icon, color: choice.iconColor),
-                            onTap: choice.onTap,
-                          ),
-                        );
-                      }).toList();
-                    },
-                  ),
+                                                                      approvalType:
+                                                                          "OrderProcessed",
+                                                                    )))
+                                                      }
+                                                    else
+                                                      {
+                                                        Navigator.of(context).pushAndRemoveUntil(
+                                                            PageRouteBuilder(
+                                                                pageBuilder: (context,
+                                                                        animation1,
+                                                                        animation2) =>
+                                                                    const NoInternetPage()),
+                                                            (route) => false)
+                                                      }
+                                                  });
+                                        },
+                                      ),
+                                  ]);
+                            });
+                      }),
+                  // PopupMenuButton<ModalOptionModel>(
+                  //   itemBuilder: (BuildContext popupContext) {
+                  //     return [
+                  //       ModalOptionModel(
+                  //           particulars: "Order Manager",
+                  //           icon: Icons.fastfood_outlined,
+                  //           onTap: () {
+                  //             Navigator.pop(popupContext);
+                  // showModalBottomSheet(
+                  //     context: context,
+                  //     builder: (BuildContext alertDialogContext) {
+                  //       return OptionModalBottomSheet(
+                  //           appBarText: "Order Manager",
+                  //           appBarIcon: Icons.fastfood_outlined,
+                  //           list: [
+                  //             ModalOptionModel(
+                  //               icon: Icons.approval,
+                  //               iconColor: Colors.amber.shade800,
+                  //               particulars: "Approve orders",
+                  //               onTap: () async {
+                  //                 Navigator.pop(alertDialogContext);
+                  //                 Connectivity connectivity =
+                  //                     Connectivity();
+                  //                 await connectivity
+                  //                     .checkConnectivity()
+                  //                     .then((value) => {
+                  //                           if (value !=
+                  //                               ConnectivityResult
+                  //                                   .none)
+                  //                             {
+                  //                               Navigator.of(context).push(PageRouteBuilder(
+                  //                                   pageBuilder: (context,
+                  //                                           animation1,
+                  //                                           animation2) =>
+                  //                                       const ApproveOrdersPage(
+                  //                                           approvalType:
+                  //                                               "OrderApproved")))
+                  //                             }
+                  //                           else
+                  //                             {
+                  //                               Navigator.of(context).pushAndRemoveUntil(
+                  //                                   PageRouteBuilder(
+                  //                                       pageBuilder: (context,
+                  //                                               animation1,
+                  //                                               animation2) =>
+                  //                                           const NoInternetPage()),
+                  //                                   (route) =>
+                  //                                       false)
+                  //                             }
+                  //                         });
+                  //               },
+                  //             ),
+                  //             if (UserClientAllocationData.ucaRoleId == 2 ||
+                  //                 UserClientAllocationData
+                  //                         .ucaRoleId ==
+                  //                     3 ||
+                  //                 UserClientAllocationData
+                  //                         .ucaRoleId ==
+                  //                     4)
+                  //               ModalOptionModel(
+                  //                 icon: Icons.fastfood,
+                  //                 iconColor: Colors.blue.shade800,
+                  //                 particulars: "Order Prepared",
+                  //                 onTap: () async {
+                  //                   Navigator.pop(
+                  //                       alertDialogContext);
+                  //                   Connectivity connectivity =
+                  //                       Connectivity();
+                  //                   await connectivity
+                  //                       .checkConnectivity()
+                  //                       .then((value) => {
+                  //                             if (value !=
+                  //                                 ConnectivityResult
+                  //                                     .none)
+                  //                               {
+                  //                                 Navigator.of(context).push(PageRouteBuilder(
+                  //                                     pageBuilder: (context,
+                  //                                             animation1,
+                  //                                             animation2) =>
+                  //                                         const ApproveOrdersPage(
+                  //                                             approvalType:
+                  //                                                 "OrderPrepared")))
+                  //                               }
+                  //                             else
+                  //                               {
+                  //                                 Navigator.of(context).pushAndRemoveUntil(
+                  //                                     PageRouteBuilder(
+                  //                                         pageBuilder: (context,
+                  //                                                 animation1,
+                  //                                                 animation2) =>
+                  //                                             const NoInternetPage()),
+                  //                                     (route) =>
+                  //                                         false)
+                  //                               }
+                  //                           });
+                  //                 },
+                  //               ),
+                  //             if (UserClientAllocationData
+                  //                         .ucaRoleId ==
+                  //                     3 ||
+                  //                 UserClientAllocationData
+                  //                         .ucaRoleId ==
+                  //                     4)
+                  //               ModalOptionModel(
+                  //                 icon: Icons.done_all,
+                  //                 iconColor: Colors.green.shade800,
+                  //                 particulars: "Order delivered",
+                  //                 onTap: () async {
+                  //                   Navigator.pop(
+                  //                       alertDialogContext);
+                  //                   Connectivity connectivity =
+                  //                       Connectivity();
+                  //                   await connectivity
+                  //                       .checkConnectivity()
+                  //                       .then((value) => {
+                  //                             if (value !=
+                  //                                 ConnectivityResult
+                  //                                     .none)
+                  //                               {
+                  //                                 Navigator.of(context).push(
+                  //                                     PageRouteBuilder(
+                  //                                         pageBuilder: (context,
+                  //                                                 animation1,
+                  //                                                 animation2) =>
+                  //                                             const ApproveOrdersPage(
+                  //                                               approvalType:
+                  //                                                   "OrderProcessed",
+                  //                                             )))
+                  //                               }
+                  //                             else
+                  //                               {
+                  //                                 Navigator.of(context).pushAndRemoveUntil(
+                  //                                     PageRouteBuilder(
+                  //                                         pageBuilder: (context,
+                  //                                                 animation1,
+                  //                                                 animation2) =>
+                  //                                             const NoInternetPage()),
+                  //                                     (route) =>
+                  //                                         false)
+                  //                               }
+                  //                           });
+                  //                 },
+                  //               ),
+                  //           ]);
+                  //     });
+                  // }),
+                  //Next update
+                  // if (UserClientAllocationData.ucaRoleId == 3 ||
+                  //     UserClientAllocationData.ucaRoleId == 4)
+                  //   ModalOptionModel(
+                  //       particulars: "Offers Manager",
+                  //       onTap: () async {
+                  //         Navigator.pop(context);
+                  //         Navigator.of(context).push(PageRouteBuilder(
+                  //             pageBuilder:
+                  //                 (context, animation1, animation2) =>
+                  //                     const OfferManagerPage()));
+                  //       },
+                  //       icon: Icons.discount_outlined),
+                  // if (UserClientAllocationData.ucaRoleId == 3 ||
+                  //     UserClientAllocationData.ucaRoleId == 4)
+                  //   ModalOptionModel(
+                  //       particulars: "Employee Manager",
+                  //       onTap: () async {
+                  //         Navigator.pop(context);
+                  //         Navigator.of(context).push(PageRouteBuilder(
+                  //             pageBuilder:
+                  //                 (context, animation1, animation2) =>
+                  //                     const EmployeeManagerPage(
+                  //                         isForAdminManagement: false)));
+                  //       },
+                  //       icon: Icons.group_outlined),
+                  // if (UserClientAllocationData.ucaRoleId == 3 ||
+                  //     UserClientAllocationData.ucaRoleId == 4)
+                  //   ModalOptionModel(
+                  //       particulars: "Menu Manager",
+                  //       onTap: () async {
+                  //         Navigator.pop(context);
+                  //         Navigator.of(context).push(PageRouteBuilder(
+                  //             pageBuilder:
+                  //                 (context, animation1, animation2) =>
+                  //                     const MenuManagerPage()));
+                  //       },
+                  //       icon: Icons.restaurant_menu_outlined),
+                  // if (UserClientAllocationData.ucaRoleId == 3 ||
+                  //     UserClientAllocationData.ucaRoleId == 4)
+                  //   ModalOptionModel(
+                  //       particulars: "Stock Group Manager",
+                  //       onTap: () async {
+                  //         Navigator.pop(context);
+                  //         Navigator.of(context).push(PageRouteBuilder(
+                  //             pageBuilder:
+                  //                 (context, animation1, animation2) =>
+                  //                     const StockGroupManagerPage()));
+                  //       },
+                  //       icon: Icons.mediation_rounded),
+                  // if (UserClientAllocationData.ucaRoleId == 3 ||
+                  //     UserClientAllocationData.ucaRoleId == 4)
+                  //   ModalOptionModel(
+                  //       particulars: "Tax Class Manager",
+                  //       onTap: () async {
+                  //         Navigator.pop(context);
+                  //         Navigator.of(context).push(PageRouteBuilder(
+                  //             pageBuilder:
+                  //                 (context, animation1, animation2) =>
+                  //                     const TaxClassManagerPage()));
+                  //       },
+                  //       icon: Icons.pending_actions_outlined),
+                  // if (UserClientAllocationData.ucaRoleId == 4)
+                  //   ModalOptionModel(
+                  //       particulars: "Outlet Manager",
+                  //       onTap: () async {
+                  //         Navigator.pop(context);
+                  //         Navigator.of(context).push(PageRouteBuilder(
+                  //             pageBuilder:
+                  //                 (context, animation1, animation2) =>
+                  //                     const OutletManagerPage()));
+                  //       },
+                  //       icon: Icons.food_bank_outlined),
+                  //role id 4 is for owner
+                  // if (UserClientAllocationData.ucaRoleId == 4)
+                  //   ModalOptionModel(
+                  //       particulars: "Admin Manager",
+                  //       onTap: () async {
+                  //         Navigator.pop(context);
+                  //         Navigator.of(context).push(PageRouteBuilder(
+                  //             pageBuilder:
+                  //                 (context, animation1, animation2) =>
+                  //                     const EmployeeManagerPage(
+                  //                         isForAdminManagement: true)));
+                  //       },
+                  //       icon: Icons.admin_panel_settings_outlined),
+                  // ModalOptionModel(
+                  //     particulars: "Refresh",
+                  //     onTap: () async {
+                  //       Navigator.pop(context);
+                  //       Connectivity connectivity = Connectivity();
+                  //       await connectivity
+                  //           .checkConnectivity()
+                  //           .then((value) => {
+                  //                 if (value != ConnectivityResult.none)
+                  //                   {
+                  //                     setState(() {
+                  //                       _isLoading = true;
+                  //                       _isDataLoaded = false;
+                  //                     }),
+                  //                     _futureitems = fetchList()
+                  //                   }
+                  //                 else
+                  //                   {
+                  //                     Navigator.of(context)
+                  //                         .pushAndRemoveUntil(
+                  //                             PageRouteBuilder(
+                  //                                 pageBuilder: (context,
+                  //                                         animation1,
+                  //                                         animation2) =>
+                  //                                     const NoInternetPage()),
+                  //                             (route) => false)
+                  //                   }
+                  //               });
+                  //     },
+                  //     icon: Icons.refresh)
+                  //     ].map((ModalOptionModel choice) {
+                  //       return PopupMenuItem<ModalOptionModel>(
+                  //         value: choice,
+                  //         child: ListTile(
+                  //           title: Text(choice.particulars),
+                  //           leading: Icon(choice.icon, color: choice.iconColor),
+                  //           onTap: choice.onTap,
+                  //         ),
+                  //       );
+                  //     }).toList();
+                  //   },
+                  // ),
                 ],
               ),
               drawer: Drawer(
@@ -543,7 +670,8 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                       },
                                       child: ListView(
                                         shrinkWrap: true,
-                                        physics: const BouncingScrollPhysics(),
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
                                         children: [
                                           Center(
                                             child: Container(
@@ -694,10 +822,10 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                     );
                                                   },
                                                 ),
-                                          SizedBox(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height)
+                                          // SizedBox(
+                                          //     height: MediaQuery.of(context)
+                                          //         .size
+                                          //         .height)
                                         ],
                                       ));
                                 } else if (snapshot.hasError) {

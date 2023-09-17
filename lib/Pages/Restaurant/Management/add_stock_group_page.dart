@@ -196,29 +196,48 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
                                 const Text("Outlets:"),
                                 SizedBox(
                                   height: 50,
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: outletConfiguration.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      return Chips(
-                                          item: outletConfiguration[index]
-                                              .outletName,
-                                          index: index,
-                                          indexSelected: _indexSelectedOutlet,
-                                          onSelected: (value) {
-                                            setState(() {
-                                              _indexSelectedOutlet = index;
-                                              _selectedOutlet =
-                                                  outletConfiguration[index];
-                                              if (value) {
-                                                _isLoadingTakeaway = false;
-                                              }
-                                              //get list of table
-                                            });
-                                          });
-                                    },
-                                  ),
+                                  child: widget.isEdit
+                                      ? ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: 1,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Chips(
+                                                item: widget
+                                                    .filterItem!.outletName,
+                                                index: 0,
+                                                indexSelected: 0,
+                                                onSelected: (value) {
+                                                  setState(() {});
+                                                });
+                                          })
+                                      : ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: outletConfiguration.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Chips(
+                                                item: outletConfiguration[index]
+                                                    .outletName,
+                                                index: index,
+                                                indexSelected:
+                                                    _indexSelectedOutlet,
+                                                onSelected: (value) {
+                                                  setState(() {
+                                                    _indexSelectedOutlet =
+                                                        index;
+                                                    _selectedOutlet =
+                                                        outletConfiguration[
+                                                            index];
+                                                    if (value) {
+                                                      _isLoadingTakeaway =
+                                                          false;
+                                                    }
+                                                    //get list of table
+                                                  });
+                                                });
+                                          },
+                                        ),
                                 ),
                                 sizedBoxSpace,
                                 TextFormField(

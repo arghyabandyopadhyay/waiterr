@@ -41,6 +41,8 @@ class ConfirmationDialog extends StatelessWidget {
               Center(
                 child: Text(
                   question,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 17),
                 ),

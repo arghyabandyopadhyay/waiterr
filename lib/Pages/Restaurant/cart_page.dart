@@ -333,14 +333,13 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
                               child: Text(
                                 "Cart",
                                 textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: 30.0,
-                                    fontWeight: FontWeight.bold),
+                                style: GlobalTextStyles.waiterrTextStyleAppBar,
                               ),
                             ),
                             Flexible(

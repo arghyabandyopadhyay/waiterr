@@ -33,7 +33,7 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
   Widget build(BuildContext context) {
     List<String> tagList =
         (widget.item.tags != null) ? widget.item.tags!.split("|") : [];
-    if (widget.item.discount != 0) {
+    if (widget.item.discount != 0 && widget.item.isDiscountable) {
       tagList.insert(0, "${widget.item.discount}% Off");
     }
     double screenWidth = MediaQuery.of(context).size.width;
@@ -160,7 +160,8 @@ class _NonFavouritesCardState extends State<NonFavouritesCard> {
                                           width: 5,
                                         ),
                                         Text(
-                                          (widget.item.discount != 0)
+                                          (widget.item.discount != 0 &&
+                                                  widget.item.isDiscountable)
                                               ? "₹${widget.item.rateBeforeDiscount}"
                                               : "",
                                           textAlign: TextAlign.end,

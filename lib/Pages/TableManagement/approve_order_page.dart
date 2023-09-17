@@ -136,7 +136,11 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
-                          "Approvals",
+                          widget.approvalType == "OrderApproved"
+                              ? "Order approvals"
+                              : widget.approvalType == "OrderPrepared"
+                                  ? "Order Preparations"
+                                  : "Order Deliverables",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: GlobalTextStyles.waiterrTextStyleAppBar,
@@ -326,8 +330,13 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                           context: context,
                           builder: (BuildContext context) {
                             return ConfirmationDialog(
-                              headerText: "Approve Order",
-                              question: "Are you sure, to approve the order?",
+                              headerText: widget.approvalType == "OrderApproved"
+                                  ? "Approve all orders!!"
+                                  : widget.approvalType == "OrderPrepared"
+                                      ? "Approve all order Preparations!!"
+                                      : "Approve all order deliverables!!",
+                              question:
+                                  "Are you sure, to approve all the order${widget.approvalType == "OrderApproved" ? "" : widget.approvalType == "OrderPrepared" ? " preparation" : " delivery"}?",
                               onTapYes: () {
                                 {
                                   Navigator.pop(context);
@@ -466,8 +475,13 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                     context: context,
                     builder: (BuildContext context) {
                       return ConfirmationDialog(
-                        headerText: "Approve Order",
-                        question: "Are you sure, to approve the order?",
+                        headerText: widget.approvalType == "OrderApproved"
+                            ? "Approve order!!"
+                            : widget.approvalType == "OrderPrepared"
+                                ? "Approve order Preparation!!"
+                                : "Approve order Deliverable!!",
+                        question:
+                            "Are you sure, to approve the order${widget.approvalType == "OrderApproved" ? "" : widget.approvalType == "OrderPrepared" ? " preparation" : " delivery"}?",
                         onTapYes: () {
                           {
                             Navigator.pop(context);
@@ -567,8 +581,13 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                     context: context,
                     builder: (BuildContext context) {
                       return ConfirmationDialog(
-                        headerText: "Disapprove Order",
-                        question: "Are you sure, to disapprove the order?",
+                        headerText: widget.approvalType == "OrderApproved"
+                            ? "Disapprove order!!"
+                            : widget.approvalType == "OrderPrepared"
+                                ? "Disapprove order Preparation!!"
+                                : "Disapprove order Deliverable!!",
+                        question:
+                            "Are you sure, to disapprove the order${widget.approvalType == "OrderApproved" ? "" : widget.approvalType == "OrderPrepared" ? " preparation" : " delivery"}?",
                         onTapYes: () {
                           {
                             Navigator.pop(context);

@@ -424,7 +424,8 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                   ),
                                   onChanged: (value) {
                                     discountedPriceController
-                                        .text = (double.parse(value) *
+                                        .text = (double.parse(
+                                                value == "" ? "0" : value) *
                                             (1 -
                                                 double.parse(
                                                         discountPercentageController
@@ -459,6 +460,26 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                                   index;
                                               _selectedDiscountableLists =
                                                   discountableLists[index];
+                                              if (discountableLists[index]
+                                                      .name ==
+                                                  'Not Discountable') {
+                                                discountPercentageController
+                                                    .text = '0.0';
+                                                discountedPriceController
+                                                    .text = (double.parse(
+                                                            priceController
+                                                                        .text ==
+                                                                    ""
+                                                                ? "0"
+                                                                : priceController
+                                                                    .text) *
+                                                        (1 -
+                                                            double.parse(
+                                                                    discountPercentageController
+                                                                        .text) /
+                                                                100))
+                                                    .toString();
+                                              }
                                             });
                                           });
                                     },

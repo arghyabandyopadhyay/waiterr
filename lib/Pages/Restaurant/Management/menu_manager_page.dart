@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../Modules/universal_module.dart';
 import '../../../global_class.dart';
 import '../../../widgets/menu_details_card.dart';
 import '../../../widgets/menu_manager_list.dart';
@@ -33,8 +34,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   String dropdownValue = '0';
   double totalItems = 0;
   double totalCartAmount = 0;
-  bool? _isSearching;
-  // bool? _isLoading;
+  bool? _isSearching, _isLoading;
   List<MenuItemModel> searchResult = [];
   Icon icon = const Icon(
     Icons.search,
@@ -53,12 +53,13 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   //Controller
   final TextEditingController _searchController = TextEditingController();
   final _controller = ScrollController();
-  Widget appBarTitle = const Text(
+  final Widget menuTextWidget = Text(
     "Menu",
     textAlign: TextAlign.left,
-    style: TextStyle(
-        fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.black),
+    style: GlobalTextStyles.waiterrTextStyleAppBar,
   );
+
+  late Widget appBarTitle;
 
   //Methods
   void _handleSearchStart() {
@@ -69,7 +70,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
 
   _addMenu() async {
     setState(() {
-      // _isLoading = true;
+      _isLoading = true;
     });
     await Navigator.of(context)
         .push(CupertinoPageRoute<void>(
@@ -144,11 +145,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
         Icons.arrow_back_ios,
         color: Colors.black,
       );
-      appBarTitle = const Text(
-        "Menu",
-        textAlign: TextAlign.left,
-        style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-      );
+      appBarTitle = menuTextWidget;
       _isSearching = false;
       _searchController.clear();
     });
@@ -180,7 +177,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
               if (temp.isNotEmpty) results.add(temp)
             },
           setState(() {
-            // _isLoading = false;
+            _isLoading = false;
           })
         });
 
@@ -230,6 +227,8 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
   void initState() {
     super.initState();
     _isSearching = false;
+    _isLoading = true;
+    appBarTitle = menuTextWidget;
     _futureproductList = fetchList();
   }
 
@@ -291,29 +290,21 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                               }
                             });
                           }),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.refresh,
-                          color: Colors.black,
-                        ),
-                        onPressed: () async {
-                          Connectivity connectivity = Connectivity();
-                          await connectivity
-                              .checkConnectivity()
-                              .then((value) => {
-                                    if (value != ConnectivityResult.none)
-                                      {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const MenuManagerPage()))
-                                      }
-                                  });
-                        },
-                      )
+                      // IconButton(
+                      //   icon: const Icon(
+                      //     Icons.refresh,
+                      //     color: Colors.black,
+                      //   ),
+                      //   onPressed: () async {
+                      //     Connectivity connectivity = Connectivity();
+                      //     await connectivity
+                      //         .checkConnectivity()
+                      //         .then((value) => {
+                      //               if (value != ConnectivityResult.none)
+                      //                 {_futureproductList = fetchList()}
+                      //             });
+                      //   },
+                      // )
                     ],
                     elevation: 0,
                   ),
@@ -345,344 +336,453 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                   padding: const EdgeInsets.only(top: 1.75),
                                   decoration:
                                       GlobalTheme.waiterrAppBarBoxDecoration,
-                                  child:
-                                      FutureBuilder<List<List<MenuItemModel>>?>(
-                                          future: _futureproductList,
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              productList = snapshot.data;
-                                              return _searchController
-                                                      .text.isNotEmpty
-                                                  ? (searchResult.isNotEmpty
-                                                      ? ListView(
-                                                          shrinkWrap: true,
-                                                          physics:
-                                                              const BouncingScrollPhysics(),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal:
-                                                                      15),
-                                                          children: <Widget>[
-                                                            ListView.builder(
-                                                              shrinkWrap: true,
-                                                              physics:
-                                                                  const NeverScrollableScrollPhysics(),
-                                                              itemCount:
-                                                                  searchResult
-                                                                      .length,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int index) {
-                                                                return MenuDetailsCard(
-                                                                    key: ObjectKey(
-                                                                        searchResult[index]
-                                                                            .itemID),
-                                                                    item: searchResult[
-                                                                        index],
-                                                                    onMiddleTap:
-                                                                        () {
-                                                                      Navigator.push(
-                                                                          context,
-                                                                          CupertinoPageRoute(
-                                                                              builder: (context) => AddMenuPage(
-                                                                                    menuItemModel: searchResult[index],
-                                                                                    isEdit: true,
-                                                                                  )));
-                                                                    });
-                                                              },
-                                                            )
-                                                          ],
-                                                        )
-                                                      : const NoDataError())
-                                                  : ListView(
+                                  child: FutureBuilder<
+                                          List<List<MenuItemModel>>?>(
+                                      future: _futureproductList,
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          productList = snapshot.data;
+                                          return _searchController
+                                                  .text.isNotEmpty
+                                              ? (searchResult.isNotEmpty
+                                                  ? RefreshIndicator(
+                                                      backgroundColor:
+                                                          Colors.black,
+                                                      onRefresh: () async {
+                                                        Connectivity
+                                                            connectivity =
+                                                            Connectivity();
+                                                        await connectivity
+                                                            .checkConnectivity()
+                                                            .then((value) => {
+                                                                  if (value !=
+                                                                      ConnectivityResult
+                                                                          .none)
+                                                                    {
+                                                                      setState(
+                                                                          () {
+                                                                        _isLoading =
+                                                                            true;
+                                                                      }),
+                                                                      _futureproductList =
+                                                                          fetchList()
+                                                                    }
+                                                                  else
+                                                                    {
+                                                                      globalShowInSnackBar(
+                                                                          "No internet connection!!",
+                                                                          null,
+                                                                          scaffoldMessengerKey,
+                                                                          null,
+                                                                          null)
+                                                                    }
+                                                                });
+                                                      },
+                                                      child: ListView(
+                                                        shrinkWrap: true,
+                                                        physics:
+                                                            const AlwaysScrollableScrollPhysics(),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 15),
+                                                        children: <Widget>[
+                                                          Center(
+                                                            child: Container(
+                                                              height:
+                                                                  _isLoading!
+                                                                      ? 40
+                                                                      : 0,
+                                                              width: _isLoading!
+                                                                  ? 40
+                                                                  : 0,
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(10),
+                                                              child: _isLoading!
+                                                                  ? const CircularProgressIndicator(
+                                                                      strokeWidth:
+                                                                          3,
+                                                                    )
+                                                                  : null,
+                                                            ),
+                                                          ),
+                                                          ListView.builder(
+                                                            shrinkWrap: true,
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            itemCount:
+                                                                searchResult
+                                                                    .length,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    int index) {
+                                                              return MenuDetailsCard(
+                                                                  key: ObjectKey(
+                                                                      searchResult[
+                                                                              index]
+                                                                          .itemID),
+                                                                  item:
+                                                                      searchResult[
+                                                                          index],
+                                                                  onMiddleTap:
+                                                                      () {
+                                                                    Navigator.push(
+                                                                        context,
+                                                                        CupertinoPageRoute(
+                                                                            builder: (context) => AddMenuPage(
+                                                                                  menuItemModel: searchResult[index],
+                                                                                  isEdit: true,
+                                                                                )));
+                                                                  });
+                                                            },
+                                                          )
+                                                        ],
+                                                      ))
+                                                  : const NoDataError())
+                                              : RefreshIndicator(
+                                                  backgroundColor: Colors.black,
+                                                  onRefresh: () async {
+                                                    Connectivity connectivity =
+                                                        Connectivity();
+                                                    await connectivity
+                                                        .checkConnectivity()
+                                                        .then((value) => {
+                                                              if (value !=
+                                                                  ConnectivityResult
+                                                                      .none)
+                                                                {
+                                                                  setState(() {
+                                                                    _isLoading =
+                                                                        true;
+                                                                  }),
+                                                                  _futureproductList =
+                                                                      fetchList()
+                                                                }
+                                                              else
+                                                                {
+                                                                  globalShowInSnackBar(
+                                                                      "No internet connection!!",
+                                                                      null,
+                                                                      scaffoldMessengerKey,
+                                                                      null,
+                                                                      null)
+                                                                }
+                                                            });
+                                                  },
+                                                  child: ListView(
                                                       physics:
-                                                          const BouncingScrollPhysics(),
+                                                          const AlwaysScrollableScrollPhysics(),
                                                       shrinkWrap: true,
                                                       controller: _controller,
                                                       padding:
                                                           const EdgeInsets.all(
                                                               0),
                                                       children: <Widget>[
-                                                          MenuManagerList(
-                                                              productList:
-                                                                  productList,
-                                                              header: (value) {
-                                                                return _header(
-                                                                    value);
-                                                              },
-                                                              buildItems:
-                                                                  (context1,
-                                                                      items) {
-                                                                return _buildItems(
-                                                                    context1,
-                                                                    items);
-                                                              }),
-                                                        ]);
-                                            } else if (snapshot.hasError) {
-                                              if (snapshot.error.toString() ==
-                                                  "NoInternet") {
-                                                return const ErrorPageNoInternet();
-                                              } else if (snapshot.error
-                                                      .toString() ==
-                                                  "500") {
-                                                return const ErrorPageFiveHundred();
-                                              } else if (snapshot.error
-                                                      .toString() ==
-                                                  "NoData") {
-                                                return const NoDataError();
-                                              } else if (snapshot.error
-                                                      .toString() ==
-                                                  "401") {
-                                                return const ErrorPageFourHundredOne();
-                                              } else {
-                                                return const ErrorHasOccurred();
-                                              }
-                                            }
-                                            return Container(
-                                                width: double.infinity,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 16.0,
-                                                        vertical: 16.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                      child: Shimmer.fromColors(
-                                                          baseColor:
-                                                              Colors.grey[300]!,
-                                                          highlightColor:
-                                                              Colors.grey[100]!,
-                                                          enabled: true,
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
+                                                        Center(
+                                                          child: Container(
+                                                            height: _isLoading!
+                                                                ? 40
+                                                                : 0,
+                                                            width: _isLoading!
+                                                                ? 40
+                                                                : 0,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: _isLoading!
+                                                                ? const CircularProgressIndicator(
+                                                                    strokeWidth:
+                                                                        3,
+                                                                  )
+                                                                : null,
+                                                          ),
+                                                        ),
+                                                        MenuManagerList(
+                                                            productList:
+                                                                productList,
+                                                            header: (value) {
+                                                              return _header(
+                                                                  value);
+                                                            },
+                                                            buildItems:
+                                                                (context1,
+                                                                    items) {
+                                                              return _buildItems(
+                                                                  context1,
+                                                                  items);
+                                                            }),
+                                                      ]));
+                                        } else if (snapshot.hasError) {
+                                          if (snapshot.error.toString() ==
+                                              "NoInternet") {
+                                            return const ErrorPageNoInternet();
+                                          } else if (snapshot.error
+                                                  .toString() ==
+                                              "500") {
+                                            return const ErrorPageFiveHundred();
+                                          } else if (snapshot.error
+                                                  .toString() ==
+                                              "NoData") {
+                                            return const NoDataError();
+                                          } else if (snapshot.error
+                                                  .toString() ==
+                                              "401") {
+                                            return const ErrorPageFourHundredOne();
+                                          } else {
+                                            return const ErrorHasOccurred();
+                                          }
+                                        }
+                                        return Container(
+                                            width: double.infinity,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16.0,
+                                                vertical: 16.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey[300]!,
+                                                      highlightColor:
+                                                          Colors.grey[100]!,
+                                                      enabled: true,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
                                                             children: <Widget>[
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: <Widget>[
-                                                                  Container(
-                                                                      padding: const EdgeInsets
-                                                                          .all(
+                                                              Container(
+                                                                  padding:
+                                                                      const EdgeInsets.all(
                                                                           10),
-                                                                      color: Colors
-                                                                          .white,
-                                                                      height:
-                                                                          20,
-                                                                      width:
-                                                                          70),
-                                                                  Container(
-                                                                      padding: const EdgeInsets
-                                                                          .all(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20,
+                                                                  width: 70),
+                                                              Container(
+                                                                  padding:
+                                                                      const EdgeInsets.all(
                                                                           10),
-                                                                      color: Colors
-                                                                          .white,
-                                                                      height:
-                                                                          20,
-                                                                      width: 20)
-                                                                ],
-                                                              ),
-                                                              const Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        vertical:
-                                                                            20.0),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        bottom:
-                                                                            10.0),
-                                                                child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    const Padding(
-                                                                      padding: EdgeInsets.symmetric(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20,
+                                                                  width: 20)
+                                                            ],
+                                                          ),
+                                                          const Padding(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        20.0),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    bottom:
+                                                                        10.0),
+                                                            child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
                                                                           vertical:
                                                                               8.0),
-                                                                    ),
-                                                                    Container(
-                                                                      width:
-                                                                          15.0,
-                                                                      height:
-                                                                          15.0,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                    const Padding(
-                                                                      padding: EdgeInsets.symmetric(
+                                                                ),
+                                                                Container(
+                                                                  width: 15.0,
+                                                                  height: 15.0,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
                                                                           horizontal:
                                                                               8.0),
-                                                                    ),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: <Widget>[
-                                                                          Container(
-                                                                            width:
-                                                                                screenWidth / 2,
-                                                                            height:
-                                                                                10.0,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                          const Padding(
-                                                                            padding:
-                                                                                EdgeInsets.symmetric(vertical: 2.0),
-                                                                          ),
-                                                                          Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceBetween,
-                                                                            children: <Widget>[
-                                                                              Container(
-                                                                                width: 100,
-                                                                                height: 10.0,
-                                                                                color: Colors.white,
-                                                                              ),
-                                                                              Container(
-                                                                                width: 70,
-                                                                                height: 35,
-                                                                                decoration: BoxDecoration(
-                                                                                  color: Colors.white,
-                                                                                  borderRadius: BorderRadius.circular(10.0),
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    )
-                                                                  ],
                                                                 ),
-                                                              ),
-                                                              const Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        vertical:
-                                                                            20.0),
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: <Widget>[
-                                                                  Container(
-                                                                      padding: const EdgeInsets
-                                                                          .all(
-                                                                          10),
-                                                                      color: Colors
-                                                                          .white,
-                                                                      height:
-                                                                          20,
-                                                                      width:
-                                                                          70),
-                                                                  Container(
-                                                                      padding: const EdgeInsets
-                                                                          .all(
-                                                                          10),
-                                                                      color: Colors
-                                                                          .white,
-                                                                      height:
-                                                                          20,
-                                                                      width: 20)
-                                                                ],
-                                                              ),
-                                                              const Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        vertical:
-                                                                            20.0),
-                                                              ),
-                                                              ListView.builder(
-                                                                shrinkWrap:
-                                                                    true,
-                                                                physics:
-                                                                    const NeverScrollableScrollPhysics(),
-                                                                itemBuilder:
-                                                                    (_, __) =>
-                                                                        Padding(
-                                                                  padding: const EdgeInsets
-                                                                      .only(
-                                                                      bottom:
-                                                                          10.0),
-                                                                  child: Row(
+                                                                Expanded(
+                                                                  child: Column(
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
-                                                                    children: [
-                                                                      const Padding(
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(vertical: 8.0),
-                                                                      ),
+                                                                    children: <Widget>[
                                                                       Container(
                                                                         width:
-                                                                            15.0,
+                                                                            screenWidth /
+                                                                                2,
                                                                         height:
-                                                                            15.0,
+                                                                            10.0,
                                                                         color: Colors
                                                                             .white,
                                                                       ),
                                                                       const Padding(
                                                                         padding:
-                                                                            EdgeInsets.symmetric(horizontal: 8.0),
+                                                                            EdgeInsets.symmetric(vertical: 2.0),
                                                                       ),
-                                                                      Expanded(
-                                                                        child:
-                                                                            Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: <Widget>[
-                                                                            Container(
-                                                                              width: screenWidth / 2,
-                                                                              height: 10.0,
+                                                                      Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: <Widget>[
+                                                                          Container(
+                                                                            width:
+                                                                                100,
+                                                                            height:
+                                                                                10.0,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                          Container(
+                                                                            width:
+                                                                                70,
+                                                                            height:
+                                                                                35,
+                                                                            decoration:
+                                                                                BoxDecoration(
                                                                               color: Colors.white,
+                                                                              borderRadius: BorderRadius.circular(10.0),
                                                                             ),
-                                                                            const Padding(
-                                                                              padding: EdgeInsets.symmetric(vertical: 2.0),
-                                                                            ),
-                                                                            Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: <Widget>[
-                                                                                Container(
-                                                                                  width: 100,
-                                                                                  height: 10.0,
-                                                                                  color: Colors.white,
-                                                                                ),
-                                                                                Container(
-                                                                                  width: 70,
-                                                                                  height: 35,
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: Colors.white,
-                                                                                    borderRadius: BorderRadius.circular(10.0),
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            )
-                                                                          ],
-                                                                        ),
+                                                                          ),
+                                                                        ],
                                                                       )
                                                                     ],
                                                                   ),
-                                                                ),
-                                                                itemCount: 2,
-                                                              )
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          const Padding(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        20.0),
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: <Widget>[
+                                                              Container(
+                                                                  padding:
+                                                                      const EdgeInsets.all(
+                                                                          10),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20,
+                                                                  width: 70),
+                                                              Container(
+                                                                  padding:
+                                                                      const EdgeInsets.all(
+                                                                          10),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20,
+                                                                  width: 20)
                                                             ],
-                                                          )),
-                                                    ),
-                                                  ],
-                                                ));
-                                          })),
+                                                          ),
+                                                          const Padding(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        20.0),
+                                                          ),
+                                                          ListView.builder(
+                                                            shrinkWrap: true,
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            itemBuilder:
+                                                                (_, __) =>
+                                                                    Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      bottom:
+                                                                          10.0),
+                                                              child: Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  const Padding(
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        vertical:
+                                                                            8.0),
+                                                                  ),
+                                                                  Container(
+                                                                    width: 15.0,
+                                                                    height:
+                                                                        15.0,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                  const Padding(
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            8.0),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: <Widget>[
+                                                                        Container(
+                                                                          width:
+                                                                              screenWidth / 2,
+                                                                          height:
+                                                                              10.0,
+                                                                          color:
+                                                                              Colors.white,
+                                                                        ),
+                                                                        const Padding(
+                                                                          padding:
+                                                                              EdgeInsets.symmetric(vertical: 2.0),
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: <Widget>[
+                                                                            Container(
+                                                                              width: 100,
+                                                                              height: 10.0,
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                            Container(
+                                                                              width: 70,
+                                                                              height: 35,
+                                                                              decoration: BoxDecoration(
+                                                                                color: Colors.white,
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            itemCount: 2,
+                                                          )
+                                                        ],
+                                                      )),
+                                                ),
+                                              ],
+                                            ));
+                                      })),
                             )
                           ]))))
         ],

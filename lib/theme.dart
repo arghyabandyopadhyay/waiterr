@@ -33,6 +33,8 @@ class GlobalTheme {
   static const Color printIconColor = Color.fromARGB(255, 3, 63, 244);
   static const Color selectionCardBorderColor = Color(0XFF808080);
   static const Color borderColorHighlight = Color.fromARGB(255, 3, 63, 244);
+  static const Color bottomNavBarBackgroundColor =
+      Color.fromARGB(255, 224, 215, 240);
   static const Color boxDecorationColorHighlight =
       Color.fromARGB(255, 3, 63, 244);
   static const Color selectionCardCheckIconColor =

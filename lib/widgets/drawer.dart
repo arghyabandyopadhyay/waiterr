@@ -1,9 +1,8 @@
 import 'package:waiterr/Model/drawer_action_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import '../global_class.dart';
 import '../theme.dart';
+import 'profile_image_widget.dart';
 
 class DrawerContent extends StatelessWidget {
   const DrawerContent(
@@ -65,52 +64,10 @@ class DrawerContent extends StatelessWidget {
                     )
                   ],
                 ),
-                CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.transparent,
-                    child: ClipOval(
-                      child: UserDetail.userDetails.profileUrl != null &&
-                              UserDetail.userDetails.profileUrl != ""
-                          ? CachedNetworkImage(
-                              imageUrl: UserDetail.userDetails.profileUrl!,
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.cover,
-                                    //colorFilter:ColorFilter.mode(Colors.red, BlendMode.colorBurn)
-                                  ),
-                                ),
-                              ),
-                              placeholder: (context, url) => SizedBox(
-                                  width: double.infinity,
-                                  child: Center(
-                                    child: Shimmer.fromColors(
-                                      baseColor:
-                                          Colors.grey[300]!.withOpacity(0.3),
-                                      highlightColor: Colors.white,
-                                      enabled: true,
-                                      child: Container(
-                                        width: 50,
-                                        height: 50,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  )),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            )
-                          : Image(
-                              height: 50,
-                              width: 50,
-                              fit: BoxFit.fitHeight,
-                              image: Image.asset(
-                                'assets/img/profile.png',
-                              ).image),
-                    )),
+                const ProfileImageWidget(
+                  radius: 30,
+                  size: Size(50, 50),
+                ),
               ],
             ),
           ),

@@ -143,7 +143,7 @@ class _AddOutletPageState extends State<AddOutletPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
-                      "Add Outlet",
+                      "${widget.isEdit ? "Edit" : "Add"} Outlet",
                       textAlign: TextAlign.left,
                       style: GlobalTextStyles.waiterrTextStyleAppBar,
                     ),
@@ -215,10 +215,10 @@ class _AddOutletPageState extends State<AddOutletPage> {
               backgroundColor: GlobalTheme.tint,
               floatingActionButton: FloatingActionButton.extended(
                 icon: Icon(
-                  widget.isEdit ? Icons.edit : Icons.add,
+                  widget.isEdit ? Icons.save : Icons.add,
                 ),
                 label: Text(
-                  widget.isEdit ? "Edit" : "Add",
+                  widget.isEdit ? "Save" : "Add",
                   style: const TextStyle(
                     fontSize: 17,
                   ),

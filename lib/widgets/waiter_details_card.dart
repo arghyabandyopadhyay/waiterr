@@ -19,7 +19,8 @@ class WaiterDetailsCard extends StatelessWidget {
     return GestureDetector(
         onTap: onMiddleTap,
         child: Container(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            margin: const EdgeInsets.all(0),
             child: Card(
               elevation: 2,
               shape: RoundedRectangleBorder(
@@ -27,18 +28,8 @@ class WaiterDetailsCard extends StatelessWidget {
               ),
               child: Container(
                 width: MediaQuery.of(context).size.width / 6.04,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: waiter.isActive
-                          ? Colors.green.withOpacity(0.4)
-                          : Colors.red.withOpacity(0.4),
-                      offset: const Offset(2.0, 3.0),
-                      blurRadius: 5,
-                      spreadRadius: 5,
-                    ), //BoxShadow
-                  ],
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
                   color: Colors.white,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -47,15 +38,28 @@ class WaiterDetailsCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     const SizedBox(height: 5),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 1.5,
-                      child: Text(
-                        waiter.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 22, height: 1),
-                      ),
-                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            child: Text(
+                              waiter.name,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontSize: 22, height: 1),
+                            ),
+                          ),
+                          Container(
+                              width: 10,
+                              height: 10,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5)),
+                                color:
+                                    waiter.isActive ? Colors.green : Colors.red,
+                              ))
+                        ]),
                     const SizedBox(height: 5),
                     SizedBox(
                       child: Text(
@@ -102,20 +106,18 @@ class WaiterDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(40, 25)),
+                        IconButton(
                             onPressed: onCallClicked,
-                            child: const Icon(Icons.call)),
+                            icon: const Icon(Icons.call, color: Colors.black)),
                         const SizedBox(
                           width: 5,
                         ),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
-                                minimumSize: const Size(40, 25)),
+                        IconButton(
                             onPressed: onDeleteClicked,
-                            child: const Icon(Icons.delete_forever_outlined))
+                            icon: const Icon(
+                              Icons.delete_forever,
+                              color: Colors.red,
+                            ))
                       ],
                     )
                   ],
