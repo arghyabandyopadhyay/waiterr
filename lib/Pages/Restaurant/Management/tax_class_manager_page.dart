@@ -10,6 +10,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../Model/tax_model.dart';
 import '../../../Modules/universal_module.dart';
 import '../../../theme.dart';
+import '../../../widgets/search_text_field.dart';
 import 'add_tax_class_manager_page.dart';
 
 class TaxClassManagerPage extends StatefulWidget {
@@ -118,6 +119,8 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                   ),
                 ),
                 Scaffold(
+                  resizeToAvoidBottomInset:
+                      GlobalTheme.internalScaffoldResizeToAvoidBottomInset,
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
                     centerTitle: true,
@@ -136,20 +139,9 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                             setState(() {
                               if (icon.icon == Icons.search) {
                                 icon = const Icon(Icons.close);
-                                appBarTitle = TextFormField(
-                                  autofocus: true,
-                                  controller: _searchController,
-                                  style: const TextStyle(fontSize: 15),
-                                  decoration: const InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                      ),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      hintText: "Search...",
-                                      hintStyle: TextStyle(fontSize: 15)),
-                                  onChanged: searchOperation,
-                                );
+                                appBarTitle = SearchTextField(
+                                    searchController: _searchController,
+                                    searchOperation: searchOperation);
                                 _handleSearchStart();
                               } else {
                                 _handleSearchEnd();
