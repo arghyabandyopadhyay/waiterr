@@ -14,8 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../global_class.dart';
+// import '../../global_class.dart';
 import '../../theme.dart';
+import '../../widgets/search_text_field.dart';
 import '../TableManagement/kot_page.dart';
 
 class OrdersPage extends StatefulWidget {
@@ -138,20 +139,9 @@ class _OrdersPageState extends State<OrdersPage> {
                         setState(() {
                           if (icon.icon == Icons.search) {
                             icon = const Icon(Icons.close);
-                            appBarTitle = TextFormField(
-                              autofocus: true,
-                              controller: _searchController,
-                              style: const TextStyle(fontSize: 15),
-                              decoration: const InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.search,
-                                  ),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide.none),
-                                  hintText: "Search...",
-                                  hintStyle: TextStyle(fontSize: 15)),
-                              onChanged: searchOperation,
-                            );
+                            appBarTitle = SearchTextField(
+                                searchController: _searchController,
+                                searchOperation: searchOperation);
                             _handleSearchStart();
                           } else {
                             _handleSearchEnd();
@@ -233,7 +223,7 @@ class _OrdersPageState extends State<OrdersPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
-                        "${UserDetail.userDetails.name ?? ""}'s ${widget.showPastOrder ? "order history" : "running orders"}",
+                        widget.showPastOrder ? "Previous Orders" : "My Orders",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GlobalTextStyles.waiterrTextStyleAppBar,
