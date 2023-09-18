@@ -17,6 +17,7 @@ import '../../../Modules/universal_module.dart';
 import '../../../global_class.dart';
 import '../../../widgets/menu_details_card.dart';
 import '../../../widgets/menu_manager_list.dart';
+import '../../../widgets/search_text_field.dart';
 import 'add_menu_page.dart';
 
 class MenuManagerPage extends StatefulWidget {
@@ -248,6 +249,8 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
           ScaffoldMessenger(
               key: scaffoldMessengerKey,
               child: Scaffold(
+                  resizeToAvoidBottomInset:
+                      GlobalTheme.internalScaffoldResizeToAvoidBottomInset,
                   key: _scaffoldKey,
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
@@ -255,9 +258,8 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                     title: appBarTitle,
                     leading: IconButton(
                       padding: const EdgeInsets.all(0),
-                      icon: appbarIcon,
-                      onPressed: () =>
-                          _isSearching! ? null : {Navigator.of(context).pop()},
+                      icon: const Icon(Icons.arrow_back_ios),
+                      onPressed: () => Navigator.of(context).pop(),
                     ),
                     actions: <Widget>[
                       IconButton(
@@ -269,17 +271,9 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                   Icons.close,
                                   color: Colors.black,
                                 );
-                                appBarTitle = TextFormField(
-                                  autofocus: true,
-                                  controller: _searchController,
-                                  style: const TextStyle(fontSize: 15),
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      hintText: "Search...",
-                                      hintStyle: TextStyle(fontSize: 15)),
-                                  onChanged: searchOperation,
-                                );
+                                appBarTitle = SearchTextField(
+                                    searchController: _searchController,
+                                    searchOperation: searchOperation);
                                 appbarIcon = const Icon(
                                   Icons.search,
                                   color: Colors.black,
@@ -309,7 +303,6 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                     elevation: 0,
                   ),
                   backgroundColor: GlobalTheme.tint,
-                  resizeToAvoidBottomInset: true,
                   floatingActionButton: FloatingActionButton(
                     onPressed: _addMenu,
                     child: const Icon(
