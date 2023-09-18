@@ -1,15 +1,12 @@
-import 'dart:async';
-import 'dart:io';
-
+// import 'dart:async';
 import 'package:waiterr/Modules/api_fetch_module.dart';
 import 'package:waiterr/Modules/universal_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:waiterr/widgets/profile_image_widget.dart';
 import '../../global_class.dart';
 import '../../theme.dart';
-import 'package:flutter/foundation.dart';
 
 class ProfilePage extends StatefulWidget {
   final List<List<dynamic>>? data;
@@ -30,71 +27,71 @@ class _ProfilePageState extends State<ProfilePage> {
     phoneNumber.text =
         "${UserDetail.userDetails.mobileNumber.substring(0, 5)} ${UserDetail.userDetails.mobileNumber.substring(5)}";
   }
-  XFile? _imageFile;
-  dynamic _pickImageError;
-  String? _retrieveDataError;
+  // XFile? _imageFile;
+  // dynamic _pickImageError;
+  // String? _retrieveDataError;
 
-  final ImagePicker _picker = ImagePicker();
+  // final ImagePicker _picker = ImagePicker();
   // final TextEditingController maxWidthController = TextEditingController();
   // final TextEditingController maxHeightController = TextEditingController();
   // final TextEditingController qualityController = TextEditingController();
-  Future<void> retrieveLostData() async {
-    final LostDataResponse response = await _picker.retrieveLostData();
-    if (response.isEmpty) {
-      return;
-    }
-    if (response.file != null) {
-      setState(() {
-        _imageFile = response.file;
-      });
-    } else {
-      _retrieveDataError = response.exception!.code;
-    }
-  }
+  // Future<void> retrieveLostData() async {
+  //   final LostDataResponse response = await _picker.retrieveLostData();
+  //   if (response.isEmpty) {
+  //     return;
+  //   }
+  //   if (response.file != null) {
+  //     setState(() {
+  //       _imageFile = response.file;
+  //     });
+  //   } else {
+  //     _retrieveDataError = response.exception!.code;
+  //   }
+  // }
 
-  Widget _previewImage() {
-    final Text? retrieveError = _getRetrieveErrorWidget();
-    if (retrieveError != null) {
-      return retrieveError;
-    }
-    if (_imageFile != null) {
-      if (kIsWeb) {
-        // Why network?
-        // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
-        return Image.network(_imageFile!.path);
-      } else {
-        return Image.file(File(_imageFile!.path));
-      }
-    } else if (_pickImageError != null) {
-      return Text(
-        'Pick image error: $_pickImageError',
-        textAlign: TextAlign.center,
-      );
-    } else {
-      return const Text(
-        'You have not yet picked an image.',
-        textAlign: TextAlign.center,
-      );
-    }
-  }
+  // Widget _previewImage() {
+  //   final Text? retrieveError = _getRetrieveErrorWidget();
+  //   if (retrieveError != null) {
+  //     return retrieveError;
+  //   }
+  //   if (_imageFile != null) {
+  //     if (kIsWeb) {
+  //       // Why network?
+  //       // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+  //       return Image.network(_imageFile!.path);
+  //     } else {
+  //       return Image.file(File(_imageFile!.path));
+  //     }
+  //   } else if (_pickImageError != null) {
+  //     return Text(
+  //       'Pick image error: $_pickImageError',
+  //       textAlign: TextAlign.center,
+  //     );
+  //   } else {
+  //     return const Text(
+  //       'You have not yet picked an image.',
+  //       textAlign: TextAlign.center,
+  //     );
+  //   }
+  // }
 
-  void _onImageButtonPressed(ImageSource source) async {
-    try {
-      final pickedFile = await _picker.pickImage(
-        source: source,
-        maxWidth: 100,
-        maxHeight: 100,
-        imageQuality: 10,
-      );
-      setState(() {
-        _imageFile = pickedFile;
-      });
-    } catch (e) {
-      setState(() {
-        _pickImageError = e;
-      });
-    }
-  }
+  // void _onImageButtonPressed(ImageSource source) async {
+  //   try {
+  //     final pickedFile = await _picker.pickImage(
+  //       source: source,
+  //       maxWidth: 100,
+  //       maxHeight: 100,
+  //       imageQuality: 10,
+  //     );
+  //     setState(() {
+  //       _imageFile = pickedFile;
+  //     });
+  //   } catch (e) {
+  //     setState(() {
+  //       _pickImageError = e;
+  //     });
+  //   }
+  // }
 
   @override
   void deactivate() {
@@ -225,9 +222,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width *
                                           0.3,
-                                      child: const ProfileImageWidget(
+                                      child: ProfileImageWidget(
                                         radius: 50,
-                                        size: Size(100, 100),
+                                        size: const Size(100, 100),
+                                        isImageUploader: true,
+                                        scaffoldMessengerKey:
+                                            scaffoldMessengerKey,
                                       ),
                                     ),
                                     // Badge(
@@ -383,14 +383,14 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Text? _getRetrieveErrorWidget() {
-    if (_retrieveDataError != null) {
-      final Text result = Text(_retrieveDataError!);
-      _retrieveDataError = null;
-      return result;
-    }
-    return null;
-  }
+  // Text? _getRetrieveErrorWidget() {
+  //   if (_retrieveDataError != null) {
+  //     final Text result = Text(_retrieveDataError!);
+  //     _retrieveDataError = null;
+  //     return result;
+  //   }
+  //   return null;
+  // }
 }
 
 typedef OnPickImageCallback = void Function(
