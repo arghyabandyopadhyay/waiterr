@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../theme.dart';
+
 class ErrorPageFiveHundred extends StatelessWidget {
   const ErrorPageFiveHundred({Key? key}) : super(key: key);
   @override
@@ -80,6 +82,8 @@ class NoRunningOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:
+          GlobalTheme.internalScaffoldResizeToAvoidBottomInset,
       backgroundColor: Colors.transparent,
       body: Container(
           margin: const EdgeInsets.all(50),
@@ -106,6 +110,8 @@ class NoDataError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:
+          GlobalTheme.internalScaffoldResizeToAvoidBottomInset,
       backgroundColor: Colors.transparent,
       body: Container(
           margin: const EdgeInsets.all(50),
