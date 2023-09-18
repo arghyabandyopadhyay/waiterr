@@ -26,6 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../global_class.dart';
+import '../../widgets/search_text_field.dart';
 
 class MenuPageAll extends StatefulWidget {
   final RunningOrderModel addOrderData;
@@ -606,17 +607,9 @@ class _MenuPageAllState extends State<MenuPageAll> {
                                   Icons.close,
                                   color: Colors.black,
                                 );
-                                appBarTitle = TextFormField(
-                                  autofocus: true,
-                                  controller: _searchController,
-                                  style: const TextStyle(fontSize: 15),
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      hintText: "Search...",
-                                      hintStyle: TextStyle(fontSize: 15)),
-                                  onChanged: searchOperation,
-                                );
+                                appBarTitle = SearchTextField(
+                                    searchController: _searchController,
+                                    searchOperation: searchOperation);
                                 appbarIcon = const Icon(
                                   Icons.search,
                                   color: Colors.black,
