@@ -65,9 +65,10 @@ class DrawerContent extends StatelessWidget {
                   ],
                 ),
                 const ProfileImageWidget(
-                  radius: 30,
-                  size: Size(50, 50),
-                ),
+                    radius: 30,
+                    size: Size(50, 50),
+                    isImageUploader: false,
+                    scaffoldMessengerKey: null),
               ],
             ),
           ),
