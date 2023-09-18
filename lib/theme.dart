@@ -20,6 +20,9 @@ class GlobalTheme {
       15.0, // Move to bottom 10 Vertically
     ),
   );
+
+  static const bool internalScaffoldResizeToAvoidBottomInset = false;
+
   static const Color borderColor = Color(0XFF808080);
   static const Color waiterrPrimaryText = Color(0XFF808080);
   static const Color waiterrSecondaryText = Colors.black;
@@ -145,6 +148,9 @@ class GlobalTextStyles {
       fontWeight: FontWeight.w900,
       fontFamily: 'Dancing',
       color: GlobalTheme.primaryGradient2[1]);
+
+  static TextStyle searchTextStyle = const TextStyle(
+      fontSize: 15, fontWeight: FontWeight.w700, color: Colors.black);
 }
 
 class WaiterrThemeDatas {
