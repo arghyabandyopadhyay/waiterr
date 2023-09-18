@@ -4,7 +4,7 @@ class UserDetailsModel {
   final String mobileNumber;
   final int roleID;
   final bool isActive;
-  final String? profileUrl;
+  String? profileUrl;
   String? deviceToken;
   String? lastLogin;
 
@@ -25,7 +25,7 @@ class UserDetailsModel {
         mobileNumber: json['MobileNumber'],
         roleID: json['RoleId'],
         isActive: json['IsActive'] == 1,
-        profileUrl: json['ProfileURL'],
+        profileUrl: json['ProfileUrl'],
         deviceToken: json['DeviceToken'],
         lastLogin: json['last_login']);
   }
@@ -36,7 +36,7 @@ class UserDetailsModel {
         "MobileNumber": mobileNumber,
         "RoleId": roleID,
         "IsActive": (isActive) ? 1 : 0,
-        "ProfileURL": profileUrl,
+        "ProfileUrl": profileUrl,
         "DeviceToken": deviceToken,
         "last_login": lastLogin
       };
