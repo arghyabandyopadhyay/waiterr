@@ -10,6 +10,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../Model/outlet_configuration_model.dart';
 import '../../../Modules/universal_module.dart';
 import '../../../theme.dart';
+import '../../../widgets/search_text_field.dart';
 
 class OutletManagerPage extends StatefulWidget {
   const OutletManagerPage({Key? key}) : super(key: key);
@@ -119,6 +120,8 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                   ),
                 ),
                 Scaffold(
+                  resizeToAvoidBottomInset:
+                      GlobalTheme.internalScaffoldResizeToAvoidBottomInset,
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
                     centerTitle: true,
@@ -137,20 +140,9 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                             setState(() {
                               if (icon.icon == Icons.search) {
                                 icon = const Icon(Icons.close);
-                                appBarTitle = TextFormField(
-                                  autofocus: true,
-                                  controller: _searchController,
-                                  style: const TextStyle(fontSize: 15),
-                                  decoration: const InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                      ),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      hintText: "Search...",
-                                      hintStyle: TextStyle(fontSize: 15)),
-                                  onChanged: searchOperation,
-                                );
+                                appBarTitle = SearchTextField(
+                                    searchController: _searchController,
+                                    searchOperation: searchOperation);
                                 _handleSearchStart();
                               } else {
                                 _handleSearchEnd();
