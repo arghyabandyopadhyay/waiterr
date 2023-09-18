@@ -10,11 +10,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:waiterr/widgets/search_text_field.dart';
 import '../../../Model/filter_item_model.dart';
 import '../../../Model/outlet_configuration_model.dart';
 import '../../../Modules/universal_module.dart';
 import '../../../global_class.dart';
 import '../../../theme.dart';
+import '../../../widgets/confirmation_dialog.dart';
 import '../../../widgets/expandable_group_list.dart';
 
 class StockGroupManagerPage extends StatefulWidget {
@@ -174,11 +176,29 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                         await connectivity.checkConnectivity().then((value) => {
                               if (value != ConnectivityResult.none)
                                 {
-                                  postForMenuGroupItemModification(
-                                          "", "", items[index].id, "Delete")
-                                      .then((value) =>
-                                          {items.remove(items[index])})
-                                }
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return ConfirmationDialog(
+                                          headerText: "Delete permanently?",
+                                          question:
+                                              "Are you sure, to delete ${items[index].stockGroup}?",
+                                          onTapYes: () {
+                                            postForMenuGroupItemModification(
+                                                    "",
+                                                    "",
+                                                    items[index].id,
+                                                    "Delete")
+                                                .then((value) => {
+                                                      items.remove(items[index])
+                                                    });
+                                          },
+                                          onTapNo: () {
+                                            Navigator.pop(context);
+                                          },
+                                        );
+                                      })
+                                },
                             });
                       },
                     ),
@@ -238,6 +258,8 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                   ),
                 ),
                 Scaffold(
+                  resizeToAvoidBottomInset:
+                      GlobalTheme.internalScaffoldResizeToAvoidBottomInset,
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
                     centerTitle: true,
@@ -256,20 +278,9 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                             setState(() {
                               if (icon.icon == Icons.search) {
                                 icon = const Icon(Icons.close);
-                                appBarTitle = TextFormField(
-                                  autofocus: true,
-                                  controller: _searchController,
-                                  style: const TextStyle(fontSize: 15),
-                                  decoration: const InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                      ),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      hintText: "Search...",
-                                      hintStyle: TextStyle(fontSize: 15)),
-                                  onChanged: searchOperation,
-                                );
+                                appBarTitle = SearchTextField(
+                                    searchController: _searchController,
+                                    searchOperation: searchOperation);
                                 _handleSearchStart();
                               } else {
                                 _handleSearchEnd();
@@ -480,8 +491,21 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                                                 {
                                                                                   if (value != ConnectivityResult.none)
                                                                                     {
-                                                                                      postForMenuGroupItemModification("", "", searchResult[index].id, "Delete").then((value) => {
-                                                                                            searchResult.remove(searchResult[index])
+                                                                                      showDialog(
+                                                                                          context: context,
+                                                                                          builder: (BuildContext context) {
+                                                                                            return ConfirmationDialog(
+                                                                                              headerText: "Delete permanently?",
+                                                                                              question: "Are you sure, to delete ${searchResult[index].stockGroup}?",
+                                                                                              onTapYes: () {
+                                                                                                postForMenuGroupItemModification("", "", searchResult[index].id, "Delete").then((value) => {
+                                                                                                      searchResult.remove(searchResult[index])
+                                                                                                    });
+                                                                                              },
+                                                                                              onTapNo: () {
+                                                                                                Navigator.pop(context);
+                                                                                              },
+                                                                                            );
                                                                                           })
                                                                                     }
                                                                                 });
