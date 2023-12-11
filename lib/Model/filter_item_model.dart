@@ -1,6 +1,6 @@
 class FilterItemModel {
   final String id;
-  final String? image;
+  String? image;
   final String? stockGroup;
   final String masterFilter;
   final String outletId;

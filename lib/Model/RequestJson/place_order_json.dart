@@ -31,9 +31,7 @@ class PlaceOrderJson {
       this.userRole});
 
   Map toJson() {
-    List<Map>? menuList = this.menuList != null
-        ? this.menuList!.map((i) => i.toJson()).toList()
-        : null;
+    List<Map>? menuList = this.menuList?.map((i) => i.toJson()).toList();
     return {
       'SalePointType': salePointType,
       'SalePointName': salePointName,

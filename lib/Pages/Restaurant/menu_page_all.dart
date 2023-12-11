@@ -241,7 +241,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                         outletId: "",
                         outletName: "",
                         image:
-                            "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/all.png",
+                            "https://firebasestorage.googleapis.com/v0/b/wiaterr-3fff2.appspot.com/o/StockGroupPictures%2Fall.png?alt=media&token=a1b58368-0fc4-459a-bfc1-19d8fb818152",
                         stockGroup: "All",
                         masterFilter: "All")),
                 if (favourites.isNotEmpty)
@@ -252,7 +252,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                           outletId: "",
                           outletName: "",
                           image:
-                              "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/previousorder.png",
+                              "https://firebasestorage.googleapis.com/v0/b/wiaterr-3fff2.appspot.com/o/StockGroupPictures%2Fpreviousorder.png?alt=media&token=72d918d1-0d62-4b8e-aee4-451108acae0a",
                           stockGroup: "Previous Orders",
                           masterFilter: "previousorders")),
                 setState(() {
@@ -310,7 +310,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                 outletId: "",
                 outletName: "",
                 image:
-                    "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/all.png",
+                    "https://firebasestorage.googleapis.com/v0/b/wiaterr-3fff2.appspot.com/o/StockGroupPictures%2Fall.png?alt=media&token=a1b58368-0fc4-459a-bfc1-19d8fb818152",
                 stockGroup: "All",
                 masterFilter: "All"));
       }
@@ -323,7 +323,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                 outletId: "",
                 outletName: "",
                 image:
-                    "https://github.com/arghyabandyopadhyay/waiterr/raw/main/assets/img/previousorder.png",
+                    "https://firebasestorage.googleapis.com/v0/b/wiaterr-3fff2.appspot.com/o/StockGroupPictures%2Fpreviousorder.png?alt=media&token=72d918d1-0d62-4b8e-aee4-451108acae0a",
                 stockGroup: "Previous Orders",
                 masterFilter: "previousorders"));
       } else if (favourites.isEmpty &&

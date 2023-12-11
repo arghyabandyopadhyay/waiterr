@@ -117,7 +117,8 @@ class EndDrawerContent extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: Icon(drawerItems![index].iconData),
-                  title: Text(drawerItems![index].title!, textScaleFactor: 1),
+                  title: Text(drawerItems![index].title!,
+                      textScaler: const TextScaler.linear(1)),
                   onTap: drawerItems![index].onTap,
                 );
               }),

@@ -4,6 +4,7 @@ import 'package:waiterr/Modules/universal_module.dart';
 import 'package:waiterr/widgets/chips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
+import 'package:waiterr/widgets/circular_image_widget.dart';
 import '../../../Model/filter_item_model.dart';
 import '../../../Model/outlet_configuration_model.dart';
 import '../../../theme.dart';
@@ -51,7 +52,8 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
           await postForMenuGroupItemModification(
                   name.text,
                   _selectedOutlet.id,
-                  widget.isEdit ? widget.filterItem!.id : "",
+                  widget.filterItem?.id ?? "",
+                  widget.filterItem?.image ?? "",
                   widget.isEdit ? "Edit" : "Create")
               .then((int resultCode) async => {
                     if (resultCode == 500)
@@ -193,61 +195,120 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
                                         : null,
                                   ),
                                 ),
-                                const Text("Outlets:"),
-                                SizedBox(
-                                  height: 50,
-                                  child: widget.isEdit
-                                      ? ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: 1,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            return Chips(
-                                                item: widget
-                                                    .filterItem!.outletName,
-                                                index: 0,
-                                                indexSelected: 0,
-                                                onSelected: (value) {
-                                                  setState(() {});
-                                                });
-                                          })
-                                      : ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: outletConfiguration.length,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            return Chips(
-                                                item: outletConfiguration[index]
-                                                    .outletName,
-                                                index: index,
-                                                indexSelected:
-                                                    _indexSelectedOutlet,
-                                                onSelected: (value) {
-                                                  setState(() {
-                                                    _indexSelectedOutlet =
-                                                        index;
-                                                    _selectedOutlet =
-                                                        outletConfiguration[
-                                                            index];
-                                                    if (value) {
-                                                      _isLoadingTakeaway =
-                                                          false;
-                                                    }
-                                                    //get list of table
-                                                  });
-                                                });
-                                          },
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Flexible(
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.6,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text("Outlets:"),
+                                            SizedBox(
+                                              height: 50,
+                                              child: widget.isEdit
+                                                  ? ListView.builder(
+                                                      shrinkWrap: true,
+                                                      itemCount: 1,
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return Chips(
+                                                            item: widget
+                                                                .filterItem!
+                                                                .outletName,
+                                                            index: 0,
+                                                            indexSelected: 0,
+                                                            onSelected:
+                                                                (value) {
+                                                              setState(() {});
+                                                            });
+                                                      })
+                                                  : ListView.builder(
+                                                      shrinkWrap: true,
+                                                      itemCount:
+                                                          outletConfiguration
+                                                              .length,
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return Chips(
+                                                            item:
+                                                                outletConfiguration[
+                                                                        index]
+                                                                    .outletName,
+                                                            index: index,
+                                                            indexSelected:
+                                                                _indexSelectedOutlet,
+                                                            onSelected:
+                                                                (value) {
+                                                              setState(() {
+                                                                _indexSelectedOutlet =
+                                                                    index;
+                                                                _selectedOutlet =
+                                                                    outletConfiguration[
+                                                                        index];
+                                                                if (value) {
+                                                                  _isLoadingTakeaway =
+                                                                      false;
+                                                                }
+                                                                //get list of table
+                                                              });
+                                                            });
+                                                      },
+                                                    ),
+                                            ),
+                                            sizedBoxSpace,
+                                            TextFormField(
+                                              textCapitalization:
+                                                  TextCapitalization.words,
+                                              controller: name,
+                                              style: const TextStyle(),
+                                              decoration: const InputDecoration(
+                                                labelText: "Stock Group",
+                                              ),
+                                              validator: _validateName,
+                                            ),
+                                          ],
                                         ),
-                                ),
-                                sizedBoxSpace,
-                                TextFormField(
-                                  textCapitalization: TextCapitalization.words,
-                                  controller: name,
-                                  style: const TextStyle(),
-                                  decoration: const InputDecoration(
-                                    labelText: "Stock Group",
-                                  ),
-                                  validator: _validateName,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: CircularImageWidget(
+                                        radius: 50,
+                                        size: const Size(100, 100),
+                                        isImageUploader: true,
+                                        imageUrl:
+                                            widget.filterItem?.image ?? "",
+                                        imageId: widget.filterItem?.id ?? "",
+                                        directory: "StockGroupPictures",
+                                        updateUrl: (imageUrl) async {
+                                          widget.filterItem?.image = imageUrl;
+                                          if (widget.isEdit) {
+                                            await postForMenuGroupItemModification(
+                                                name.text,
+                                                _selectedOutlet.id,
+                                                widget.filterItem?.id ?? "",
+                                                widget.filterItem?.image ?? "",
+                                                "Edit");
+                                          }
+                                          setState(() {});
+                                        },
+                                        scaffoldMessengerKey:
+                                            scaffoldMessengerKey,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 sizedBoxSpace,
                               ],

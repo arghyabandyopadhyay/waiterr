@@ -188,6 +188,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                     "",
                                                     "",
                                                     items[index].id,
+                                                    "",
                                                     "Delete")
                                                 .then((value) => {
                                                       items.remove(items[index])
@@ -498,7 +499,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                                                               headerText: "Delete permanently?",
                                                                                               question: "Are you sure, to delete ${searchResult[index].stockGroup}?",
                                                                                               onTapYes: () {
-                                                                                                postForMenuGroupItemModification("", "", searchResult[index].id, "Delete").then((value) => {
+                                                                                                postForMenuGroupItemModification("", "", searchResult[index].id, "", "Delete").then((value) => {
                                                                                                       searchResult.remove(searchResult[index])
                                                                                                     });
                                                                                               },

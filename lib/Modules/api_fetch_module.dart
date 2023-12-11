@@ -746,13 +746,13 @@ Future<List<FilterItemModel>> postForMenuGroupItem(String? outletId) async {
 
 //ready
 Future<int> postForMenuGroupItemModification(String stockGroup, String outletID,
-    String? id, String modificationType) async {
+    String? id, String imageUrl, String modificationType) async {
   RequestJson requestJson =
       RequestJson(requestType: "Waiterr Menu Group", parameterList: [
     Parameter(pKey: "StockGroup", pValue: stockGroup),
     Parameter(pKey: "OutletId", pValue: outletID),
     Parameter(pKey: "id", pValue: id),
-    Parameter(pKey: "ImageUrl", pValue: null),
+    Parameter(pKey: "ImageUrl", pValue: imageUrl),
     Parameter(pKey: "ModificationType", pValue: modificationType)
   ]);
   UniversalJson universalJson = UniversalJson(

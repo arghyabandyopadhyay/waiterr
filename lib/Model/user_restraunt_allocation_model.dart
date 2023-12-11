@@ -38,9 +38,8 @@ class UserRestrauntAllocationModel {
   }
 
   Map toJson() {
-    List<Map>? outletConfiguration = this.outletConfiguration != null
-        ? this.outletConfiguration!.map((i) => i.toJson()).toList()
-        : null;
+    List<Map>? outletConfiguration =
+        this.outletConfiguration?.map((i) => i.toJson()).toList();
     return {
       'clientName': clientName,
       'logoURL': logoURL,
