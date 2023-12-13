@@ -54,7 +54,7 @@ class KOTProgressStatusIndicatorState
                     ? GlobalTheme.kotActiveColor
                     : GlobalTheme.kotInActiveColor),
             Container(
-              width: MediaQuery.of(context).size.width / 6.5,
+              width: MediaQuery.of(context).size.width / 6.6,
               alignment: Alignment.center,
               child: Text(
                 'Order Placed',
@@ -78,7 +78,7 @@ class KOTProgressStatusIndicatorState
             ),
             Container(
               height: 2,
-              width: MediaQuery.of(context).size.width / 12.25,
+              width: MediaQuery.of(context).size.width / 12.4,
               margin: const EdgeInsets.all(0),
               padding: const EdgeInsets.all(0),
               color: currentStep >= 0
@@ -96,7 +96,7 @@ class KOTProgressStatusIndicatorState
                     ? GlobalTheme.orderApprovedColor
                     : GlobalTheme.kotInActiveColor),
             Container(
-              width: MediaQuery.of(context).size.width / 6.5,
+              width: MediaQuery.of(context).size.width / 6.6,
               alignment: Alignment.center,
               child: Text(
                 'Order Approved',
@@ -120,7 +120,7 @@ class KOTProgressStatusIndicatorState
             ),
             Container(
               height: 2,
-              width: MediaQuery.of(context).size.width / 12.25,
+              width: MediaQuery.of(context).size.width / 12.4,
               margin: const EdgeInsets.all(0),
               padding: const EdgeInsets.all(0),
               color: currentStep >= 1
@@ -138,7 +138,7 @@ class KOTProgressStatusIndicatorState
                     ? GlobalTheme.orderProcessedColor
                     : GlobalTheme.kotInActiveColor),
             Container(
-              width: MediaQuery.of(context).size.width / 6.5,
+              width: MediaQuery.of(context).size.width / 6.6,
               alignment: Alignment.center,
               child: Text(
                 'Order Prepared',
@@ -162,7 +162,7 @@ class KOTProgressStatusIndicatorState
             ),
             Container(
               height: 2,
-              width: MediaQuery.of(context).size.width / 12.25,
+              width: MediaQuery.of(context).size.width / 12.4,
               margin: const EdgeInsets.all(0),
               padding: const EdgeInsets.all(0),
               color: currentStep >= 2
@@ -180,7 +180,7 @@ class KOTProgressStatusIndicatorState
                     ? GlobalTheme.orderDeliveredColor
                     : GlobalTheme.kotInActiveColor),
             Container(
-              width: MediaQuery.of(context).size.width / 6.5,
+              width: MediaQuery.of(context).size.width / 6.6,
               alignment: Alignment.center,
               child: Text(
                 'Order Delivered',
