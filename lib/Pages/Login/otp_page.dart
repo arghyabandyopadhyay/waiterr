@@ -12,7 +12,7 @@ import 'package:waiterr/widgets/loading_indicator.dart';
 
 class OtpPage extends StatefulWidget {
   static const String routeName = "otpPage";
-  const OtpPage({Key? key}) : super(key: key);
+  const OtpPage({super.key});
   @override
   State<OtpPage> createState() => _OtpPageState();
 }

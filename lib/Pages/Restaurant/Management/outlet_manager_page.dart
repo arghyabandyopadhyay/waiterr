@@ -13,7 +13,7 @@ import '../../../theme.dart';
 import '../../../widgets/search_text_field.dart';
 
 class OutletManagerPage extends StatefulWidget {
-  const OutletManagerPage({Key? key}) : super(key: key);
+  const OutletManagerPage({super.key});
   @override
   State<OutletManagerPage> createState() => _OutletManagerPageState();
 }
@@ -159,7 +159,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                       //     await connectivity
                       //         .checkConnectivity()
                       //         .then((value) => {
-                      //               if (value != ConnectivityResult.none)
+                      //               if (value.isNotEmpty)
                       //                 {
                       //                   setState(() {
                       //                     _isLoading = true;
@@ -220,9 +220,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                                                   await connectivity
                                                       .checkConnectivity()
                                                       .then((value) => {
-                                                            if (value !=
-                                                                ConnectivityResult
-                                                                    .none)
+                                                            if (value.isNotEmpty)
                                                               {
                                                                 setState(() {
                                                                   _isLoading =
@@ -303,7 +301,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                                                                             .checkConnectivity()
                                                                             .then((value) =>
                                                                                 {
-                                                                                  if (value != ConnectivityResult.none)
+                                                                                  if (value.isNotEmpty)
                                                                                     {
                                                                                       postForOutletModification("", "", searchResult[index].id, "Delete").then((value) => {
                                                                                             if (value == 200)
@@ -362,7 +360,7 @@ class _OutletManagerPageState extends State<OutletManagerPage> {
                                                                         .checkConnectivity()
                                                                         .then((value) =>
                                                                             {
-                                                                              if (value != ConnectivityResult.none)
+                                                                              if (value.isNotEmpty)
                                                                                 {
                                                                                   postForOutletModification("", "", outlets![index].id, "Delete").then((value) => {
                                                                                         if (value == 200)

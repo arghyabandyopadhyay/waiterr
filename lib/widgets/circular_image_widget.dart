@@ -24,7 +24,7 @@ class CircularImageWidget extends StatefulWidget {
   final Function(String) updateUrl;
   final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
   const CircularImageWidget(
-      {Key? key,
+      {super.key,
       required this.radius,
       required this.size,
       required this.isImageUploader,
@@ -32,8 +32,7 @@ class CircularImageWidget extends StatefulWidget {
       required this.directory,
       required this.imageId,
       required this.updateUrl,
-      this.scaffoldMessengerKey})
-      : super(key: key);
+      this.scaffoldMessengerKey});
   @override
   State<CircularImageWidget> createState() => _CircularImageWidgetState();
 }

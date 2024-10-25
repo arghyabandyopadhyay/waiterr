@@ -4,12 +4,11 @@ import 'package:waiterr/Model/waiter_details_model.dart';
 
 class WaiterDetailsCard extends StatelessWidget {
   const WaiterDetailsCard(
-      {Key? key,
+      {super.key,
       required this.waiter,
       required this.onMiddleTap,
       required this.onDeleteClicked,
-      required this.onCallClicked})
-      : super(key: key);
+      required this.onCallClicked});
   final WaiterDetailsModel waiter;
   final Function() onMiddleTap;
   final Function() onDeleteClicked;

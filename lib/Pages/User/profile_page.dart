@@ -10,7 +10,7 @@ import '../../theme.dart';
 
 class ProfilePage extends StatefulWidget {
   final List<List<dynamic>>? data;
-  const ProfilePage({Key? key, this.data}) : super(key: key);
+  const ProfilePage({super.key, this.data});
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }

@@ -5,7 +5,7 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 import '../../../theme.dart';
 
 class AddTaxClassPage extends StatefulWidget {
-  const AddTaxClassPage({Key? key}) : super(key: key);
+  const AddTaxClassPage({super.key});
   @override
   State<AddTaxClassPage> createState() => _AddTaxClassPageState();
 }
@@ -45,7 +45,7 @@ class _AddTaxClassPageState extends State<AddTaxClassPage> {
                         globalShowInSnackBar("Something went wrong", null,
                             scaffoldMessengerKey, null, null)
                       }
-                    else
+                    else if (context.mounted)
                       {Navigator.pop(context)}
                   });
         } catch (E) {

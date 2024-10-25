@@ -5,7 +5,7 @@ import '../global_class.dart';
 
 class KOTDetailsWidget extends StatelessWidget {
   final KOTModel? list;
-  const KOTDetailsWidget({Key? key, this.list}) : super(key: key);
+  const KOTDetailsWidget({super.key, this.list});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,7 +23,7 @@ class KOTDetailsWidget extends StatelessWidget {
 
 class KOTDetailsList extends StatelessWidget {
   final KOTModel? list;
-  const KOTDetailsList({Key? key, this.list}) : super(key: key);
+  const KOTDetailsList({super.key, this.list});
   @override
   Widget build(BuildContext context) {
     try {

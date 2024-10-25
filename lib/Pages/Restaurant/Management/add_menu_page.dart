@@ -13,8 +13,7 @@ import '../../../theme.dart';
 class AddMenuPage extends StatefulWidget {
   final MenuItemModel? menuItemModel;
   final bool isEdit;
-  const AddMenuPage({Key? key, this.menuItemModel, required this.isEdit})
-      : super(key: key);
+  const AddMenuPage({super.key, this.menuItemModel, required this.isEdit});
   @override
   State<AddMenuPage> createState() => _AddMenuPageState();
 }
@@ -136,7 +135,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
                         globalShowInSnackBar("Something went wrong", null,
                             scaffoldMessengerKey, null, null)
                       }
-                    else
+                    else if (context.mounted)
                       {Navigator.pop(context)}
                   });
         } catch (E) {

@@ -11,11 +11,10 @@ class BottomSheetContent extends StatefulWidget {
   final String description;
   // This widget is the root of your application.
   const BottomSheetContent(
-      {Key? key,
+      {super.key,
       required this.jsonData,
       required this.title,
-      required this.description})
-      : super(key: key);
+      required this.description});
 
   @override
   State<BottomSheetContent> createState() => _BottomSheetContent();

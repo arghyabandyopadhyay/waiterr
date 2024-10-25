@@ -17,7 +17,7 @@ import 'Product/product_specification.dart';
 
 class ProductPage extends StatefulWidget {
   final MenuItemModel item;
-  const ProductPage({Key? key, required this.item}) : super(key: key);
+  const ProductPage({super.key, required this.item});
   @override
   State<ProductPage> createState() => _ProductPageState();
 }

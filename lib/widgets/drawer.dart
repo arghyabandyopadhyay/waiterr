@@ -6,8 +6,7 @@ import 'profile_image_widget.dart';
 
 class DrawerContent extends StatelessWidget {
   const DrawerContent(
-      {Key? key, this.drawerItems, this.alternativeName, this.alternativeMno})
-      : super(key: key);
+      {super.key, this.drawerItems, this.alternativeName, this.alternativeMno});
   final List<DrawerActionModel>? drawerItems;
   final String? alternativeName;
   final String? alternativeMno;

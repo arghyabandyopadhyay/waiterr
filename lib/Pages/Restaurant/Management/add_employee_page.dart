@@ -14,8 +14,7 @@ import '../../../theme.dart';
 class AddEmployeePage extends StatefulWidget {
   final WaiterDetailsModel? waiterDetail;
   final bool isEdit;
-  const AddEmployeePage({Key? key, required this.isEdit, this.waiterDetail})
-      : super(key: key);
+  const AddEmployeePage({super.key, required this.isEdit, this.waiterDetail});
   @override
   State<AddEmployeePage> createState() => _AddEmployeePageState();
 }
@@ -81,7 +80,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                         globalShowInSnackBar("Something went wrong", null,
                             scaffoldMessengerKey, null, null)
                       }
-                    else
+                    else if (context.mounted)
                       {Navigator.pop(context)}
                   });
         } catch (E) {
@@ -299,8 +298,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                                         await connectivity
                                             .checkConnectivity()
                                             .then((value) async => {
-                                                  if (value !=
-                                                      ConnectivityResult.none)
+                                                  if (value.isNotEmpty)
                                                     {
                                                       setState(() {
                                                         _isLoading = true;

@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 
 class AddImagePage extends StatefulWidget {
   final Function(String thumnailFilePath) callback;
-  const AddImagePage({Key? key, required this.callback}) : super(key: key);
+  const AddImagePage({super.key, required this.callback});
   @override
   State<AddImagePage> createState() => _AddImagePageState();
 }

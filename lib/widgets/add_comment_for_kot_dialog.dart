@@ -10,12 +10,11 @@ class AddCommentForKOTDialog extends StatefulWidget {
   final CommentForKotSuggestionsModel previousValue;
   final String itemId;
   const AddCommentForKOTDialog(
-      {Key? key,
+      {super.key,
       required this.onTapAdd,
       required this.setCommentForKOT,
       required this.previousValue,
-      required this.itemId})
-      : super(key: key);
+      required this.itemId});
   @override
   State<AddCommentForKOTDialog> createState() => _AddCommentForKOTDialogState();
 }

@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
-
 class VendorCard extends StatelessWidget {
-  const VendorCard({Key? key, this.item, required this.onTap})
-      : super(key: key);
+  const VendorCard({super.key, this.item, required this.onTap});
   final UserRestrauntAllocationModel? item;
   final Function() onTap;
   @override

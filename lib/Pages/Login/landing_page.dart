@@ -8,7 +8,7 @@ import '../../widgets/welcome_to_waiterr.dart';
 
 class LandingPage extends StatefulWidget {
   static const String routeName = "loginPage";
-  const LandingPage({Key? key}) : super(key: key);
+  const LandingPage({super.key});
   @override
   State<LandingPage> createState() => _LandingPageState();
 }

@@ -7,8 +7,8 @@ class ExpandableGroupList<T> extends StatefulWidget {
   final List<List<T>>? list;
   final Function? header;
   final Function? buildItems;
-  const ExpandableGroupList({Key? key, this.list, this.buildItems, this.header})
-      : super(key: key);
+  const ExpandableGroupList(
+      {super.key, this.list, this.buildItems, this.header});
   @override
   State<ExpandableGroupList> createState() => _ExpandableGroupListState();
 }

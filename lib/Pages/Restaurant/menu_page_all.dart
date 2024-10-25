@@ -33,8 +33,7 @@ class MenuPageAll extends StatefulWidget {
   final bool isWaiter;
   // This widget is the root of your application.
   const MenuPageAll(
-      {Key? key, required this.addOrderData, required this.isWaiter})
-      : super(key: key);
+      {super.key, required this.addOrderData, required this.isWaiter});
   @override
   State<MenuPageAll> createState() => _MenuPageAllState();
 }
@@ -632,7 +631,7 @@ class _MenuPageAllState extends State<MenuPageAll> {
                           await connectivity
                               .checkConnectivity()
                               .then((value) => {
-                                    if (value != ConnectivityResult.none)
+                                    if (value.isNotEmpty)
                                       {
                                         Navigator.pushReplacement(
                                             context,
@@ -1191,11 +1190,10 @@ class _MenuPageAllState extends State<MenuPageAll> {
 
 class ViewCartButton extends StatefulWidget {
   const ViewCartButton(
-      {Key? key,
+      {super.key,
       this.totalItems,
       this.totalCartAmount,
-      required this.onPressed})
-      : super(key: key);
+      required this.onPressed});
   final double? totalItems;
   final double? totalCartAmount;
   final Function() onPressed;

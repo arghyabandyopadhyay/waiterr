@@ -22,7 +22,7 @@ import 'add_menu_page.dart';
 
 class MenuManagerPage extends StatefulWidget {
   // This widget is the root of your application.
-  const MenuManagerPage({Key? key}) : super(key: key);
+  const MenuManagerPage({super.key});
   @override
   State<MenuManagerPage> createState() => _MenuManagerPageState();
 }
@@ -294,7 +294,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                       //     await connectivity
                       //         .checkConnectivity()
                       //         .then((value) => {
-                      //               if (value != ConnectivityResult.none)
+                      //               if (value.isNotEmpty)
                       //                 {_futureproductList = fetchList()}
                       //             });
                       //   },
@@ -348,9 +348,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                         await connectivity
                                                             .checkConnectivity()
                                                             .then((value) => {
-                                                                  if (value !=
-                                                                      ConnectivityResult
-                                                                          .none)
+                                                                  if (value.isNotEmpty)
                                                                     {
                                                                       setState(
                                                                           () {
@@ -442,9 +440,7 @@ class _MenuManagerPageState extends State<MenuManagerPage> {
                                                     await connectivity
                                                         .checkConnectivity()
                                                         .then((value) => {
-                                                              if (value !=
-                                                                  ConnectivityResult
-                                                                      .none)
+                                                              if (value.isNotEmpty)
                                                                 {
                                                                   setState(() {
                                                                     _isLoading =

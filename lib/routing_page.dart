@@ -26,7 +26,7 @@ import 'Pages/CautionPages/error_page.dart';
 
 class RoutingPage extends StatefulWidget {
   final BuildContext context;
-  const RoutingPage({Key? key, required this.context}) : super(key: key);
+  const RoutingPage({super.key, required this.context});
   @override
   State<RoutingPage> createState() => _RoutingPageState();
 }
@@ -53,33 +53,34 @@ class _RoutingPageState extends State<RoutingPage> {
         .isAlreadyAuthenticated()
         .then((result) async {
       if (result) {
-        await _readUserDetails()
-            .then((UserLoginModel? offlineUserLoginDetail) async => {
-                  if (offlineUserLoginDetail != null)
-                    {
-                      UserDetail.loginDetail = offlineUserLoginDetail,
-                    }
-                  else
-                    {
-                      UserDetail.loginDetail.mobileNumber =
-                          Provider.of<LoginStore>(widget.context, listen: false)
-                              .firebaseUser!
-                              .phoneNumber!
-                              .replaceAll("+91", ""),
-                      UserDetail.loginDetail.password = "",
-                      UserDetail.loginDetail.token = "",
-                      UserDetail.loginDetail.tokenType = ""
-                    },
-                  await loginAppUserDetail(UserDetail.loginDetail)
-                      .then((UserLoginModel resultLoginDetail) async => {
-                            UserDetail.loginDetail = resultLoginDetail,
-                            if (UserDetail.loginDetail.uid != null)
-                              {
-                                _saveUserDetails(UserDetail.loginDetail),
-                                await getRegistrationDetails(
-                                        resultLoginDetail.uid)
-                                    .then((UserDetailsModel
-                                            resultUserDetail) async =>
+        await _readUserDetails().then((UserLoginModel?
+                offlineUserLoginDetail) async =>
+            {
+              if (offlineUserLoginDetail != null)
+                {
+                  UserDetail.loginDetail = offlineUserLoginDetail,
+                }
+              else
+                {
+                  UserDetail.loginDetail.mobileNumber = widget.context.mounted
+                      ? Provider.of<LoginStore>(widget.context, listen: false)
+                          .firebaseUser!
+                          .phoneNumber!
+                          .replaceAll("+91", "")
+                      : "",
+                  UserDetail.loginDetail.password = "",
+                  UserDetail.loginDetail.token = "",
+                  UserDetail.loginDetail.tokenType = ""
+                },
+              await loginAppUserDetail(UserDetail.loginDetail)
+                  .then((UserLoginModel resultLoginDetail) async => {
+                        UserDetail.loginDetail = resultLoginDetail,
+                        if (UserDetail.loginDetail.uid != null)
+                          {
+                            _saveUserDetails(UserDetail.loginDetail),
+                            await getRegistrationDetails(resultLoginDetail.uid)
+                                .then(
+                                    (UserDetailsModel resultUserDetail) async =>
                                         {
                                           UserDetail.userDetails =
                                               resultUserDetail,
@@ -111,39 +112,39 @@ class _RoutingPageState extends State<RoutingPage> {
                                               widget1 = const IdBlockedPage()
                                             }
                                         })
-                                    .catchError((e) async {
-                                  if (userDetails != null) {
-                                    widget1 = const NoDateErrorPage();
-                                  } else {
-                                    throw e;
-                                  }
-                                })
+                                .catchError((e) async {
+                              if (userDetails != null) {
+                                widget1 = const NoDateErrorPage();
+                              } else {
+                                throw e;
                               }
-                            else
-                              {
-                                await postRegistrationDetails(
-                                        UserDetail.loginDetail.id,
-                                        UserDetail.loginDetail.name,
-                                        UserDetail.loginDetail.mobileNumber,
-                                        deviceToken)
-                                    .then((UserDetailsModel u1) async => {
-                                          UserDetail.userDetails = u1,
-                                          //savedetail
-                                          // _saveUserDetails(u1),
-                                          if (u1.isActive)
-                                            {
-                                              widget1 = const HomePage(),
-                                            }
-                                          else
-                                            {
-                                              //Your Id Is Blocked.
-                                              // _saveOfflineLogin(0),
-                                              widget1 = const IdBlockedPage()
-                                            }
-                                        }),
-                              }
-                          })
-                });
+                            })
+                          }
+                        else
+                          {
+                            await postRegistrationDetails(
+                                    UserDetail.loginDetail.id,
+                                    UserDetail.loginDetail.name,
+                                    UserDetail.loginDetail.mobileNumber,
+                                    deviceToken)
+                                .then((UserDetailsModel u1) async => {
+                                      UserDetail.userDetails = u1,
+                                      //savedetail
+                                      // _saveUserDetails(u1),
+                                      if (u1.isActive)
+                                        {
+                                          widget1 = const HomePage(),
+                                        }
+                                      else
+                                        {
+                                          //Your Id Is Blocked.
+                                          // _saveOfflineLogin(0),
+                                          widget1 = const IdBlockedPage()
+                                        }
+                                    }),
+                          }
+                      })
+            });
       } else {
         // _saveOfflineLogin(100);
         widget1 = const LandingPage();

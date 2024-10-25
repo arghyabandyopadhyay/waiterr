@@ -9,8 +9,7 @@ class MenuDetailsCard extends StatefulWidget {
   final MenuItemModel item;
   final Function() onMiddleTap;
   const MenuDetailsCard(
-      {Key? key, required this.item, required this.onMiddleTap})
-      : super(key: key);
+      {super.key, required this.item, required this.onMiddleTap});
   @override
   State<MenuDetailsCard> createState() => _MenuDetailsCardState();
 }

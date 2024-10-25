@@ -12,7 +12,7 @@ class TabData {
 class ProductTab extends StatelessWidget {
   final MenuItemModel? item;
   final List<TabData> tabs;
-  const ProductTab({Key? key, this.item, required this.tabs}) : super(key: key);
+  const ProductTab({super.key, this.item, required this.tabs});
 
   Widget _buildTabBar() {
     return TabBar(

@@ -35,7 +35,7 @@ Future<UserLoginModel> loginAppUserDetail(UserLoginModel loginDetails) async {
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -69,7 +69,7 @@ Future<String> registerAppUserDetail(UserLoginModel userLoginModel) async {
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -107,7 +107,7 @@ Future<UserDetailsModel> userRegistration(String? id) async {
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -146,7 +146,7 @@ Future<UserDetailsModel> getRegistrationDetails(String? id) async {
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -184,7 +184,7 @@ Future<void> putRegistrationDetails(UserDetailsModel userDetailsModel) async {
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -224,7 +224,7 @@ Future<UserDetailsModel> postRegistrationDetails(
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -263,7 +263,7 @@ Future<CustomerDetailsModel> getCustomerDetails(String mobile) async {
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -308,7 +308,7 @@ Future<List<UserRestrauntAllocationModel>> getUserClientAllocation(
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -351,7 +351,7 @@ Future<CustomerDetailsModel> postCustomerDetails(
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -397,7 +397,7 @@ Future<int> putCustomerDetails(
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -461,7 +461,7 @@ Future<List<RunningOrderModel>> postForRunningOrders(
     if (kDebugMode) print(E);
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }
@@ -893,7 +893,7 @@ Future<String> responseGeneratorPost(String body) async {
   } catch (E) {
     Connectivity connectivity = Connectivity();
     await connectivity.checkConnectivity().then((value) => {
-          if (value == ConnectivityResult.none)
+          if (value.isEmpty)
             {
               throw "NoInternet",
             }

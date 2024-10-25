@@ -160,8 +160,8 @@ class WaiterrThemeDatas {
       scaffoldBackgroundColor: globalTheme.backgroundColor,
       primaryColorLight: globalTheme.primaryColorLight,
       elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.pressed)) {
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.pressed)) {
           return globalTheme.buttonPressedColor;
         } else {
           return globalTheme.buttonColor;
@@ -208,8 +208,8 @@ class WaiterrThemeDatas {
       scaffoldBackgroundColor: globalTheme.backgroundColorDark,
       primaryColorLight: globalTheme.primaryColorLightDark,
       elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.pressed)) {
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.pressed)) {
           return globalTheme.buttonPressedColorDark;
         } else {
           return globalTheme.buttonColorDark;

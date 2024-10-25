@@ -13,7 +13,7 @@ import 'error_page.dart';
 import 'package:waiterr/Model/drawer_action_model.dart';
 
 class NoInternetPage extends StatefulWidget {
-  const NoInternetPage({Key? key}) : super(key: key);
+  const NoInternetPage({super.key});
   @override
   State<NoInternetPage> createState() => _NoInternetPageState();
 }
@@ -45,7 +45,7 @@ class _NoInternetPageState extends State<NoInternetPage> {
                 onPressed: () async {
                   Connectivity connectivity = Connectivity();
                   await connectivity.checkConnectivity().then((value) => {
-                        if (value != ConnectivityResult.none)
+                        if (value.isNotEmpty && context.mounted)
                           {
                             Navigator.pushReplacement(
                                 context,

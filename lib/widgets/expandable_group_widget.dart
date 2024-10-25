@@ -5,6 +5,8 @@
 /// Created: Aug 11th 2020
 /// Copyright (C) 2020 Liem Vo.
 ///
+library;
+
 import 'package:flutter/material.dart';
 
 class ExpandableGroup extends StatefulWidget {
@@ -44,15 +46,14 @@ class ExpandableGroup extends StatefulWidget {
   final Color? headerBackgroundColor;
 
   const ExpandableGroup(
-      {Key? key,
+      {super.key,
       this.isExpanded = false,
       required this.header,
       required this.items,
       this.expandedIcon,
       this.collapsedIcon,
       this.headerEdgeInsets,
-      this.headerBackgroundColor})
-      : super(key: key);
+      this.headerBackgroundColor});
 
   @override
   State<ExpandableGroup> createState() => _ExpandableGroupState();

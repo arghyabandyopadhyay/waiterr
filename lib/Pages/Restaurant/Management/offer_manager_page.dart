@@ -13,7 +13,7 @@ import '../../../theme.dart';
 import '../../../widgets/search_text_field.dart';
 
 class OfferManagerPage extends StatefulWidget {
-  const OfferManagerPage({Key? key}) : super(key: key);
+  const OfferManagerPage({super.key});
   @override
   State<OfferManagerPage> createState() => _OfferManagerPageState();
 }
@@ -153,14 +153,14 @@ class _OfferManagerPageState extends State<OfferManagerPage> {
                     onPressed: () async {
                       Connectivity connectivity = Connectivity();
                       await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
+                            if (value.isNotEmpty)
                               {
                                 setState(() {
                                   _isLoading = true;
                                 }),
                                 _futureoutlets = fetchList()
                               }
-                            else
+                            else if(context.mounted)
                               {
                                 Navigator.of(context).pushAndRemoveUntil(
                                     PageRouteBuilder(
@@ -245,8 +245,7 @@ class _OfferManagerPageState extends State<OfferManagerPage> {
                                                                 .checkConnectivity()
                                                                 .then(
                                                                     (value) => {
-                                                                          if (value !=
-                                                                              ConnectivityResult.none)
+                                                                          if (value.isNotEmpty)
                                                                             {
                                                                               postForOutletModification("", "", searchResult[index].id, "Delete").then((value) => {
                                                                                     if (value == 200)
@@ -298,9 +297,7 @@ class _OfferManagerPageState extends State<OfferManagerPage> {
                                                         await connectivity
                                                             .checkConnectivity()
                                                             .then((value) => {
-                                                                  if (value !=
-                                                                      ConnectivityResult
-                                                                          .none)
+                                                                  if (context.mounted)
                                                                     {
                                                                       postForOutletModification(
                                                                               "",

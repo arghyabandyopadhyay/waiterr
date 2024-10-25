@@ -10,14 +10,13 @@ class FavouritesCard extends StatelessWidget {
   final Function() onLongPressedRemove;
   final Function() onDoubleTap;
   const FavouritesCard(
-      {Key? key,
+      {super.key,
       required this.item,
       required this.onTapAdd,
       required this.onLongPressedAdd,
       required this.onLongPressedRemove,
       required this.onTapRemove,
-      required this.onDoubleTap})
-      : super(key: key);
+      required this.onDoubleTap});
 
   @override
   Widget build(BuildContext context) {

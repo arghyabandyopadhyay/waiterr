@@ -10,8 +10,7 @@ import '../../../theme.dart';
 class AddOutletPage extends StatefulWidget {
   final OutletConfigurationModel? outletDetail;
   final bool isEdit;
-  const AddOutletPage({Key? key, required this.isEdit, this.outletDetail})
-      : super(key: key);
+  const AddOutletPage({super.key, required this.isEdit, this.outletDetail});
   @override
   State<AddOutletPage> createState() => _AddOutletPageState();
 }
@@ -57,7 +56,7 @@ class _AddOutletPageState extends State<AddOutletPage> {
                         globalShowInSnackBar("Something went wrong", null,
                             scaffoldMessengerKey, null, null)
                       }
-                    else
+                    else if (context.mounted)
                       {Navigator.pop(context)}
                   });
         } catch (E) {

@@ -10,12 +10,11 @@ class ConfirmationDialog extends StatelessWidget {
   final String headerText;
   // This widget is the root of your application.
   const ConfirmationDialog(
-      {Key? key,
+      {super.key,
       required this.onTapYes,
       required this.onTapNo,
       required this.question,
-      required this.headerText})
-      : super(key: key);
+      required this.headerText});
 
   @override
   Widget build(BuildContext context) {

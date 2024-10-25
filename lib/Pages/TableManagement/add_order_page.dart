@@ -19,8 +19,7 @@ import '../../theme.dart';
 class AddOrder extends StatefulWidget {
   final QRJSONModel? qrjsonModel;
   final bool isThroughQr;
-  const AddOrder({Key? key, this.qrjsonModel, required this.isThroughQr})
-      : super(key: key);
+  const AddOrder({super.key, this.qrjsonModel, required this.isThroughQr});
   @override
   State<AddOrder> createState() => _AddOrderState();
 }
@@ -499,9 +498,7 @@ class _AddOrderState extends State<AddOrder> {
                                                 await connectivity
                                                     .checkConnectivity()
                                                     .then((value) async => {
-                                                          if (value !=
-                                                              ConnectivityResult
-                                                                  .none)
+                                                          if (value.isNotEmpty)
                                                             {
                                                               setState(() {
                                                                 _isLoadingTakeaway =
@@ -605,8 +602,7 @@ class _AddOrderState extends State<AddOrder> {
                                         await connectivity
                                             .checkConnectivity()
                                             .then((value) async => {
-                                                  if (value !=
-                                                      ConnectivityResult.none)
+                                                  if (value.isNotEmpty)
                                                     {
                                                       setState(() {
                                                         _isLoading = true;

@@ -21,7 +21,7 @@ import '../TableManagement/kot_page.dart';
 
 class OrdersPage extends StatefulWidget {
   final bool showPastOrder;
-  const OrdersPage({Key? key, required this.showPastOrder}) : super(key: key);
+  const OrdersPage({super.key, required this.showPastOrder});
   @override
   State<OrdersPage> createState() => _OrdersPageState();
 }
@@ -155,7 +155,7 @@ class _OrdersPageState extends State<OrdersPage> {
                     onPressed: () async {
                       Connectivity connectivity = Connectivity();
                       await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
+                            if (value.isNotEmpty)
                               {
                                 setState(() {
                                   _isLoading = true;
@@ -163,7 +163,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                 }),
                                 _futureitems = fetchList()
                               }
-                            else
+                            else if (context.mounted)
                               {
                                 Navigator.of(context).pushAndRemoveUntil(
                                     PageRouteBuilder(

@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waiterr/Model/drawer_action_model.dart';
 
 class IdBlockedPage extends StatefulWidget {
-  const IdBlockedPage({Key? key}) : super(key: key);
+  const IdBlockedPage({super.key});
   @override
   State<IdBlockedPage> createState() => _IdBlockedPageState();
 }
@@ -58,7 +58,7 @@ class _IdBlockedPageState extends State<IdBlockedPage> {
                       onPressed: () async {
                         Connectivity connectivity = Connectivity();
                         await connectivity.checkConnectivity().then((value) => {
-                              if (value != ConnectivityResult.none)
+                              if (value.isNotEmpty && context.mounted)
                                 {
                                   Navigator.pushReplacement(
                                       context,

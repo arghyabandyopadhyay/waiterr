@@ -6,8 +6,9 @@ class SearchTextField extends StatelessWidget {
   final TextEditingController searchController;
   final Function(String searchText) searchOperation;
   const SearchTextField(
-      {Key? key, required this.searchController, required this.searchOperation})
-      : super(key: key);
+      {super.key,
+      required this.searchController,
+      required this.searchOperation});
 
   @override
   Widget build(BuildContext context) {

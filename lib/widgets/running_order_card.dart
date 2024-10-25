@@ -5,8 +5,7 @@ import '../theme.dart';
 
 class RunningOrderCard extends StatelessWidget {
   const RunningOrderCard(
-      {Key? key, this.item, required this.onBillPrintedClick})
-      : super(key: key);
+      {super.key, this.item, required this.onBillPrintedClick});
   final RunningOrderModel? item;
   final Function() onBillPrintedClick;
 

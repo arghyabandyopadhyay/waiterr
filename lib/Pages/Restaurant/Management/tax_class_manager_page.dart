@@ -14,7 +14,7 @@ import '../../../widgets/search_text_field.dart';
 import 'add_tax_class_manager_page.dart';
 
 class TaxClassManagerPage extends StatefulWidget {
-  const TaxClassManagerPage({Key? key}) : super(key: key);
+  const TaxClassManagerPage({super.key});
   @override
   State<TaxClassManagerPage> createState() => _TaxClassManagerPageState();
 }
@@ -156,7 +156,7 @@ class _TaxClassManagerPageState extends State<TaxClassManagerPage> {
                       //   onPressed: () async {
                       //     Connectivity connectivity = Connectivity();
                       //     await connectivity.checkConnectivity().then((value) => {
-                      //           if (value != ConnectivityResult.none)
+                      //           if (value.isNotEmpty)
                       //             {
                       //               setState(() {
                       //                 _isLoading = true;

@@ -10,7 +10,7 @@ import '../Restaurant/Management/stock_group_manager_page.dart';
 import '../Restaurant/Management/tax_class_manager_page.dart';
 
 class ClientManagementPage extends StatefulWidget {
-  const ClientManagementPage({Key? key}) : super(key: key);
+  const ClientManagementPage({super.key});
   @override
   State<ClientManagementPage> createState() => _ClientManagementPageState();
 }

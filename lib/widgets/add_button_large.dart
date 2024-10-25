@@ -5,13 +5,12 @@ import 'package:flutter/material.dart';
 class AddButtonLarge extends StatefulWidget {
   // This widget is the root of your application.
   const AddButtonLarge(
-      {Key? key,
+      {super.key,
       this.item,
       required this.onTapAdd,
       required this.onLongPressedAdd,
       required this.onLongPressedRemove,
-      required this.onTapRemove})
-      : super(key: key);
+      required this.onTapRemove});
   final MenuItemModel? item;
   final Function() onTapAdd;
   final Function() onLongPressedAdd;

@@ -4,12 +4,11 @@ import '../theme.dart';
 
 class Chips extends StatelessWidget {
   const Chips(
-      {Key? key,
+      {super.key,
       this.item,
       this.indexSelected,
       required this.onSelected,
-      this.index})
-      : super(key: key);
+      this.index});
 
   final String? item;
   final int? indexSelected;

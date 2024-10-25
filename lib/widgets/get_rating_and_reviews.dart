@@ -5,7 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class GetRatingAndReviews extends StatefulWidget {
   final MenuItemModel item;
-  const GetRatingAndReviews({Key? key, required this.item}) : super(key: key);
+  const GetRatingAndReviews({super.key, required this.item});
   @override
   State<GetRatingAndReviews> createState() => _GetRatingAndReviewsState();
 }

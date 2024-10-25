@@ -30,7 +30,7 @@ import 'kot_page.dart';
 import 'add_order_page.dart';
 
 class TableManagementPage extends StatefulWidget {
-  const TableManagementPage({Key? key}) : super(key: key);
+  const TableManagementPage({super.key});
   @override
   State<TableManagementPage> createState() => _MyTableHomePage();
 }
@@ -203,8 +203,8 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                         await connectivity
                                             .checkConnectivity()
                                             .then((value) => {
-                                                  if (value !=
-                                                      ConnectivityResult.none)
+                                                  if (value.isNotEmpty &&
+                                                      context.mounted)
                                                     {
                                                       Navigator.of(context).push(PageRouteBuilder(
                                                           pageBuilder: (context,
@@ -214,7 +214,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                                   approvalType:
                                                                       "OrderApproved")))
                                                     }
-                                                  else
+                                                  else if (context.mounted)
                                                     {
                                                       Navigator.of(context).pushAndRemoveUntil(
                                                           PageRouteBuilder(
@@ -242,8 +242,8 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                           await connectivity
                                               .checkConnectivity()
                                               .then((value) => {
-                                                    if (value !=
-                                                        ConnectivityResult.none)
+                                                    if (value.isNotEmpty &&
+                                                        context.mounted)
                                                       {
                                                         Navigator.of(context).push(PageRouteBuilder(
                                                             pageBuilder: (context,
@@ -253,7 +253,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                                     approvalType:
                                                                         "OrderPrepared")))
                                                       }
-                                                    else
+                                                    else if (context.mounted)
                                                       {
                                                         Navigator.of(context).pushAndRemoveUntil(
                                                             PageRouteBuilder(
@@ -280,8 +280,8 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                           await connectivity
                                               .checkConnectivity()
                                               .then((value) => {
-                                                    if (value !=
-                                                        ConnectivityResult.none)
+                                                    if (value.isNotEmpty &&
+                                                        context.mounted)
                                                       {
                                                         Navigator.of(context).push(
                                                             PageRouteBuilder(
@@ -293,7 +293,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                                           "OrderProcessed",
                                                                     )))
                                                       }
-                                                    else
+                                                    else if (context.mounted)
                                                       {
                                                         Navigator.of(context).pushAndRemoveUntil(
                                                             PageRouteBuilder(
@@ -549,7 +549,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                   //       await connectivity
                   //           .checkConnectivity()
                   //           .then((value) => {
-                  //                 if (value != ConnectivityResult.none)
+                  //                 if (value.isNotEmpty)
                   //                   {
                   //                     setState(() {
                   //                       _isLoading = true;
@@ -700,7 +700,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                                         .checkConnectivity()
                                                                         .then((value) =>
                                                                             {
-                                                                              if (value != ConnectivityResult.none)
+                                                                              if (value.isNotEmpty)
                                                                                 {
                                                                                   terminateRunningOrders(searchResult[index].id).then((value) => {
                                                                                         if (value == 200)
@@ -770,8 +770,7 @@ class _MyTableHomePage extends State<TableManagementPage> {
                                                                   .then(
                                                                       (value) =>
                                                                           {
-                                                                            if (value !=
-                                                                                ConnectivityResult.none)
+                                                                            if (value.isNotEmpty)
                                                                               {
                                                                                 terminateRunningOrders(items![index].id).then((value) => {
                                                                                       if (value == 200)

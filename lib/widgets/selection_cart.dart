@@ -2,8 +2,7 @@ import 'package:waiterr/theme.dart';
 import 'package:flutter/material.dart';
 
 class SelectionCard extends StatelessWidget {
-  const SelectionCard({Key? key, this.item, this.active, required this.onTap})
-      : super(key: key);
+  const SelectionCard({super.key, this.item, this.active, required this.onTap});
 
   final String? item;
   final bool? active;

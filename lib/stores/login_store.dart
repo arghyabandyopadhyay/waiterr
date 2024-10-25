@@ -54,7 +54,7 @@ abstract class LoginStoreBase with Store {
         timeout: const Duration(seconds: 60),
         verificationCompleted: (AuthCredential auth) async {
           await _auth.signInWithCredential(auth).then((UserCredential value) {
-            if (value.user != null) {
+            if (value.user != null && context.mounted) {
               onAuthenticationSuccessful(context, value);
             } else {
               globalShowInSnackBar(
@@ -112,7 +112,7 @@ abstract class LoginStoreBase with Store {
       globalShowInSnackBar('Wrong code ! Please enter the last code received.',
           null, otpScaffoldMessengerKey, SnackBarBehavior.floating, Colors.red);
     }).then((UserCredential authResult) {
-      if (authResult.user != null) {
+      if (authResult.user != null && context.mounted) {
         onAuthenticationSuccessful(context, authResult);
       }
     });

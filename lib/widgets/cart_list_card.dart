@@ -12,14 +12,13 @@ class CartListCard extends StatefulWidget {
   final Function() onLongPressedRemove;
   final Function() onDoubleTap;
   const CartListCard(
-      {Key? key,
+      {super.key,
       required this.item,
       required this.onTapAdd,
       required this.onLongPressedAdd,
       required this.onLongPressedRemove,
       required this.onTapRemove,
-      required this.onDoubleTap})
-      : super(key: key);
+      required this.onDoubleTap});
   @override
   State<CartListCard> createState() => _CartListCardState();
 }

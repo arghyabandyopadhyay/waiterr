@@ -5,7 +5,7 @@ import '../../../theme.dart';
 
 class ProductAbout extends StatelessWidget {
   final MenuItemModel item;
-  const ProductAbout({Key? key, required this.item}) : super(key: key);
+  const ProductAbout({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {

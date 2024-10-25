@@ -10,13 +10,12 @@ class CustomizableListCard extends StatelessWidget {
   final Function() onLongPressRemove;
   final CustomizablePageModel? list;
   const CustomizableListCard(
-      {Key? key,
+      {super.key,
       this.list,
       required this.onTapRemove,
       required this.onTapAdd,
       required this.onLongPressAdd,
-      required this.onLongPressRemove})
-      : super(key: key);
+      required this.onLongPressRemove});
 
   @override
   Widget build(BuildContext context) {

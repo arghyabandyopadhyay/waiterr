@@ -21,8 +21,7 @@ import 'add_employee_page.dart';
 
 class EmployeeManagerPage extends StatefulWidget {
   final bool isForAdminManagement;
-  const EmployeeManagerPage({Key? key, required this.isForAdminManagement})
-      : super(key: key);
+  const EmployeeManagerPage({super.key, required this.isForAdminManagement});
   @override
   State<EmployeeManagerPage> createState() => _EmployeeManagerPageState();
 }
@@ -159,12 +158,12 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
                     onDeleteClicked: () async {
                       Connectivity connectivity = Connectivity();
                       await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
+                            if (value.isNotEmpty)
                               {
                                 deleteUserClientAllocation(
                                         items[index].userClientAllocationId)
                                     .then((value) => {
-                                          if (value == 200)
+                                          if (value == 200 && context.mounted)
                                             {Navigator.pop(context)}
                                         })
                               }
@@ -242,7 +241,7 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
                       //     await connectivity
                       //         .checkConnectivity()
                       //         .then((value) => {
-                      //               if (value != ConnectivityResult.none)
+                      //               if (value.isNotEmpty)
                       //                 {
                       //                   setState(() {
                       //                     _isLoading = true;
@@ -303,9 +302,8 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
                                                   await connectivity
                                                       .checkConnectivity()
                                                       .then((value) => {
-                                                            if (value !=
-                                                                ConnectivityResult
-                                                                    .none)
+                                                            if (value
+                                                                .isNotEmpty)
                                                               {
                                                                 setState(() {
                                                                   _isLoading =
@@ -400,10 +398,10 @@ class _EmployeeManagerPageState extends State<EmployeeManagerPage> {
                                                                           .checkConnectivity()
                                                                           .then((value) =>
                                                                               {
-                                                                                if (value != ConnectivityResult.none)
+                                                                                if (value.isNotEmpty)
                                                                                   {
                                                                                     deleteUserClientAllocation(searchResult[index].userClientAllocationId).then((value) => {
-                                                                                          if (value == 200) {Navigator.pop(context)}
+                                                                                          if (value == 200 && context.mounted) {Navigator.pop(context)}
                                                                                         })
                                                                                   }
                                                                               });

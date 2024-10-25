@@ -3,10 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-
 class VendorCardMini extends StatelessWidget {
-  const VendorCardMini({Key? key, required this.item, required this.onTap})
-      : super(key: key);
+  const VendorCardMini({super.key, required this.item, required this.onTap});
   final UserRestrauntAllocationModel item;
   final Function() onTap;
   @override

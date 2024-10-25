@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,14 +19,13 @@ import 'package:waiterr/stores/login_store.dart';
 import 'package:waiterr/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:waiterr/widgets/vendor_card_mini.dart';
 import '../TableManagement/add_order_page.dart';
 import '../User/orders_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "homePage";
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage> {
     String qrResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      qrResult = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
+      var barcodeResult=await BarcodeScanner.scan();
+      qrResult = barcodeResult.rawContent;
       // qrResult =
       //     '{"RestaurantId":"5a9010a2-3845-11ed-9bd3-83007858518f","Table":"5","Outlet":"Pizza Den","SalespointType":"Dine In"}';
       // If the widget was removed from the tree while the asynchronous platform
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                           await connectivity
                               .checkConnectivity()
                               .then((value) => {
-                                    if (value != ConnectivityResult.none)
+                                    if (value.isNotEmpty && context.mounted)
                                       {
                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                                                         const HomePage()),
                                                 (route) => false)
                                       }
-                                    else
+                                    else if (context.mounted)
                                       {
                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
@@ -603,7 +603,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 // class VendorCard  extends StatelessWidget{
-//   VendorCard({Key key, this.item, this.onTap}) : super(key: key);
+//   VendorCard({Key key, this.item, this.onTap});
 //   final UserRestrauntAllocationModel item;
 //   final onTap;
 //   @override

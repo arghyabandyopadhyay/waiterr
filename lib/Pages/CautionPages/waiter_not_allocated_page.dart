@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waiterr/Model/drawer_action_model.dart';
 
 class WaiterNotAllocatedPage extends StatefulWidget {
-  const WaiterNotAllocatedPage({Key? key}) : super(key: key);
+  const WaiterNotAllocatedPage({super.key});
   @override
   State<WaiterNotAllocatedPage> createState() => _WaiterNotAllocatedPageState();
 }
@@ -47,7 +47,7 @@ class _WaiterNotAllocatedPageState extends State<WaiterNotAllocatedPage> {
                       onPressed: () async {
                         Connectivity connectivity = Connectivity();
                         await connectivity.checkConnectivity().then((value) => {
-                              if (value != ConnectivityResult.none)
+                              if (value.isNotEmpty && context.mounted)
                                 {
                                   Navigator.pushReplacement(
                                       context,

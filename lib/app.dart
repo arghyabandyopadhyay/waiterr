@@ -13,9 +13,9 @@ import 'settings/settings_view.dart';
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
   const MyApp({
-    Key? key,
+    super.key,
     required this.settingsController,
-  }) : super(key: key);
+  });
 
   final SettingsController settingsController;
   void preloadAssets(BuildContext context) {

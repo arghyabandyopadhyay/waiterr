@@ -13,7 +13,7 @@ import 'error_page.dart';
 import 'package:waiterr/Model/drawer_action_model.dart';
 
 class ErrorPageFiveHundredPage extends StatefulWidget {
-  const ErrorPageFiveHundredPage({Key? key}) : super(key: key);
+  const ErrorPageFiveHundredPage({super.key});
   @override
   State<ErrorPageFiveHundredPage> createState() =>
       _ErrorPageFiveHundredPageState();
@@ -47,7 +47,7 @@ class _ErrorPageFiveHundredPageState extends State<ErrorPageFiveHundredPage> {
                     onPressed: () async {
                       Connectivity connectivity = Connectivity();
                       await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
+                            if (value.isNotEmpty && context.mounted)
                               {
                                 Navigator.pushReplacement(
                                     context,

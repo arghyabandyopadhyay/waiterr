@@ -7,8 +7,8 @@ class MenuAllList extends StatefulWidget {
   final List<List<MenuItemModel>>? productList;
   final Function? header;
   final Function? buildItems;
-  const MenuAllList({Key? key, this.productList, this.buildItems, this.header})
-      : super(key: key);
+  const MenuAllList(
+      {super.key, this.productList, this.buildItems, this.header});
   @override
   State<MenuAllList> createState() => _MenuAllListState();
 }

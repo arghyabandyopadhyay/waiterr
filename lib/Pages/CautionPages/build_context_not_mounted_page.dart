@@ -13,7 +13,7 @@ import 'error_page.dart';
 import 'package:waiterr/Model/drawer_action_model.dart';
 
 class BuildContextNotMountedPage extends StatefulWidget {
-  const BuildContextNotMountedPage({Key? key}) : super(key: key);
+  const BuildContextNotMountedPage({super.key});
   @override
   State<BuildContextNotMountedPage> createState() =>
       _BuildContextNotMountedPageState();
@@ -47,7 +47,7 @@ class _BuildContextNotMountedPageState
                     onPressed: () async {
                       Connectivity connectivity = Connectivity();
                       await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
+                            if (value.isNotEmpty && context.mounted)
                               {
                                 Navigator.pushReplacement(
                                     context,

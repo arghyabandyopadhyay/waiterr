@@ -7,11 +7,10 @@ class OptionModalBottomSheet extends StatelessWidget {
   final IconData appBarIcon;
   final List<ModalOptionModel> list;
   const OptionModalBottomSheet(
-      {Key? key,
+      {super.key,
       required this.list,
       required this.appBarText,
-      required this.appBarIcon})
-      : super(key: key);
+      required this.appBarIcon});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

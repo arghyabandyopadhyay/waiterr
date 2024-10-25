@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../theme.dart';
 
 class ErrorPageFiveHundred extends StatelessWidget {
-  const ErrorPageFiveHundred({Key? key}) : super(key: key);
+  const ErrorPageFiveHundred({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class ErrorPageFiveHundred extends StatelessWidget {
 }
 
 class ErrorPageFourHundredOne extends StatelessWidget {
-  const ErrorPageFourHundredOne({Key? key}) : super(key: key);
+  const ErrorPageFourHundredOne({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +53,7 @@ class ErrorPageFourHundredOne extends StatelessWidget {
 }
 
 class ErrorPageNoInternet extends StatelessWidget {
-  const ErrorPageNoInternet({Key? key}) : super(key: key);
+  const ErrorPageNoInternet({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +78,7 @@ class ErrorPageNoInternet extends StatelessWidget {
 }
 
 class NoRunningOrders extends StatelessWidget {
-  const NoRunningOrders({Key? key}) : super(key: key);
+  const NoRunningOrders({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +106,7 @@ class NoRunningOrders extends StatelessWidget {
 }
 
 class NoDataError extends StatelessWidget {
-  const NoDataError({Key? key}) : super(key: key);
+  const NoDataError({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,7 +135,7 @@ class NoDataError extends StatelessWidget {
 }
 
 class ErrorHasOccurred extends StatelessWidget {
-  const ErrorHasOccurred({Key? key}) : super(key: key);
+  const ErrorHasOccurred({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,7 +162,7 @@ class ErrorHasOccurred extends StatelessWidget {
 }
 
 class BuildContextNotMounted extends StatelessWidget {
-  const BuildContextNotMounted({Key? key}) : super(key: key);
+  const BuildContextNotMounted({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

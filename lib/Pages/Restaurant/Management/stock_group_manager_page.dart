@@ -20,7 +20,7 @@ import '../../../widgets/confirmation_dialog.dart';
 import '../../../widgets/expandable_group_list.dart';
 
 class StockGroupManagerPage extends StatefulWidget {
-  const StockGroupManagerPage({Key? key}) : super(key: key);
+  const StockGroupManagerPage({super.key});
   @override
   State<StockGroupManagerPage> createState() => _StockGroupManagerPageState();
 }
@@ -174,7 +174,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                       onPressed: () async {
                         Connectivity connectivity = Connectivity();
                         await connectivity.checkConnectivity().then((value) => {
-                              if (value != ConnectivityResult.none)
+                              if (value.isNotEmpty && context.mounted)
                                 {
                                   showDialog(
                                       context: context,
@@ -296,7 +296,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                       //   onPressed: () async {
                       //     Connectivity connectivity = Connectivity();
                       //     await connectivity.checkConnectivity().then((value) => {
-                      //           if (value != ConnectivityResult.none)
+                      //           if (value.isNotEmpty)
                       //             {
                       //               setState(() {
                       //                 _isLoading = true;
@@ -354,9 +354,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                   await connectivity
                                                       .checkConnectivity()
                                                       .then((value) => {
-                                                            if (value !=
-                                                                ConnectivityResult
-                                                                    .none)
+                                                            if (value.isNotEmpty)
                                                               {
                                                                 setState(() {
                                                                   _isLoading =
@@ -490,7 +488,7 @@ class _StockGroupManagerPageState extends State<StockGroupManagerPage> {
                                                                             .checkConnectivity()
                                                                             .then((value) =>
                                                                                 {
-                                                                                  if (value != ConnectivityResult.none)
+                                                                                  if (value.isNotEmpty && context.mounted)
                                                                                     {
                                                                                       showDialog(
                                                                                           context: context,

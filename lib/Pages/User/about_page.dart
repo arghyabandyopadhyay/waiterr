@@ -4,7 +4,7 @@ import '../../theme.dart';
 
 class AboutPage extends StatefulWidget {
   final List<List<dynamic>>? data;
-  const AboutPage({Key? key, this.data}) : super(key: key);
+  const AboutPage({super.key, this.data});
   @override
   State<AboutPage> createState() => _AboutPageState();
 }

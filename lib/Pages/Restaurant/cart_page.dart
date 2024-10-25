@@ -574,11 +574,16 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                                     setState(() {
                                                       isLoading = false;
                                                     }),
-                                                    Navigator.of(_scaffoldKey
-                                                        .currentState!.context)
-                                                      ..pop()
-                                                      ..pop()
-                                                      ..pop(),
+                                                    if (_scaffoldKey
+                                                        .currentState!
+                                                        .context
+                                                        .mounted)
+                                                      Navigator.of(_scaffoldKey
+                                                          .currentState!
+                                                          .context)
+                                                        ..pop()
+                                                        ..pop()
+                                                        ..pop(),
                                                   }
                                                 else if (value == 201)
                                                   {
@@ -681,7 +686,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
 class CartIconWithBadge extends StatelessWidget {
   final int counter = 3;
 
-  const CartIconWithBadge({Key? key}) : super(key: key);
+  const CartIconWithBadge({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -725,7 +730,7 @@ class CartIconWithBadge extends StatelessWidget {
 
 class AddToCartMenu extends StatelessWidget {
   final int productCounter;
-  const AddToCartMenu(this.productCounter, {Key? key}) : super(key: key);
+  const AddToCartMenu(this.productCounter, {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -15,8 +15,7 @@ import '../../widgets/loading_indicator.dart';
 
 class ApproveOrdersPage extends StatefulWidget {
   final String approvalType;
-  const ApproveOrdersPage({Key? key, required this.approvalType})
-      : super(key: key);
+  const ApproveOrdersPage({super.key, required this.approvalType});
   @override
   State<ApproveOrdersPage> createState() => _ApproveOrdersPageState();
 }
@@ -114,7 +113,7 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                           await connectivity
                               .checkConnectivity()
                               .then((value) => {
-                                    if (value != ConnectivityResult.none)
+                                    if (value.isNotEmpty)
                                       {
                                         setState(() {
                                           _isLoading = true;
@@ -353,7 +352,8 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                                                 setState(() {
                                                   _futureKot = fetchList();
                                                 }),
-                                                Navigator.of(context)..pop()
+                                                if (context.mounted)
+                                                  Navigator.of(context)..pop()
                                               }
                                             else if (value == 201)
                                               {
@@ -596,15 +596,19 @@ class _ApproveOrdersPageState extends State<ApproveOrdersPage> {
                             });
                             _approveOrder(items, false, false, false)
                                 .then((value) => {
-                                      if (value == 200)
+                                      if (value == 200 &&
+                                          _scaffoldKey
+                                              .currentState!.context.mounted)
                                         {
                                           setState(() {
                                             isLoading = false;
                                           }),
-                                          Navigator.of(_scaffoldKey
-                                                  .currentState!.context)
-                                              .popUntil(
-                                                  (route) => route.isFirst),
+                                          if (_scaffoldKey
+                                              .currentState!.context.mounted)
+                                            Navigator.of(_scaffoldKey
+                                                    .currentState!.context)
+                                                .popUntil(
+                                                    (route) => route.isFirst),
                                         }
                                       else if (value == 201)
                                         {

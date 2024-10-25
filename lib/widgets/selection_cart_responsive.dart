@@ -6,8 +6,7 @@ import 'package:waiterr/theme.dart';
 
 class SelectionCardResponsive extends StatelessWidget {
   const SelectionCardResponsive(
-      {Key? key, this.item, this.active, required this.onTap})
-      : super(key: key);
+      {super.key, this.item, this.active, required this.onTap});
   final FilterItemModel? item;
   final bool? active;
   final Function() onTap;

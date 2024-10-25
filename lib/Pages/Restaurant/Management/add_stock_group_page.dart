@@ -12,8 +12,7 @@ import '../../../theme.dart';
 class AddStockGroupPage extends StatefulWidget {
   final FilterItemModel? filterItem;
   final bool isEdit;
-  const AddStockGroupPage({Key? key, required this.isEdit, this.filterItem})
-      : super(key: key);
+  const AddStockGroupPage({super.key, required this.isEdit, this.filterItem});
   @override
   State<AddStockGroupPage> createState() => _AddStockGroupPageState();
 }
@@ -61,7 +60,7 @@ class _AddStockGroupPageState extends State<AddStockGroupPage> {
                         globalShowInSnackBar("Something went wrong", null,
                             scaffoldMessengerKey, null, null)
                       }
-                    else
+                    else if (context.mounted)
                       {Navigator.pop(context)}
                   });
         } catch (E) {

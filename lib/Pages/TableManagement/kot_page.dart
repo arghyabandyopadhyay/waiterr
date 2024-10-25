@@ -15,8 +15,7 @@ import '../../widgets/expandable_group_widget.dart';
 
 class KOTPage extends StatefulWidget {
   final bool isWaiter;
-  const KOTPage({Key? key, required this.item, required this.isWaiter})
-      : super(key: key);
+  const KOTPage({super.key, required this.item, required this.isWaiter});
   final RunningOrderModel item;
 
   @override
@@ -111,7 +110,7 @@ class _KOTPageState extends State<KOTPage> {
                     onPressed: () async {
                       Connectivity connectivity = Connectivity();
                       await connectivity.checkConnectivity().then((value) => {
-                            if (value != ConnectivityResult.none)
+                            if (value.isNotEmpty)
                               {
                                 setState(() {
                                   _isLoading = true;

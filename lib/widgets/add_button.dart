@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 
 class AddButton extends StatefulWidget {
   const AddButton(
-      {Key? key,
+      {super.key,
       this.item,
       required this.onTapAdd,
       required this.onLongPressedAdd,
       required this.onLongPressedRemove,
-      required this.onTapRemove})
-      : super(key: key);
+      required this.onTapRemove});
   final MenuItemModel? item;
   final Function() onTapAdd;
   final Function() onLongPressedAdd;

@@ -22,12 +22,11 @@ class ProfileImageWidget extends StatefulWidget {
   final bool isImageUploader;
   final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
   const ProfileImageWidget(
-      {Key? key,
+      {super.key,
       required this.radius,
       required this.size,
       required this.isImageUploader,
-      this.scaffoldMessengerKey})
-      : super(key: key);
+      this.scaffoldMessengerKey});
   @override
   State<ProfileImageWidget> createState() => _ProfileImageWidgetState();
 }

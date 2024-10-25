@@ -18,13 +18,13 @@ class LoadingIndicator extends StatelessWidget {
   final Widget child;
 
   LoadingIndicator({
-    Key? key,
+    super.key,
     required this.inAsyncCall,
     this.opacity = 0.3,
     this.color = Colors.grey,
     this.dismissible = false,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import '../global_class.dart';
 
 class TotalCalculationWidget extends StatelessWidget {
   final MenuItemModel? item;
-  const TotalCalculationWidget({Key? key, this.item}) : super(key: key);
+  const TotalCalculationWidget({super.key, this.item});
   @override
   Widget build(BuildContext context) {
     if (item!.customizable.isEmpty) {

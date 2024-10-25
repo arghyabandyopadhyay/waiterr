@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
   static const String routeName = "splashPage";
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
   @override
   State<SplashPage> createState() => _SplashPageState();
 }

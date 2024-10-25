@@ -15,15 +15,14 @@ class NonFavouritesCard extends StatefulWidget {
   final Function() onDoubleTap;
   final Function() onMiddleTap;
   const NonFavouritesCard(
-      {Key? key,
+      {super.key,
       required this.item,
       required this.onTapAdd,
       required this.onLongPressedAdd,
       required this.onLongPressedRemove,
       required this.onTapRemove,
       required this.onDoubleTap,
-      required this.onMiddleTap})
-      : super(key: key);
+      required this.onMiddleTap});
   @override
   State<NonFavouritesCard> createState() => _NonFavouritesCardState();
 }

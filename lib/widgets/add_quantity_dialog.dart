@@ -6,11 +6,10 @@ class AddQuantityDialog extends StatefulWidget {
   final Function(double value) setQuantity;
   final double previousValue;
   const AddQuantityDialog(
-      {Key? key,
+      {super.key,
       required this.onTapAdd,
       required this.setQuantity,
-      required this.previousValue})
-      : super(key: key);
+      required this.previousValue});
   @override
   State<AddQuantityDialog> createState() => _AddQuantityDialogState();
 }

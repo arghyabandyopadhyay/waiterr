@@ -8,8 +8,7 @@ class MenuManagerList extends StatefulWidget {
   final Function? header;
   final Function? buildItems;
   const MenuManagerList(
-      {Key? key, this.productList, this.buildItems, this.header})
-      : super(key: key);
+      {super.key, this.productList, this.buildItems, this.header});
   @override
   State<MenuManagerList> createState() => _MenuManagerListState();
 }
