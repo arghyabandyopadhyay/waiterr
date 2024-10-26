@@ -32,9 +32,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     preloadAssets(context);
     UserDetail.currentUrl = "http://10.0.2.2:3000/api/";
-    // UserDetail.currentUrl = "http://165.227.145.73:3000/api/";
-    // UserDetail.currentUrl =
-    //     "http://2401:4900:47f3:3339:10ab:a3df:a53a:e07d:3000/api";
     // Glue the SettingsController to the MaterialApp.
     //
     // The AnimatedBuilder Widget listens to the SettingsController for changes.
